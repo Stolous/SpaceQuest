@@ -1,0 +1,24 @@
+package ca.viaware.rpg.game;
+
+import org.lwjgl.input.Keyboard;
+
+public class GameLogic {
+
+	public void doLogic() {
+		if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
+			Globals.gameMap.moveMap(0, 3);
+		}
+
+		if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
+			Globals.gameMap.moveMap(3, 0);
+		}
+
+		if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
+			Globals.gameMap.moveMap(0, -3);
+		}
+
+		if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
+			Globals.gameMap.moveMap(-3, 0);
+		}
+	}
+}

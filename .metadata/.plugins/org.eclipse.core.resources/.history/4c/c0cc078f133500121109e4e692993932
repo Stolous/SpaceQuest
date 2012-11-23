@@ -1,0 +1,52 @@
+package ca.viaware.rpg.map;
+
+import static org.lwjgl.opengl.GL11.GL_QUADS;
+import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glEnd;
+import static org.lwjgl.opengl.GL11.glVertex2i;
+
+import org.newdawn.slick.opengl.Texture;
+
+import ca.viaware.rpg.game.Globals;
+
+public class Tile {
+
+	private Texture tex = null;
+	private boolean enabled = false;
+	private int ID = 0;
+	
+	public void setTexture(Texture t){
+		tex = t;
+	}
+	
+	public boolean isenabled(){
+		return enabled;
+	}
+	
+	public Texture getTexture(){
+		return tex;
+	}
+	
+	public void render(int cx, int cy, int xOff, int yOff){
+	
+		Globals.tileTextures.get(ID).bind();
+		
+	glBegin(GL_QUADS);
+		glVertex2i(cx * 64 + xOff, cy * 64 + yOff);
+		glVertex2i(cx * 64 + xOff + 64, cy * 64 + yOff);
+		glVertex2i(cx * 64 + xOff + 64, cy * 64 + yOff + 64);
+		glVertex2i(cx * 64 + xOff, cy * 64 + yOff + 64);
+	glEnd();
+	}
+	
+	public void setID(int id){
+		if (id == -1){
+			enabled = false;
+		}else{
+		ID = id;
+		}
+		if (enabled){
+		setTexture(Globals.tileTextures.get(ID - 1));
+		}
+	}
+}

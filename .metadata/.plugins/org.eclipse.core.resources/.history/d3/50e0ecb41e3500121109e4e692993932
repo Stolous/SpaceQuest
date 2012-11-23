@@ -1,0 +1,44 @@
+package ca.viaware.rpg.entities;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.newdawn.slick.opengl.Texture;
+
+import ca.viaware.rpg.entity.AbstractEntity;
+import static org.lwjgl.opengl.GL11.*;
+
+public class Player extends AbstractEntity {
+
+	List<Texture> animPositions = new ArrayList(16);
+	
+	public Player(double x, double y, double width, double height) {
+		super(x, y, width, height);
+	}
+
+	@Override
+	public void draw() {
+		animPositions.get(0).bind();
+		
+		glBegin(GL_QUADS);
+			glTexCoord2f(0f, 0f);
+			glVertex2d(x, y);
+			glTexCoord2f(1f, 0f);
+			glVertex2d(x + width, y);
+			glTexCoord2f(1f, 1f);
+			glVertex2d(x + width, y + height);
+			glTexCoord2f(0f, 1f);
+			glVertex2d(x, y + height);
+		glEnd();
+	}
+
+	@Override
+	public void update(int delta) {
+
+	}
+	
+	public void addTexture(Texture tex){
+		animPositions.add(tex);
+	}
+
+}

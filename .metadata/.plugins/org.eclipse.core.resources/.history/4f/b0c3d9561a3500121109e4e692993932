@@ -1,0 +1,31 @@
+package ca.viaware.rpg.entities;
+
+import ca.viaware.rpg.entity.AbstractEntity;
+import static org.lwjgl.opengl.GL11.*;
+
+public class Player extends AbstractEntity {
+
+	public Player(double x, double y, double width, double height) {
+		super(x, y, width, height);
+	}
+
+	@Override
+	public void draw() {
+		glBegin(GL_QUADS);
+		glTexCoord2f(0f, 0f);
+		glVertex2d(x, y);
+		glTexCoord2f(1f, 0f);
+		glVertex2d(x + 64, y);
+		glTexCoord2f(1f, 1f);
+		glVertex2d(x + 64, y + 64);
+		glTexCoord2f(0f, 1f);
+		glVertex2d(x, y + 64);
+		glEnd();
+	}
+
+	@Override
+	public void update(int delta) {
+
+	}
+
+}

@@ -1,0 +1,94 @@
+package ca.viaware.rpg.entities;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.newdawn.slick.opengl.Texture;
+
+import ca.viaware.rpg.entity.AbstractEntity;
+import static org.lwjgl.opengl.GL11.*;
+
+public class Player extends AbstractEntity {
+
+	List<Texture> animPositions = new ArrayList(16);
+	int animStage = 0;
+	int animCount = 0;
+
+	int oldWalkingDir = 0;
+	private int walkingDir = 0;
+
+	public Player(double x, double y, double width, double height) {
+		super(x, y, width, height);
+	}
+
+	@Override
+	public void draw() {
+
+		animPositions.get(animStage).bind();
+
+		glBegin(GL_QUADS);
+		glTexCoord2f(0f, 0f);
+		glVertex2d(x, y);
+		glTexCoord2f(1f, 0f);
+		glVertex2d(x + width, y);
+		glTexCoord2f(1f, 1f);
+		glVertex2d(x + width, y + height);
+		glTexCoord2f(0f, 1f);
+		glVertex2d(x, y + height);
+		glEnd();
+	}
+
+	@Override
+	public void update(int delta) {
+
+		animCount += delta;
+		if (animCount > 100) {
+			animStage++;
+			switch (walkingDir) {
+
+			case 0:
+				animStage = 1;
+				break;
+			case 1:
+				if (oldWalkingDir != walkingDir) {
+
+				}
+				if (animStage > 3) {
+					animStage = 0;
+				}
+				break;
+			case 2:
+				if (oldWalkingDir != walkingDir) {
+
+				}
+				if (animStage > 7) {
+					animStage = 4;
+				}
+				break;
+			case 3:
+				if (oldWalkingDir != walkingDir) {
+
+				}
+				if (animStage > 15) {
+					animStage = 8;
+				}
+				break;
+			case 4:
+
+				break;
+
+			}
+			animCount = 0;
+		}
+	}
+
+	public void addTexture(Texture tex) {
+		animPositions.add(tex);
+	}
+
+	public void setWalkingDir(int d) {
+		oldWalkingDir = walkingDir;
+		walkingDir = d;
+	}
+
+}

@@ -1,0 +1,20 @@
+package ca.viaware.rpg.entities;
+import ca.viaware.rpg.entity.AbstractEntity;
+
+public class Player extends AbstractEntity{
+
+	public Player(double x, double y, double width, double height) {
+		super(x, y, width, height);
+	}
+
+	@Override
+	public void draw() {
+		
+	}
+
+	@Override
+	public void update(int delta) {
+		
+	}
+
+}
