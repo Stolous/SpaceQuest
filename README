@@ -1,0 +1,10 @@
+This is the SpaceQuest RPG repository
+
+This repository can be used as an eclipse workspace with no modifications, to do so:
+
+1. Clone this repo on the local machine
+2. Switch eclipse workspace to the repo
+3. Edit your code and save changes, when ready to upload go to step 4
+4. Simply use the github UI to commit and publish the changes
+
+This is not a public project and most commits will be denied.
