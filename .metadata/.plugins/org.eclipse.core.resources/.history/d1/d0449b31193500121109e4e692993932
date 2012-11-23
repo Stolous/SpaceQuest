@@ -1,6 +1,0 @@
-package ca.viaware.rpg.entities;
-import ca.viaware.rpg.entity.AbstractEntity;
-
-public class Player extends AbstractEntity{
-
-}
