@@ -1,10 +1,15 @@
 This is the SpaceQuest RPG repository
 
-This repository can be used as an eclipse workspace with no modifications, to do so:
+How to edit using eclipse:
 
 1. Clone this repo on the local machine
-2. Switch eclipse workspace to the repo
-3. Edit your code and save changes, when ready to upload go to step 4
-4. Simply use the github UI to commit and publish the changes
+2. Create a clean workspace if you want to be tidy
+3. Go to File > Import > General > Import Existing Projects into Workspace
+4. Make sure "Copy projects into Workspace" is DESELECTED
+5. Make sure "Select root directory" is selected and click "Browse"
+6. Navigate to the repo and select it (this is the folder directly above 'SpaceQuest' and 'SpaceQuestMapEditor')
+7. Click ok, it should appear in your project explorer
+8. Edit your code and save changes, when ready to upload go to step 4
+9. Simply use the github UI to commit and publish the changes
 
 This is not a public project and most commits will be denied.
