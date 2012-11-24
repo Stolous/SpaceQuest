@@ -4,6 +4,7 @@ import org.lwjgl.*;
 import org.lwjgl.opengl.*;
 
 import ca.viaware.rpg.game.Globals;
+import ca.viaware.rpg.utilities.TextRenderer;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Map {
@@ -35,6 +36,8 @@ public class Map {
 			countx = 0;
 			county++;
 		}
+		TextRenderer r = new TextRenderer(1000,100, 100, 0, "res/text/fonts.png", "A");
+		r.update();
 	}
 	
 	public void moveMap(double x, double y, int delta){

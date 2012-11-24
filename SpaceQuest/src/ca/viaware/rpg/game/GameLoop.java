@@ -24,8 +24,8 @@ private long lasttime = 0;
 		DebugScreen dbs = new DebugScreen(170,200);
 		
 		while (Globals.isRunning) {
-			TextRenderer r = new TextRenderer(10,100, 100, 0, "res/text/fonts.png", "");
-			r.update();
+			
+			
 			
 			int delta = getDelta();
 			
@@ -46,7 +46,7 @@ private long lasttime = 0;
 			if (Display.isCloseRequested()) {
 				Globals.isRunning = false;
 			}
-			
+
 		}
 		Display.destroy();
 		System.exit(0);
