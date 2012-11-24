@@ -56,8 +56,14 @@ private long lasttime = 0;
 		TextureHandler th = new TextureHandler();
 		Globals.startImg = th.loadDiffTexture("res/img/intro.png", "PNG");
 		
-		Globals.tileTextures.add(th.loadTexture("grass1"));
-		Globals.tileTextures.add(th.loadTexture("grass2"));
+		Globals.tileTextures.add(th.loadSprite("tiles/grass"));
+		Globals.tileTextures.add(th.loadSprite("tiles/cobble"));
+		Globals.tileTextures.add(th.loadSprite("tiles/flower red"));
+		Globals.tileTextures.add(th.loadSprite("tiles/flower"));
+		Globals.tileTextures.add(th.loadSprite("tiles/palm"));
+		Globals.tileTextures.add(th.loadSprite("tiles/sand"));
+		Globals.tileTextures.add(th.loadSprite("tiles/tree"));
+
 		System.out.println("Loaded " + Globals.tileTextures.size() + " tile textures");
 		
 		//Player animation stages - Temporary, messy and needs redoing

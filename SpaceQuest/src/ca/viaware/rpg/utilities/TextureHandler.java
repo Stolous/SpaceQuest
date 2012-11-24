@@ -11,23 +11,6 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 public class TextureHandler {
 
-	public Texture loadTexture(String key){
-		File location = new File("res/tex/" + key + ".png");
-		
-		Texture texture = null;
-		
-		try {
-			texture = new TextureLoader().getTexture("PNG", new FileInputStream(location));
-		} catch (FileNotFoundException e) {
-			System.out.println("Could not find texture: " + key);
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("Unknown IO exception");
-			e.printStackTrace();
-		}
-		
-		return texture;
-	}
 	
 	public Texture loadSprite(String key){
 		File location = new File("res/sprites/" + key + ".png");
