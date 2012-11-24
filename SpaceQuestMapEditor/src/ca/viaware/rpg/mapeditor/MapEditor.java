@@ -61,6 +61,12 @@ public class MapEditor {
 		
 		textures.add(new TileTexture(th.loadTexture("grass1"), "Grass 1"));
 		textures.add(new TileTexture(th.loadTexture("grass2"), "Grass 2"));
+		textures.add(new TileTexture(th.loadTexture("cobble"), "Cobble"));
+		textures.add(new TileTexture(th.loadTexture("flower red"), "Red flower"));
+		textures.add(new TileTexture(th.loadTexture("flower"), "Blue flower"));
+		textures.add(new TileTexture(th.loadTexture("palm"), "Palm Tree"));
+		textures.add(new TileTexture(th.loadTexture("sand"), "Sand"));
+		textures.add(new TileTexture(th.loadTexture("tree"), "Tree"));
 
 	}
 	
