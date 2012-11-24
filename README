@@ -9,7 +9,21 @@ How to edit using eclipse:
 5. Make sure "Select root directory" is selected and click "Browse"
 6. Navigate to the repo and select it (this is the folder directly above 'SpaceQuest' and 'SpaceQuestMapEditor')
 7. Click ok, it should appear in your project explorer
-8. Edit your code and save changes, when ready to upload go to step 4
+
+----------------------------------------
+MAY NEED TO DO THIS:
+IF YOU GET TONS OF ERRORS AND THE RES FOLDERS, LIB FOLDERS, ETC. APPEAR AS PACKAGES THEN DO THE FOLLOWING:
+1. Go into your project properties
+2. Go to 'Java Build Path' > 'Order and Export'
+3. Check 'JRE System Library'
+4. Click OK
+
+Your folders should all be properly organized now but if your still getting errors its probably because LWJGL is no longer referenced, to fix this just re-reference the LWJGL libraries like you normally would.
+----------------------------------------
+
+
+8. Edit your code and save changes, when ready to upload go to next step
 9. Simply use the github UI to commit and publish the changes
+10. Repeat from step 8
 
 This is not a public project and most commits will be denied.
