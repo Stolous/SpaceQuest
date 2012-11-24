@@ -17,6 +17,8 @@ public class Player extends AbstractEntity {
 
 	boolean walkChange = false;
 	private int walkingDir = 0;
+	
+	private int actX = 0, actY = 0;
 
 	public Player(double x, double y, double width, double height) {
 		super(x, y, width, height);
@@ -102,6 +104,19 @@ public class Player extends AbstractEntity {
 	
 	public double getSpeed(){
 		return speed;
+	}
+	
+	public void changePosition(double x, double y, int delta){
+		actX += x * delta;
+		actY += y * delta;
+	}
+	
+	public int getActX(){
+		return actX;
+	}
+	
+	public int getActY(){
+		return actY;
 	}
 
 }

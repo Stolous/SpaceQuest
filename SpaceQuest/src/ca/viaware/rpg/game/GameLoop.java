@@ -32,6 +32,7 @@ private long lasttime = 0;
 			//Update debug screen
 			dbs.updateDelta(delta);
 			dbs.updateMouseCoords(MouseData.MouseX(), MouseData.MouseY());
+			dbs.updatePlayerCoords(Globals.playerEntity.getActX(), Globals.playerEntity.getActY());
 			
 			logic.doLogic(delta);
 			render.render();

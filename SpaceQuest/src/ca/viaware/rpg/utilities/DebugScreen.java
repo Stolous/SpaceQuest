@@ -10,6 +10,7 @@ public class DebugScreen extends JFrame{
 
 	JLabel delta = new JLabel();
 	JLabel mouseCoords = new JLabel();
+	JLabel playerCoords = new JLabel();
 	
 	public DebugScreen(int width, int height){
 		setSize(width,height);
@@ -24,6 +25,7 @@ public class DebugScreen extends JFrame{
 		Container cont = getContentPane();
 		
 		cont.add(mouseCoords);
+		cont.add(playerCoords);
 		cont.add(delta);
 	}
 	
@@ -33,5 +35,9 @@ public class DebugScreen extends JFrame{
 	
 	public void updateMouseCoords(int x, int y){
 		mouseCoords.setText("Mouse Coords: " + Integer.toString(x) + ", " + Integer.toString(y));
+	}
+	
+	public void updatePlayerCoords(int x, int y){
+		playerCoords.setText("Player Coords: " + Integer.toString(x) + ", " + Integer.toString(y));
 	}
 }

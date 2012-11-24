@@ -9,9 +9,11 @@ public class PlayerMovement {
 		double speed = Globals.playerEntity.getSpeed();
 		if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
 			Globals.gameMap.moveMap(speed, 0, delta);
+			Globals.playerEntity.changePosition(-speed, 0, delta);
 			arrowG1 = true;
 		} else if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
 			Globals.gameMap.moveMap(-speed, 0, delta);
+			Globals.playerEntity.changePosition(speed, 0, delta);
 			Globals.playerEntity.setWalkingDir(3);
 			arrowG1 = true;
 		} else {
@@ -20,10 +22,12 @@ public class PlayerMovement {
 
 		if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
 			Globals.gameMap.moveMap(0, -speed, delta);
+			Globals.playerEntity.changePosition(0, speed, delta);
 			Globals.playerEntity.setWalkingDir(1);
 			arrowG2 = true;
 		} else if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
 			Globals.gameMap.moveMap(0, speed, delta);
+			Globals.playerEntity.changePosition(0, -speed, delta);
 			Globals.playerEntity.setWalkingDir(2);
 			arrowG2 = true;
 		} else {
