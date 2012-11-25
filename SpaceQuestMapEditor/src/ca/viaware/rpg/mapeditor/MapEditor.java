@@ -26,6 +26,8 @@ public class MapEditor {
 	int dCount = 0;
 	boolean prevPressed = false;
 	public static List<TileTexture> textures = new ArrayList(16);
+	ToolBox tools = new ToolBox();
+	int selectedTile = 0;
 
 	public MapEditor() {
 		setupDisplay();
@@ -56,9 +58,9 @@ public class MapEditor {
 		System.exit(0);
 	}
 
-	public void loadTextures(){
+	public void loadTextures() {
 		TextureHandler th = new TextureHandler();
-		
+
 		textures.add(new TileTexture(th.loadTexture("grass1"), "Grass 1"));
 		textures.add(new TileTexture(th.loadTexture("cobble"), "Cobble"));
 		textures.add(new TileTexture(th.loadTexture("flower red"), "Red flower"));
@@ -68,7 +70,7 @@ public class MapEditor {
 		textures.add(new TileTexture(th.loadTexture("tree"), "Tree"));
 
 	}
-	
+
 	public void logic() {
 		int mX = mouseX();
 		int mY = mouseY();
@@ -107,34 +109,55 @@ public class MapEditor {
 		} else {
 			dCount += delta;
 		}
-		
-		
-		cSelected += Mouse.getDWheel()/120;
-		
-		if(cSelected > (textures.size() - 1) ){
-			cSelected = 0;
-		}
-		if(cSelected < 0 ){
-			cSelected = 0;
-		}
-		
 
-		
-		if (Mouse.isButtonDown(1)) {
-			boolean d = false;
-			for (Tile tile : tiles){
-				if (tile.isTouching(rect)){
-					d = true;
+		cSelected += Mouse.getDWheel() / 120;
+
+		if (cSelected > (textures.size() - 1)) {
+			cSelected = 0;
+		}
+		if (cSelected < 0) {
+			cSelected = 0;
+		}
+
+		tools.updateSelectedTexture(textures.get(cSelected).getName());
+
+		switch (Globals.selectedTool) {
+
+		case PAINT:
+			if (Mouse.isButtonDown(1)) {
+				boolean d = false;
+				for (Tile tile : tiles) {
+					if (tile.isTouching(rect)) {
+						d = true;
+					}
+				}
+
+				if (!d) {
+					tiles.add(new Tile(mX - mX % 64, mY - mY % 64, cSelected));
 				}
 			}
-			
-			if (!d){
-			tiles.add(new Tile(mX - mX % 64, mY - mY % 64, cSelected));
-			}
-		}
-		
-		int count = 0;
+			break;
 
+		case ERASE:
+			if (Mouse.isButtonDown(1)) {
+				int toRemove = 0;
+				boolean isRemoving = false;
+				for (Tile tile : tiles) {
+					if (tile.isTouching(rect)) {
+						toRemove = tiles.indexOf(tile);
+						isRemoving = true;
+					}
+				}
+
+				if (isRemoving) {
+					tiles.remove(toRemove);
+				}
+			}
+			break;
+		}
+
+		int count = 0;
+		int count2 = 0;
 		for (Tile tile : tiles) {
 
 			if (tile.isTouching(rect) && Mouse.isButtonDown(0) && !tileSelected) {
@@ -157,12 +180,28 @@ public class MapEditor {
 
 			}
 
+			if (tile.isTouching(rect) && Mouse.isButtonDown(0) && Keyboard.isKeyDown(Keyboard.KEY_SPACE) && !tile.isToolSelected()) {
+				tile.setToolSelected(true);
+				selectedTile = count2;
+			}
+			count2++;
 		}
 
+		count2 = 0;
 		for (Tile tile : tiles) {
 			if (tile.isSelected()) {
 				tile.setX(mX - mX % 64);
 				tile.setY(mY - mY % 64);
+			}
+			if (count2 == selectedTile) {
+				tile.setToolSelected(true);
+			} else {
+				tile.setToolSelected(false);
+			}
+			count2++;
+
+			if (tile.isToolSelected()) {
+				tools.updateTile(tile.getID());
 			}
 		}
 
@@ -198,13 +237,13 @@ public class MapEditor {
 
 			for (int x = 0; x < Globals.WIDTH; x += 64) {
 				glBegin(GL_LINE_STRIP);
-					glVertex2i(x, 0);
-					glVertex2i(x, Globals.HEIGHT);
+				glVertex2i(x, 0);
+				glVertex2i(x, Globals.HEIGHT);
 				glEnd();
 
 				glBegin(GL_LINE_STRIP);
-					glVertex2i(0, y);
-					glVertex2i(Globals.WIDTH, y);
+				glVertex2i(0, y);
+				glVertex2i(Globals.WIDTH, y);
 				glEnd();
 			}
 		}

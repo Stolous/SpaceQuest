@@ -12,7 +12,7 @@ public class Menu extends JFrame{
 
 	public void showMenu(){
 		setTitle("Menu");
-		setSize(100,200);
+		setSize(195,200);
 		setResizable(false);
 		setLayout(new GridLayout(5,1));
 		setVisible(true);

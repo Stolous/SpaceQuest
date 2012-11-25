@@ -11,6 +11,7 @@ public class Tile {
 	private int x = 0, y = 0, actX = 0, actY = 0;
 	private int ID = 0;
 	private boolean selected = false;
+	private boolean toolSelected = false;
 
 	public Tile(int x, int y, int ID) {
 		this.x = x;
@@ -125,6 +126,14 @@ public class Tile {
 	public String getDataString(){
 		System.out.println("Getting ID, returning " + ID);
 		return Integer.toString(ID) + "&";
+	}
+	
+	public void setToolSelected(boolean s){
+		toolSelected = s;
+	}
+	
+	public boolean isToolSelected(){
+		return toolSelected;
 	}
 	
 
