@@ -36,6 +36,7 @@ public class Map {
 			countx = 0;
 			county++;
 		}
+		
 		TextRenderer r = new TextRenderer(1000,100, 100, 0, "res/text/fonts.png", "A");
 		r.update();
 	}

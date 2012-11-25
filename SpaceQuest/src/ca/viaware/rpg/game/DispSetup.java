@@ -22,8 +22,7 @@ public class DispSetup {
 	public static void setupDisplay() {
 		try {
 			Display.setTitle("SpaceQuest");
-			Display.setDisplayMode(new DisplayMode(Globals.dispWidth,
-					Globals.dispHeight));
+			Display.setDisplayMode(new DisplayMode(Globals.dispWidth, Globals.dispHeight));
 			Display.create();
 		} catch (LWJGLException e) {
 

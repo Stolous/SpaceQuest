@@ -21,8 +21,7 @@ public class TextRenderer {
 	private Texture texture;
 	String text;
 
-	public TextRenderer(int fontsize, int xlocation, int ylocation,
-			int rotates, String path, String Text) {
+	public TextRenderer(int fontsize, int xlocation, int ylocation, int rotates, String path, String Text) {
 
 		text = Text;
 
@@ -35,8 +34,7 @@ public class TextRenderer {
 		yh = ysize / 2;
 
 		try {
-			texture = TextureLoader.getTexture(".PNG", new FileInputStream(
-					new File(path)));
+			texture = TextureLoader.getTexture(".PNG", new FileInputStream(new File(path)));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
