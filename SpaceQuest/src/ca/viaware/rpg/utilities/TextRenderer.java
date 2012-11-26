@@ -15,10 +15,12 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
+
 public class TextRenderer {
 	private double xsize, ysize, x, y, rotate, xh, yh, lxpos, lypos;
 	private Texture texture;
 	String text;
+
 
 	public TextRenderer(int fontsize, int xlocation, int ylocation, int rotates, String path, String Text) {
 
@@ -103,6 +105,8 @@ public class TextRenderer {
 			GL11.glPopMatrix();
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			
+			
+
 			/*
 			 * Just in case i screw something up GL11.glBegin(GL11.GL_QUADS);
 			 * GL11.glTexCoord2f(0, 0); GL11.glVertex2d(x - getXh(), y - yh);
