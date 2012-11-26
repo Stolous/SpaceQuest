@@ -36,8 +36,12 @@ public class Map {
 			countx = 0;
 			county++;
 		}
+
 		
-		TextRenderer r = new TextRenderer(1000,100, 100, 0, "res/text/fonts.png", "A");
+		TextRenderer r = new TextRenderer(100,100, 100, 0, "res/text/fonts.png", "Hello how are you?");
+
+		
+// enabled removal of tiles worked on text renderer
 		r.update();
 	}
 	

@@ -16,8 +16,7 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
 public class TextRenderer {
-	private double xsize, ysize, x, y, rotate, xh, yh;
-	private int lxpos, lypos;
+	private double xsize, ysize, x, y, rotate, xh, yh, lxpos, lypos;
 	private Texture texture;
 	String text;
 
@@ -41,24 +40,24 @@ public class TextRenderer {
 			e.printStackTrace();
 		}
 		texture.bind();
-		update();
+	
 	}
 
 	public void update() {
-
+		
 		char[] c = text.toCharArray();
 
 		int letter;
 		// 16 collumns 16 rows
 		for (int i = 0; i < c.length; i++) {
+			
 			letter = c[i];
-			System.out.println(c[i]);
 			lypos = letter % 16;
-			lypos++;
+
 			System.out.println("Collumn :" + lypos);
 			lxpos = letter / 16;
 			System.out.println("Row :" + lxpos);
-
+			
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			GL11.glPushMatrix();
 			GL11.glTranslated(x, y, 0);
@@ -70,13 +69,26 @@ public class TextRenderer {
 
 			// 128 px total
 
-			lxpos = lxpos * 8;
-			lxpos = lxpos * 8;
+			
+			double nbr = 0.063;
+			
+			
 
-			int startx = lxpos * 8;
-			int starty = lypos * 8;
-			double endx = startx - 8;
-			double endy = starty - 8;
+			
+			System.out.println("lxpos: "+lxpos);
+			System.out.println("lypos: "+lypos);
+			
+			double startx = lypos*nbr;//16 rows/columns
+			double starty = lxpos*nbr;
+			System.out.println("Start x: "+startx);
+			System.out.println("Start y: "+starty);
+			double endx = startx +nbr ;
+			double endy = starty +nbr; 
+			
+
+			
+			System.out.println("End x: "+endx);
+			System.out.println("End y: "+endy);
 			GL11.glBegin(GL11.GL_QUADS);
 			GL11.glTexCoord2d(startx, starty);
 			GL11.glVertex2d(x - getXh(), y - yh);
@@ -90,7 +102,7 @@ public class TextRenderer {
 			GL11.glEnd();
 			GL11.glPopMatrix();
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
-
+			
 			/*
 			 * Just in case i screw something up GL11.glBegin(GL11.GL_QUADS);
 			 * GL11.glTexCoord2f(0, 0); GL11.glVertex2d(x - getXh(), y - yh);
@@ -102,9 +114,10 @@ public class TextRenderer {
 			 * getXh(), y - yh); GL11.glEnd(); GL11.glPopMatrix();
 			 * GL11.glDisable(GL11.GL_TEXTURE_2D);
 			 */
+			x = x+(xsize*0.4);	
 		}
-		System.out.println("Done :");
-
+		System.out.println("Done");
+		
 	}
 
 	public void rotate(double rotates) {
