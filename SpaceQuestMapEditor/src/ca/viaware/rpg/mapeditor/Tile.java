@@ -10,6 +10,8 @@ import org.newdawn.slick.opengl.Texture;
 public class Tile {
 	private int x = 0, y = 0, actX = 0, actY = 0;
 	private int ID = 0;
+	private int l2ID = 0;
+	private boolean is2Layers = false;
 	private boolean selected = false;
 	private boolean toolSelected = false;
 
@@ -39,6 +41,40 @@ public class Tile {
 		glVertex2i(x, y + 64);
 		glEnd();
 		glDisable(GL_TEXTURE_2D);
+		
+		if (is2Layers){
+			glEnable(GL_TEXTURE_2D);
+
+			MapEditor.textures.get(l2ID).getTexture().bind();
+
+
+			glBegin(GL_QUADS);
+			glTexCoord2f(0f,0f);
+			glVertex2i(x, y);
+			glTexCoord2f(1f,0f);
+			glVertex2i(x + 64, y);
+			glTexCoord2f(1f,1f);
+			glVertex2i(x + 64, y + 64);
+			glTexCoord2f(0f,1f);
+			glVertex2i(x, y + 64);
+			glEnd();
+			glDisable(GL_TEXTURE_2D);
+		}
+		
+		if (toolSelected){
+			glBegin(GL_LINE_STRIP);
+			glVertex2i(x+1,y+1);
+			glVertex2i(x+63,y+1);
+			glVertex2i(x+63,y+63);
+			glVertex2i(x+1,y+63);
+			glVertex2i(x+1,y+1);
+			glVertex2i(x+2,y+2);
+			glVertex2i(x+62,y+2);
+			glVertex2i(x+62,y+62);
+			glVertex2i(x+2,y+62);
+			glVertex2i(x+2,y+2);
+			glEnd();
+		}
 		
 	}
 	
@@ -124,8 +160,20 @@ public class Tile {
 	}
 	
 	public String getDataString(){
-		System.out.println("Getting ID, returning " + ID);
-		return Integer.toString(ID) + "&";
+		String data = "";
+		data = Integer.toString(ID);
+		
+		if(is2Layers){
+			System.out.println("Has 2 layers, adding layer 2 data");
+			data = data + "/" + Integer.toString(l2ID);
+		}else{
+			System.out.println("Does not have 2 layers, adding null data");
+			data = data + "/N";
+		}
+		
+		data = data + "&";
+		System.out.println("Finished producing data string, returning " + data);
+		return data;
 	}
 	
 	public void setToolSelected(boolean s){
@@ -136,5 +184,22 @@ public class Tile {
 		return toolSelected;
 	}
 	
+	public void addSecondLayer(int ID){
+		l2ID = ID;
+		is2Layers = true;
+	}
+	
+	public void removeSecondLayer(){
+		l2ID = 0;
+		is2Layers = false;
+	}
+	
+	public boolean is2Layers(){
+		return is2Layers;
+	}
+	
+	public int getLayer2ID(){
+		return l2ID;
+	}
 
 }

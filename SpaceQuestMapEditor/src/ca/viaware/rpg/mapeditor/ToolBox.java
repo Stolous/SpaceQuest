@@ -14,6 +14,8 @@ public class ToolBox extends JFrame{
 	private JLabel selectedTextureName = new JLabel();
 	private JLabel tileTextureName = new JLabel();
 	private JLabel tileID = new JLabel();
+	private JLabel tileLayer2ID = new JLabel();
+	private JLabel tileLayer2Name = new JLabel();
 	
 	private JButton paintTool = new JButton();
 	private JButton eraseTool = new JButton();
@@ -34,6 +36,8 @@ public class ToolBox extends JFrame{
 		cont.add(selectedTextureName);
 		cont.add(tileTextureName);
 		cont.add(tileID);
+		cont.add(tileLayer2Name);
+		cont.add(tileLayer2ID);
 		
 		cont.add(paintTool);
 		cont.add(eraseTool);
@@ -65,9 +69,17 @@ public class ToolBox extends JFrame{
 		selectedTextureName.setText("Placing Texture: " + t);
 	}
 	
-	public void updateTile(int ID){
+	public void updateTile(int ID, int l2ID, boolean l2){
 		tileID.setText("Tile ID: " + Integer.toString(ID));
 		tileTextureName.setText("Tile Texture: " + MapEditor.textures.get(ID).getName());
+		if (l2){
+			tileLayer2ID.setText("Tile layer 2 ID: " + Integer.toString(l2ID));
+			tileLayer2Name.setText("Tile layer 2 Texture: " + MapEditor.textures.get(l2ID).getName());
+		}else{
+			tileLayer2ID.setText("Tile layer 2 ID: NONE");
+			tileLayer2Name.setText("Tile layer 2 Texture: NONE");
+		}
+		
 	}
 	
 }

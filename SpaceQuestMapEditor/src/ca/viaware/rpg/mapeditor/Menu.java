@@ -40,7 +40,7 @@ public class Menu extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				Map.passMap(MapEditor.tiles, 150, 150);
+				Map.passMap(MapEditor.tiles, 50, 50);
 				Map.save();
 			}
 		});

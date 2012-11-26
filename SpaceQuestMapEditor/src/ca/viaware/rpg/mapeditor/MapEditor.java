@@ -124,7 +124,7 @@ public class MapEditor {
 		switch (Globals.selectedTool) {
 
 		case PAINT:
-			if (Mouse.isButtonDown(1)) {
+			if (Mouse.isButtonDown(1) && !Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 				boolean d = false;
 				for (Tile tile : tiles) {
 					if (tile.isTouching(rect)) {
@@ -134,6 +134,14 @@ public class MapEditor {
 
 				if (!d) {
 					tiles.add(new Tile(mX - mX % 64, mY - mY % 64, cSelected));
+				}
+			}
+			
+			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
+				for (Tile tile : tiles){
+					if (tile.isTouching(rect)){
+						tile.addSecondLayer(cSelected);
+					}
 				}
 			}
 			break;
@@ -201,7 +209,7 @@ public class MapEditor {
 			count2++;
 
 			if (tile.isToolSelected()) {
-				tools.updateTile(tile.getID());
+				tools.updateTile(tile.getID(), tile.getLayer2ID(), tile.is2Layers());
 			}
 		}
 

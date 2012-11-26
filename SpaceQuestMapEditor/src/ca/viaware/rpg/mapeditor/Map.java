@@ -47,7 +47,8 @@ public class Map {
 						tiles[xC][yC] = tile;
 						
 						System.out.println("XC: " + xC + ", YC: " + yC + " has tile, adding all stuff to string...");
-						s = s + tiles[xC][yC].getDataString();
+						String data = tiles[xC][yC].getDataString();
+						s = s + data;
 						isTile = true;
 					}
 				}
