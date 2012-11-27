@@ -22,7 +22,7 @@ public  class TexturedQuad {
 	Texture texture;
 
 	public TexturedQuad(int xsizes, int ysizes, int xs, int ys, int rotates,
-			String path,String ext) {
+			Texture tex) {
 
 		rotate = rotates;
 		setXsize(xsizes);
@@ -31,15 +31,8 @@ public  class TexturedQuad {
 		y = ys;
 		setXh(getXsize() / 2);
 		yh = ysize / 2;
-
-		try {
-			texture = TextureLoader.getTexture(ext, new FileInputStream(
-					new File(path)));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		texture = tex;
+		
 		texture.bind();
 		update();
 	}
@@ -110,15 +103,8 @@ public  class TexturedQuad {
 	public void setXsize(double xsize) {
 		this.xsize = xsize;
 	}
-	public void changetext(String path,String ext){
-		try {
-			texture = TextureLoader.getTexture(ext, new FileInputStream(
-					new File(path)));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void changetext(Texture tex){
+		texture = tex;
 		texture.bind();
 		
 	}
