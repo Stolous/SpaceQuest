@@ -23,6 +23,10 @@ public class Tile {
 		actX = x / 64 + Globals.xOffset;
 		actY = y / 64 + Globals.yOffset;
 	}
+	
+	public void passData(String data){
+		
+	}
 
 	public void renderTile() {
 		glEnable(GL_TEXTURE_2D);

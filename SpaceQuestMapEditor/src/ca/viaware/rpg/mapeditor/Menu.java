@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Menu extends JFrame{
 
@@ -39,9 +40,9 @@ public class Menu extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				String n = JOptionPane.showInputDialog("Map name");
 				Map.passMap(MapEditor.tiles, 50, 50);
-				Map.save();
+				Map.save(n);
 			}
 		});
 		

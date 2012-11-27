@@ -69,10 +69,10 @@ public class Map {
 		
 	}
 	
-	public static void save(){
+	public static void save(String name){
 		Saver saver = new Saver();
 		try {
-			saver.saveMap(sLines);
+			saver.saveMap(sLines, name);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
