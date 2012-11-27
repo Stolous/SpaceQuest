@@ -11,7 +11,7 @@ public class MeleeEnemy extends Enemy {
 	private int agressiveness;
 	private static double x,y,distancebetween,xdist,ydist,playerx,playery,xmov,ymov,range,actxdist,actydist,speed;
 	public MeleeEnemy(int maxhealth, int damage, Texture[][] sprites,int spawnx,int spawny,int agresiveness,double range,double speed) {
-		super(maxhealth, damage, sprites,spawnx,spawny);
+		super(maxhealth, damage, sprites, spawnx,spawny);
 		
 		this.speed=speed/100;
 		this.range=range;
@@ -29,6 +29,7 @@ public class MeleeEnemy extends Enemy {
 		
 		
 	}
+	
 	public static void Update(){
 		
 		//MATH (YAY!!!!!!!!!!)

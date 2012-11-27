@@ -9,7 +9,7 @@ public abstract class Enemy {
 	private Texture[][] sprites;
 	
 	
-	public Enemy(int maxhealth,int damage,Texture [][] left,Texture [] right,Texture [] up,Texture [] down,int spawnx,int spawnz){
+	public Enemy(int maxhealth,int damage,Texture [][] sprites,int spawnx,int spawnz){
 		
 		this.currenthealth = this.maxhealth=maxhealth;
 		this.damage=damage;
