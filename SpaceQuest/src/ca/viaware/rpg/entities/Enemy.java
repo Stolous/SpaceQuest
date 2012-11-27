@@ -6,20 +6,18 @@ public abstract class Enemy {
 
 	
 	private int currenthealth,maxhealth,damage;
-	private Texture[] left,right,up,down,attack;
+	private Texture[][] sprites;
 	
 	
-	public Enemy(int maxhealth,int damage,Texture [] left,Texture [] right,Texture [] up,Texture [] down,int spawnx,int spawnz){
-		this.left = left;
-		this.right = right;
-		this.up = up;
-		this.down = down;
+	public Enemy(int maxhealth,int damage,Texture [][] left,Texture [] right,Texture [] up,Texture [] down,int spawnx,int spawnz){
+		
 		this.currenthealth = this.maxhealth=maxhealth;
 		this.damage=damage;
 		//this is where spawn code goes
-		
+		this.sprites = sprites;
 		
 	}
+	
 	public void setmaxhealth(int maxhealth){
 		this.maxhealth= maxhealth;
 	}

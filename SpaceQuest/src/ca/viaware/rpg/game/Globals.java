@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.newdawn.slick.opengl.Texture;
 
+import ca.viaware.rpg.entities.MeleeEnemy;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.map.Map;
 
 public class Globals {
+	public static MeleeEnemy m = new MeleeEnemy(1,1,null,10,10,1,1,1);
 	public static boolean isRunning = true;
 	public static int dispWidth = 800, dispHeight = 600;
 	public static int temp = 0;

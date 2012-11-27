@@ -4,6 +4,7 @@ import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
+
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
