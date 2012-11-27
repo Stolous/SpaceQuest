@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.game.Globals;
-import ca.viaware.rpg.utilities.texdquad;
+import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class MeleeEnemy extends Enemy {
 	//private static texdquad t = new texdquad(50,50,0,0,0,);

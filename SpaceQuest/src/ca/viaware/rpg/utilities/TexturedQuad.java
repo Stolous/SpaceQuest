@@ -15,13 +15,13 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
-public  class texdquad {
+public  class TexturedQuad {
 
 	private double xsize, ysize, x, y, rotate, xh, yh;
 
 	Texture texture;
 
-	public texdquad(int xsizes, int ysizes, int xs, int ys, int rotates,
+	public TexturedQuad(int xsizes, int ysizes, int xs, int ys, int rotates,
 			String path,String ext) {
 
 		rotate = rotates;
