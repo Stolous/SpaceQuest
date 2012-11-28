@@ -78,32 +78,43 @@ public class MapEditor {
 
 		Rectangle rect = new Rectangle(mX, mY, 1, 1);
 
-		if (!Keyboard.isKeyDown(Keyboard.KEY_DOWN) && !Keyboard.isKeyDown(Keyboard.KEY_UP) && !Keyboard.isKeyDown(Keyboard.KEY_LEFT) && !Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+		if (!Keyboard.isKeyDown(Keyboard.KEY_S) && !Keyboard.isKeyDown(Keyboard.KEY_W) && !Keyboard.isKeyDown(Keyboard.KEY_A) && !Keyboard.isKeyDown(Keyboard.KEY_D)) {
 			dCount = 1001;
 			prevPressed = false;
 		}
 		// System.out.println(dCount);
 
-		if (dCount > 200 || !prevPressed) {
+		if (dCount > 150 || !prevPressed) {
 			dCount = 0;
-			if (Keyboard.isKeyDown(Keyboard.KEY_UP) && Globals.yOffset > 0) {
-				Globals.yOffset--;
+			if (Keyboard.isKeyDown(Keyboard.KEY_W) && Globals.yOffset > 0) {
 				shiftDir = 1;
-				prevPressed = true;
-			} else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-				Globals.yOffset++;
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
 				shiftDir = 2;
-				prevPressed = true;
 			}
 
-			if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-				Globals.xOffset++;
+			if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
 				shiftDir = 3;
-				prevPressed = true;
-			} else if (Keyboard.isKeyDown(Keyboard.KEY_LEFT) && Globals.xOffset > 0) {
-				Globals.xOffset--;
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_A) && Globals.xOffset > 0) {
 				shiftDir = 4;
+			}
+			
+			switch(shiftDir){
+			case 1:
+				Globals.yOffset--;
 				prevPressed = true;
+				break;
+			case 2:
+				Globals.yOffset++;
+				prevPressed = true;
+				break;
+			case 3:
+				Globals.xOffset++;
+				prevPressed = true;
+				break;
+			case 4:
+				Globals.xOffset--;
+				prevPressed = true;
+				break;
 			}
 
 		} else {

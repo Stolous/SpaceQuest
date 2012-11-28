@@ -25,14 +25,17 @@ public class Menu extends JFrame{
 		JButton save = new JButton();
 		JButton newMap = new JButton();
 		JButton exit = new JButton();
+		JButton load = new JButton();
 		
 		Container cont = getContentPane();
 		
 		save.setText("Save");
 		newMap.setText("New");
 		exit.setText("Exit");
+		load.setText("Load");
 		
 		cont.add(save);
+		cont.add(load);
 		cont.add(newMap);
 		cont.add(exit);
 		
@@ -51,6 +54,8 @@ public class Menu extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MapEditor.tiles.clear();
+				Globals.xOffset = 0;
+				Globals.yOffset = 0;
 			}
 		});
 		
@@ -59,6 +64,21 @@ public class Menu extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
+			}
+		});
+		
+		load.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Globals.xOffset = 0;
+				Globals.yOffset = 0;
+				String file = JOptionPane.showInputDialog("Map name");
+				if(Loader.checkFile(file)){
+				MapEditor.tiles = Loader.loadMap(file);
+				}else{
+					JOptionPane.showMessageDialog(null, "Map not found!");
+				}
 			}
 		});
 	}

@@ -24,8 +24,23 @@ public class Tile {
 		actY = y / 64 + Globals.yOffset;
 	}
 	
-	public void passData(String data){
+	public void passData(String data, int x, int y){
+		actX = x;
+		actY = y;
 		
+		String[] data2 = data.split("/");
+		
+		ID = Integer.parseInt(data2[0]);
+		
+		System.out.println("ID is now " + ID);
+		
+		if (data2[1].equals("N")){
+			is2Layers = false;
+			l2ID = 0;
+		}else{
+			is2Layers = true;
+			l2ID = Integer.parseInt(data2[1]);
+		}
 	}
 
 	public void renderTile() {
@@ -109,7 +124,7 @@ public class Tile {
 			actX--;
 		}
 		
-		System.out.println(actX);
+		System.out.println(actX + ", " + actY);
 		this.x = x;
 	}
 
@@ -120,7 +135,7 @@ public class Tile {
 			actY--;
 		}
 		
-		System.out.println(actY);
+		System.out.println(actX + ", " + actY);
 		this.y = y;
 	}
 	
