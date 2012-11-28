@@ -12,12 +12,18 @@ import ca.viaware.rpg.utilities.TextureHandler;
 
 public class Globals {
 	
-	TextureHandler r;
-	Texture demo = r.loadSprite("/enemies/slime moving/slimemoving0001.png");
-	ArrayList<ArrayList<String>> array = new ArrayList<ArrayList<String>>();
 	
 	
-	public static MeleeEnemy m;
+	
+	
+	
+	
+	
+
+	
+	
+	
+	public static MeleeEnemy m = new MeleeEnemy(1,1,null,10,10,1,1,100);
 	public static boolean isRunning = true;
 	public static int dispWidth = 800, dispHeight = 600;
 	public static int temp = 0;
@@ -26,19 +32,14 @@ public class Globals {
 	public static Player playerEntity = null;
 	public static Map gameMap = null;
 
+	
+	
 	public static enum gState {
 		INTRO, MAIN_MENU, GAME, OUTRO;
 	}
 
 	public static gState gameState = gState.INTRO;
 
-	
-	public static void init(){
-		
-		m = new MeleeEnemy(1,1,null,10,10,1,1,100);
-		
-	}
 }
-
 
 
