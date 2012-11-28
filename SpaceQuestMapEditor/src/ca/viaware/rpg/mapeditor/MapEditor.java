@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -49,7 +51,15 @@ public class MapEditor {
 			Display.sync(60);
 
 			if (Display.isCloseRequested()) {
-				Globals.isRunning = false;
+				if (Globals.isSaved) {
+					System.out.println("Saved");
+					Globals.isRunning = false;
+				} else {
+					menu.setVisible(true);
+					if (JOptionPane.showConfirmDialog(null, "Exit without saving?", "Quit", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+						Globals.isRunning = false;
+					}
+				}
 			}
 		}
 
@@ -69,6 +79,10 @@ public class MapEditor {
 		textures.add(new TileTexture(th.loadTexture("sand"), "Sand"));
 		textures.add(new TileTexture(th.loadTexture("tree"), "Tree"));
 
+	}
+
+	private void changeMade() {
+		Globals.isSaved = false;
 	}
 
 	public void logic() {
@@ -97,8 +111,8 @@ public class MapEditor {
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_A) && Globals.xOffset > 0) {
 				shiftDir = 4;
 			}
-			
-			switch(shiftDir){
+
+			switch (shiftDir) {
 			case 1:
 				Globals.yOffset--;
 				prevPressed = true;
@@ -144,13 +158,15 @@ public class MapEditor {
 				}
 
 				if (!d) {
+					changeMade();
 					tiles.add(new Tile(mX - mX % 64, mY - mY % 64, cSelected));
 				}
 			}
-			
-			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
-				for (Tile tile : tiles){
-					if (tile.isTouching(rect)){
+
+			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+				for (Tile tile : tiles) {
+					if (tile.isTouching(rect)) {
+						changeMade();
 						tile.addSecondLayer(cSelected);
 					}
 				}
@@ -158,7 +174,7 @@ public class MapEditor {
 			break;
 
 		case ERASE:
-			if (Mouse.isButtonDown(1)) {
+			if (Mouse.isButtonDown(1) && !Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 				int toRemove = 0;
 				boolean isRemoving = false;
 				for (Tile tile : tiles) {
@@ -169,7 +185,17 @@ public class MapEditor {
 				}
 
 				if (isRemoving) {
+					changeMade();
 					tiles.remove(toRemove);
+				}
+			}
+
+			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+				for (Tile tile : tiles) {
+					if (tile.isTouching(rect)) {
+						changeMade();
+						tile.removeSecondLayer();
+					}
 				}
 			}
 			break;
@@ -209,6 +235,7 @@ public class MapEditor {
 		count2 = 0;
 		for (Tile tile : tiles) {
 			if (tile.isSelected()) {
+				changeMade();
 				tile.setX(mX - mX % 64);
 				tile.setY(mY - mY % 64);
 			}

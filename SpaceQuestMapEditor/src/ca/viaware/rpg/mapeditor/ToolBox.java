@@ -10,76 +10,76 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class ToolBox extends JFrame{
+public class ToolBox extends JFrame {
 	private JLabel selectedTextureName = new JLabel();
 	private JLabel tileTextureName = new JLabel();
 	private JLabel tileID = new JLabel();
 	private JLabel tileLayer2ID = new JLabel();
 	private JLabel tileLayer2Name = new JLabel();
-	
+
 	private JButton paintTool = new JButton();
 	private JButton eraseTool = new JButton();
-	
-	public ToolBox(){
+
+	public ToolBox() {
 		setTitle("Toolbox");
-		setLayout(new GridLayout(15,1));
-		setSize(200,500);
-		setLocation(0,200);
+		setLayout(new GridLayout(15, 1));
+		setSize(200, 500);
+		setLocation(0, 200);
 		setVisible(true);
-		
+
 		addComponents();
 	}
-	
-	private void addComponents(){
+
+	private void addComponents() {
 		Container cont = getContentPane();
-		
+
 		cont.add(selectedTextureName);
 		cont.add(tileTextureName);
 		cont.add(tileID);
 		cont.add(tileLayer2Name);
 		cont.add(tileLayer2ID);
-		
+
 		cont.add(paintTool);
 		cont.add(eraseTool);
-		
+
 		paintTool.setText("Paint brush");
-		eraseTool.setText("Erase brush");		
+		eraseTool.setText("Erase brush");
 		selectedTextureName.setText("Placing Texture: ");
 		tileTextureName.setText("Tile Texture: ");
 		tileID.setText("Tile ID: ");
-		
+
 		paintTool.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Globals.selectedTool = Globals.brush.PAINT;
 			}
 		});
-		
+
 		eraseTool.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Globals.selectedTool = Globals.brush.ERASE;
 			}
 		});
 	}
-	
-	public void updateSelectedTexture(String t){
+
+	public void updateSelectedTexture(String t) {
 		selectedTextureName.setText("Placing Texture: " + t);
 	}
-	
-	public void updateTile(int ID, int l2ID, boolean l2){
+
+	public void updateTile(int ID, int l2ID, boolean l2) {
 		tileID.setText("Tile ID: " + Integer.toString(ID));
 		tileTextureName.setText("Tile Texture: " + MapEditor.textures.get(ID).getName());
-		if (l2){
+		if (l2) {
 			tileLayer2ID.setText("Tile layer 2 ID: " + Integer.toString(l2ID));
 			tileLayer2Name.setText("Tile layer 2 Texture: " + MapEditor.textures.get(l2ID).getName());
-		}else{
+		} else {
 			tileLayer2ID.setText("Tile layer 2 ID: NONE");
 			tileLayer2Name.setText("Tile layer 2 Texture: NONE");
 		}
-		
+
 	}
-	
+
 }

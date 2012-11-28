@@ -19,25 +19,25 @@ public class Tile {
 		this.x = x;
 		this.y = y;
 		this.ID = ID;
-		
+
 		actX = x / 64 + Globals.xOffset;
 		actY = y / 64 + Globals.yOffset;
 	}
-	
-	public void passData(String data, int x, int y){
+
+	public void passData(String data, int x, int y) {
 		actX = x;
 		actY = y;
-		
+
 		String[] data2 = data.split("/");
-		
+
 		ID = Integer.parseInt(data2[0]);
-		
+
 		System.out.println("ID is now " + ID);
-		
-		if (data2[1].equals("N")){
+
+		if (data2[1].equals("N")) {
 			is2Layers = false;
 			l2ID = 0;
-		}else{
+		} else {
 			is2Layers = true;
 			l2ID = Integer.parseInt(data2[1]);
 		}
@@ -48,55 +48,53 @@ public class Tile {
 
 		MapEditor.textures.get(ID).getTexture().bind();
 
-
 		glBegin(GL_QUADS);
-		glTexCoord2f(0f,0f);
+		glTexCoord2f(0f, 0f);
 		glVertex2i(x, y);
-		glTexCoord2f(1f,0f);
+		glTexCoord2f(1f, 0f);
 		glVertex2i(x + 64, y);
-		glTexCoord2f(1f,1f);
+		glTexCoord2f(1f, 1f);
 		glVertex2i(x + 64, y + 64);
-		glTexCoord2f(0f,1f);
+		glTexCoord2f(0f, 1f);
 		glVertex2i(x, y + 64);
 		glEnd();
 		glDisable(GL_TEXTURE_2D);
-		
-		if (is2Layers){
+
+		if (is2Layers) {
 			glEnable(GL_TEXTURE_2D);
 
 			MapEditor.textures.get(l2ID).getTexture().bind();
 
-
 			glBegin(GL_QUADS);
-			glTexCoord2f(0f,0f);
+			glTexCoord2f(0f, 0f);
 			glVertex2i(x, y);
-			glTexCoord2f(1f,0f);
+			glTexCoord2f(1f, 0f);
 			glVertex2i(x + 64, y);
-			glTexCoord2f(1f,1f);
+			glTexCoord2f(1f, 1f);
 			glVertex2i(x + 64, y + 64);
-			glTexCoord2f(0f,1f);
+			glTexCoord2f(0f, 1f);
 			glVertex2i(x, y + 64);
 			glEnd();
 			glDisable(GL_TEXTURE_2D);
 		}
-		
-		if (toolSelected){
+
+		if (toolSelected) {
 			glBegin(GL_LINE_STRIP);
-			glVertex2i(x+1,y+1);
-			glVertex2i(x+63,y+1);
-			glVertex2i(x+63,y+63);
-			glVertex2i(x+1,y+63);
-			glVertex2i(x+1,y+1);
-			glVertex2i(x+2,y+2);
-			glVertex2i(x+62,y+2);
-			glVertex2i(x+62,y+62);
-			glVertex2i(x+2,y+62);
-			glVertex2i(x+2,y+2);
+			glVertex2i(x + 1, y + 1);
+			glVertex2i(x + 63, y + 1);
+			glVertex2i(x + 63, y + 63);
+			glVertex2i(x + 1, y + 63);
+			glVertex2i(x + 1, y + 1);
+			glVertex2i(x + 2, y + 2);
+			glVertex2i(x + 62, y + 2);
+			glVertex2i(x + 62, y + 62);
+			glVertex2i(x + 2, y + 62);
+			glVertex2i(x + 2, y + 2);
 			glEnd();
 		}
-		
+
 	}
-	
+
 	public int getX() {
 		return x;
 	}
@@ -104,12 +102,12 @@ public class Tile {
 	public int getY() {
 		return y;
 	}
-	
-	public int getActX(){
+
+	public int getActX() {
 		return actX;
 	}
-	
-	public int getActY(){
+
+	public int getActY() {
 		return actY;
 	}
 
@@ -118,40 +116,40 @@ public class Tile {
 	}
 
 	public void setX(int x) {
-		if (x > this.x){
+		if (x > this.x) {
 			actX++;
-		} else if (x < this.x){
+		} else if (x < this.x) {
 			actX--;
 		}
-		
+
 		System.out.println(actX + ", " + actY);
 		this.x = x;
 	}
 
 	public void setY(int y) {
-		if (y > this.y){
+		if (y > this.y) {
 			actY++;
-		} else if (y < this.y){
+		} else if (y < this.y) {
 			actY--;
 		}
-		
+
 		System.out.println(actX + ", " + actY);
 		this.y = y;
 	}
-	
-	public void shiftUP(){
+
+	public void shiftUP() {
 		y = y - 64;
 	}
-	
-	public void shiftDOWN(){
+
+	public void shiftDOWN() {
 		y = y + 64;
 	}
-	
-	public void shiftLEFT(){
+
+	public void shiftLEFT() {
 		x = x - 64;
 	}
-	
-	public void shiftRIGHT(){
+
+	public void shiftRIGHT() {
 		x = x + 64;
 	}
 
@@ -162,62 +160,62 @@ public class Tile {
 	public boolean isTouching(Rectangle rect) {
 		boolean touching = false;
 		Rectangle thisRect = new Rectangle(x, y, 64, 64);
-		
-		if (thisRect.intersects(rect)){
+
+		if (thisRect.intersects(rect)) {
 			touching = true;
 		}
-		
+
 		return touching;
 	}
-	
-	public void setSelected(boolean s){
+
+	public void setSelected(boolean s) {
 		selected = s;
 	}
-	
-	public boolean isSelected(){
+
+	public boolean isSelected() {
 		return selected;
 	}
-	
-	public String getDataString(){
+
+	public String getDataString() {
 		String data = "";
 		data = Integer.toString(ID);
-		
-		if(is2Layers){
+
+		if (is2Layers) {
 			System.out.println("Has 2 layers, adding layer 2 data");
 			data = data + "/" + Integer.toString(l2ID);
-		}else{
+		} else {
 			System.out.println("Does not have 2 layers, adding null data");
 			data = data + "/N";
 		}
-		
+
 		data = data + "&";
 		System.out.println("Finished producing data string, returning " + data);
 		return data;
 	}
-	
-	public void setToolSelected(boolean s){
+
+	public void setToolSelected(boolean s) {
 		toolSelected = s;
 	}
-	
-	public boolean isToolSelected(){
+
+	public boolean isToolSelected() {
 		return toolSelected;
 	}
-	
-	public void addSecondLayer(int ID){
+
+	public void addSecondLayer(int ID) {
 		l2ID = ID;
 		is2Layers = true;
 	}
-	
-	public void removeSecondLayer(){
+
+	public void removeSecondLayer() {
 		l2ID = 0;
 		is2Layers = false;
 	}
-	
-	public boolean is2Layers(){
+
+	public boolean is2Layers() {
 		return is2Layers;
 	}
-	
-	public int getLayer2ID(){
+
+	public int getLayer2ID() {
 		return l2ID;
 	}
 
