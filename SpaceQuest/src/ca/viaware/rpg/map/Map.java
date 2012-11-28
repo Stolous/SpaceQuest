@@ -3,6 +3,7 @@ package ca.viaware.rpg.map;
 import org.lwjgl.*;
 import org.lwjgl.opengl.*;
 
+import ca.viaware.rpg.entities.MeleeEnemy;
 import ca.viaware.rpg.game.Globals;
 import ca.viaware.rpg.utilities.TextRenderer;
 import static org.lwjgl.opengl.GL11.*;
@@ -39,7 +40,7 @@ public class Map {
 
 		
 		TextRenderer r = new TextRenderer(30,100, 100, 0, "res/text/fonts.png", "Seth is jealous of my text rendering abilities!");
-
+		
 		
 // enabled removal of tiles worked on text renderer
 		r.update();

@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
+import ca.viaware.rpg.game.GameLoop;
 import ca.viaware.rpg.game.Globals;
 import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TexturedQuad;
@@ -38,6 +39,8 @@ public class MeleeEnemy extends Enemy {
 		this.y=spawny;
 		//t.setlocation(x, y);
 		ArrayList<Texture> spritesforward=sprites.get(0);
+		
+		
 		t = new TexturedQuad(50,50,0,0,0,"res/sprites/enemies/slimemoving/1.png");
 		
 		
@@ -49,13 +52,17 @@ public class MeleeEnemy extends Enemy {
 		
 	}
 	
-	public static void Update(){
+	public static void Update(int delta){
 		
 		//MATH (YAY!!!!!!!!!!)
 		playerx = Globals.playerEntity.getActX();
 		playery = Globals.playerEntity.getActY();
-		System.out.println(playerx);
-		System.out.println(playery);
+		playerx = Globals.playerEntity.getX();
+		playery = Globals.playerEntity.getY();
+		
+		
+		x = x - Globals.playerEntity.getChangeX();
+		y = y - Globals.playerEntity.getChangeY();
 		
 		
 		xdist= playerx - x;
@@ -70,14 +77,12 @@ public class MeleeEnemy extends Enemy {
 			ydist*=-1;
 		}
 		
-		System.out.println("tot"+ distancebetween);
-		System.out.println("x"+ x);
-		System.out.println("y"+ y);
+	
+
 		distancebetween =Math.sqrt(((xdist*xdist)+(ydist*ydist)));//pythagorean theorem
 		
 		
 		if(distancebetween>0){
-			System.out.println("act"+actxdist);
 			x=moverx(actxdist,x,speed);
 			y=moverx(actydist,y,speed);
 			
@@ -87,8 +92,8 @@ public class MeleeEnemy extends Enemy {
 		
 		
 		
-		//t.setlocation(x, y);
-		//t.update();
+		t.setlocation(x, y);
+		t.update();
 	
 
 	}

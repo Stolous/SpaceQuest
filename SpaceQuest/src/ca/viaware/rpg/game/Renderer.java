@@ -34,6 +34,7 @@ public class Renderer {
 		case GAME:
 			Globals.gameMap.renderMap();
 			Globals.playerEntity.draw();
+			
 			break;
 		}
 	}

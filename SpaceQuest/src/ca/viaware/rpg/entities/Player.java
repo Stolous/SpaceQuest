@@ -14,6 +14,9 @@ public class Player extends AbstractEntity {
 	int animStage = 0;
 	int animCount = 0;
 	double speed = 0.15;
+	
+	private double changeY, changeX;
+	
 
 	boolean walkChange = false;
 	private int walkingDir = 0;
@@ -26,7 +29,8 @@ public class Player extends AbstractEntity {
 
 	@Override
 	public void draw() {
-
+		changeX = 0;
+		changeY = 0;
 		animPositions.get(animStage).bind();
 
 		glBegin(GL_QUADS);
@@ -43,7 +47,7 @@ public class Player extends AbstractEntity {
 
 	@Override
 	public void update(int delta) {
-
+		
 		//Animation
 		animCount += delta;
 		if (animCount > 150) {
@@ -107,8 +111,11 @@ public class Player extends AbstractEntity {
 	}
 	
 	public void changePosition(double x, double y, int delta){
-		actX += x * delta;
+		actX += x * delta; 
 		actY += y * delta;
+		
+		changeX = x * delta; 
+		changeY = y * delta;
 	}
 	
 	public int getActX(){
@@ -118,5 +125,16 @@ public class Player extends AbstractEntity {
 	public int getActY(){
 		return actY;
 	}
+	
+	public double getChangeX(){
+		System.out.println("Change x"+ changeX);
+		return changeX;
+	}
+	
+	public double getChangeY(){
+		System.out.println("Change y"+ changeY);
+		return changeY;
+	}
+	
 
 }

@@ -12,8 +12,7 @@ import ca.viaware.rpg.utilities.TextureHandler;
 
 public class Globals {
 	
-	TextureHandler r;
-	Texture demo = r.loadSprite("/enemies/slime moving/slimemoving0001.png");
+
 	ArrayList<ArrayList<String>> array = new ArrayList<ArrayList<String>>();
 	
 	
@@ -33,11 +32,7 @@ public class Globals {
 	public static gState gameState = gState.INTRO;
 
 	
-	public static void init(){
-		
-		m = new MeleeEnemy(1,1,null,10,10,1,1,100);
-		
-	}
+
 }
 
 

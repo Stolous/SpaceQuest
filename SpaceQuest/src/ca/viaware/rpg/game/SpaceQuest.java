@@ -15,7 +15,6 @@ public class SpaceQuest {
 		
 		DispSetup.setupDisplay();
 		DispSetup.setupGL();
-		Globals.init();
 		GameLoop gloop = new GameLoop();
 		gloop.startLoop();
        
