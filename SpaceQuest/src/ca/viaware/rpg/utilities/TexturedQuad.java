@@ -22,7 +22,7 @@ public  class TexturedQuad {
 	Texture texture;
 
 	public TexturedQuad(int xsizes, int ysizes, int xs, int ys, int rotates,
-			Texture tex) {
+			String path) {
 
 		rotate = rotates;
 		setXsize(xsizes);
@@ -31,7 +31,17 @@ public  class TexturedQuad {
 		y = ys;
 		setXh(getXsize() / 2);
 		yh = ysize / 2;
-		texture = tex;
+		
+		
+		try {
+			texture = TextureLoader.getTexture(".PNG", new FileInputStream(new File(path)));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			
+		}
+		
+
 		
 		texture.bind();
 		update();

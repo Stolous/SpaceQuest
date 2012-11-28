@@ -12,6 +12,7 @@ import ca.viaware.rpg.map.Loader;
 public class SpaceQuest {
 
 	public SpaceQuest() {
+		
 		DispSetup.setupDisplay();
 		DispSetup.setupGL();
 		GameLoop gloop = new GameLoop();

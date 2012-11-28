@@ -1,17 +1,35 @@
 package ca.viaware.rpg.entities;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
 
 import ca.viaware.rpg.game.Globals;
+import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class MeleeEnemy extends Enemy {
 	private static TexturedQuad t;
+	Texture demo;
 	private int agressiveness;
 	private static double x,y,distancebetween,xdist,ydist,playerx,playery,xmov,ymov,range,actxdist,actydist,speed;
-	public MeleeEnemy(int maxhealth, int damage, Texture[][] sprites,int spawnx,int spawny,int agresiveness,double range,double speed) {
+	public MeleeEnemy(int maxhealth, int damage, ArrayList<ArrayList<Texture>> sprites ,int spawnx,int spawny,int agresiveness,double range,double speed) {
 		super(maxhealth, damage, sprites, spawnx,spawny);
+		
+		
+		TextureHandler r=new TextureHandler();
+		
+		sprites = new ArrayList<ArrayList<Texture>>();
+
+			ArrayList<Texture> sprite = new ArrayList<Texture>();
+			sprite.add(0,demo);
+			sprites.add(0,sprite);
 		
 		this.speed=speed/100;
 		this.range=range;
@@ -19,7 +37,8 @@ public class MeleeEnemy extends Enemy {
 		this.x=spawnx;
 		this.y=spawny;
 		//t.setlocation(x, y);
-		t = new TexturedQuad(50,50,0,0,0,sprites[0][0]);
+		ArrayList<Texture> spritesforward=sprites.get(0);
+		t = new TexturedQuad(50,50,0,0,0,"res/sprites/enemies/slimemoving/1.png");
 		
 		
 		

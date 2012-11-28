@@ -1,15 +1,17 @@
 package ca.viaware.rpg.entities;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.opengl.Texture;
 
 public abstract class Enemy {
 
 	
 	private int currenthealth,maxhealth,damage;
-	private Texture[][] sprites;
+	private ArrayList<ArrayList<Texture>> sprites;
 	
 	
-	public Enemy(int maxhealth,int damage,Texture [][] sprites,int spawnx,int spawnz){
+	public Enemy(int maxhealth,int damage,ArrayList<ArrayList<Texture>> sprites,int spawnx,int spawnz){
 		
 		this.currenthealth = this.maxhealth=maxhealth;
 		this.damage=damage;
