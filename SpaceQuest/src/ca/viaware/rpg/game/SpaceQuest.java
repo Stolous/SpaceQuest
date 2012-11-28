@@ -15,6 +15,7 @@ public class SpaceQuest {
 		
 		DispSetup.setupDisplay();
 		DispSetup.setupGL();
+		Globals.init();
 		GameLoop gloop = new GameLoop();
 		gloop.startLoop();
        
@@ -22,5 +23,6 @@ public class SpaceQuest {
 
 	public static void main(String[] args) {
 		new SpaceQuest();
+		
 	}                                                                        
 	}
