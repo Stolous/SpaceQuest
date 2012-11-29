@@ -2,6 +2,7 @@ package ca.viaware.rpg.entities;
 
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 import org.newdawn.slick.opengl.Texture;
@@ -15,8 +16,8 @@ public class MeleeEnemy extends Enemy {
 	Texture demo;
 	private int agressiveness;
 	private static double x,y,distancebetween,xdist,ydist,playerx,playery,Xoffset,Yoffset,range,actxdist,actydist,speed;
-	public MeleeEnemy(int maxhealth, int damage, ArrayList<ArrayList<Texture>> sprites ,int spawnx,int spawny,int agresiveness,double range,double speed) {
-		super(maxhealth, damage, sprites, spawnx,spawny);
+	public MeleeEnemy(int maxhealth, int maxdamage,int mindamage, ArrayList<ArrayList<Texture>> sprites ,int spawnx,int spawny,int agresiveness,double range,double speed) {
+		super(maxhealth, maxdamage,mindamage, sprites, spawnx,spawny);
 		
 		
 		
@@ -81,6 +82,8 @@ public class MeleeEnemy extends Enemy {
 			x=moverx(actxdist,x,speed);
 			y=moverx(actydist,y,speed);
 			
+		}else{//this means the mob is within range and will attack
+			attack();
 		}
 		
 		
@@ -113,6 +116,11 @@ public class MeleeEnemy extends Enemy {
 		
 		return x;
 	
+		
+	}
+	private static void attack(){
+		Random r = new Random();
+		int damage;
 		
 	}
 

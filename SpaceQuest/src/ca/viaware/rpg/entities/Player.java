@@ -9,7 +9,9 @@ import ca.viaware.rpg.entity.AbstractEntity;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Player extends AbstractEntity {
-
+	private int maxhealth;
+	private static int currenthealth;
+	private int regenrate;
 	List<Texture> animPositions = new ArrayList(16);
 	int animStage = 0;
 	int animCount = 0;
@@ -132,6 +134,27 @@ public class Player extends AbstractEntity {
 	
 	public double getChangeY(){
 		return changeY;
+	}
+	public int getMaxHealth(){
+		return maxhealth;
+	}
+	public int getCurrentHealth(){
+		return currenthealth;
+	}
+	public int getRegenRate(){
+		return regenrate;
+	}
+	public static void takedamage(int amount){
+		
+		if(currenthealth>0){
+			currenthealth -=amount;
+		}else{
+			death();
+		}
+		
+	}
+	public static void  death(){
+		
 	}
 	
 
