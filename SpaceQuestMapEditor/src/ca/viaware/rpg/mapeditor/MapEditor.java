@@ -23,7 +23,7 @@ public class MapEditor {
 	public static List<Tile> tiles = new ArrayList<Tile>(16);
 	private boolean tileSelected = false;
 	private long lasttime = getTime();
-	private int cSelected = 0;
+	
 	int delta;
 	int dCount = 0;
 	boolean prevPressed = false;
@@ -35,6 +35,7 @@ public class MapEditor {
 		setupDisplay();
 		setupGL();
 		loadTextures();
+		tools.updateTextures();
 
 		Menu menu = new Menu();
 		menu.showMenu();
@@ -89,6 +90,7 @@ public class MapEditor {
 		int mX = mouseX();
 		int mY = mouseY();
 		int shiftDir = 0;
+		int cSelected = Globals.cSelected;
 
 		Rectangle rect = new Rectangle(mX, mY, 1, 1);
 
@@ -143,8 +145,6 @@ public class MapEditor {
 		if (cSelected < 0) {
 			cSelected = 0;
 		}
-
-		tools.updateSelectedTexture(textures.get(cSelected).getName());
 
 		switch (Globals.selectedTool) {
 
@@ -270,6 +270,9 @@ public class MapEditor {
 				tile.shiftRIGHT();
 			}
 		}
+		
+		Globals.cSelected = cSelected;
+		tools.updateSelected();
 	}
 
 	public void render() {

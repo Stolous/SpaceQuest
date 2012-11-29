@@ -8,6 +8,7 @@ public class Globals {
 	public static int yOffset = 0, xOffset = 0;
 	public static int mapSizeX, mapSizeY;
 	public static boolean isSaved = true;
+	public static int cSelected = 0;
 
 	public static enum brush {
 		PAINT, ERASE;

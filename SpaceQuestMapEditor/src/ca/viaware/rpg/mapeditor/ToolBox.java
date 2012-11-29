@@ -5,8 +5,11 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -16,10 +19,12 @@ public class ToolBox extends JFrame {
 	private JLabel tileID = new JLabel();
 	private JLabel tileLayer2ID = new JLabel();
 	private JLabel tileLayer2Name = new JLabel();
+	private JComboBox textureSelect = new JComboBox();
 
 	private JButton paintTool = new JButton();
 	private JButton eraseTool = new JButton();
 
+	private List<Object> objects = new ArrayList(16);
 	public ToolBox() {
 		setTitle("Toolbox");
 		setLayout(new GridLayout(15, 1));
@@ -33,7 +38,7 @@ public class ToolBox extends JFrame {
 	private void addComponents() {
 		Container cont = getContentPane();
 
-		cont.add(selectedTextureName);
+		cont.add(textureSelect);
 		cont.add(tileTextureName);
 		cont.add(tileID);
 		cont.add(tileLayer2Name);
@@ -44,7 +49,6 @@ public class ToolBox extends JFrame {
 
 		paintTool.setText("Paint brush");
 		eraseTool.setText("Erase brush");
-		selectedTextureName.setText("Placing Texture: ");
 		tileTextureName.setText("Tile Texture: ");
 		tileID.setText("Tile ID: ");
 
@@ -63,10 +67,8 @@ public class ToolBox extends JFrame {
 				Globals.selectedTool = Globals.brush.ERASE;
 			}
 		});
-	}
-
-	public void updateSelectedTexture(String t) {
-		selectedTextureName.setText("Placing Texture: " + t);
+		
+		
 	}
 
 	public void updateTile(int ID, int l2ID, boolean l2) {
@@ -80,6 +82,24 @@ public class ToolBox extends JFrame {
 			tileLayer2Name.setText("Tile layer 2 Texture: NONE");
 		}
 
+	}
+	
+	public void updateSelected(){
+		int cSelected = Globals.cSelected;
+		
+		textureSelect.setSelectedIndex(cSelected);
+	}
+	
+	public void updateTextures(){
+		for (TileTexture t : MapEditor.textures){
+			Object o = object(t.getName());
+			objects.add(o);
+			textureSelect.addItem(o);
+			}
+	}
+	
+	private Object object(final String item){
+		return new Object() { public String toString() { return item; } };
 	}
 
 }
