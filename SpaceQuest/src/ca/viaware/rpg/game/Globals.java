@@ -7,6 +7,7 @@ import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.MeleeEnemy;
 import ca.viaware.rpg.entities.Player;
+import ca.viaware.rpg.entities.Slime;
 import ca.viaware.rpg.map.Map;
 
 public class Globals {
@@ -15,7 +16,7 @@ public class Globals {
 	ArrayList<ArrayList<String>> array = new ArrayList<ArrayList<String>>();
 	
 	
-	public static MeleeEnemy m;
+	public static Slime s;
 	public static boolean isRunning = true;
 	public static int dispWidth = 800, dispHeight = 600;
 	public static int temp = 0;

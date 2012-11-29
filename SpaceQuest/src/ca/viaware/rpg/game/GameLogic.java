@@ -10,7 +10,8 @@ PlayerMovement pMovement = new PlayerMovement();
 		
 		pMovement.checkMovement(delta);
 		
-		Globals.m.update(delta);
+		Globals.s.update(delta);
 		
 	}
+	
 }

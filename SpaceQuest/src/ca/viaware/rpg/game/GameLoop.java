@@ -7,6 +7,7 @@ import org.lwjgl.opengl.Display;
 
 import ca.viaware.rpg.entity.MeleeEnemy;
 import ca.viaware.rpg.entities.Player;
+import ca.viaware.rpg.entities.Slime;
 import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
 import ca.viaware.rpg.utilities.DebugScreen;
@@ -24,7 +25,7 @@ private long lasttime = 0;
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170,200);
-		Globals.m = new MeleeEnemy(1,1,1,null,10,10,1,1,50);
+		Globals.s = new Slime(1,1,1,null,10,10,1,1,50);
 		while (Globals.isRunning) {
 			
 			
@@ -38,6 +39,7 @@ private long lasttime = 0;
 			
 			logic.doLogic(delta);
 			render.render();
+			Globals.s.reset();
 			
 			Display.update();
 			Display.sync(60);

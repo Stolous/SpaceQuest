@@ -83,6 +83,7 @@ public  class TexturedQuad {
 		x = x + xs;
 		y = y + ys;
 	}
+	
 
 	public void setlocation(double xs, double ys) {
 		x = xs;

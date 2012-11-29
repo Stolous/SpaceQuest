@@ -8,12 +8,12 @@ import java.util.Random;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.game.Globals;
-import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TexturedQuad;
 
+
 public class MeleeEnemy extends Enemy {
-	private static TexturedQuad t;
-	Texture demo;
+
+	private TexturedQuad t;
 	private int agressiveness;
 	private static double distancebetween,xdist,ydist,playerx,playery,Xoffset,Yoffset,range,actxdist,actydist,speed;
 	public MeleeEnemy(int maxhealth, int maxdamage,int mindamage, ArrayList<ArrayList<Texture>> sprites ,int spawnx,int spawny,int agresiveness,double range,double speed) {
@@ -22,22 +22,18 @@ public class MeleeEnemy extends Enemy {
 		
 		
 		
-		sprites = new ArrayList<ArrayList<Texture>>();
 
-			ArrayList<Texture> sprite = new ArrayList<Texture>();
-			sprite.add(0,demo);
-			sprites.add(0,sprite);
 		
 		MeleeEnemy.speed=speed/100;
 		MeleeEnemy.range=range;
 		this.agressiveness =agresiveness;
-		MeleeEnemy.x=spawnx;
-		MeleeEnemy.y=spawny;
+		x=spawnx;
+		y=spawny;
 		
 		
 		
 		
-		t = new TexturedQuad(50,50,0,0,0,"res/sprites/enemies/slimemoving/1.png");
+		
 		
 		
 		
@@ -47,11 +43,14 @@ public class MeleeEnemy extends Enemy {
 		
 		
 	}
+	
+
 	//it may seem like the enemy has a weird box for the Y value- but that is because the sprite isn't centered
 	@Override
+	
 	public void update(int delta){
-		Xoffset= (Globals.gameMap.getXOffset());
-		Yoffset = (Globals.gameMap.getYOffset());
+		setXoffset((Globals.gameMap.getXOffset()));
+		setYoffset((Globals.gameMap.getYOffset()));
 		//MATH (YAY!!!!!!!!!!)
 		playerx = Globals.playerEntity.getX();
 		playery = Globals.playerEntity.getY();
@@ -82,6 +81,7 @@ public class MeleeEnemy extends Enemy {
 			x=moverx(actxdist,x,speed);
 			y=moverx(actydist,y,speed);
 			
+			
 		}else{//this means the mob is within range and will attack
 			attack();
 		}
@@ -89,11 +89,16 @@ public class MeleeEnemy extends Enemy {
 		
 		
 
-		x=x + Xoffset;//this is for movement of player
-		y=y + Yoffset;
-		t.setlocation(x, y);
-		x=x-Xoffset;//resets so it doesn't compound
-		y=y-Yoffset;
+		x=x + getXoffset();//this is for movement of player
+		y=y + getYoffset();
+		
+		
+		
+		
+	}
+	public void reset(){
+		x=x - getXoffset();//this is for movement of player
+		y=y - getYoffset();
 	}
 
 	private static double moverx(double i,double x,double speed){
@@ -122,11 +127,32 @@ public class MeleeEnemy extends Enemy {
 		int damage;
 		
 	}
+	
+	
 	@Override
 	public void draw() {
-
-		t.update();
+		// TODO Auto-generated method stub
+		
 	}
+	public static double getXoffset() {
+		return Xoffset;
+	}
+	public static void setXoffset(double xoffset) {
+		Xoffset = xoffset;
+	}
+	public static double getYoffset() {
+		return Yoffset;
+	}
+	public static void setYoffset(double yoffset) {
+		Yoffset = yoffset;
+	}
+	public TexturedQuad getT() {
+		return t;
+	}
+	public void setT(TexturedQuad t) {
+		this.t = t;
+	}
+	
 
 	
 

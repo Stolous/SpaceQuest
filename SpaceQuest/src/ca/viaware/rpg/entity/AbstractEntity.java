@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 
 public abstract class AbstractEntity implements Entity {
 
-	protected double x, y, width, height;
+	protected  double x, y, width, height;
 	protected Rectangle hitbox = new Rectangle();
 	
 	public AbstractEntity(double x, double y, double width, double height) {
