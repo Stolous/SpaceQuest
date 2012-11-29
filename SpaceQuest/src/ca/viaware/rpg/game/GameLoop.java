@@ -5,7 +5,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 
-import ca.viaware.rpg.entities.MeleeEnemy;
+import ca.viaware.rpg.entity.MeleeEnemy;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
@@ -24,7 +24,7 @@ private long lasttime = 0;
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170,200);
-		Globals.m = new MeleeEnemy(1,1,1,null,10,10,1,100,50);
+		Globals.m = new MeleeEnemy(1,1,1,null,10,10,1,1,50);
 		while (Globals.isRunning) {
 			
 			

@@ -5,10 +5,9 @@ import java.util.List;
 
 import org.newdawn.slick.opengl.Texture;
 
-import ca.viaware.rpg.entities.MeleeEnemy;
+import ca.viaware.rpg.entity.MeleeEnemy;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.map.Map;
-import ca.viaware.rpg.utilities.TextureHandler;
 
 public class Globals {
 	

@@ -1,27 +1,35 @@
-package ca.viaware.rpg.entities;
+package ca.viaware.rpg.entity;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import org.newdawn.slick.opengl.Texture;
 
-public abstract class Enemy {
-
-	
+public abstract class Enemy extends AbstractMoveableEntity {
+	static double x,y,width, height;
+	protected Rectangle hitbox = new Rectangle();
 	private int currenthealth,maxhealth,maxdamage,mindamage;
 	private ArrayList<ArrayList<Texture>> sprites;
 	
-	
-	public Enemy(int maxhealth,int maxdamage,int mindamage,ArrayList<ArrayList<Texture>> sprites,int spawnx,int spawnz){
-		
+	public Enemy(double x, double y, double width, double height,int maxhealth,int maxdamage,int mindamage,ArrayList<ArrayList<Texture>> sprites,int spawnx,int spawnz) {
+		super(x, y, width, height);
 		//max/min damage is so there is a range 
-		
 		this.currenthealth = this.maxhealth=maxhealth;
 		this.maxdamage=maxdamage;
 		this.mindamage=mindamage;
 		//this is where spawn code goes
 		this.sprites = sprites;
-		
 	}
+
+	
+	
+	
+		
+		
+		
+	
+		
+	
 	
 	public void setmaxhealth(int maxhealth){
 		this.maxhealth= maxhealth;
@@ -47,5 +55,6 @@ public abstract class Enemy {
 public void death(){
 	
 }
+
 	
 }

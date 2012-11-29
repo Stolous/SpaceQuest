@@ -1,4 +1,4 @@
-package ca.viaware.rpg.entities;
+package ca.viaware.rpg.entity;
 
 
 import java.util.ArrayList;
@@ -15,9 +15,9 @@ public class MeleeEnemy extends Enemy {
 	private static TexturedQuad t;
 	Texture demo;
 	private int agressiveness;
-	private static double x,y,distancebetween,xdist,ydist,playerx,playery,Xoffset,Yoffset,range,actxdist,actydist,speed;
+	private static double distancebetween,xdist,ydist,playerx,playery,Xoffset,Yoffset,range,actxdist,actydist,speed;
 	public MeleeEnemy(int maxhealth, int maxdamage,int mindamage, ArrayList<ArrayList<Texture>> sprites ,int spawnx,int spawny,int agresiveness,double range,double speed) {
-		super(maxhealth, maxdamage,mindamage, sprites, spawnx,spawny);
+		super( x,  y,  width,  height, maxhealth, maxdamage, mindamage, sprites, spawnx, spawny);
 		
 		
 		
@@ -48,7 +48,8 @@ public class MeleeEnemy extends Enemy {
 		
 	}
 	//it may seem like the enemy has a weird box for the Y value- but that is because the sprite isn't centered
-	public static void Update(){
+	@Override
+	public void update(int delta){
 		Xoffset= (Globals.gameMap.getXOffset());
 		Yoffset = (Globals.gameMap.getYOffset());
 		//MATH (YAY!!!!!!!!!!)
@@ -59,8 +60,7 @@ public class MeleeEnemy extends Enemy {
 		
 		
 		
-		System.out.println("Px"+ playerx);
-		System.out.println("Px"+ playerx);
+
 		xdist= playerx - x;
 		actxdist=xdist;
 		//if  negative
@@ -92,7 +92,6 @@ public class MeleeEnemy extends Enemy {
 		x=x + Xoffset;//this is for movement of player
 		y=y + Yoffset;
 		t.setlocation(x, y);
-		t.update();
 		x=x-Xoffset;//resets so it doesn't compound
 		y=y-Yoffset;
 	}
@@ -122,6 +121,11 @@ public class MeleeEnemy extends Enemy {
 		Random r = new Random();
 		int damage;
 		
+	}
+	@Override
+	public void draw() {
+
+		t.update();
 	}
 
 	
