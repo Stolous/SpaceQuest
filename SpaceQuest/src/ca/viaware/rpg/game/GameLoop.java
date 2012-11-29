@@ -25,7 +25,7 @@ private long lasttime = 0;
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170,200);
-		Globals.s = new Slime(1,1,1,null,10,10,1,1,50);
+		Globals.s = new Slime(0,0,0,0,1,1,1,10,10,1,1,50);
 		while (Globals.isRunning) {
 			
 			

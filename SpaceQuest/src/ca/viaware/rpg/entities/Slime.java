@@ -9,10 +9,10 @@ import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class Slime extends MeleeEnemy {
 
-	public Slime(int maxhealth, int maxdamage, int mindamage,
-			ArrayList<ArrayList<Texture>> sprites, int spawnx, int spawny,
+	public Slime(double x, double y, double width, double height,int maxhealth, int maxdamage, int mindamage,
+			int spawnx, int spawny,
 			int agresiveness, double range, double speed) {
-		super(maxhealth, maxdamage, mindamage, sprites, spawnx, spawny, agresiveness,
+		super( x,  y,  width,  height,maxhealth, maxdamage, mindamage, spawnx, spawny, agresiveness,
 				range, speed);
 		// TODO Auto-generated constructor stub
 		setT(new TexturedQuad(50,50,0,0,0,"res/sprites/enemies/slimemoving/1.png"));

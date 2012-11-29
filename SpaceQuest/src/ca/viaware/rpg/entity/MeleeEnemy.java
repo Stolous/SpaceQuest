@@ -16,8 +16,8 @@ public class MeleeEnemy extends Enemy {
 	private TexturedQuad t;
 	private int agressiveness;
 	private static double distancebetween,xdist,ydist,playerx,playery,Xoffset,Yoffset,range,actxdist,actydist,speed;
-	public MeleeEnemy(int maxhealth, int maxdamage,int mindamage, ArrayList<ArrayList<Texture>> sprites ,int spawnx,int spawny,int agresiveness,double range,double speed) {
-		super( x,  y,  width,  height, maxhealth, maxdamage, mindamage, sprites, spawnx, spawny);
+	public MeleeEnemy(double x, double y, double width, double height,int maxhealth, int maxdamage,int mindamage, int spawnx,int spawny,int agresiveness,double range,double speed) {
+		super( x,  y,  width,  height, maxhealth, maxdamage, mindamage,  spawnx, spawny);
 		
 		
 		

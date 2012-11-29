@@ -8,9 +8,9 @@ import org.newdawn.slick.opengl.Texture;
 public abstract class Enemy extends AbstractMoveableEntity {
 	protected Rectangle hitbox = new Rectangle();
 	private int currenthealth,maxhealth,maxdamage,mindamage;
-	private ArrayList<ArrayList<Texture>> sprites;
 	
-	public Enemy(double x, double y, double width, double height,int maxhealth,int maxdamage,int mindamage,ArrayList<ArrayList<Texture>> sprites,int spawnx,int spawnz) {
+	
+	public Enemy(double x, double y, double width, double height,int maxhealth,int maxdamage,int mindamage,int spawnx,int spawnz) {
 		super(x, y, width, height);
 		//max/min damage is so there is a range 
 		this.x = x;
@@ -21,7 +21,7 @@ public abstract class Enemy extends AbstractMoveableEntity {
 		this.maxdamage=maxdamage;
 		this.mindamage=mindamage;
 		//this is where spawn code goes
-		this.sprites = sprites;
+	
 	}
 
 	
