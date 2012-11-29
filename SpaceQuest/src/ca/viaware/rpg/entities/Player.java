@@ -127,12 +127,10 @@ public class Player extends AbstractEntity {
 	}
 	
 	public double getChangeX(){
-		System.out.println("Change x"+ changeX);
 		return changeX;
 	}
 	
 	public double getChangeY(){
-		System.out.println("Change y"+ changeY);
 		return changeY;
 	}
 	

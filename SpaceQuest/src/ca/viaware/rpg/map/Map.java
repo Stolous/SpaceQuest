@@ -10,7 +10,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Map {
 	public int xSize, ySize;
-	public int xOffset, yOffset;
+	private int xOffset, yOffset;
 	public Tile mapTiles[][];
 
 	public void setSize(int x, int y) {
@@ -50,5 +50,10 @@ public class Map {
 		xOffset += x * delta;
 		yOffset += y * delta;
 	}
-	
+	public int getXOffset(){
+		return xOffset;
+	}
+	public int getYOffset(){
+		return yOffset;
+	}
 }

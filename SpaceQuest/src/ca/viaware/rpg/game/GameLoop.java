@@ -24,7 +24,7 @@ private long lasttime = 0;
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170,200);
-		Globals.m = new MeleeEnemy(1,1,null,10,10,1,1,100);
+		Globals.m = new MeleeEnemy(1,1,null,10,10,1,100,50);
 		while (Globals.isRunning) {
 			
 			

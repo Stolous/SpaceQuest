@@ -1,16 +1,11 @@
 package ca.viaware.rpg.entities;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 import java.util.ArrayList;
 
-import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
 
-import ca.viaware.rpg.game.GameLoop;
+import org.newdawn.slick.opengl.Texture;
+
 import ca.viaware.rpg.game.Globals;
 import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TexturedQuad;
@@ -19,12 +14,12 @@ public class MeleeEnemy extends Enemy {
 	private static TexturedQuad t;
 	Texture demo;
 	private int agressiveness;
-	private static double x,y,distancebetween,xdist,ydist,playerx,playery,xmov,ymov,range,actxdist,actydist,speed;
+	private static double x,y,distancebetween,xdist,ydist,playerx,playery,Xoffset,Yoffset,range,actxdist,actydist,speed;
 	public MeleeEnemy(int maxhealth, int damage, ArrayList<ArrayList<Texture>> sprites ,int spawnx,int spawny,int agresiveness,double range,double speed) {
 		super(maxhealth, damage, sprites, spawnx,spawny);
 		
 		
-		TextureHandler r=new TextureHandler();
+		
 		
 		sprites = new ArrayList<ArrayList<Texture>>();
 
@@ -32,13 +27,13 @@ public class MeleeEnemy extends Enemy {
 			sprite.add(0,demo);
 			sprites.add(0,sprite);
 		
-		this.speed=speed/100;
-		this.range=range;
+		MeleeEnemy.speed=speed/100;
+		MeleeEnemy.range=range;
 		this.agressiveness =agresiveness;
-		this.x=spawnx;
-		this.y=spawny;
-		//t.setlocation(x, y);
-		ArrayList<Texture> spritesforward=sprites.get(0);
+		MeleeEnemy.x=spawnx;
+		MeleeEnemy.y=spawny;
+		
+		
 		
 		
 		t = new TexturedQuad(50,50,0,0,0,"res/sprites/enemies/slimemoving/1.png");
@@ -51,20 +46,20 @@ public class MeleeEnemy extends Enemy {
 		
 		
 	}
-	
-	public static void Update(int delta){
-		
+	//it may seem like the enemy has a weird box for the Y value- but that is because the sprite isn't centered
+	public static void Update(){
+		Xoffset= (Globals.gameMap.getXOffset());
+		Yoffset = (Globals.gameMap.getYOffset());
 		//MATH (YAY!!!!!!!!!!)
-		playerx = Globals.playerEntity.getActX();
-		playery = Globals.playerEntity.getActY();
 		playerx = Globals.playerEntity.getX();
 		playery = Globals.playerEntity.getY();
+		playerx = Globals.playerEntity.getActX()+384;//additin is because doesn't start at center
+		playery = Globals.playerEntity.getActY()+256;
 		
 		
-		x = x - Globals.playerEntity.getChangeX();
-		y = y - Globals.playerEntity.getChangeY();
 		
-		
+		System.out.println("Px"+ playerx);
+		System.out.println("Px"+ playerx);
 		xdist= playerx - x;
 		actxdist=xdist;
 		//if  negative
@@ -82,7 +77,7 @@ public class MeleeEnemy extends Enemy {
 		distancebetween =Math.sqrt(((xdist*xdist)+(ydist*ydist)));//pythagorean theorem
 		
 		
-		if(distancebetween>0){
+		if(distancebetween>range){
 			x=moverx(actxdist,x,speed);
 			y=moverx(actydist,y,speed);
 			
@@ -90,12 +85,13 @@ public class MeleeEnemy extends Enemy {
 		
 		
 		
-		
-		
+
+		x=x + Xoffset;//this is for movement of player
+		y=y + Yoffset;
 		t.setlocation(x, y);
 		t.update();
-	
-
+		x=x-Xoffset;//resets so it doesn't compound
+		y=y-Yoffset;
 	}
 
 	private static double moverx(double i,double x,double speed){
@@ -104,14 +100,14 @@ public class MeleeEnemy extends Enemy {
 		if(i>0){
 			x = x+speed;
 			
-			if(i<0){
+			if(i<range){
 				
-				x=0;
+				x=x-speed;
 			}}else{
 		if(i<0){
 			x=x-speed;
-			if(i>0){
-				x= 0;
+			if(i>range){
+				x= x+speed;
 			}
 		}}
 		
@@ -119,5 +115,7 @@ public class MeleeEnemy extends Enemy {
 	
 		
 	}
+
+	
 
 }

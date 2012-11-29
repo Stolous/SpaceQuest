@@ -11,7 +11,7 @@ PlayerMovement pMovement = new PlayerMovement();
 	public void doLogic(int delta) {
 		
 		pMovement.checkMovement(delta);
-		Globals.m.Update(delta);
+		
 		
 		
 	}
