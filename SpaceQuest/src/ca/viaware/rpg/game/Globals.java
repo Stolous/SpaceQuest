@@ -6,6 +6,7 @@ import java.util.List;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.MeleeEnemy;
+import ca.viaware.rpg.entities.Cursor;
 import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.entities.Slime;
@@ -25,6 +26,7 @@ public class Globals {
 	public static Texture startImg = null;
 	public static Player playerEntity = null;
 	public static Map gameMap = null;
+	public static Cursor cursor;
 
 	public static enum gState {
 		INTRO, MAIN_MENU, GAME, OUTRO;

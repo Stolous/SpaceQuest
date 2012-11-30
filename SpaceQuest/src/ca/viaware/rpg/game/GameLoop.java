@@ -5,6 +5,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 import ca.viaware.rpg.entity.MeleeEnemy;
+import ca.viaware.rpg.entities.Cursor;
 import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.entities.Slime;
@@ -30,6 +31,7 @@ public class GameLoop {
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
 		Globals.s = new Slime(0, 0, 0, 0, 1, 10, 10, 1, 1,50 );
+		Globals.cursor = new Cursor(0,0,32,32);
 		while (Globals.isRunning) {
 
 			int delta = getDelta();

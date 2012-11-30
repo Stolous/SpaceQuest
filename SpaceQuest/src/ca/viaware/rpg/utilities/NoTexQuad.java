@@ -4,11 +4,11 @@ import static org.lwjgl.opengl.GL11.glColor3f;
 
 import org.lwjgl.opengl.GL11;
 
-public class nontexdquad {
+public class NoTexQuad {
 
 	private double xsize, ysize, x, y, rotate, xh, yh;
 
-	public nontexdquad(int xsizes, int ysizes, int xs, int ys, int rotates) {
+	public NoTexQuad(int xsizes, int ysizes, int xs, int ys, int rotates) {
 
 		rotate = rotates;
 		setXsize(xsizes);

@@ -12,6 +12,8 @@ PlayerMovement pMovement = new PlayerMovement();
 		
 		Globals.s.update(delta);
 		
+		Globals.cursor.update(delta);
+		
 	}
 	
 }

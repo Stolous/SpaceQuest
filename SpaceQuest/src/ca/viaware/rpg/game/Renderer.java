@@ -40,5 +40,7 @@ public class Renderer {
 			
 			break;
 		}
+		
+		Globals.cursor.draw();
 	}
 }
