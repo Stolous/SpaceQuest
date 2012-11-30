@@ -13,7 +13,7 @@ public class Renderer {
 		switch (Globals.gameState) {
 		case INTRO:
 			//Intro screen - not working yet
-			/*
+			
 			Globals.startImg.bind();
 			glBegin(GL_QUADS);
 				glTexCoord2f(0f, 0f);
@@ -25,7 +25,7 @@ public class Renderer {
 				glTexCoord2f(0f, 1f);
 				glVertex2i(0, Globals.dispHeight);
 			glEnd();
-			*/
+			
 			Globals.gameState = Globals.gState.GAME;
 			break;
 		case MAIN_MENU:

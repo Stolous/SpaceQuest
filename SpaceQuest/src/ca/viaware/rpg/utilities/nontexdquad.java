@@ -4,7 +4,7 @@ import static org.lwjgl.opengl.GL11.glColor3f;
 
 import org.lwjgl.opengl.GL11;
 
-public abstract class nontexdquad {
+public class nontexdquad {
 
 	private double xsize, ysize, x, y, rotate, xh, yh;
 
