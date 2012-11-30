@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class ToolBox extends JFrame {
 	private JLabel selectedTextureName = new JLabel();
@@ -20,14 +22,16 @@ public class ToolBox extends JFrame {
 	private JLabel tileLayer2ID = new JLabel();
 	private JLabel tileLayer2Name = new JLabel();
 	private JComboBox textureSelect = new JComboBox();
-
 	private JButton paintTool = new JButton();
 	private JButton eraseTool = new JButton();
 
+	private boolean changed = false;
+
 	private List<Object> objects = new ArrayList(16);
+
 	public ToolBox() {
 		setTitle("Toolbox");
-		setLayout(new GridLayout(15, 1));
+		setLayout(new GridLayout(18, 1));
 		setSize(200, 500);
 		setLocation(0, 200);
 		setVisible(true);
@@ -67,8 +71,7 @@ public class ToolBox extends JFrame {
 				Globals.selectedTool = Globals.brush.ERASE;
 			}
 		});
-		
-		
+
 	}
 
 	public void updateTile(int ID, int l2ID, boolean l2) {
@@ -83,23 +86,38 @@ public class ToolBox extends JFrame {
 		}
 
 	}
-	
-	public void updateSelected(){
+
+	public void updateSelected() {
 		int cSelected = Globals.cSelected;
-		
-		textureSelect.setSelectedIndex(cSelected);
+		// Prevent scrollwheel and combobox from conflicting
+		if (changed) {
+			textureSelect.setSelectedIndex(cSelected);
+		} else {
+			cSelected = textureSelect.getSelectedIndex();
+		}
+		textureSelect.repaint();
+		changed = false;
+		Globals.cSelected = cSelected;
 	}
-	
-	public void updateTextures(){
-		for (TileTexture t : MapEditor.textures){
+
+	public void updateTextures() {
+		for (TileTexture t : MapEditor.textures) {
 			Object o = object(t.getName());
 			objects.add(o);
 			textureSelect.addItem(o);
-			}
+		}
 	}
-	
-	private Object object(final String item){
-		return new Object() { public String toString() { return item; } };
+
+	private Object object(final String item) {
+		return new Object() {
+			public String toString() {
+				return item;
+			}
+		};
+	}
+
+	public void changed() {
+		changed = true;
 	}
 
 }

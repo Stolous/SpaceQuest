@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
@@ -28,10 +30,22 @@ public class MapEditor {
 	int dCount = 0;
 	boolean prevPressed = false;
 	public static List<TileTexture> textures = new ArrayList(16);
-	ToolBox tools = new ToolBox();
+	ToolBox tools;
 	int selectedTile = 0;
 
 	public MapEditor() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
+		tools = new ToolBox();
 		setupDisplay();
 		setupGL();
 		loadTextures();
@@ -137,7 +151,13 @@ public class MapEditor {
 			dCount += delta;
 		}
 
+		int csOld = cSelected;
+		
 		cSelected += Mouse.getDWheel() / 120;
+		
+		if (csOld != cSelected){
+			tools.changed();
+		}
 
 		if (cSelected > (textures.size() - 1)) {
 			cSelected = 0;
@@ -145,6 +165,9 @@ public class MapEditor {
 		if (cSelected < 0) {
 			cSelected = 0;
 		}
+		
+		Globals.cSelected = cSelected;
+		tools.updateSelected();
 
 		switch (Globals.selectedTool) {
 
@@ -271,8 +294,6 @@ public class MapEditor {
 			}
 		}
 		
-		Globals.cSelected = cSelected;
-		tools.updateSelected();
 	}
 
 	public void render() {
