@@ -13,11 +13,11 @@ public class Slime extends MeleeEnemy {
 	private Texture [] textures=new Texture[17];
 	private int index =1;
 	private int slower = 0;
-	public Slime(double x, double y, double width, double height,int maxhealth, int maxdamage, int mindamage,
+	public Slime(double x, double y, double width, double height,int maxhealth, 
 			int spawnx, int spawny,
 			int agresiveness, double range, double speed) {
-		super( x,  y,  width,  height,maxhealth, maxdamage, mindamage, spawnx, spawny, agresiveness,
-				range, speed);
+		super( x,  y,  width,  height,maxhealth, 10, 5, spawnx, spawny, agresiveness,
+				range, speed,50);
 		// TODO Auto-generated constructor stub
 		setT(new TexturedQuad(50,50,0,0,0,"res/sprites/enemies/slimemoving/1.png"));
 										   
@@ -47,7 +47,7 @@ public class Slime extends MeleeEnemy {
 			
 			getT().setlocation(getX(),getY());
 			getT().update();
-			if(!(index== 18)){//so the index doesn't go ver nbr of sprites
+			if(!(index== 17)){//so the index doesn't go ver nbr of sprites
 				
 			}else{
 			index = 0;

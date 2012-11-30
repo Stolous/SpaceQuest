@@ -18,8 +18,8 @@ public abstract class Enemy extends AbstractMoveableEntity {
 		this.width = -width;
 		this.height = height;
 		this.currenthealth = this.maxhealth = maxhealth;
-		this.maxdamage = maxdamage;
-		this.mindamage = mindamage;
+		this.setMaxdamage(maxdamage);
+		this.setMindamage(mindamage);
 		// this is where spawn code goes
 
 	}
@@ -33,8 +33,8 @@ public abstract class Enemy extends AbstractMoveableEntity {
 	}
 
 	public void setdamage(int mindamage, int maxdamage) {
-		this.mindamage = mindamage;
-		this.maxdamage = maxdamage;
+		this.setMindamage(mindamage);
+		this.setMaxdamage(maxdamage);
 	}
 
 	public void takedamage(int damagetaken) {
@@ -52,6 +52,22 @@ public abstract class Enemy extends AbstractMoveableEntity {
 
 	public void death() {
 
+	}
+
+	public int getMaxdamage() {
+		return maxdamage;
+	}
+
+	public void setMaxdamage(int maxdamage) {
+		this.maxdamage = maxdamage;
+	}
+
+	public int getMindamage() {
+		return mindamage;
+	}
+
+	public void setMindamage(int mindamage) {
+		this.mindamage = mindamage;
 	}
 
 }

@@ -3,6 +3,7 @@ package ca.viaware.rpg.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.AbstractEntity;
@@ -10,13 +11,14 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Player extends AbstractEntity {
 	private int maxHealth;
+	boolean color = false;
 	private static int currentHealth;
 	private int regenRate;
-	List<Texture> animPositions = new ArrayList(16);
+	List<Texture> animPositions = new ArrayList<Texture>(16);
 	int animStage = 0;
 	int animCount = 0;
 	double speed = 0.15;
-	
+	private static double width,height;
 	
 	private double changeY, changeX;
 	
@@ -28,14 +30,43 @@ public class Player extends AbstractEntity {
 
 	public Player(double x, double y, double width, double height) {
 		super(x, y, width, height);
+		this.width = width;
+		this.height = height;
+	}
+	public static double getW(){
+		return width;
+	}
+	public static double getH(){
+		return height;
 	}
 
 	@Override
 	public void draw() {
+		
 		changeX = 0;
 		changeY = 0;
 		animPositions.get(animStage).bind();
 
+		
+		if(color){
+			GL11.glColor3f(1,0.5f,0.5f);
+			
+			Runnable r = new Runnable(){
+				public void run(){
+					try {
+						Thread.sleep(100L);//this is so that the color  shows for a little while
+						color=false;
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				
+				}
+			};
+			Thread t = new Thread(r);
+			t.start();
+			
+			
+		}
 		glBegin(GL_QUADS);
 		glTexCoord2f(0f, 0f);
 		glVertex2d(x, y);
@@ -46,6 +77,7 @@ public class Player extends AbstractEntity {
 		glTexCoord2f(0f, 1f);
 		glVertex2d(x, y + height);
 		glEnd();
+		GL11.glColor3f(1,1,1);
 	}
 
 	@Override
@@ -145,8 +177,9 @@ public class Player extends AbstractEntity {
 	public int getRegenRate(){
 		return regenRate;
 	}
-	public static void takedamage(int amount){
-		
+	public void takedamage(int amount){
+		color=true;
+		System.out.println("Enemy attack registered "+ amount+" damage was dealt");
 		if(currentHealth>0){
 			currentHealth -=amount;
 		}else{
@@ -155,7 +188,7 @@ public class Player extends AbstractEntity {
 		
 	}
 	public static void  death(){
-		
+		System.out.println("You are dead!");
 	}
 	
 

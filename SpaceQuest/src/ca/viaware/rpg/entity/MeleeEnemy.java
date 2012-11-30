@@ -5,27 +5,29 @@ import java.util.Random;
 
 import org.newdawn.slick.opengl.Texture;
 
+import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.game.Globals;
 import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class MeleeEnemy extends Enemy {
 
 	private TexturedQuad t;
-	private int delta,agressiveness;
+	private int delta,agressiveness,betattacks,attackspeed;
 	private static double distancebetween, xdist, ydist, playerx, playery,
 			Xoffset, Yoffset, range, actxdist, actydist, speed;
 
 	public MeleeEnemy(double x, double y, double width, double height,
 			int maxhealth, int maxdamage, int mindamage, int spawnx,
-			int spawny, int agresiveness, double range, double speed) {
+			int spawny, int agresiveness, double range, double speed, int attackspeed) {
 		super(x, y, width, height, maxhealth, maxdamage, mindamage, spawnx,
 				spawny);
-
+		this.attackspeed = attackspeed;
 		MeleeEnemy.speed = speed / 100;
 		MeleeEnemy.range = range;
 		this.agressiveness = agresiveness;
 		x = spawnx;
 		y = spawny;
+		betattacks= attackspeed/2;//this way the initial attack will be faster
 
 	}
 
@@ -47,13 +49,14 @@ public class MeleeEnemy extends Enemy {
 														// center
 		playery = Globals.playerEntity.getActY() + 256;
 
-		xdist = playerx - x;
+		xdist = playerx +(Player.getW()/2)- x;
+		System.out.println("Width"+ Player.getW());
 		actxdist = xdist;
 		// if negative
 		if (xdist < 0) {
 			xdist *= -1;
 		}
-		ydist = playery - y;
+		ydist = playery+(Player.getH()/2) - y;
 		actydist = ydist;
 		if (ydist < 1) {
 			ydist *= -1;
@@ -102,10 +105,15 @@ public class MeleeEnemy extends Enemy {
 
 	}
 
-	private static void attack() {
+	private void attack() {
+		if(betattacks>=attackspeed){
 		Random r = new Random();
 		int damage;
-
+		damage= r.nextInt((getMaxdamage()-getMindamage()))+getMindamage();
+		Globals.playerEntity.takedamage(damage);
+		betattacks = 0;
+		}
+		betattacks++;
 	}
 
 	@Override
