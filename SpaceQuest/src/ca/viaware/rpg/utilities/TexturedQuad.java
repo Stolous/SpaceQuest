@@ -58,8 +58,7 @@ public  class TexturedQuad {
 		GL11.glTranslatef(-10.0f, -10.5f, 0.0f); // to the origin
 		GL11.glTranslated(-x, -y, 0);
 		
-		System.out.println("X is"+ x);
-		System.out.println("Y is"+ y);
+
 		GL11.glBegin(GL11.GL_QUADS);
 		GL11.glTexCoord2f(0, 0);
 		GL11.glVertex2d(x - getXh(), y - yh);

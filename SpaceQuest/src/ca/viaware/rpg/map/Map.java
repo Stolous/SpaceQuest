@@ -1,12 +1,11 @@
 package ca.viaware.rpg.map;
 
-import org.lwjgl.*;
-import org.lwjgl.opengl.*;
+
 
 
 import ca.viaware.rpg.game.Globals;
 import ca.viaware.rpg.utilities.TextRenderer;
-import static org.lwjgl.opengl.GL11.*;
+
 
 public class Map {
 	public int xSize, ySize;

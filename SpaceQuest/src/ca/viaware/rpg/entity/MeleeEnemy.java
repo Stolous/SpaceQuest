@@ -50,7 +50,7 @@ public class MeleeEnemy extends Enemy {
 		playery = Globals.playerEntity.getActY() + 256;
 
 		xdist = playerx +(Player.getW()/2)- x;
-		System.out.println("Width"+ Player.getW());
+
 		actxdist = xdist;
 		// if negative
 		if (xdist < 0) {

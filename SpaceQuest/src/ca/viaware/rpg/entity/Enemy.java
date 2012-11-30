@@ -1,9 +1,9 @@
 package ca.viaware.rpg.entity;
 
 import java.awt.Rectangle;
-import java.util.ArrayList;
 
-import org.newdawn.slick.opengl.Texture;
+
+
 
 public abstract class Enemy extends AbstractMoveableEntity {
 	protected Rectangle hitbox = new Rectangle();
@@ -40,6 +40,7 @@ public abstract class Enemy extends AbstractMoveableEntity {
 	public void takedamage(int damagetaken) {
 		this.currenthealth -= damagetaken;
 		isalive();
+		
 	}
 
 	public void isalive() {

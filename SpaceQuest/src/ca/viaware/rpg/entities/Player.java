@@ -10,7 +10,7 @@ import ca.viaware.rpg.entity.AbstractEntity;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Player extends AbstractEntity {
-	private int maxHealth;
+	private int maxHealth = 100;
 	boolean color = false;
 	private static int currentHealth;
 	private int regenRate;
@@ -30,8 +30,9 @@ public class Player extends AbstractEntity {
 
 	public Player(double x, double y, double width, double height) {
 		super(x, y, width, height);
-		this.width = width;
-		this.height = height;
+		Player.width = width;
+		Player.height = height;
+		currentHealth=maxHealth;
 	}
 	public static double getW(){
 		return width;
@@ -179,7 +180,7 @@ public class Player extends AbstractEntity {
 	}
 	public void takedamage(int amount){
 		color=true;
-		System.out.println("Enemy attack registered "+ amount+" damage was dealt");
+		System.out.println("Enemy attack registered "+ amount+" damage was dealt "+ currentHealth +" health left");
 		if(currentHealth>0){
 			currentHealth -=amount;
 		}else{
