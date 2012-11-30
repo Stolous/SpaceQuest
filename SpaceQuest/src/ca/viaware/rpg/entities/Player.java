@@ -17,6 +17,7 @@ public class Player extends AbstractEntity {
 	int animCount = 0;
 	double speed = 0.15;
 	
+	
 	private double changeY, changeX;
 	
 

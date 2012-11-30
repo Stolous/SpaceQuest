@@ -4,9 +4,9 @@ import java.awt.Rectangle;
 
 public abstract class AbstractEntity implements Entity {
 
-	protected  double x, y, width, height;
+	protected double x, y, width, height;
 	protected Rectangle hitbox = new Rectangle();
-	
+
 	public AbstractEntity(double x, double y, double width, double height) {
 		this.x = x;
 		this.y = y;
@@ -67,8 +67,9 @@ public abstract class AbstractEntity implements Entity {
 
 	@Override
 	public boolean intersects(Entity other) {
-		hitbox.setBounds((int)x, (int)y, (int)width, (int)height);
-		return hitbox.intersects(other.getX(), other.getY(), other.getWidth(), other.getHeight());
+		hitbox.setBounds((int) x, (int) y, (int) width, (int) height);
+		return hitbox.intersects(other.getX(), other.getY(), other.getWidth(),
+				other.getHeight());
 	}
 
 }

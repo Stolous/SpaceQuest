@@ -117,7 +117,7 @@ public  class TexturedQuad {
 	public void setXsize(double xsize) {
 		this.xsize = xsize;
 	}
-	public void changetext(Texture tex){
+	public void changetexture(Texture tex){
 		texture = tex;
 		texture.bind();
 		
