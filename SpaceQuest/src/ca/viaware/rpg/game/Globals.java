@@ -6,6 +6,7 @@ import java.util.List;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.MeleeEnemy;
+import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.entities.Slime;
 import ca.viaware.rpg.map.Map;
@@ -15,7 +16,7 @@ public class Globals {
 
 	ArrayList<ArrayList<String>> array = new ArrayList<ArrayList<String>>();
 	
-	
+	public static HealthBar h;
 	public static Slime s;
 	public static boolean isRunning = true;
 	public static int dispWidth = 800, dispHeight = 600;

@@ -5,6 +5,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 import ca.viaware.rpg.entity.MeleeEnemy;
+import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.entities.Slime;
 import ca.viaware.rpg.map.Loader;
@@ -17,7 +18,9 @@ import ca.viaware.rpg.utilities.TextureHandler;
 public class GameLoop {
 	private long lasttime = 0;
 
+	
 	public void startLoop() {
+		Globals.h=new HealthBar();
 		Globals.playerEntity = new Player(Globals.dispWidth / 2 - 32,
 				Globals.dispHeight / 2 - 32, 64, 64);
 		setupTextures();

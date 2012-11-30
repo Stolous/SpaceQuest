@@ -35,6 +35,7 @@ public class Renderer {
 			Globals.gameMap.renderMap();
 			Globals.playerEntity.draw();
 			Globals.s.draw();
+			Globals.h.update();
 		
 			
 			break;
