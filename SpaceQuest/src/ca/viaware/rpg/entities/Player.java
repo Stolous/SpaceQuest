@@ -192,12 +192,18 @@ public class Player extends AbstractEntity {
 		}else{
 			death();
 		}
-		}}
+		}
+		if(currentHealth<=0){
+			death();
+		}
+		}
 		
 		
 	
 	public static void  death(){
+		
 		System.out.println("You are dead!");
+		Globals.h.set(0);
 	}
 	
 
