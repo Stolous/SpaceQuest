@@ -11,6 +11,7 @@ import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class MeleeEnemy extends Enemy {
 
+	private boolean b =false;
 	private TexturedQuad t;
 	private int delta, agressiveness, betattacks, attackspeed;
 	private static double distancebetween, xdist, ydist, playerx, playery, Xoffset, Yoffset, range, actxdist, actydist, speed, mx, my;
@@ -38,7 +39,7 @@ public class MeleeEnemy extends Enemy {
 
 	@Override
 	public void update(int delta) {
-
+b=false;
 		setX(getT().getx());
 		setY(getT().gety());
 
@@ -74,11 +75,12 @@ public class MeleeEnemy extends Enemy {
 			my = moverx(actydist, my, speed);
 
 		} else {// this means the mob is within range and will attack
+			b=true;
 			attack();
 		}
 
-		if (this.intersects(Globals.playerEntity)) {
-			System.out.println("Collision detected");
+		if (this.intersects(Globals.playerEntity)&&b==false) {
+			attack();
 		}
 
 		mx = mx + getXoffset();// this is for movement of player
