@@ -24,6 +24,7 @@ public class GameLoop {
 		Globals.h=new HealthBar();
 		Globals.playerEntity = new Player(Globals.dispWidth / 2 - 32,
 				Globals.dispHeight / 2 - 32, 64, 64);
+		Globals.cursor = new Cursor(0,0,32,32);
 		setupTextures();
 		Loader loader = new Loader();
 		Globals.gameMap = loader.loadMap();
@@ -31,7 +32,6 @@ public class GameLoop {
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
 		Globals.s = new Slime(0, 0, 0, 0, 1, 10, 10, 1, 1,50 );
-		Globals.cursor = new Cursor(0,0,32,32);
 		while (Globals.isRunning) {
 
 			int delta = getDelta();
@@ -95,6 +95,8 @@ public class GameLoop {
 		Globals.playerEntity.addTexture(th.loadSprite("player/right/6"));
 		Globals.playerEntity.addTexture(th.loadSprite("player/right/7"));
 		Globals.playerEntity.addTexture(th.loadSprite("player/right/8"));
+		
+		Globals.cursor.setTexture(th.loadSprite("other/cursor"));
 
 	}
 
