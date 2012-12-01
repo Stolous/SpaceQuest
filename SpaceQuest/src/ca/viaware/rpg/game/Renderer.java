@@ -12,8 +12,7 @@ public class Renderer {
 		glClear(GL_COLOR_BUFFER_BIT);
 		switch (Globals.gameState) {
 		case INTRO:
-			//Intro screen - not working yet
-			
+			//Intro screen - now working!
 			Globals.startImg.bind();
 			glBegin(GL_QUADS);
 				glTexCoord2f(0f, 0f);
@@ -26,9 +25,10 @@ public class Renderer {
 				glVertex2i(0, Globals.dispHeight);
 			glEnd();
 			
-			Globals.gameState = Globals.gState.GAME;
 			break;
 		case MAIN_MENU:
+			
+			Globals.gameState = Globals.gState.GAME;
 			new Menu();
 			break;
 		case GAME:
