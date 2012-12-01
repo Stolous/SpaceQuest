@@ -14,30 +14,36 @@ public class MeleeEnemy extends Enemy {
 	private TexturedQuad t;
 	private int delta,agressiveness,betattacks,attackspeed;
 	private static double distancebetween, xdist, ydist, playerx, playery,
-			Xoffset, Yoffset, range, actxdist, actydist, speed;
+			Xoffset, Yoffset, range, actxdist, actydist, speed,mx,my;
 
-	public MeleeEnemy(double x, double y, double width, double height,
+	public MeleeEnemy(double mx, double my, double width, double height,
 			int maxhealth, int maxdamage, int mindamage, int spawnx,
 			int spawny, int agresiveness, double range, double speed, int attackspeed) {
-		super(x, y, width, height, maxhealth, maxdamage, mindamage, spawnx,
+		super(mx, my, width, height, maxhealth, maxdamage, mindamage, spawnx,
 				spawny);
 		this.attackspeed = attackspeed;
 		MeleeEnemy.speed = speed / 100;
 		MeleeEnemy.range = range;
 		this.agressiveness = agresiveness;
-		x = spawnx;
-		y = spawny;
+		mx = spawnx;
+		my = spawny;
+		x = (mx);
+		y = (my);
 		betattacks= attackspeed/2;//this way the initial attack will be faster
 
 	}
 
-	// it may seem like the enemy has a weird box for the Y value- but that is
+	// it may seem like the enemy has a weird box for the my value- but that is
 	// because the sprite isn't centered
 	public int getdelta(){
 		return delta;
 	}
 	@Override
 	public void update(int delta) {
+		Globals.playerEntity.intersects(x,y,this);
+		
+		
+		
 		this.delta= delta;
 		setXoffset((Globals.gameMap.getXOffset()));
 		setYoffset((Globals.gameMap.getYOffset()));
@@ -49,14 +55,14 @@ public class MeleeEnemy extends Enemy {
 														// center
 		playery = Globals.playerEntity.getActY() + 256;
 
-		xdist = playerx +(Player.getW()/2)- x;
+		xdist = playerx +(Player.getW()/2)- mx;
 
 		actxdist = xdist;
 		// if negative
 		if (xdist < 0) {
 			xdist *= -1;
 		}
-		ydist = playery+(Player.getH()/2) - y;
+		ydist = playery+(Player.getH()/2) - my;
 		actydist = ydist;
 		if (ydist < 1) {
 			ydist *= -1;
@@ -66,43 +72,50 @@ public class MeleeEnemy extends Enemy {
 																			// theorem
 
 		if (distancebetween > range) {
-			x = moverx(actxdist, x, speed);
-			y = moverx(actydist, y, speed);
+			mx = moverx(actxdist, mx, speed);
+			my = moverx(actydist, my, speed);
 
 		} else {// this means the mob is within range and will attack
 			attack();
 		}
 
-		x = x + getXoffset();// this is for movement of player
-		y = y + getYoffset();
+		
+		mx = mx + getXoffset();// this is for movement of player
+		my = my + getYoffset();
 
 	}
 
 	public void reset() {
-		x = x - getXoffset();// this is for movement of player
-		y = y - getYoffset();
+		mx = mx - getXoffset();// this is for movement of player
+		my = my - getYoffset();
 	}
 
-	private static double moverx(double i, double x, double speed) {
+	private static double moverx(double i, double mx, double speed) {
 
 		if (i > 0) {
-			x = x + speed;
+			mx = mx + speed;
 
 			if (i < range) {
 
-				x = x - speed;
+				mx = mx - speed;
 			}
 		} else {
 			if (i < 0) {
-				x = x - speed;
+				mx = mx - speed;
 				if (i > range) {
-					x = x + speed;
+					mx = mx + speed;
 				}
 			}
 		}
 
-		return x;
+		return mx;
 
+	}
+	protected double getmx(){
+		return mx;
+	}
+	protected double getmy(){
+		return my;
 	}
 
 	private void attack() {

@@ -45,7 +45,9 @@ public class Slime extends MeleeEnemy {
 			
 			
 			
-			getT().setlocation(getX(),getY());
+			getT().setlocation(getmx(),getmy());
+			setX(getT().getx());
+			setY(getT().gety());
 			getT().update();
 			if(!(index== 17)){//so the index doesn't go ver nbr of sprites
 				
