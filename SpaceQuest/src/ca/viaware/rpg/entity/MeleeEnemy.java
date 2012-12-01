@@ -40,9 +40,12 @@ public class MeleeEnemy extends Enemy {
 	}
 	@Override
 	public void update(int delta) {
-		Globals.playerEntity.intersects(x,y,this);
+
+			
 		
 		
+		setX(getT().getx());
+		setY(getT().gety());
 		
 		this.delta= delta;
 		setXoffset((Globals.gameMap.getXOffset()));

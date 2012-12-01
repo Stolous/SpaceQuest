@@ -74,8 +74,6 @@ public abstract class AbstractEntity implements Entity {
 				other.getHeight());
 	}
 	public boolean intersects(double x2,double y2,Entity other) {
-		System.out.println("X "+ x);
-		System.out.println("X o"+ x2);
 		hitbox.setBounds((int) x, (int) y, (int) width, (int) height);
 		return hitbox.intersects(x2,y2, other.getWidth(),
 				other.getHeight());

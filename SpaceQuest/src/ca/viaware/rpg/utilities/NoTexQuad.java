@@ -6,10 +6,12 @@ import org.lwjgl.opengl.GL11;
 
 public class NoTexQuad {
 
-	private double xsize, ysize, x, y, rotate, xh, yh;
+	private double xsize, ysize, x, y, rotate, xh, yh,r,g,b;
 
 	public NoTexQuad(int xsizes, int ysizes, int xs, int ys, int rotates) {
-
+		r=1;
+		g=1;
+		b=1;
 		rotate = rotates;
 		setXsize(xsizes);
 		setYsize(ysizes);
@@ -17,12 +19,18 @@ public class NoTexQuad {
 		y = ys;
 		update();
 	}
-
+public void setcol(double r,double g ,double b){
+	this.r=r;
+	this.g=g;
+	this.b=b;
+	
+}
 	
 
 	public void update() {
 		xh = getXsize() / 2;
 		yh = getYsize() / 2;
+		GL11.glColor3d(r, g, b);
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, 0);
 		GL11.glTranslatef(10.0f, 10.5f, -0.0f); 
@@ -36,6 +44,7 @@ public class NoTexQuad {
 		GL11.glVertex2d(x + xh, y - yh);
 		GL11.glEnd();
 		GL11.glPopMatrix();
+		GL11.glColor3d(1, 1, 1);
 	}
 
 	public void rotate(double rotates) {
@@ -78,6 +87,10 @@ public class NoTexQuad {
 
 	public void setYsize(double ysize) {
 		this.ysize = ysize;
+	}
+	public void  resize(double x, double y){
+		xsize = this.xsize +x;
+		ysize = this.ysize +y;
 	}
 
 }

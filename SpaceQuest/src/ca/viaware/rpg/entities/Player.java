@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.AbstractEntity;
+import ca.viaware.rpg.game.Globals;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Player extends AbstractEntity {
@@ -179,15 +180,22 @@ public class Player extends AbstractEntity {
 		return regenRate;
 	}
 	public void takedamage(int amount){
+		if(currentHealth>0){
 		color=true;
-		System.out.println("Enemy attack registered "+ amount+" damage was dealt "+ currentHealth +" health left");
+		int percent = (amount*100)/maxHealth;
+		System.out.println("Percent lost "+percent);
+		Globals.h.change(-percent);
 		if(currentHealth>0){
 			currentHealth -=amount;
+			
+			System.out.println("Enemy attack registered "+ amount+" damage was dealt "+ currentHealth +" health left");
 		}else{
 			death();
 		}
+		}}
 		
-	}
+		
+	
 	public static void  death(){
 		System.out.println("You are dead!");
 	}
