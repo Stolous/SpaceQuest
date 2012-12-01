@@ -19,19 +19,17 @@ import ca.viaware.rpg.utilities.TextureHandler;
 public class GameLoop {
 	private long lasttime = 0;
 
-	
 	public void startLoop() {
-		Globals.h=new HealthBar();
-		Globals.playerEntity = new Player(Globals.dispWidth / 2 - 32,
-				Globals.dispHeight / 2 - 32, 64, 64);
-		Globals.cursor = new Cursor(0,0,32,32);
+		Globals.h = new HealthBar();
+		Globals.playerEntity = new Player(Globals.dispWidth / 2 - 32, Globals.dispHeight / 2 - 32, 64, 64);
+		Globals.cursor = new Cursor(0, 0, 32, 32);
 		setupTextures();
 		Loader loader = new Loader();
 		Globals.gameMap = loader.loadMap();
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
-		Globals.s = new Slime(0, 0, 0, 0, 1, 10, 10, 1, 1,50 );
+		Globals.s = new Slime(0, 0, 50, 50, 1, 10, 10, 1, 1, 50);
 		while (Globals.isRunning) {
 
 			int delta = getDelta();
@@ -39,8 +37,7 @@ public class GameLoop {
 			// Update debug screen
 			dbs.updateDelta(delta);
 			dbs.updateMouseCoords(MouseData.MouseX(), MouseData.MouseY());
-			dbs.updatePlayerCoords(Globals.playerEntity.getActX(),
-					Globals.playerEntity.getActY());
+			dbs.updatePlayerCoords(Globals.playerEntity.getActX(), Globals.playerEntity.getActY());
 
 			logic.doLogic(delta);
 			render.render();
@@ -73,8 +70,7 @@ public class GameLoop {
 		Globals.tileTextures.add(th.loadSprite("tiles/sand"));
 		Globals.tileTextures.add(th.loadSprite("tiles/tree"));
 
-		System.out.println("Loaded " + Globals.tileTextures.size()
-				+ " tile textures");
+		System.out.println("Loaded " + Globals.tileTextures.size() + " tile textures");
 
 		// Player animation stages - Temporary, messy and needs redoing
 		Globals.playerEntity.addTexture(th.loadSprite("player/down/1"));
@@ -95,7 +91,7 @@ public class GameLoop {
 		Globals.playerEntity.addTexture(th.loadSprite("player/right/6"));
 		Globals.playerEntity.addTexture(th.loadSprite("player/right/7"));
 		Globals.playerEntity.addTexture(th.loadSprite("player/right/8"));
-		
+
 		Globals.cursor.setTexture(th.loadSprite("other/cursor"));
 
 	}

@@ -13,10 +13,9 @@ import ca.viaware.rpg.entities.Slime;
 import ca.viaware.rpg.map.Map;
 
 public class Globals {
-	
 
 	ArrayList<ArrayList<String>> array = new ArrayList<ArrayList<String>>();
-	
+
 	public static HealthBar h;
 	public static Slime s;
 	public static boolean isRunning = true;
@@ -34,9 +33,4 @@ public class Globals {
 
 	public static gState gameState = gState.INTRO;
 
-	
-
 }
-
-
-

@@ -14,7 +14,6 @@ import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.*;
 
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.DisplayMode;
 
@@ -35,7 +34,7 @@ public class DispSetup {
 		glOrtho(0, Globals.dispWidth, Globals.dispHeight, 0, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
 		glEnable(GL_TEXTURE_2D);
-		//Enabled transparency
+		// Enabled transparency
 		GL11.glEnable(GL_BLEND);
 		GL11.glBlendFunc(GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glEnable(GL_ALPHA_TEST);

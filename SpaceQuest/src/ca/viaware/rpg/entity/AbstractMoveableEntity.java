@@ -1,32 +1,34 @@
 package ca.viaware.rpg.entity;
 
-public abstract class AbstractMoveableEntity extends AbstractEntity implements MoveableEntity{
+public abstract class AbstractMoveableEntity extends AbstractEntity implements MoveableEntity {
 
 	protected double dx, dy;
-	
-	public AbstractMoveableEntity(double x, double y, double width,
-			double height) {
+
+	public AbstractMoveableEntity(double x, double y, double width, double height) {
 		super(x, y, width, height);
 		this.dx = 0;
 		this.dy = 0;
 	}
-	
+
 	@Override
 	public void update(int delta) {
 		this.x += delta * dx;
 		this.y += delta * dy;
 	}
-	
-	public double getDX(){
+
+	public double getDX() {
 		return dx;
 	}
-	public double getDY(){
+
+	public double getDY() {
 		return dy;
 	}
-	public void setDX(double dx){
+
+	public void setDX(double dx) {
 		this.dx = dx;
 	}
-	public void setDY(double dy){
+
+	public void setDY(double dy) {
 		this.dy = dy;
 	}
 

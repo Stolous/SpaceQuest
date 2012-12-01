@@ -15,14 +15,13 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
-public  class TexturedQuad {
+public class TexturedQuad {
 
 	private double xsize, ysize, x, y, rotate, xh, yh;
 
 	Texture texture;
 
-	public TexturedQuad(int xsizes, int ysizes, int xs, int ys, int rotates,
-			String path) {
+	public TexturedQuad(int xsizes, int ysizes, int xs, int ys, int rotates, String path) {
 
 		rotate = rotates;
 		setXsize(xsizes);
@@ -31,24 +30,21 @@ public  class TexturedQuad {
 		y = ys;
 		setXh(getXsize() / 2);
 		yh = ysize / 2;
-		
-		
+
 		try {
 			texture = TextureLoader.getTexture(".PNG", new FileInputStream(new File(path)));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			
-		}
-		
 
-		
+		}
+
 		texture.bind();
 		update();
 	}
 
 	public void update() {
-		
+
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		texture.bind();
 		GL11.glPushMatrix();
@@ -57,7 +53,6 @@ public  class TexturedQuad {
 		GL11.glRotated(rotate, 0.0f, 0.0f, -1.0f); // rotate
 		GL11.glTranslatef(-10.0f, -10.5f, 0.0f); // to the origin
 		GL11.glTranslated(-x, -y, 0);
-		
 
 		GL11.glBegin(GL11.GL_QUADS);
 		GL11.glTexCoord2f(0, 0);
@@ -82,7 +77,6 @@ public  class TexturedQuad {
 		x = x + xs;
 		y = y + ys;
 	}
-	
 
 	public void setlocation(double xs, double ys) {
 		x = xs;
@@ -116,9 +110,10 @@ public  class TexturedQuad {
 	public void setXsize(double xsize) {
 		this.xsize = xsize;
 	}
-	public void changetexture(Texture tex){
+
+	public void changetexture(Texture tex) {
 		texture = tex;
 		texture.bind();
-		
+
 	}
 }

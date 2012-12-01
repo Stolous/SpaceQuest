@@ -12,22 +12,22 @@ public class Renderer {
 		glClear(GL_COLOR_BUFFER_BIT);
 		switch (Globals.gameState) {
 		case INTRO:
-			//Intro screen - now working!
+			// Intro screen - now working!
 			Globals.startImg.bind();
 			glBegin(GL_QUADS);
-				glTexCoord2f(0f, 0f);
-				glVertex2i(0, 0);
-				glTexCoord2f(1f, 0f);
-				glVertex2i(Globals.dispWidth, 0);
-				glTexCoord2f(1f, 1f);
-				glVertex2i(Globals.dispWidth, Globals.dispHeight);
-				glTexCoord2f(0f, 1f);
-				glVertex2i(0, Globals.dispHeight);
+			glTexCoord2f(0f, 0f);
+			glVertex2i(0, 0);
+			glTexCoord2f(1f, 0f);
+			glVertex2i(Globals.dispWidth, 0);
+			glTexCoord2f(1f, 1f);
+			glVertex2i(Globals.dispWidth, Globals.dispHeight);
+			glTexCoord2f(0f, 1f);
+			glVertex2i(0, Globals.dispHeight);
 			glEnd();
-			
+
 			break;
 		case MAIN_MENU:
-			
+
 			Globals.gameState = Globals.gState.GAME;
 			new Menu();
 			break;
@@ -36,11 +36,10 @@ public class Renderer {
 			Globals.playerEntity.draw();
 			Globals.s.draw();
 			Globals.h.update();
-		
-			
+
 			break;
 		}
-		
+
 		Globals.cursor.draw();
 	}
 }

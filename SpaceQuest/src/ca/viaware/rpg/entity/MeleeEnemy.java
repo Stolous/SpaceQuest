@@ -12,15 +12,11 @@ import ca.viaware.rpg.utilities.TexturedQuad;
 public class MeleeEnemy extends Enemy {
 
 	private TexturedQuad t;
-	private int delta,agressiveness,betattacks,attackspeed;
-	private static double distancebetween, xdist, ydist, playerx, playery,
-			Xoffset, Yoffset, range, actxdist, actydist, speed,mx,my;
+	private int delta, agressiveness, betattacks, attackspeed;
+	private static double distancebetween, xdist, ydist, playerx, playery, Xoffset, Yoffset, range, actxdist, actydist, speed, mx, my;
 
-	public MeleeEnemy(double mx, double my, double width, double height,
-			int maxhealth, int maxdamage, int mindamage, int spawnx,
-			int spawny, int agresiveness, double range, double speed, int attackspeed) {
-		super(mx, my, width, height, maxhealth, maxdamage, mindamage, spawnx,
-				spawny);
+	public MeleeEnemy(double mx, double my, double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed) {
+		super(mx, my, width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
 		this.attackspeed = attackspeed;
 		MeleeEnemy.speed = speed / 100;
 		MeleeEnemy.range = range;
@@ -29,25 +25,24 @@ public class MeleeEnemy extends Enemy {
 		my = spawny;
 		x = (mx);
 		y = (my);
-		betattacks= attackspeed/2;//this way the initial attack will be faster
+		betattacks = attackspeed / 2;// this way the initial attack will be
+										// faster
 
 	}
 
 	// it may seem like the enemy has a weird box for the my value- but that is
 	// because the sprite isn't centered
-	public int getdelta(){
+	public int getdelta() {
 		return delta;
 	}
+
 	@Override
 	public void update(int delta) {
 
-			
-		
-		
 		setX(getT().getx());
 		setY(getT().gety());
-		
-		this.delta= delta;
+
+		this.delta = delta;
 		setXoffset((Globals.gameMap.getXOffset()));
 		setYoffset((Globals.gameMap.getYOffset()));
 		// MATH (YAY!!!!!!!!!!)
@@ -58,14 +53,14 @@ public class MeleeEnemy extends Enemy {
 														// center
 		playery = Globals.playerEntity.getActY() + 256;
 
-		xdist = playerx +(Player.getW()/2)- mx;
+		xdist = playerx + (Player.getW() / 2) - mx;
 
 		actxdist = xdist;
 		// if negative
 		if (xdist < 0) {
 			xdist *= -1;
 		}
-		ydist = playery+(Player.getH()/2) - my;
+		ydist = playery + (Player.getH() / 2) - my;
 		actydist = ydist;
 		if (ydist < 1) {
 			ydist *= -1;
@@ -82,7 +77,10 @@ public class MeleeEnemy extends Enemy {
 			attack();
 		}
 
-		
+		if (this.intersects(Globals.playerEntity)) {
+			System.out.println("Collision detected");
+		}
+
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
 
@@ -114,20 +112,22 @@ public class MeleeEnemy extends Enemy {
 		return mx;
 
 	}
-	protected double getmx(){
+
+	protected double getmx() {
 		return mx;
 	}
-	protected double getmy(){
+
+	protected double getmy() {
 		return my;
 	}
 
 	private void attack() {
-		if(betattacks>=attackspeed){
-		Random r = new Random();
-		int damage;
-		damage= r.nextInt((getMaxdamage()-getMindamage()))+getMindamage();
-		Globals.playerEntity.takedamage(damage);
-		betattacks = 0;
+		if (betattacks >= attackspeed) {
+			Random r = new Random();
+			int damage;
+			damage = r.nextInt((getMaxdamage() - getMindamage())) + getMindamage();
+			Globals.playerEntity.takedamage(damage);
+			betattacks = 0;
 		}
 		betattacks++;
 	}
