@@ -30,6 +30,7 @@ public class Globals {
 	public static Player playerEntity = null;
 	public static Map gameMap = null;
 	public static Cursor cursor;
+	public static boolean isFullscreen = false;
 
 	public static enum gState {
 		INTRO, MAIN_MENU, GAME, OUTRO;

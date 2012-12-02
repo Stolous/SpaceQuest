@@ -1,11 +1,20 @@
 package ca.viaware.rpg.game;
 
+import static org.lwjgl.opengl.GL11.*;
+
+import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.GL11;
+
 
 public class GameLogic {
 	PlayerMovement pMovement = new PlayerMovement();
 	private int timer = 0, count = 0;
+	private boolean fsSwitch = false;
+	private int widthBackup, heightBackup;
 
 	public void doLogic(int delta) {
 
@@ -20,6 +29,44 @@ public class GameLogic {
 			// Count loops because delta is a huge number in the first loop
 			// through, and we need to wait for it to get back to normal
 			count++;
+		}
+		
+		if (Keyboard.isKeyDown(Keyboard.KEY_F)){
+			if (!fsSwitch){
+				System.out.println("Setting fullscreen");
+			DisplayMode dispMode = Display.getDesktopDisplayMode();
+			widthBackup = Globals.dispWidth;
+			heightBackup = Globals.dispHeight;
+			Globals.dispWidth = dispMode.getWidth();
+			Globals.dispHeight = dispMode.getHeight();
+			try {
+				glViewport(0, 0, Globals.dispWidth, Globals.dispHeight);
+				Display.setDisplayMode(dispMode);
+				Display.setFullscreen(true);
+				Display.setVSyncEnabled(true);
+			} catch (LWJGLException e) {
+				e.printStackTrace();
+			}
+			System.out.println("Done");
+			Globals.isFullscreen = true;
+			fsSwitch = true;
+			}else{
+				System.out.println("Setting windowed");
+				Globals.dispWidth = widthBackup;
+				Globals.dispHeight = heightBackup;
+				DisplayMode dispMode = new DisplayMode(Globals.dispWidth, Globals.dispHeight);
+				try {
+					glViewport(0, 0, Globals.dispWidth, Globals.dispHeight);
+					Display.setDisplayMode(dispMode);
+					Display.setFullscreen(false);
+					Display.setVSyncEnabled(false);
+				} catch (LWJGLException e) {
+					e.printStackTrace();
+				}
+				System.out.println("Done");
+				Globals.isFullscreen = false;
+				fsSwitch = false;
+			}
 		}
 
 		// Allows user to leave the game screen if desired

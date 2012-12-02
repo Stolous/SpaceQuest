@@ -1,5 +1,8 @@
 package ca.viaware.rpg.game;
 
+import static org.lwjgl.opengl.GL11.glOrtho;
+
+import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -38,7 +41,7 @@ public class GameLoop {
 
 			
 			int delta = getDelta();
-
+			
 			// Update debug screen
 			dbs.updateDelta(delta);
 			dbs.updateMouseCoords(MouseData.MouseX(), MouseData.MouseY());
