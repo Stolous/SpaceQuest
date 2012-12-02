@@ -42,7 +42,6 @@ public class Map {
 		
 		
 // enabled removal of tiles worked on text renderer
-		r.update();
 	}
 	
 	public void moveMap(double x, double y, int delta){

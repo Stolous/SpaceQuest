@@ -1,44 +1,31 @@
 package ca.viaware.rpg.entity;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import org.newdawn.slick.opengl.Texture;
-
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.game.Globals;
 import ca.viaware.rpg.utilities.TexturedQuad;
 
-public class MeleeEnemy extends Enemy {
+public class RangedEnemy extends Enemy {
 
 	private boolean b =false;
 	private TexturedQuad t;
 	private int delta, agressiveness, betattacks, attackspeed;
-	private static double distancebetween, xdist, ydist, playerx, playery, Xoffset, Yoffset, range, actxdist, actydist, speed, mx, my;
-
-	public MeleeEnemy(double mx, double my, double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed) {
+	private static double distancebetween, xdist, ydist, playerx, playery, Xoffset, Yoffset, range, actxdist, actydist, speed, mx, my,mindist;
+	
+	public RangedEnemy(double mx, double my, double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double mindist) {
 		super(mx, my, width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
 		this.attackspeed = attackspeed;
-		MeleeEnemy.speed = speed / 100;
-		MeleeEnemy.range = range;
+		this.speed = speed / 100;
+		this.range = range;
+		this.mindist=mindist;
 		this.agressiveness = agresiveness;
 		mx = spawnx;
 		my = spawny;
 		x = (mx);
-		y = (my);
-// this way the initial attack will be
-										// faster
-
+		y = (my);		
 	}
 
-	// it may seem like the enemy has a weird box for the my value- but that is
-	// because the sprite isn't centered
-	public int getdelta() {
-		return delta;
-	}
-
-	@Override
-	public void update(int delta) {
+	
+	public void update(){
 		b=false;
 		setX(getT().getx());
 		setY(getT().gety());
@@ -70,6 +57,9 @@ public class MeleeEnemy extends Enemy {
 		distancebetween = Math.sqrt(((xdist * xdist) + (ydist * ydist)));// pythagorean
 																			// theorem
 
+		if(distancebetween<mindist){
+			run();
+		}
 		if (distancebetween > range) {
 			mx = moverx(actxdist, mx, speed);
 			my = moverx(actydist, my, speed);
@@ -87,12 +77,21 @@ public class MeleeEnemy extends Enemy {
 		my = my + getYoffset();
 
 	}
-
-	public void reset() {
-		mx = mx - getXoffset();// this is for movement of player
-		my = my - getYoffset();
+	
+private void attack(){
+	
+}
+	@Override
+	public void draw() {
+		
+		
+		
 	}
-
+	private void run(){
+		mx++;
+		my++;
+	}
+	
 	private static double moverx(double i, double mx, double speed) {
 
 		if (i > 0) {
@@ -114,32 +113,6 @@ public class MeleeEnemy extends Enemy {
 		return mx;
 
 	}
-
-	protected double getmx() {
-		return mx;
-	}
-
-	protected double getmy() {
-		return my;
-	}
-
-	private void attack() {
-		if (betattacks >= attackspeed) {
-			Random r = new Random();
-			int damage;
-			damage = r.nextInt((getMaxdamage() - getMindamage())) + getMindamage();
-			Globals.playerEntity.takedamage(damage);
-			betattacks = 0;
-		}
-		betattacks++;
-	}
-
-	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
-
-	}
-
 	public static double getXoffset() {
 		return Xoffset;
 	}
@@ -163,5 +136,6 @@ public class MeleeEnemy extends Enemy {
 	public void setT(TexturedQuad t) {
 		this.t = t;
 	}
-
+	
+	
 }
