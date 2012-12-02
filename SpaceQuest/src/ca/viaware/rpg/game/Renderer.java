@@ -34,9 +34,9 @@ public class Renderer {
 		case GAME:
 			Globals.gameMap.renderMap();
 			Globals.playerEntity.draw();
-			Globals.s.draw();
-			Globals.fs.draw();
-		
+			for(int i=0;i<Globals.enemies.size();i++){
+				Globals.enemies.get(i).draw();
+			}
 			Globals.h.update();
 
 			break;

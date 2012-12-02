@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 public abstract class Enemy extends AbstractMoveableEntity {
 	protected Rectangle hitbox = new Rectangle();
 	private int currenthealth, maxhealth, maxdamage, mindamage;
+	protected double mx,my,Xoffset,Yoffset;
 	
 
 	public Enemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny) {
@@ -19,6 +20,24 @@ public abstract class Enemy extends AbstractMoveableEntity {
 		this.setMindamage(mindamage);
 		// this is where spawn code goes
 
+	}
+	public void reset() {
+		mx = mx - getXoffset();// this is for movement of player
+		my = my - getYoffset();
+	}
+	public  double getXoffset() {
+		return Xoffset;
+	}
+
+	public  void setXoffset(double xoffset) {
+		Xoffset = xoffset;
+	}
+	public  double getYoffset() {
+		return Yoffset;
+	}
+
+	public  void setYoffset(double yoffset) {
+		Yoffset = yoffset;
 	}
 
 	public void setmaxhealth(int maxhealth) {

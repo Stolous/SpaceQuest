@@ -9,10 +9,10 @@ public class RangedEnemy extends Enemy {
 	private boolean b =false;
 	private TexturedQuad t;
 	private int delta, agressiveness, betattacks, attackspeed;
-	private static double distancebetween, xdist, ydist, playerx, playery, Xoffset, Yoffset, range, actxdist, actydist, speed, mx, my,mindist,sightrange;
+	private static double distancebetween, xdist, ydist, playerx, playery, range, actxdist, actydist, speed, mx, my,mindist,sightrange;
 	
 	public RangedEnemy(double mx, double my, double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double mindist,double sightrange) {
-		super(mx, my, width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
+		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
 		this.attackspeed = attackspeed;
 		this.speed = speed / 100;
 		this.range = range;
@@ -114,21 +114,7 @@ private void attack(){
 		return mx;
 
 	}
-	public static double getXoffset() {
-		return Xoffset;
-	}
-
-	public static void setXoffset(double xoffset) {
-		Xoffset = xoffset;
-	}
-
-	public static double getYoffset() {
-		return Yoffset;
-	}
-
-	public static void setYoffset(double yoffset) {
-		Yoffset = yoffset;
-	}
+	
 
 	public TexturedQuad getT() {
 		return t;

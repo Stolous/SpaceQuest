@@ -31,8 +31,9 @@ public class GameLogic {
 
 		pMovement.checkMovement(delta);
 
-		Globals.s.update(delta);
-		Globals.fs.update(delta);
+		for(int i=0;i<Globals.enemies.size();i++){
+			Globals.enemies.get(i).update(delta);
+		}
 
 		Globals.cursor.update(delta);
 

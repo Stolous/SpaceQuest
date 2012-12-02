@@ -10,6 +10,7 @@ import ca.viaware.rpg.entities.FastSlime;
 import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.entities.Slime;
+import ca.viaware.rpg.entities.WeakSlime;
 import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
 import ca.viaware.rpg.utilities.DebugScreen;
@@ -30,8 +31,9 @@ public class GameLoop {
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
-		Globals.s = new Slime(0, 0);
-		Globals.fs=new FastSlime(10,10);
+		Globals.enemies.add(new Slime(0,0));
+		Globals.enemies.add(new FastSlime(10,10));
+		Globals.enemies.add(new WeakSlime(30,30));
 		while (Globals.isRunning) {
 
 			int delta = getDelta();
@@ -43,8 +45,12 @@ public class GameLoop {
 
 			logic.doLogic(delta);
 			render.render();
-			Globals.s.reset();
-			Globals.fs.reset();
+			
+			
+			for(int i=0;i<Globals.enemies.size();i++){
+				Globals.enemies.get(i).reset();
+			}
+			
 			Display.update();
 			Display.sync(60);
 

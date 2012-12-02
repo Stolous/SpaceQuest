@@ -14,7 +14,7 @@ public class MeleeEnemy extends Enemy {
 	private boolean b =false;
 	private TexturedQuad t;
 	private int delta, agressiveness, betattacks, attackspeed;
-	private double distancebetween, xdist, ydist, playerx, playery, Xoffset, Yoffset, range, actxdist, actydist, speed, mx, my,sightrange;
+	private double distancebetween, xdist, ydist, playerx, playery,range, actxdist, actydist, speed, sightrange;
 
 	public MeleeEnemy( double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double sightrange) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
@@ -88,11 +88,7 @@ public class MeleeEnemy extends Enemy {
 
 	}
 
-	public void reset() {
-		mx = mx - getXoffset();// this is for movement of player
-		my = my - getYoffset();
-	}
-
+	
 	private double moverx(double i, double mx, double speed) {
 
 		if (i > 0) {
@@ -140,21 +136,9 @@ public class MeleeEnemy extends Enemy {
 
 	}
 
-	public  double getXoffset() {
-		return Xoffset;
-	}
+	
 
-	public  void setXoffset(double xoffset) {
-		Xoffset = xoffset;
-	}
 
-	public  double getYoffset() {
-		return Yoffset;
-	}
-
-	public  void setYoffset(double yoffset) {
-		Yoffset = yoffset;
-	}
 
 	public TexturedQuad getT() {
 		return t;

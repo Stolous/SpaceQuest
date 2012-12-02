@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.newdawn.slick.opengl.Texture;
 
+import ca.viaware.rpg.entity.Enemy;
 import ca.viaware.rpg.entity.MeleeEnemy;
 import ca.viaware.rpg.entities.Cursor;
 import ca.viaware.rpg.entities.FastSlime;
 import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.entities.Slime;
+import ca.viaware.rpg.entities.WeakSlime;
 import ca.viaware.rpg.map.Map;
 
 public class Globals {
@@ -18,8 +20,8 @@ public class Globals {
 	ArrayList<ArrayList<String>> array = new ArrayList<ArrayList<String>>();
 
 	public static HealthBar h;
-	public static Slime s;
-	public static FastSlime fs;
+	public static ArrayList <Enemy> enemies=new ArrayList<Enemy>();
+
 	public static boolean isRunning = true;
 	public static int dispWidth = 800, dispHeight = 600;
 	public static int temp = 0;
