@@ -32,6 +32,7 @@ public class GameLogic {
 		pMovement.checkMovement(delta);
 
 		Globals.s.update(delta);
+		Globals.fs.update(delta);
 
 		Globals.cursor.update(delta);
 

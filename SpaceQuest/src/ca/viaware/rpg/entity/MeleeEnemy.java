@@ -14,13 +14,13 @@ public class MeleeEnemy extends Enemy {
 	private boolean b =false;
 	private TexturedQuad t;
 	private int delta, agressiveness, betattacks, attackspeed;
-	private static double distancebetween, xdist, ydist, playerx, playery, Xoffset, Yoffset, range, actxdist, actydist, speed, mx, my,sightrange;
+	private double distancebetween, xdist, ydist, playerx, playery, Xoffset, Yoffset, range, actxdist, actydist, speed, mx, my,sightrange;
 
-	public MeleeEnemy(double mx, double my, double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double sightrange) {
-		super(mx, my, width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
+	public MeleeEnemy( double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double sightrange) {
+		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
 		this.attackspeed = attackspeed;
-		MeleeEnemy.speed = speed / 100;
-		MeleeEnemy.range = range;
+		this.speed = speed / 100;
+		this.range = range;
 		this.agressiveness = agresiveness;
 		mx = spawnx;
 		my = spawny;
@@ -93,7 +93,7 @@ public class MeleeEnemy extends Enemy {
 		my = my - getYoffset();
 	}
 
-	private static double moverx(double i, double mx, double speed) {
+	private double moverx(double i, double mx, double speed) {
 
 		if (i > 0) {
 			mx = mx + speed;
@@ -140,19 +140,19 @@ public class MeleeEnemy extends Enemy {
 
 	}
 
-	public static double getXoffset() {
+	public  double getXoffset() {
 		return Xoffset;
 	}
 
-	public static void setXoffset(double xoffset) {
+	public  void setXoffset(double xoffset) {
 		Xoffset = xoffset;
 	}
 
-	public static double getYoffset() {
+	public  double getYoffset() {
 		return Yoffset;
 	}
 
-	public static void setYoffset(double yoffset) {
+	public  void setYoffset(double yoffset) {
 		Yoffset = yoffset;
 	}
 

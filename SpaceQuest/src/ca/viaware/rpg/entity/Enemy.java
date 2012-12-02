@@ -5,12 +5,13 @@ import java.awt.Rectangle;
 public abstract class Enemy extends AbstractMoveableEntity {
 	protected Rectangle hitbox = new Rectangle();
 	private int currenthealth, maxhealth, maxdamage, mindamage;
+	
 
-	public Enemy(double x, double y, double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawnz) {
-		super(x, y, width, height);
+	public Enemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny) {
+		super(spawnx,spawny,width, height);
 		// max/min damage is so there is a range
-		this.x = x;
-		this.y = y;
+		this.x = spawnx;
+		this.y = spawny;
 		this.width = width;
 		this.height = height;
 		this.currenthealth = this.maxhealth = maxhealth;

@@ -8,19 +8,19 @@ import ca.viaware.rpg.entity.MeleeEnemy;
 import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TexturedQuad;
 
-public class Slime extends MeleeEnemy {
+public class FastSlime extends MeleeEnemy {
 
 	private Texture[] textures = new Texture[17];
 	private int index = 1;
 	private int slower = 0;
 
-	public Slime(  int spawnx, int spawny) {
-		super(50, 50, 100, 10, 5, spawnx, spawny, 1, 10, 50, 50,400);
+	public FastSlime(int spawnx, int spawny) {
+		super(50, 50, 30, 5, 2, spawnx, spawny, 1, 10, 150, 40,500);
 		// TODO Auto-generated constructor stub
 
-		setT(new TexturedQuad((int) width, (int) height, 0, 0, 0, "res/sprites/enemies/slimemoving/1.png"));
+		setT(new TexturedQuad((int) width, (int) height, 0, 0, 0, "res/sprites/enemies/fastslimemoving/1.png"));
 
-		String s = "enemies/slimemoving/";
+		String s = "enemies/fastslimemoving/";
 		TextureHandler t = new TextureHandler();
 		for (int count = 1; count < 18; count++) {
 			textures[count - 1] = t.loadSprite(s + count);

@@ -6,6 +6,7 @@ import org.lwjgl.opengl.Display;
 
 import ca.viaware.rpg.entity.MeleeEnemy;
 import ca.viaware.rpg.entities.Cursor;
+import ca.viaware.rpg.entities.FastSlime;
 import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.entities.Slime;
@@ -29,7 +30,8 @@ public class GameLoop {
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
-		Globals.s = new Slime(0, 0, 50, 50, 1, 10);
+		Globals.s = new Slime(0, 0);
+		Globals.fs=new FastSlime(10,10);
 		while (Globals.isRunning) {
 
 			int delta = getDelta();
@@ -42,7 +44,7 @@ public class GameLoop {
 			logic.doLogic(delta);
 			render.render();
 			Globals.s.reset();
-
+			Globals.fs.reset();
 			Display.update();
 			Display.sync(60);
 
