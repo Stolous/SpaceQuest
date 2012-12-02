@@ -14,9 +14,9 @@ public class MeleeEnemy extends Enemy {
 	private boolean b =false;
 	private TexturedQuad t;
 	private int delta, agressiveness, betattacks, attackspeed;
-	private static double distancebetween, xdist, ydist, playerx, playery, Xoffset, Yoffset, range, actxdist, actydist, speed, mx, my;
+	private static double distancebetween, xdist, ydist, playerx, playery, Xoffset, Yoffset, range, actxdist, actydist, speed, mx, my,sightrange;
 
-	public MeleeEnemy(double mx, double my, double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed) {
+	public MeleeEnemy(double mx, double my, double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double sightrange) {
 		super(mx, my, width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
 		this.attackspeed = attackspeed;
 		MeleeEnemy.speed = speed / 100;
@@ -26,6 +26,7 @@ public class MeleeEnemy extends Enemy {
 		my = spawny;
 		x = (mx);
 		y = (my);
+		this.sightrange = sightrange;
 // this way the initial attack will be
 										// faster
 
@@ -68,6 +69,7 @@ public class MeleeEnemy extends Enemy {
 		distancebetween = Math.sqrt(((xdist * xdist) + (ydist * ydist)));// pythagorean
 																			// theorem
 
+		if(distancebetween<sightrange){
 		if (distancebetween > range) {
 			mx = moverx(actxdist, mx, speed);
 			my = moverx(actydist, my, speed);
@@ -80,7 +82,7 @@ public class MeleeEnemy extends Enemy {
 		if (this.intersects(Globals.playerEntity)&&b==false) {
 			attack();
 		}
-
+	}
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
 

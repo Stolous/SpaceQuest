@@ -14,8 +14,8 @@ public class Slime extends MeleeEnemy {
 	private int index = 1;
 	private int slower = 0;
 
-	public Slime(double x, double y, double width, double height, int maxhealth, int spawnx, int spawny, int agresiveness, double range, double speed) {
-		super(x, y, width, height, maxhealth, 10, 5, spawnx, spawny, agresiveness, range, speed, 50);
+	public Slime(double x, double y, double width, double height, int spawnx, int spawny) {
+		super(x, y, width, height, 100, 10, 5, spawnx, spawny, 1, 10, 50, 50,400);
 		// TODO Auto-generated constructor stub
 
 		setT(new TexturedQuad((int) width, (int) height, 0, 0, 0, "res/sprites/enemies/slimemoving/1.png"));

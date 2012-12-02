@@ -29,7 +29,7 @@ public class GameLoop {
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
-		Globals.s = new Slime(0, 0, 50, 50, 1, 10, 10, 1, 1, 50);
+		Globals.s = new Slime(0, 0, 50, 50, 1, 10);
 		while (Globals.isRunning) {
 
 			int delta = getDelta();
