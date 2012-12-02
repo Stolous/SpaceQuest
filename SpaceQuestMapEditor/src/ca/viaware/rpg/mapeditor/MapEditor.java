@@ -95,9 +95,9 @@ public class MapEditor {
 		textures.add(new TileTexture(th.loadTexture("tree"), "Tree"));
 		textures.add(new TileTexture(th.loadTexture("alien cactus plant 1"), "Alien cactus right"));
 		textures.add(new TileTexture(th.loadTexture("alien cactus plant 2"), "Alien cactus left"));
-		textures.add(new TileTexture(th.loadTexture("double alien cactus plant"), "double alien cactus"));
-		textures.add(new TileTexture(th.loadTexture("red rock"), "red rock"));
-		textures.add(new TileTexture(th.loadTexture("sign"), "sign"));
+		textures.add(new TileTexture(th.loadTexture("double alien cactus plant"), "Double alien cactus"));
+		textures.add(new TileTexture(th.loadTexture("red rock"), "Red rock"));
+		textures.add(new TileTexture(th.loadTexture("sign"), "Sign"));
 	}
 
 	private void changeMade() {

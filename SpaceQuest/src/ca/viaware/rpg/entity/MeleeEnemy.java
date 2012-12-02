@@ -47,13 +47,11 @@ public class MeleeEnemy extends Enemy {
 		setXoffset((Globals.gameMap.getXOffset()));
 		setYoffset((Globals.gameMap.getYOffset()));
 		// MATH (YAY!!!!!!!!!!)
-		playerx = Globals.playerEntity.getX();
-		playery = Globals.playerEntity.getY();
-		playerx = Globals.playerEntity.getActX() + 384;// additin is because
-														// doesn't start at
-														// center
-		playery = Globals.playerEntity.getActY() + 256;
+		playerx = Globals.playerEntity.getActX();
+		playery = Globals.playerEntity.getActY();
 
+		
+		//System.out.println(playerx + ", " + playery);
 		xdist = playerx + (Player.getW() / 2) - mx;
 
 		actxdist = xdist;

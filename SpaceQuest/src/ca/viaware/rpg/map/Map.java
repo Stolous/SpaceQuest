@@ -9,7 +9,7 @@ import ca.viaware.rpg.utilities.TextRenderer;
 
 public class Map {
 	public int xSize, ySize;
-	private int xOffset, yOffset;
+	private double xOffset, yOffset;
 	public Tile mapTiles[][];
 
 	public void setSize(int x, int y) {
@@ -26,7 +26,7 @@ public class Map {
 			while (countx < xSize){
 				
 				if (mapTiles[countx][county].isEnabled()){
-				mapTiles[countx][county].render(countx, county, xOffset, yOffset);
+				mapTiles[countx][county].render(countx, county, (int)xOffset, (int)yOffset);
 					Globals.temp++;
 				} else {
 				}
@@ -47,11 +47,12 @@ public class Map {
 	public void moveMap(double x, double y, int delta){
 		xOffset += x * delta;
 		yOffset += y * delta;
+		
 	}
 	public int getXOffset(){
-		return xOffset;
+		return (int)xOffset;
 	}
 	public int getYOffset(){
-		return yOffset;
+		return (int)yOffset;
 	}
 }

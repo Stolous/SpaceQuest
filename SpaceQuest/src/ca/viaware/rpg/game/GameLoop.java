@@ -69,6 +69,11 @@ public class GameLoop {
 		Globals.tileTextures.add(th.loadSprite("tiles/palm"));
 		Globals.tileTextures.add(th.loadSprite("tiles/sand"));
 		Globals.tileTextures.add(th.loadSprite("tiles/tree"));
+		Globals.tileTextures.add(th.loadSprite("tiles/alien cactus plant 1"));
+		Globals.tileTextures.add(th.loadSprite("tiles/alien cactus plant 2"));
+		Globals.tileTextures.add(th.loadSprite("tiles/double alien cactus plant"));
+		Globals.tileTextures.add(th.loadSprite("tiles/red rock"));
+		Globals.tileTextures.add(th.loadSprite("tiles/sign"));
 
 		System.out.println("Loaded " + Globals.tileTextures.size() + " tile textures");
 

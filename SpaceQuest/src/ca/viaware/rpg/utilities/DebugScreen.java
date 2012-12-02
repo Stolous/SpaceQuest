@@ -37,7 +37,7 @@ public class DebugScreen extends JFrame{
 		mouseCoords.setText("Mouse Coords: " + Integer.toString(x) + ", " + Integer.toString(y));
 	}
 	
-	public void updatePlayerCoords(int x, int y){
-		playerCoords.setText("Player Coords: " + Integer.toString(x) + ", " + Integer.toString(y));
+	public void updatePlayerCoords(double x, double y){
+		playerCoords.setText("Player Coords: " + Integer.toString((int)x) + ", " + Integer.toString((int)y));
 	}
 }

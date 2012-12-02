@@ -7,6 +7,7 @@ public class PlayerMovement {
 
 	public void checkMovement(int delta) {
 		double speed = Globals.playerEntity.getSpeed();
+		
 		if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
 			Globals.gameMap.moveMap(speed, 0, delta);
 			Globals.playerEntity.changePosition(-speed, 0, delta);

@@ -27,13 +27,16 @@ public class Player extends AbstractEntity {
 	boolean walkChange = false;
 	private int walkingDir = 0;
 	
-	private int actX = 0, actY = 0;
+	private double actX = 0, actY = 0;
 
 	public Player(double x, double y, double width, double height) {
 		super(x, y, width, height);
 		Player.width = width;
 		Player.height = height;
 		currentHealth=maxHealth;
+		actX = Globals.dispWidth / 2 - width / 2;
+		actY = Globals.dispHeight / 2 - height / 2;
+		
 	}
 	public static double getW(){
 		return width;
@@ -153,13 +156,14 @@ public class Player extends AbstractEntity {
 		
 		changeX = x * delta; 
 		changeY = y * delta;
+		
 	}
 	
-	public int getActX(){
+	public double getActX(){
 		return actX;
 	}
 	
-	public int getActY(){
+	public double getActY(){
 		return actY;
 	}
 	
