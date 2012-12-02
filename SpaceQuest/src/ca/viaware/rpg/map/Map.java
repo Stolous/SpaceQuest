@@ -38,7 +38,7 @@ public class Map {
 		}
 
 		
-		TextRenderer r = new TextRenderer(30,100, 100, 0, "res/text/fonts.png", "Seth is jealous of my text rendering abilities!");
+		
 		
 		
 // enabled removal of tiles worked on text renderer
