@@ -8,11 +8,11 @@ public class PlayerMovement {
 	public void checkMovement(int delta) {
 		double speed = Globals.playerEntity.getSpeed();
 		
-		if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
+		if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)||Keyboard.isKeyDown(Keyboard.KEY_A)) {
 			Globals.gameMap.moveMap(speed, 0, delta);
 			Globals.playerEntity.changePosition(-speed, 0, delta);
 			arrowG1 = true;
-		} else if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
+		} else if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)||Keyboard.isKeyDown(Keyboard.KEY_D)) {
 			Globals.gameMap.moveMap(-speed, 0, delta);
 			Globals.playerEntity.changePosition(speed, 0, delta);
 			Globals.playerEntity.setWalkingDir(3);
@@ -21,12 +21,12 @@ public class PlayerMovement {
 			arrowG1 = false;
 		}
 
-		if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
+		if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)||Keyboard.isKeyDown(Keyboard.KEY_S)) {
 			Globals.gameMap.moveMap(0, -speed, delta);
 			Globals.playerEntity.changePosition(0, speed, delta);
 			Globals.playerEntity.setWalkingDir(1);
 			arrowG2 = true;
-		} else if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
+		} else if (Keyboard.isKeyDown(Keyboard.KEY_UP)||Keyboard.isKeyDown(Keyboard.KEY_W)) {
 			Globals.gameMap.moveMap(0, speed, delta);
 			Globals.playerEntity.changePosition(0, -speed, delta);
 			Globals.playerEntity.setWalkingDir(2);

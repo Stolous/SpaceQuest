@@ -2,6 +2,7 @@ package ca.viaware.rpg.entities;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.AbstractMoveableEntity;
@@ -17,6 +18,7 @@ private boolean enabled = false;
 	@Override
 	public void draw() {
 		if(enabled){
+			
 		mTex.bind();
 		
 		glBegin(GL_QUADS);
@@ -35,8 +37,10 @@ private boolean enabled = false;
 
 	@Override
 	public void update(int delta) {
+		
 		setX(MouseData.MouseX());
 		setY(MouseData.MouseY());
+		
 	}
 	
 	public void setTexture(Texture t){

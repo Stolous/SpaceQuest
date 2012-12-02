@@ -36,6 +36,7 @@ public class GameLoop {
 		Globals.enemies.add(new WeakSlime(30,30));
 		while (Globals.isRunning) {
 
+			
 			int delta = getDelta();
 
 			// Update debug screen
