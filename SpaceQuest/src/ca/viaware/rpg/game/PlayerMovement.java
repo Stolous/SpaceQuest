@@ -65,7 +65,6 @@ public class PlayerMovement {
 				tileY++;
 				if (tile.hasCollision()) {
 					if (Globals.playerEntity.intersects(tile)) {
-						tile.setID(7);
 						if (playerX > tileX) {
 							Globals.gameMap.moveMap(-speed, 0, delta);
 							Globals.playerEntity.changePosition(speed, 0, delta);
