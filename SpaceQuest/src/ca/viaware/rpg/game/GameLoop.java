@@ -35,9 +35,9 @@ public class GameLoop {
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
-		Globals.enemies.add(new Slime(0,0));
-		Globals.enemies.add(new FastSlime(10,10));
-		Globals.enemies.add(new WeakSlime(30,30));
+		//Globals.enemies.add(new Slime(0,0));
+		//Globals.enemies.add(new FastSlime(10,10));
+		//Globals.enemies.add(new WeakSlime(30,30));
 		Globals.ab=new ammobar();
 		while (Globals.isRunning) {
 

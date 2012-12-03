@@ -40,7 +40,7 @@ public class HealthBar {
 		
 	}
 	public void set(int amount) {
-		System.out.println("Size set");
+		//System.out.println("Size set");
 		hl = amount;
 		amount = amount * rat;
 		barb.setXsize(amount);

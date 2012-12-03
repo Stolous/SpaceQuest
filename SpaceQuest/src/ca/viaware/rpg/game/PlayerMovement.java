@@ -52,40 +52,39 @@ public class PlayerMovement {
 		if (!arrowG1 && !arrowG2) {
 			Globals.playerEntity.setWalkingDir(0);
 		}
-		boolean coll = false;
-		int c1 = 0, c2 = 0;
+		
+		
+		//Collision:
 		int tileX = 0, tileY = 0;
-		int playerX = (int) (Globals.playerEntity.getActX() - Globals.playerEntity.getActX() % 64) / 64;
-		int playerY = (int) (Globals.playerEntity.getActY() - Globals.playerEntity.getActY() % 64) / 64;
+		int playerX = (int) (Globals.playerEntity.getActX() - Globals.playerEntity.getActX() % 64) / 64 + 2;
+		int playerY = (int) (Globals.playerEntity.getActY() - Globals.playerEntity.getActY() % 64) / 64 + 1;
+
 		for (Tile[] tile1 : Globals.gameMap.mapTiles) {
-			c1++;
+			tileX++;
 			for (Tile tile : tile1) {
-				c2++;
+				tileY++;
 				if (tile.hasCollision()) {
 					if (Globals.playerEntity.intersects(tile)) {
-						coll = true;
-						tileY = c1;
-						tileX = c2;
+						tile.setID(7);
+						if (playerX > tileX) {
+							Globals.gameMap.moveMap(-speed, 0, delta);
+							Globals.playerEntity.changePosition(speed, 0, delta);
+						} else if (playerX <= tileX) {
+							Globals.gameMap.moveMap(speed, 0, delta);
+							Globals.playerEntity.changePosition(-speed, 0, delta);
+						}
+
+						if (playerY >= tileY) {
+							Globals.gameMap.moveMap(0, -speed, delta);
+							Globals.playerEntity.changePosition(0, speed, delta);
+						} else if (playerY < tileY) {
+							Globals.gameMap.moveMap(0, speed, delta);
+							Globals.playerEntity.changePosition(0, -speed, delta);
+						}
 					}
 				}
 			}
-			c2 = 0;
-		}
-		System.out.println(playerX + ", " + playerY);
-		System.out.println("T:" + tileX + ", " + tileY);
-		if (coll) {
-			if (playerX > tileX) {
-				Globals.gameMap.moveMap(-speed, 0, delta);
-				Globals.playerEntity.changePosition(speed, 0, delta);
-			} else if (playerX < tileX) {
-				
-			}
-
-			if (playerY > tileY) {
-				
-			} else if (playerY < tileY) {
-				
-			}
+			tileY = 0;
 		}
 
 		Globals.playerEntity.update(delta);

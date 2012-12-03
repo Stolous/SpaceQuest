@@ -82,7 +82,13 @@ public class Player extends AbstractEntity {
 		glTexCoord2f(0f, 1f);
 		glVertex2d(x, y + height);
 		glEnd();
-		GL11.glColor3f(1,1,1);
+		
+		glBegin(GL_LINE_STRIP);
+		glVertex2d(x,y);
+		glVertex2d(x+64,y);
+		glVertex2d(x+64,y+64);
+		glVertex2d(x,y+64);
+		glEnd();
 	}
 
 	@Override
@@ -187,12 +193,12 @@ public class Player extends AbstractEntity {
 		if(currentHealth>0){
 		color=true;
 		int percent = (amount*100)/maxHealth;
-		System.out.println("Percent lost "+percent);
+		//System.out.println("Percent lost "+percent);
 		Globals.h.change(-percent);
 		if(currentHealth>0){
 			currentHealth -=amount;
 			
-			System.out.println("Enemy attack registered "+ amount+" damage was dealt "+ currentHealth +" health left");
+			//System.out.println("Enemy attack registered "+ amount+" damage was dealt "+ currentHealth +" health left");
 		}else{
 			death();
 		}
