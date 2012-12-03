@@ -14,6 +14,7 @@ import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.entities.Slime;
 import ca.viaware.rpg.entities.WeakSlime;
+import ca.viaware.rpg.entities.ammobar;
 import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
 import ca.viaware.rpg.utilities.DebugScreen;
@@ -37,6 +38,7 @@ public class GameLoop {
 		Globals.enemies.add(new Slime(0,0));
 		Globals.enemies.add(new FastSlime(10,10));
 		Globals.enemies.add(new WeakSlime(30,30));
+		Globals.ab=new ammobar();
 		while (Globals.isRunning) {
 
 			

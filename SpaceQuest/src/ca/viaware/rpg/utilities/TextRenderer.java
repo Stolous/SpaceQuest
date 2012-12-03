@@ -22,7 +22,7 @@ public class TextRenderer {
 	String text;
 
 
-	public TextRenderer(int fontsize, int xlocation, int ylocation, int rotates, String path, String Text) {
+	public TextRenderer(int fontsize, int xlocation, int ylocation, int rotates, String Text) {
 
 		text = Text;
 
@@ -35,7 +35,7 @@ public class TextRenderer {
 		yh = ysize / 2;
 
 		try {
-			texture = TextureLoader.getTexture(".PNG", new FileInputStream(new File(path)));
+			texture = TextureLoader.getTexture(".PNG", new FileInputStream(new File("res/text/fonts.png")));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -46,6 +46,7 @@ public class TextRenderer {
 	}
 
 	public void update() {
+		
 		
 		char[] c = text.toCharArray();
 

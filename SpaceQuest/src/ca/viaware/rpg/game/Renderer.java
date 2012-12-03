@@ -38,6 +38,7 @@ public class Renderer {
 				Globals.enemies.get(i).draw();
 			}
 			Globals.h.update();
+			Globals.ab.update();
 
 			break;
 		}
