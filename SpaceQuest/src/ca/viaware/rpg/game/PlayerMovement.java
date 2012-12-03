@@ -1,12 +1,29 @@
 package ca.viaware.rpg.game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.lwjgl.input.Keyboard;
+
+import ca.viaware.rpg.map.Tile;
 
 public class PlayerMovement {
 	private boolean arrowG1 = false, arrowG2 = false;
 
 	public void checkMovement(int delta) {
 		double speed = Globals.playerEntity.getSpeed();
+		List<Tile> tilesWithCollision = new ArrayList(16);
+		tilesWithCollision.clear();
+		
+		for (Tile[] tile1: Globals.gameMap.mapTiles){
+			for (Tile tile : tile1){
+				if (tile.hasCollision()){
+					if (Globals.playerEntity.intersects(tile)){
+						System.out.println("Collision");
+					}
+				}
+			}
+		}
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)||Keyboard.isKeyDown(Keyboard.KEY_A)) {
 			Globals.gameMap.moveMap(speed, 0, delta);

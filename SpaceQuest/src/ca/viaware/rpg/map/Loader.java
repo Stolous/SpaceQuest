@@ -31,9 +31,9 @@ public class Loader {
 			String[] line = sc.nextLine().split("&");
 			for (int i = 0; i < line.length; i++) {
 				if (line[i].equals("N")) {
-					mapTiles[i][ycount] = new Tile(false, line[i]);
+					mapTiles[i][ycount] = new Tile(0, 0, 64, 64, false, line[i]);
 				} else {
-					mapTiles[i][ycount] = new Tile(true, line[i]);
+					mapTiles[i][ycount] = new Tile(0, 0, 64, 64, true, line[i]);
 				}
 			}
 			ycount++;

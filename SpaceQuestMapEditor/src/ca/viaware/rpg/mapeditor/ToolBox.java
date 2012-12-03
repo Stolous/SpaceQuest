@@ -21,9 +21,12 @@ public class ToolBox extends JFrame {
 	private JLabel tileID = new JLabel();
 	private JLabel tileLayer2ID = new JLabel();
 	private JLabel tileLayer2Name = new JLabel();
+	private JLabel hasCollision = new JLabel();
+	private JLabel tileIndex = new JLabel();
 	private JComboBox textureSelect = new JComboBox();
 	private JButton paintTool = new JButton();
 	private JButton eraseTool = new JButton();
+	private JButton collisionTool = new JButton();
 
 	private boolean changed = false;
 
@@ -47,10 +50,14 @@ public class ToolBox extends JFrame {
 		cont.add(tileID);
 		cont.add(tileLayer2Name);
 		cont.add(tileLayer2ID);
+		cont.add(tileIndex);
+		cont.add(hasCollision);
 
 		cont.add(paintTool);
 		cont.add(eraseTool);
+		cont.add(collisionTool);
 
+		collisionTool.setText("Collision brush");
 		paintTool.setText("Paint brush");
 		eraseTool.setText("Erase brush");
 		tileTextureName.setText("Tile Texture: ");
@@ -72,9 +79,17 @@ public class ToolBox extends JFrame {
 			}
 		});
 
+		collisionTool.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Globals.selectedTool = Globals.brush.COLLISION;
+			}
+		});
+
 	}
 
-	public void updateTile(int ID, int l2ID, boolean l2) {
+	public void updateTile(int ID, int l2ID, boolean l2, boolean collision, int index) {
 		tileID.setText("Tile ID: " + Integer.toString(ID));
 		tileTextureName.setText("Tile Texture: " + MapEditor.textures.get(ID).getName());
 		if (l2) {
@@ -84,6 +99,12 @@ public class ToolBox extends JFrame {
 			tileLayer2ID.setText("Tile layer 2 ID: NONE");
 			tileLayer2Name.setText("Tile layer 2 Texture: NONE");
 		}
+		if (collision) {
+			hasCollision.setText("Tile has collision: YES");
+		} else {
+			hasCollision.setText("Tile has collision: NO");
+		}
+		tileIndex.setText("Tile index: " + Integer.toString(index));
 
 	}
 

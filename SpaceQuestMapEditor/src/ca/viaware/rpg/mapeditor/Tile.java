@@ -14,6 +14,7 @@ public class Tile {
 	private boolean is2Layers = false;
 	private boolean selected = false;
 	private boolean toolSelected = false;
+	private boolean isCollision = false;
 
 	public Tile(int x, int y, int ID) {
 		this.x = x;
@@ -40,6 +41,12 @@ public class Tile {
 		} else {
 			is2Layers = true;
 			l2ID = Integer.parseInt(data2[1]);
+		}
+		
+		if (data2[2].equals("C")){
+			isCollision = true;
+		}else{
+			isCollision = false;
 		}
 	}
 
@@ -90,6 +97,18 @@ public class Tile {
 			glVertex2i(x + 62, y + 62);
 			glVertex2i(x + 2, y + 62);
 			glVertex2i(x + 2, y + 2);
+			glEnd();
+		}
+
+		if (isCollision) {
+			glBegin(GL_LINE_STRIP);
+			glVertex2i(x, y);
+			glVertex2i(x + 64, y + 64);
+			glEnd();
+
+			glBegin(GL_LINE_STRIP);
+			glVertex2i(x + 64, y);
+			glVertex2i(x, y + 64);
 			glEnd();
 		}
 
@@ -187,6 +206,14 @@ public class Tile {
 			System.out.println("Does not have 2 layers, adding null data");
 			data = data + "/N";
 		}
+		
+		if (isCollision){
+			System.out.println("Has collision, adding collision data");
+			data = data + "/" + "C";
+		}else{
+			System.out.println("Does not have collision, adding null data");
+			data = data + "/" + "N";
+		}
 
 		data = data + "&";
 		System.out.println("Finished producing data string, returning " + data);
@@ -217,6 +244,14 @@ public class Tile {
 
 	public int getLayer2ID() {
 		return l2ID;
+	}
+
+	public void setCollision(boolean c) {
+		isCollision = c;
+	}
+
+	public boolean checkColision() {
+		return isCollision;
 	}
 
 }

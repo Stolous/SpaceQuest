@@ -5,17 +5,20 @@ import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
+import ca.viaware.rpg.entity.AbstractMoveableEntity;
 import ca.viaware.rpg.game.Globals;
 
-public class Tile {
+public class Tile extends AbstractMoveableEntity{
 
 	private Texture tex = null;
 	private boolean enabled = false;
 	private int ID = 0;
 	private int l2ID = 0;
 	private boolean hasLayer2 = false;
+	private boolean isCollision = false;
 
-	public Tile(boolean enabled, String data){
+	public Tile(double n1, double n2, double n3, double n4, boolean enabled, String data){
+		super(n1, n2, n3, n4);
 		this.enabled = enabled;
 		if (data.equals("N")){
 			ID = -1;
@@ -38,6 +41,8 @@ public class Tile {
 	}
 
 	public void render(int cx, int cy, int xOff, int yOff) {
+		x = cx * 64 + xOff;
+		y = cy * 64 + yOff;
 		
 		if (enabled){
 		Globals.tileTextures.get(ID).bind();
@@ -102,5 +107,20 @@ public class Tile {
 			setLayer2ID(Integer.parseInt(data[1]));
 			setLayer2(true);
 		}
+		
+		if (data[2].equals("C")){
+			isCollision = true;
+		}else{
+			isCollision = false;
+		}
+	}
+	
+	public boolean hasCollision(){
+		return isCollision;
+	}
+
+	@Override
+	public void draw() {
+		
 	}
 }

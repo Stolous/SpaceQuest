@@ -226,6 +226,22 @@ public class MapEditor {
 				}
 			}
 			break;
+			
+		case COLLISION:
+			if (Mouse.isButtonDown(1) && !Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
+				for (Tile tile : tiles){
+					if (tile.isTouching(rect)){
+						tile.setCollision(true);
+					}
+				}
+			} else if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
+				for (Tile tile : tiles){
+					if (tile.isTouching(rect)){
+						tile.setCollision(false);
+					}
+				}
+			}
+			break;
 		}
 
 		int count = 0;
@@ -274,7 +290,7 @@ public class MapEditor {
 			count2++;
 
 			if (tile.isToolSelected()) {
-				tools.updateTile(tile.getID(), tile.getLayer2ID(), tile.is2Layers());
+				tools.updateTile(tile.getID(), tile.getLayer2ID(), tile.is2Layers(), tile.checkColision(), tiles.indexOf(tile));
 			}
 		}
 
