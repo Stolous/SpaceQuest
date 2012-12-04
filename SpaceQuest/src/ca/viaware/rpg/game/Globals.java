@@ -21,9 +21,9 @@ public class Globals {
 
 	ArrayList<ArrayList<String>> array = new ArrayList<ArrayList<String>>();
 
-	public static HealthBar h;
+	public static HealthBar healthBar;
 	public static ArrayList <Enemy> enemies=new ArrayList<Enemy>();
-	public static ammobar ab;
+	public static ammobar ammoBar;
 	public static boolean isRunning = true;
 	public static int dispWidth = 800, dispHeight = 600;
 	public static int dispWidthBK = 0, dispHeightBK = 0;

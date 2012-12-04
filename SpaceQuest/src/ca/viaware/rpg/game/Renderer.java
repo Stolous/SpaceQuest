@@ -40,8 +40,8 @@ public class Renderer {
 			for(int i=0;i<Globals.enemies.size();i++){
 				Globals.enemies.get(i).draw();
 			}
-			Globals.h.update();
-			Globals.ab.update();
+			Globals.healthBar.update();
+			Globals.ammoBar.update();
 
 			break;
 		}

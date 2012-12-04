@@ -219,7 +219,7 @@ public class Player extends AbstractEntity {
 			color = true;
 			int percent = (amount * 100) / maxHealth;
 			// System.out.println("Percent lost "+percent);
-			Globals.h.change(-percent);
+			Globals.healthBar.change(-percent);
 			if (currentHealth > 0) {
 				currentHealth -= amount;
 
@@ -237,7 +237,7 @@ public class Player extends AbstractEntity {
 	public static void death() {
 
 		System.out.println("You are dead!");
-		Globals.h.set(0);
+		Globals.healthBar.set(0);
 	}
 	
 	public void teleport(int teleX, int teleY){
