@@ -85,7 +85,6 @@ public class MapEditor {
 
 	public void loadTextures() {
 		TextureHandler th = new TextureHandler();
-		textures.add(new TileTexture(th.loadTexture("Dirt"), "dirt"));
 		textures.add(new TileTexture(th.loadTexture("grass1"), "Grass 1"));
 		textures.add(new TileTexture(th.loadTexture("cobble"), "Cobble"));
 		textures.add(new TileTexture(th.loadTexture("flower red"), "Red flower"));
@@ -98,6 +97,7 @@ public class MapEditor {
 		textures.add(new TileTexture(th.loadTexture("double alien cactus plant"), "Double alien cactus"));
 		textures.add(new TileTexture(th.loadTexture("red rock"), "Red rock"));
 		textures.add(new TileTexture(th.loadTexture("sign"), "Sign"));
+		textures.add(new TileTexture(th.loadTexture("dirt"), "Dirt"));
 	}
 
 	private void changeMade() {

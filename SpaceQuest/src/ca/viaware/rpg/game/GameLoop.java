@@ -75,7 +75,6 @@ public class GameLoop {
 	private void setupTextures() {
 		TextureHandler th = new TextureHandler();
 		Globals.startImg = th.loadDiffTexture("res/img/intro.png", "PNG");
-		Globals.tileTextures.add(th.loadSprite("tiles/dirt"));
 		Globals.tileTextures.add(th.loadSprite("tiles/grass"));
 		Globals.tileTextures.add(th.loadSprite("tiles/cobble"));
 		Globals.tileTextures.add(th.loadSprite("tiles/flower red"));
@@ -88,7 +87,12 @@ public class GameLoop {
 		Globals.tileTextures.add(th.loadSprite("tiles/double alien cactus plant"));
 		Globals.tileTextures.add(th.loadSprite("tiles/red rock"));
 		Globals.tileTextures.add(th.loadSprite("tiles/sign"));
-
+		//NUMBER ONE RULE FOR LOADING NEW TILES
+		//THEY MUST BE PUT AT THE BOTTOM
+		//OR ELSE THEY MAKE OLD MAPS NOT WORK PROPERLY:
+		Globals.tileTextures.add(th.loadSprite("tiles/dirt"));
+		//JUST A HEADS UP FOR NEXT TIME
+		
 		System.out.println("Loaded " + Globals.tileTextures.size() + " tile textures");
 
 		// Player animation stages - Temporary, messy and needs redoing
