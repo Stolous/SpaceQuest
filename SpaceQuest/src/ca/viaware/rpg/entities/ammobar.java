@@ -21,7 +21,7 @@ public class ammobar{
 	}
 	public void update(){
 		r.setlocation(60, 120);
-		r.update();
+		//r.update();
 		back.update();
 		
 	}

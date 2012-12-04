@@ -35,10 +35,11 @@ public class Map {
 			}
 			countx = 0;
 			county++;
+			
 		}
 
-		
-		
+		TextRenderer r = new TextRenderer(100,100, 100, 0, "res/text/fonts.png", "Hello how are you?");
+		r.update();
 		
 		
 // enabled removal of tiles worked on text renderer

@@ -15,6 +15,7 @@ import ca.viaware.rpg.entities.Slime;
 import ca.viaware.rpg.entities.WeakSlime;
 import ca.viaware.rpg.entities.ammobar;
 import ca.viaware.rpg.map.Map;
+import ca.viaware.rpg.utilities.TextRenderer;
 
 public class Globals {
 
@@ -22,7 +23,6 @@ public class Globals {
 
 	public static HealthBar h;
 	public static ArrayList <Enemy> enemies=new ArrayList<Enemy>();
-
 	public static ammobar ab;
 	public static boolean isRunning = true;
 	public static int dispWidth = 800, dispHeight = 600;

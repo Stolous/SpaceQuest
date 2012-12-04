@@ -4,6 +4,7 @@ import org.lwjgl.opengl.*;
 
 import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
+import ca.viaware.rpg.utilities.TextRenderer;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Renderer {
@@ -32,6 +33,8 @@ public class Renderer {
 			new Menu();
 			break;
 		case GAME:
+			
+
 			Globals.gameMap.renderMap();
 			Globals.playerEntity.draw();
 			for(int i=0;i<Globals.enemies.size();i++){
