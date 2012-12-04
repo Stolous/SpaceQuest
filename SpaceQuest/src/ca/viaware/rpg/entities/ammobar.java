@@ -11,17 +11,19 @@ public class ammobar{
 	
 	
 	TexturedQuad back;
-	TextRenderer outof,slash,total; 
+	TextRenderer r,slash,total; 
 	public ammobar(){
 		
 		back = new TexturedQuad(65,65,Display.getWidth()-60,Display.getHeight()-120,180,"res/sprites/other/Ammo Icon.png");
-		outof = new TextRenderer(5,60,120,0,"fadafa");
+		r = new TextRenderer(50,100, 100, 0, "res/text/fonts.png", "Seth is jealous of my text rendering abilities");
 		
 		
 	}
 	public void update(){
+		r.setlocation(60, 120);
+		//r.update();
 		back.update();
-		outof.update();
+		
 	}
 	
 }

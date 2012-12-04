@@ -19,7 +19,7 @@ public class TexturedQuad {
 
 	private double xsize, ysize, x, y, rotate, xh, yh;
 
-	Texture texture;
+	Texture t;
 
 	public TexturedQuad(int xsizes, int ysizes, int xs, int ys, int rotates, String path) {
 
@@ -32,21 +32,21 @@ public class TexturedQuad {
 		yh = ysize / 2;
 
 		try {
-			texture = TextureLoader.getTexture(".PNG", new FileInputStream(new File(path)));
+			t = TextureLoader.getTexture(".PNG", new FileInputStream(new File(path)));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 
 		}
 
-		texture.bind();
+		t.bind();
 		update();
 	}
 
 	public void update() {
 
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		texture.bind();
+		t.bind();
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, 0);
 		GL11.glTranslatef(10.0f, 10.5f, -0.0f); // back to previous position
@@ -57,11 +57,11 @@ public class TexturedQuad {
 		GL11.glBegin(GL11.GL_QUADS);
 		GL11.glTexCoord2f(0, 0);
 		GL11.glVertex2d(x - getXh(), y - yh);
-		GL11.glTexCoord2f(0, texture.getHeight());
+		GL11.glTexCoord2f(0, t.getHeight());
 		GL11.glVertex2d(x - getXh(), y + yh);
-		GL11.glTexCoord2f(texture.getWidth(), texture.getHeight());
+		GL11.glTexCoord2f(t.getWidth(), t.getHeight());
 		GL11.glVertex2d(x + getXh(), y + yh);
-		GL11.glTexCoord2f(texture.getWidth(), 0);
+		GL11.glTexCoord2f(t.getWidth(), 0);
 		GL11.glVertex2d(x + getXh(), y - yh);
 		GL11.glEnd();
 		GL11.glPopMatrix();
@@ -112,8 +112,8 @@ public class TexturedQuad {
 	}
 
 	public void changetexture(Texture tex) {
-		texture = tex;
-		texture.bind();
+		t = tex;
+		t.bind();
 
 	}
 }

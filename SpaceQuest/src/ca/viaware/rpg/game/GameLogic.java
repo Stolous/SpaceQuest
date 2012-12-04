@@ -14,7 +14,6 @@ public class GameLogic {
 	PlayerMovement pMovement = new PlayerMovement();
 	private int timer = 0, count = 0;
 	private boolean fsSwitch = false;
-	private int widthBackup, heightBackup;
 
 	public void doLogic(int delta) {
 
@@ -32,15 +31,19 @@ public class GameLogic {
 		}
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_F)){
+			Globals.dispWidthBK = Globals.dispWidth;
+			Globals.dispHeightBK = Globals.dispHeight;
 			if (!fsSwitch){
 				System.out.println("Setting fullscreen");
 			DisplayMode dispMode = Display.getDesktopDisplayMode();
-			widthBackup = Globals.dispWidth;
-			heightBackup = Globals.dispHeight;
 			Globals.dispWidth = dispMode.getWidth();
 			Globals.dispHeight = dispMode.getHeight();
 			try {
 				glViewport(0, 0, Globals.dispWidth, Globals.dispHeight);
+				glMatrixMode(GL_PROJECTION);
+				glLoadIdentity();
+				glOrtho(0, Globals.dispWidth, Globals.dispHeight, 0, 1, -1);
+				glMatrixMode(GL_MODELVIEW);
 				Display.setDisplayMode(dispMode);
 				Display.setFullscreen(true);
 				Display.setVSyncEnabled(true);
@@ -52,8 +55,8 @@ public class GameLogic {
 			fsSwitch = true;
 			}else{
 				System.out.println("Setting windowed");
-				Globals.dispWidth = widthBackup;
-				Globals.dispHeight = heightBackup;
+				Globals.dispWidth = Globals.dispWidthBK;
+				Globals.dispHeight = Globals.dispHeightBK;
 				DisplayMode dispMode = new DisplayMode(Globals.dispWidth, Globals.dispHeight);
 				try {
 					glViewport(0, 0, Globals.dispWidth, Globals.dispHeight);

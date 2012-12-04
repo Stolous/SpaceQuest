@@ -35,19 +35,19 @@ public class GameLoop {
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
-		Globals.enemies.add(new Slime(0,0));
-		Globals.enemies.add(new FastSlime(10,10));
-		Globals.enemies.add(new WeakSlime(30,30));
+		
+
+		
 		Globals.ab=new ammobar();
 		while (Globals.isRunning) {
 
-			
 			int delta = getDelta();
 			
 			// Update debug screen
 			dbs.updateDelta(delta);
 			dbs.updateMouseCoords(MouseData.MouseX(), MouseData.MouseY());
 			dbs.updatePlayerCoords(Globals.playerEntity.getActX(), Globals.playerEntity.getActY());
+			dbs.updateMapOffset(Globals.gameMap.getXOffset(), Globals.gameMap.getYOffset());
 
 			logic.doLogic(delta);
 			render.render();
@@ -56,7 +56,6 @@ public class GameLoop {
 			for(int i=0;i<Globals.enemies.size();i++){
 				Globals.enemies.get(i).reset();
 			}
-			
 			Display.update();
 			Display.sync(60);
 
@@ -75,7 +74,6 @@ public class GameLoop {
 	private void setupTextures() {
 		TextureHandler th = new TextureHandler();
 		Globals.startImg = th.loadDiffTexture("res/img/intro.png", "PNG");
-
 		Globals.tileTextures.add(th.loadSprite("tiles/grass"));
 		Globals.tileTextures.add(th.loadSprite("tiles/cobble"));
 		Globals.tileTextures.add(th.loadSprite("tiles/flower red"));
@@ -88,7 +86,12 @@ public class GameLoop {
 		Globals.tileTextures.add(th.loadSprite("tiles/double alien cactus plant"));
 		Globals.tileTextures.add(th.loadSprite("tiles/red rock"));
 		Globals.tileTextures.add(th.loadSprite("tiles/sign"));
-
+		//NUMBER ONE RULE FOR LOADING NEW TILES
+		//THEY MUST BE PUT AT THE BOTTOM
+		//OR ELSE THEY MAKE OLD MAPS NOT WORK PROPERLY:
+		Globals.tileTextures.add(th.loadSprite("tiles/dirt"));
+		//JUST A HEADS UP FOR NEXT TIME
+		
 		System.out.println("Loaded " + Globals.tileTextures.size() + " tile textures");
 
 		// Player animation stages - Temporary, messy and needs redoing

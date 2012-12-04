@@ -24,7 +24,6 @@ public class HealthBar {
 	}
 
 	public void update() {
-		
 		barb.setcol(r, g, b);
 		barf.update();
 		barb.update();
@@ -40,7 +39,7 @@ public class HealthBar {
 		
 	}
 	public void set(int amount) {
-		System.out.println("Size set");
+		//System.out.println("Size set");
 		hl = amount;
 		amount = amount * rat;
 		barb.setXsize(amount);
