@@ -16,7 +16,7 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
 public class TextRenderer {
-	private double xsize, ysize, x, y, rotate, xh, yh, lxpos, lypos;
+	private double xsize, ysize, x, y, rotate, xh, yh, lxpos, lypos,xloc;
 	private Texture texture;
 	String text;
 
@@ -31,7 +31,7 @@ public class TextRenderer {
 		y = ylocation;
 		setXh(getXsize() / 2);
 		yh = ysize / 2;
-
+		xloc = xlocation;
 		try {
 			texture = TextureLoader.getTexture(".PNG", new FileInputStream(new File(path)));
 		} catch (FileNotFoundException e) {
@@ -45,11 +45,15 @@ public class TextRenderer {
 
 	public void update() {
 
+		x=xloc;
 		char[] c = text.toCharArray();
-
+		
 		int letter;
 		// 16 collumns 16 rows
+
+double mov = 0;
 		for (int i = 0; i < c.length; i++) {
+			x = x+ mov;
 
 			letter = c[i];
 			lypos = letter % 16;
@@ -114,9 +118,12 @@ public class TextRenderer {
 			 * getXh(), y - yh); GL11.glEnd(); GL11.glPopMatrix();
 			 * GL11.glDisable(GL11.GL_TEXTURE_2D);
 			 */
-			x = x+(xsize*0.4);	
+			mov = mov+(xsize*0.4);	
 		}
-		System.out.println("Done");
+		x=x - mov;
+		
+
+		
 
 	}
 

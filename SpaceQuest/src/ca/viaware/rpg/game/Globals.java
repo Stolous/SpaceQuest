@@ -21,6 +21,8 @@ public class Globals {
 
 	ArrayList<ArrayList<String>> array = new ArrayList<ArrayList<String>>();
 
+	
+	public static ArrayList <TextRenderer> text = new ArrayList <TextRenderer>();
 	public static HealthBar healthBar;
 	public static ArrayList <Enemy> enemies=new ArrayList<Enemy>();
 	public static ammobar ammoBar;
@@ -31,6 +33,7 @@ public class Globals {
 	public static List<Texture> tileTextures = new ArrayList(16);
 	public static Texture startImg = null;
 	public static Player playerEntity = null;
+	//public static TextRenderer r = new TextRenderer(100,100, 100, 0, "res/text/fonts.png", "Hello how are you?");
 	public static Map gameMap = null;
 	public static Cursor cursor;
 	public static boolean isFullscreen = false;

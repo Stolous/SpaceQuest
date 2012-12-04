@@ -3,6 +3,7 @@ package ca.viaware.rpg.entity;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entities.Player;
@@ -40,6 +41,7 @@ public class MeleeEnemy extends Enemy {
 
 	@Override
 	public void update(int delta) {
+	
 		b=false;
 		setX(getT().getx());
 		setY(getT().gety());
