@@ -32,6 +32,7 @@ public class MapEditor {
 	public static List<TileTexture> textures = new ArrayList(16);
 	ToolBox tools;
 	int selectedTile = 0;
+	    
 
 	public MapEditor() {
 		try {
