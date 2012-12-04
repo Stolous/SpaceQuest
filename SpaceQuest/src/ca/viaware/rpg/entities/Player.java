@@ -55,7 +55,7 @@ public class Player extends AbstractEntity {
 		animPositions.get(animStage).bind();
 
 		if (color) {
-			GL11.glColor3f(1, 0.5f, 0.5f);
+			glColor3f(1, 0.5f, 0.5f);
 
 			Runnable r = new Runnable() {
 				public void run() {
@@ -73,6 +73,7 @@ public class Player extends AbstractEntity {
 			t.start();
 
 		}
+		
 		glBegin(GL_QUADS);
 		glTexCoord2f(0f, 0f);
 		glVertex2d(x, y);
@@ -83,13 +84,9 @@ public class Player extends AbstractEntity {
 		glTexCoord2f(0f, 1f);
 		glVertex2d(x, y + height);
 		glEnd();
-
-		glBegin(GL_LINE_STRIP);
-		glVertex2d(x, y);
-		glVertex2d(x + 64, y);
-		glVertex2d(x + 64, y + 64);
-		glVertex2d(x, y + 64);
-		glEnd();
+		
+		glColor3f(1, 1, 1);
+		
 	}
 
 	@Override

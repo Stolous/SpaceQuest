@@ -243,6 +243,21 @@ public class MapEditor {
 				}
 			}
 			break;
+		case MARKERS:
+			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_Z)){
+				for (Tile tile : tiles){
+					if (tile.isTouching(rect)){
+						Globals.spawnPoint = tiles.indexOf(tile);
+						tile.setSpawnpoint(true);
+					}
+				}
+				for (Tile tile : tiles){
+					if (tiles.indexOf(tile) != Globals.spawnPoint && tile.isSpawn()){
+						tile.setSpawnpoint(false);
+					}
+				}
+			}
+			break;
 		}
 
 		int count = 0;
