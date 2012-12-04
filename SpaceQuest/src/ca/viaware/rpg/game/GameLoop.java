@@ -55,7 +55,7 @@ public class GameLoop {
 
 			logic.doLogic(delta);
 			render.render();
-			
+			Globals.playerEntity.takedamage(-1);
 			
 			for(int i=0;i<Globals.enemies.size();i++){
 				Globals.enemies.get(i).reset();
