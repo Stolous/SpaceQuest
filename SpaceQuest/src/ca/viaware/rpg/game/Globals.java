@@ -26,6 +26,7 @@ public class Globals {
 	public static ammobar ab;
 	public static boolean isRunning = true;
 	public static int dispWidth = 800, dispHeight = 600;
+	public static int dispWidthBK = 0, dispHeightBK = 0;
 	public static int temp = 0;
 	public static List<Texture> tileTextures = new ArrayList(16);
 	public static Texture startImg = null;

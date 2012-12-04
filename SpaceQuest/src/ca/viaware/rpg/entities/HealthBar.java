@@ -24,7 +24,6 @@ public class HealthBar {
 	}
 
 	public void update() {
-		
 		barb.setcol(r, g, b);
 		barf.update();
 		barb.update();

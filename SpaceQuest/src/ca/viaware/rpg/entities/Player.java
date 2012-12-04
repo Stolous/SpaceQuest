@@ -19,58 +19,59 @@ public class Player extends AbstractEntity {
 	int animStage = 0;
 	int animCount = 0;
 	double speed = 0.15;
-	private static double width,height;
-	
+	private static double width, height;
+	private boolean screenChanged = false;
+
 	private double changeY, changeX;
-	
 
 	boolean walkChange = false;
 	private int walkingDir = 0;
-	
+
 	private double actX = 0, actY = 0;
 
 	public Player(double x, double y, double width, double height) {
 		super(x, y, width, height);
 		Player.width = width;
 		Player.height = height;
-		currentHealth=maxHealth;
+		currentHealth = maxHealth;
 		actX = Globals.dispWidth / 2 - width / 2;
 		actY = Globals.dispHeight / 2 - height / 2;
-		
+
 	}
-	public static double getW(){
+
+	public static double getW() {
 		return width;
 	}
-	public static double getH(){
+
+	public static double getH() {
 		return height;
 	}
 
 	@Override
 	public void draw() {
-		
+
 		changeX = 0;
 		changeY = 0;
 		animPositions.get(animStage).bind();
 
-		
-		if(color){
-			GL11.glColor3f(1,0.5f,0.5f);
-			
-			Runnable r = new Runnable(){
-				public void run(){
+		if (color) {
+			GL11.glColor3f(1, 0.5f, 0.5f);
+
+			Runnable r = new Runnable() {
+				public void run() {
 					try {
-						Thread.sleep(100L);//this is so that the color  shows for a little while
-						color=false;
+						Thread.sleep(100L);// this is so that the color shows
+											// for a little while
+						color = false;
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-				
+
 				}
 			};
 			Thread t = new Thread(r);
 			t.start();
-			
-			
+
 		}
 		glBegin(GL_QUADS);
 		glTexCoord2f(0f, 0f);
@@ -82,19 +83,40 @@ public class Player extends AbstractEntity {
 		glTexCoord2f(0f, 1f);
 		glVertex2d(x, y + height);
 		glEnd();
-		
+
 		glBegin(GL_LINE_STRIP);
-		glVertex2d(x,y);
-		glVertex2d(x+64,y);
-		glVertex2d(x+64,y+64);
-		glVertex2d(x,y+64);
+		glVertex2d(x, y);
+		glVertex2d(x + 64, y);
+		glVertex2d(x + 64, y + 64);
+		glVertex2d(x, y + 64);
 		glEnd();
 	}
 
 	@Override
 	public void update(int delta) {
-		
-		//Animation
+
+		//Temp system of compensating player coords for fullscreen change
+		if (Globals.isFullscreen) {
+			setX(Globals.dispWidth / 2 - width / 2);
+			setY(Globals.dispHeight / 2 - height / 2);
+			System.out.println(actX + ", " + actY);
+
+			if (!screenChanged) {
+				screenChanged = true;
+				actX = actX + (Globals.dispWidth - Globals.dispWidthBK) / 2;
+				actY = actY + (Globals.dispHeight - Globals.dispHeightBK) / 2;
+			}
+		}
+
+		if (!Globals.isFullscreen) {
+			if (screenChanged) {
+				screenChanged = false;
+				actX = actX + (Globals.dispWidth - Globals.dispWidthBK) / 2;
+				actY = actY + (Globals.dispHeight - Globals.dispHeightBK) / 2;
+			}
+		}
+
+		// Animation
 		animCount += delta;
 		if (animCount > 150) {
 			animStage++;
@@ -151,70 +173,72 @@ public class Player extends AbstractEntity {
 		}
 		walkingDir = d;
 	}
-	
-	public double getSpeed(){
+
+	public double getSpeed() {
 		return speed;
 	}
-	
-	public void changePosition(double x, double y, int delta){
-		actX += x * delta; 
+
+	public void changePosition(double x, double y, int delta) {
+		actX += x * delta;
 		actY += y * delta;
-		
-		changeX = x * delta; 
+
+		changeX = x * delta;
 		changeY = y * delta;
-		
+
 	}
-	
-	public double getActX(){
+
+	public double getActX() {
 		return actX;
 	}
-	
-	public double getActY(){
+
+	public double getActY() {
 		return actY;
 	}
-	
-	public double getChangeX(){
+
+	public double getChangeX() {
 		return changeX;
 	}
-	
-	public double getChangeY(){
+
+	public double getChangeY() {
 		return changeY;
 	}
-	public int getMaxHealth(){
+
+	public int getMaxHealth() {
 		return maxHealth;
 	}
-	public int getCurrentHealth(){
+
+	public int getCurrentHealth() {
 		return currentHealth;
 	}
-	public int getRegenRate(){
+
+	public int getRegenRate() {
 		return regenRate;
 	}
-	public void takedamage(int amount){
-		if(currentHealth>0){
-		color=true;
-		int percent = (amount*100)/maxHealth;
-		//System.out.println("Percent lost "+percent);
-		Globals.h.change(-percent);
-		if(currentHealth>0){
-			currentHealth -=amount;
-			
-			//System.out.println("Enemy attack registered "+ amount+" damage was dealt "+ currentHealth +" health left");
-		}else{
+
+	public void takedamage(int amount) {
+		if (currentHealth > 0) {
+			color = true;
+			int percent = (amount * 100) / maxHealth;
+			// System.out.println("Percent lost "+percent);
+			Globals.h.change(-percent);
+			if (currentHealth > 0) {
+				currentHealth -= amount;
+
+				// System.out.println("Enemy attack registered "+
+				// amount+" damage was dealt "+ currentHealth +" health left");
+			} else {
+				death();
+			}
+		}
+		if (currentHealth <= 0) {
 			death();
 		}
-		}
-		if(currentHealth<=0){
-			death();
-		}
-		}
-		
-		
-	
-	public static void  death(){
-		
+	}
+
+	public static void death() {
+
 		System.out.println("You are dead!");
 		Globals.h.set(0);
 	}
-	
 
 }
