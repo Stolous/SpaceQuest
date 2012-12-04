@@ -103,8 +103,7 @@ public class Player extends AbstractEntity {
 
 			if (!screenChanged) {
 				screenChanged = true;
-				actX = actX + (Globals.dispWidth - Globals.dispWidthBK) / 2;
-				actY = actY + (Globals.dispHeight - Globals.dispHeightBK) / 2;
+				teleport((int)actX, (int)actY);
 			}
 		}
 
@@ -239,6 +238,16 @@ public class Player extends AbstractEntity {
 
 		System.out.println("You are dead!");
 		Globals.h.set(0);
+	}
+	
+	public void teleport(int teleX, int teleY){
+		actX = teleX;
+		actY = teleY;
+		
+		int mapX = (int) (getX() - teleX);
+		int mapY = (int) (getY() - teleY);
+		
+		Globals.gameMap.setOffsets(mapX, mapY);
 	}
 
 }

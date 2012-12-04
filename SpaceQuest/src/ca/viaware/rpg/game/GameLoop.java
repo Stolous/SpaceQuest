@@ -47,6 +47,7 @@ public class GameLoop {
 			dbs.updateDelta(delta);
 			dbs.updateMouseCoords(MouseData.MouseX(), MouseData.MouseY());
 			dbs.updatePlayerCoords(Globals.playerEntity.getActX(), Globals.playerEntity.getActY());
+			dbs.updateMapOffset(Globals.gameMap.getXOffset(), Globals.gameMap.getYOffset());
 
 			logic.doLogic(delta);
 			render.render();
@@ -55,7 +56,6 @@ public class GameLoop {
 			for(int i=0;i<Globals.enemies.size();i++){
 				Globals.enemies.get(i).reset();
 			}
-			
 			Display.update();
 			Display.sync(60);
 

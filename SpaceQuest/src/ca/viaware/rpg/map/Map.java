@@ -56,4 +56,9 @@ public class Map {
 	public int getYOffset(){
 		return (int)yOffset;
 	}
+	
+	public void setOffsets(int x, int y){
+		xOffset = x;
+		yOffset = y;
+	}
 }
