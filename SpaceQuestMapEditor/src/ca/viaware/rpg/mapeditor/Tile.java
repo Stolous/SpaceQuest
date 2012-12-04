@@ -15,6 +15,7 @@ public class Tile {
 	private boolean selected = false;
 	private boolean toolSelected = false;
 	private boolean isCollision = false;
+	private boolean isSpawnpoint = false;
 
 	public Tile(int x, int y, int ID) {
 		this.x = x;
@@ -252,6 +253,14 @@ public class Tile {
 
 	public boolean checkColision() {
 		return isCollision;
+	}
+	
+	public void setSpawnpoint(boolean s){
+		isSpawnpoint = s;
+	}
+	
+	public boolean isSpawn(){
+		return isSpawnpoint;
 	}
 
 }

@@ -33,6 +33,7 @@ public class GameLoop {
 		Loader loader = new Loader();
 		Globals.gameMap = loader.loadMap();
 		Renderer render = new Renderer();
+		Globals.enemies.add(new Slime(10,10));
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
 		Globals.text.add(new TextRenderer(100,100, 100, 0, "res/text/fonts.png", "Hello how are you?"));
