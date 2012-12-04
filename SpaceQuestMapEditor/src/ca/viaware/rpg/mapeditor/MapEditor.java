@@ -85,7 +85,7 @@ public class MapEditor {
 
 	public void loadTextures() {
 		TextureHandler th = new TextureHandler();
-
+		textures.add(new TileTexture(th.loadTexture("Dirt"), "dirt"));
 		textures.add(new TileTexture(th.loadTexture("grass1"), "Grass 1"));
 		textures.add(new TileTexture(th.loadTexture("cobble"), "Cobble"));
 		textures.add(new TileTexture(th.loadTexture("flower red"), "Red flower"));
