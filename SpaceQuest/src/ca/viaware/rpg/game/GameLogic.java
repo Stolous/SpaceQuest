@@ -12,6 +12,25 @@ import org.lwjgl.opengl.GL11;
 import ca.viaware.rpg.utilities.FullscreenHandler;
 
 public class GameLogic {
+	
+//	float ySpeed = 0;
+//	float xSpeed = 0;
+//
+//	double speed = 2;
+//
+//	// Maths to make bullet go in direction thing
+//	xSpeed = (float) (bullet.gotoX - bullet.oldPlayerX);
+//	ySpeed = (float) (bullet.gotoY - bullet.oldPlayerY);
+//
+//	float factor = (float) (speed / Math.sqrt(xSpeed * xSpeed + ySpeed * ySpeed));
+//
+//	xSpeed = xSpeed * factor;
+//	ySpeed = ySpeed * factor;
+//
+//	bullet.setDX(xSpeed);
+//	bullet.setDY(ySpeed);
+//
+//	bullet.update(delta);
 	PlayerMovement pMovement = new PlayerMovement();
 	FullscreenHandler fHandler = new FullscreenHandler();
 	private int timer = 0, count = 0;
