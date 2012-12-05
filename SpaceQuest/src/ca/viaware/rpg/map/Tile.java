@@ -32,7 +32,12 @@ public class Tile extends AbstractMoveableEntity{
 		actX = tileX * 64;
 		actY = tileY * 64;
 	}
-	
+	public int getBX(){
+		return actX/64;
+	}
+	public int getBY(){
+		return actY/64;
+	}
 	public void setTexture(Texture t) {
 		tex = t;
 	}

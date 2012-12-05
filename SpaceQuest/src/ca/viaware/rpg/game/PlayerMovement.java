@@ -63,8 +63,9 @@ public class PlayerMovement {
 			tileX++;
 			for (Tile tile : tile1) {
 				tileY++;
-				if (tile.hasCollision()) {
+				//i reorganized this - not necessary to check if tile has collision if it does not intersect player!
 					if (Globals.playerEntity.intersects(tile)) {
+						if (tile.hasCollision()) {
 						if (playerX > tileX) {
 							Globals.gameMap.moveMap(-speed, 0, delta);
 							Globals.playerEntity.changePosition(speed, 0, delta);

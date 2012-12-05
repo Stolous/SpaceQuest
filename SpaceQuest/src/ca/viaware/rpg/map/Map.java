@@ -43,8 +43,7 @@ public class Map {
 		
 		for(int i = 0;i <Globals.text.size();i++){
 			//Globals.text.get(i).update();
-			System.out.println(Globals.text.get(i).getx()+"X is");
-			System.out.println(i+"done");
+			
 			
 		}
 		//TextRenderer r = new TextRenderer(100,100, 100, 0, "res/text/fonts.png", "Hello how are you?");

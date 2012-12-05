@@ -8,15 +8,16 @@ import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.game.Globals;
+import ca.viaware.rpg.map.Tile;
 import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class MeleeEnemy extends Enemy {
 
 	private boolean b =false;
 	private TexturedQuad t;
-	private int delta, agressiveness, betattacks, attackspeed;
+	private int delta, agressiveness, betattacks, attackspeed,blockx,blocky;
 	private double distancebetween, xdist, ydist, playerx, playery,range, actxdist, actydist, speed, sightrange;
-
+	
 	public MeleeEnemy( double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double sightrange) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
 		this.attackspeed = attackspeed;
@@ -28,8 +29,7 @@ public class MeleeEnemy extends Enemy {
 		x = (mx);
 		y = (my);
 		this.sightrange = sightrange;
-// this way the initial attack will be
-										// faster
+// this way the initial attack will be faster
 
 	}
 
@@ -42,10 +42,14 @@ public class MeleeEnemy extends Enemy {
 	@Override
 	public void update(int delta) {
 	
+		blockx = (int) (mx/64);
+		blocky = (int) (my/64);
+		
 		b=false;
 		setX(getT().getx());
 		setY(getT().gety());
-
+		
+		
 		this.delta = delta;
 		setXoffset((Globals.gameMap.getXOffset()));
 		setYoffset((Globals.gameMap.getYOffset()));
@@ -71,7 +75,41 @@ public class MeleeEnemy extends Enemy {
 		distancebetween = Math.sqrt(((xdist * xdist) + (ydist * ydist)));// pythagorean
 																			// theorem
 
+		
+		
+		
 		if(distancebetween<sightrange){
+			//mob colision
+			int i =0;
+			for (Tile[] tile1 : Globals.gameMap.mapTiles) {
+				
+				if(ydist>0){
+					if(blockx==tile1[i].getBX()){
+						if(blocky-1==tile1[i].getBY()){
+							//then it means that it is in this tile
+							if(Globals.gameMap.mapTiles[blockx][blocky].hasCollision()){					
+								//block on right of mob has collision
+								System.out.println("Block on up has collision");
+							}
+						}
+						}
+				}
+				if(xdist>0){
+					if(blockx-1==tile1[i].getBX()){
+						if(blocky==tile1[i].getBY()){
+							//then it means that it is in this tile
+							if(Globals.gameMap.mapTiles[blockx][blocky].hasCollision()){					
+								//block on right of mob has collision
+								System.out.println("Block on right/left has collision");
+							}
+						}
+						}
+				}
+				
+				
+				
+				i++;
+			}
 		if (distancebetween > range) {
 			mx = moverx(actxdist, mx, speed);
 			my = moverx(actydist, my, speed);
@@ -81,13 +119,20 @@ public class MeleeEnemy extends Enemy {
 			attack();
 		}
 
+		
+		
+		
 		if (this.intersects(Globals.playerEntity)&&b==false) {
 			attack();
 		}
 	}
+		
+		
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
 
+		
+		
 	}
 
 	

@@ -97,7 +97,6 @@ public class Player extends AbstractEntity {
 		if (Globals.isFullscreen) {
 			setX(Globals.dispWidth / 2 - width / 2);
 			setY(Globals.dispHeight / 2 - height / 2);
-			System.out.println(actX + ", " + actY);
 
 			if (!screenChanged) {
 				screenChanged = true;
