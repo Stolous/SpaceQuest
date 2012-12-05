@@ -36,6 +36,7 @@ public class HealthBar {
 		percent = percent * rat;
 		barb.resize(percent, 0);
 		barb.move((percent/2), 0);
+<<<<<<< HEAD
 		r=  r+hl*0.0002;
 		g= g -( hl*0.0002);
 	
@@ -45,6 +46,10 @@ public class HealthBar {
 		System.out.println("Size changed");
 		barf.setSize(Display.getWidth(), (Display.getHeight() / 9));
 		barf.setlocation(Display.getWidth() / 2, Display.getHeight() - Display.getHeight() / 25);
+=======
+		r=  r+hl*0.000075;
+		g= g -( hl*0.000075);
+>>>>>>> 13269180865cb00e69f02b4fe2f5c36c9128a788
 		
 		barb.setlocation(Display.getWidth() / 2, Display.getHeight() - (int) (Display.getHeight() / 150));
 		barb.setSize(hl*rat, (Display.getHeight() / 54.3));

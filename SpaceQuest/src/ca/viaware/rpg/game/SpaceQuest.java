@@ -18,6 +18,8 @@ public class SpaceQuest {
 		DispSetup.setupGL();
 		GameLoop gloop = new GameLoop();
 		Globals.enemies.add(new WeakSlime(1,1));
+		Globals.enemies.add(new WeakSlime(1,1));
+		Globals.enemies.add(new WeakSlime(1,1));
 		gloop.startLoop();
        
 	}

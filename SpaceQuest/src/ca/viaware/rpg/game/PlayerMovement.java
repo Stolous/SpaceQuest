@@ -15,8 +15,7 @@ public class PlayerMovement {
 		List<Tile> tilesWithCollision = new ArrayList(16);
 		tilesWithCollision.clear();
 		int dir1, dir2;
-
-		if (delta < 30) {
+		if (delta < 30){
 			if (Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_A)) {
 				Globals.gameMap.moveMap(speed, 0, delta);
 				Globals.playerEntity.changePosition(-speed, 0, delta);
