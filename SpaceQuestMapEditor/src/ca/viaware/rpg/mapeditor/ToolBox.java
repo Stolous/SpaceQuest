@@ -28,6 +28,7 @@ public class ToolBox extends JFrame {
 	private JButton eraseTool = new JButton();
 	private JButton collisionTool = new JButton();
 	private JButton markerTool = new JButton();
+	private JButton enemyTool = new JButton();
 
 	private boolean changed = false;
 
@@ -58,11 +59,13 @@ public class ToolBox extends JFrame {
 		cont.add(eraseTool);
 		cont.add(collisionTool);
 		cont.add(markerTool);
+		cont.add(enemyTool);
 
 		collisionTool.setText("Collision brush");
 		paintTool.setText("Paint brush");
 		eraseTool.setText("Erase brush");
 		markerTool.setText("GameMarker brush");
+		enemyTool.setText("Enemy brush");
 		tileTextureName.setText("Tile Texture: ");
 		tileID.setText("Tile ID: ");
 
@@ -95,6 +98,14 @@ public class ToolBox extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Globals.selectedTool = Globals.brush.MARKERS;
+			}
+		});
+		
+		enemyTool.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 

@@ -119,6 +119,10 @@ public class MapEditor {
 		textures.add(new TileTexture(th.loadTexture("red rock"), "Red rock"));
 		textures.add(new TileTexture(th.loadTexture("sign"), "Sign"));
 		textures.add(new TileTexture(th.loadTexture("dirt"), "Dirt"));
+		
+		Globals.enemies.add(new Enemy(th.loadTexture("thumb/SlimeNormal"), 1, "Normal Slime"));
+		Globals.enemies.add(new Enemy(th.loadTexture("thumb/SlimeFast"), 2, "Fast Slime"));
+		Globals.enemies.add(new Enemy(th.loadTexture("thumb/SlimeWeak"), 3, "Weak Slime"));
 
 		Globals.otherTextures.add(th.loadTexture("img/spawnpoint"));
 	}

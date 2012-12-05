@@ -14,6 +14,7 @@ public class Globals {
 	public static int cSelected = 0;
 	public static int spawnPoint = 0;
 	public static List<Texture> otherTextures = new ArrayList(16);
+	public static List<Enemy> enemies = new ArrayList(16);
 
 	public static enum brush {
 		PAINT, ERASE, COLLISION, MARKERS;

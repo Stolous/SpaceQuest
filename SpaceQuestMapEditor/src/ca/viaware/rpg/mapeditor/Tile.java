@@ -16,6 +16,8 @@ public class Tile {
 	private boolean toolSelected = false;
 	private boolean isCollision = false;
 	private boolean isSpawnpoint = false;
+	private boolean isEnemy = false;
+	private Enemy enemy;
 
 	public Tile(int x, int y, int ID) {
 		this.x = x;
@@ -289,6 +291,20 @@ public class Tile {
 	
 	public boolean isSpawn(){
 		return isSpawnpoint;
+	}
+	
+	public void addEnemy(Enemy e){
+		enemy = e;
+		isEnemy = true;
+	}
+	
+	public void deleteEnemy(){
+		enemy = null;
+		isEnemy = false;
+	}
+	
+	public boolean isEnemy(){
+		return isEnemy;
 	}
 
 }
