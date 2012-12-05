@@ -42,8 +42,14 @@ public class TexturedQuad {
 		t.bind();
 		update();
 	}
+	public void setSize(double x,double y){
+		setXh(x / 2);
+		yh = y / 2;
+	}
 
 	public void update() {
+		
+		
 
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		t.bind();

@@ -25,11 +25,14 @@ public void setcol(double r,double g ,double b){
 	this.b=b;
 	
 }
+public void setSize(double x,double y){
+	xh = x / 2;
+	yh = y / 2;
+}
 	
 
 	public void update() {
-		xh = getXsize() / 2;
-		yh = getYsize() / 2;
+		
 		GL11.glColor3d(r, g, b);
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, 0);

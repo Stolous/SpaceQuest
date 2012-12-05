@@ -23,12 +23,14 @@ public class HealthBar {
 
 	}
 
-	public void update() {
+	public void update() {	
+
 		barb.setcol(r, g, b);
 		barf.update();
 		barb.update();
 	}
 
+	
 	public void change(int percent) {
 		hl = hl-percent;
 		percent = percent * rat;
@@ -36,10 +38,18 @@ public class HealthBar {
 		barb.move((percent/2), 0);
 		r=  r+hl*0.0002;
 		g= g -( hl*0.0002);
+	
 		
 	}
+	public void fullscreen(){
+		System.out.println("Size changed");
+		barf.setSize(Display.getWidth(), (Display.getHeight() / 9));
+		barf.setlocation(Display.getWidth() / 2, Display.getHeight() - Display.getHeight() / 25);
+		
+		barb.setlocation(Display.getWidth() / 2, Display.getHeight() - (int) (Display.getHeight() / 150));
+		barb.setSize(hl*rat, (Display.getHeight() / 54.3));
+	}
 	public void set(int amount) {
-		//System.out.println("Size set");
 		hl = amount;
 		amount = amount * rat;
 		barb.setXsize(amount);
