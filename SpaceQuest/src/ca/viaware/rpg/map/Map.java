@@ -4,6 +4,7 @@ package ca.viaware.rpg.map;
 
 
 import ca.viaware.rpg.game.Globals;
+import ca.viaware.rpg.utilities.Location;
 import ca.viaware.rpg.utilities.TextRenderer;
 
 
@@ -11,6 +12,7 @@ public class Map {
 	public int xSize, ySize;
 	private double xOffset, yOffset;
 	public Tile mapTiles[][];
+	Location spawn;
 
 	public void setSize(int x, int y) {
 		xSize = x;
@@ -67,5 +69,13 @@ public class Map {
 	public void setOffsets(int x, int y){
 		xOffset = x;
 		yOffset = y;
+	}
+	
+	public void setSpawn(int x, int y){
+		spawn = new Location(x,y);
+	}
+	
+	public Location getSpawn(){
+		return spawn;
 	}
 }

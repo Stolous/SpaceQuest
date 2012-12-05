@@ -1,5 +1,8 @@
 package ca.viaware.rpg.mapeditor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.opengl.Texture;
 
 public class Globals {
@@ -10,6 +13,7 @@ public class Globals {
 	public static boolean isSaved = true;
 	public static int cSelected = 0;
 	public static int spawnPoint = 0;
+	public static List<Texture> otherTextures = new ArrayList(16);
 
 	public static enum brush {
 		PAINT, ERASE, COLLISION, MARKERS;

@@ -16,8 +16,10 @@ public class Tile extends AbstractMoveableEntity{
 	private int l2ID = 0;
 	private boolean hasLayer2 = false;
 	private boolean isCollision = false;
+	private boolean isSpawnpoint = false;
+	int actX, actY;
 
-	public Tile(double n1, double n2, double n3, double n4, boolean enabled, String data){
+	public Tile(double n1, double n2, double n3, double n4, boolean enabled, String data, int tileX, int tileY){
 		super(n1, n2, n3, n4);
 		this.enabled = enabled;
 		if (data.equals("N")){
@@ -26,6 +28,9 @@ public class Tile extends AbstractMoveableEntity{
 		if (enabled){
 		parseInputData(data);
 		}
+		
+		actX = tileX * 64;
+		actY = tileY * 64;
 	}
 	
 	public void setTexture(Texture t) {
@@ -113,6 +118,12 @@ public class Tile extends AbstractMoveableEntity{
 		}else{
 			isCollision = false;
 		}
+		
+		if (data[3].equals("S")){
+			isSpawnpoint = true;
+		}else{
+			isSpawnpoint = false;
+		}
 	}
 	
 	public boolean hasCollision(){
@@ -122,5 +133,9 @@ public class Tile extends AbstractMoveableEntity{
 	@Override
 	public void draw() {
 		
+	}
+	
+	public boolean isSpawn(){
+		return isSpawnpoint;
 	}
 }

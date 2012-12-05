@@ -22,17 +22,37 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class MapEditor {
 
+	/* - - DO NOT FORMAT THE ENTIRE CLASS, WILL MESS UP THIS COMMENT - -
+	 * Brushes, key binds, etc - Just so I don't forget and have to sift through
+	 * code:
+	 * 
+	 * Left click - Move tile (unstable, try not to use this)
+	 * 
+	 * Paint brush: 
+	 * Right click - Add new tile 
+	 * LShift + Right click - Add texture to second layer
+	 * 
+	 * Erase brush: 
+	 * Right click - Erase tile 
+	 * LShift + Right click - Erase second Layer
+	 * 
+	 * Collision brush:
+	 * Right click - Add collision data
+	 * LShift + Right click - Remove collision data
+	 * 
+	 * Game marker brush: Z + Right click - Move spawn point
+	 */
+
 	public static List<Tile> tiles = new ArrayList<Tile>(16);
 	private boolean tileSelected = false;
 	private long lasttime = getTime();
-	
+
 	int delta;
 	int dCount = 0;
 	boolean prevPressed = false;
 	public static List<TileTexture> textures = new ArrayList(16);
 	ToolBox tools;
 	int selectedTile = 0;
-	    
 
 	public MapEditor() {
 		try {
@@ -56,7 +76,7 @@ public class MapEditor {
 		menu.showMenu();
 
 		tiles.add(new Tile(0, 0, 0));
-
+		
 		while (Globals.isRunning) {
 			delta = getDelta();
 
@@ -99,6 +119,8 @@ public class MapEditor {
 		textures.add(new TileTexture(th.loadTexture("red rock"), "Red rock"));
 		textures.add(new TileTexture(th.loadTexture("sign"), "Sign"));
 		textures.add(new TileTexture(th.loadTexture("dirt"), "Dirt"));
+
+		Globals.otherTextures.add(th.loadTexture("img/spawnpoint"));
 	}
 
 	private void changeMade() {
@@ -157,10 +179,10 @@ public class MapEditor {
 		}
 
 		int csOld = cSelected;
-		
+
 		cSelected += Mouse.getDWheel() / 120;
-		
-		if (csOld != cSelected){
+
+		if (csOld != cSelected) {
 			tools.changed();
 		}
 
@@ -170,7 +192,7 @@ public class MapEditor {
 		if (cSelected < 0) {
 			cSelected = 0;
 		}
-		
+
 		Globals.cSelected = cSelected;
 		tools.updateSelected();
 
@@ -227,32 +249,32 @@ public class MapEditor {
 				}
 			}
 			break;
-			
+
 		case COLLISION:
-			if (Mouse.isButtonDown(1) && !Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
-				for (Tile tile : tiles){
-					if (tile.isTouching(rect)){
+			if (Mouse.isButtonDown(1) && !Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+				for (Tile tile : tiles) {
+					if (tile.isTouching(rect)) {
 						tile.setCollision(true);
 					}
 				}
-			} else if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
-				for (Tile tile : tiles){
-					if (tile.isTouching(rect)){
+			} else if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+				for (Tile tile : tiles) {
+					if (tile.isTouching(rect)) {
 						tile.setCollision(false);
 					}
 				}
 			}
 			break;
 		case MARKERS:
-			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_Z)){
-				for (Tile tile : tiles){
-					if (tile.isTouching(rect)){
+			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_Z)) {
+				for (Tile tile : tiles) {
+					if (tile.isTouching(rect)) {
 						Globals.spawnPoint = tiles.indexOf(tile);
 						tile.setSpawnpoint(true);
 					}
 				}
-				for (Tile tile : tiles){
-					if (tiles.indexOf(tile) != Globals.spawnPoint && tile.isSpawn()){
+				for (Tile tile : tiles) {
+					if (tiles.indexOf(tile) != Globals.spawnPoint && tile.isSpawn()) {
 						tile.setSpawnpoint(false);
 					}
 				}
@@ -329,7 +351,7 @@ public class MapEditor {
 				tile.shiftRIGHT();
 			}
 		}
-		
+
 	}
 
 	public void render() {

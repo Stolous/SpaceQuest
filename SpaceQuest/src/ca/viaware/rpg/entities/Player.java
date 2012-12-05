@@ -8,6 +8,7 @@ import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.AbstractEntity;
 import ca.viaware.rpg.game.Globals;
+import ca.viaware.rpg.utilities.Location;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Player extends AbstractEntity {
@@ -100,7 +101,7 @@ public class Player extends AbstractEntity {
 
 			if (!screenChanged) {
 				screenChanged = true;
-				teleport((int)actX, (int)actY);
+				teleportXY((int)actX, (int)actY);
 			}
 		}
 
@@ -237,7 +238,7 @@ public class Player extends AbstractEntity {
 		Globals.healthBar.set(0);
 	}
 	
-	public void teleport(int teleX, int teleY){
+	public void teleportXY(int teleX, int teleY){
 		actX = teleX;
 		actY = teleY;
 		
@@ -246,5 +247,16 @@ public class Player extends AbstractEntity {
 		
 		Globals.gameMap.setOffsets(mapX, mapY);
 	}
+	
+	public void teleport(Location loc){
+		actX = loc.getX();
+		actY = loc.getY();
+		
+		int mapX = (int) (getX() - loc.getX());
+		int mapY = (int) (getY() - loc.getY());
+		
+		Globals.gameMap.setOffsets(mapX, mapY);
+	}
+	
 
 }

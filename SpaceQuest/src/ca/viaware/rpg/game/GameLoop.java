@@ -17,6 +17,7 @@ import ca.viaware.rpg.entities.WeakSlime;
 import ca.viaware.rpg.entities.ammobar;
 import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
+import ca.viaware.rpg.map.MapHandler;
 import ca.viaware.rpg.utilities.DebugScreen;
 import ca.viaware.rpg.utilities.MouseData;
 import ca.viaware.rpg.utilities.TextRenderer;
@@ -30,19 +31,20 @@ public class GameLoop {
 		Globals.playerEntity = new Player(Globals.dispWidth / 2 - 32, Globals.dispHeight / 2 - 32, 64, 64);
 		Globals.cursor = new Cursor(0, 0, 32, 32);
 		setupTextures();
-		Loader loader = new Loader();
-		Globals.gameMap = loader.loadMap();
 		Renderer render = new Renderer();
-		Globals.enemies.add(new Slime(10,10));
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
 		Globals.text.add(new TextRenderer(100,100, 100, 0, "res/text/fonts.png", "Hello how are you?"));
 
-				Globals.enemies.add(new Slime(0,0));
-				Globals.enemies.add(new FastSlime(10,10));
-				Globals.enemies.add(new WeakSlime(30,30));
+				//Globals.enemies.add(new Slime(0,0));
+				//Globals.enemies.add(new FastSlime(10,10));
+				//Globals.enemies.add(new WeakSlime(30,30));
 
 		Globals.ammoBar=new ammobar();
+		
+		Globals.gameMap = MapHandler.handleMapLoad("Test");
+		MapHandler.finishLoad();
+		
 		while (Globals.isRunning) {
 
 			int delta = getDelta();
@@ -55,7 +57,7 @@ public class GameLoop {
 
 			logic.doLogic(delta);
 			render.render();
-			Globals.playerEntity.takedamage(-1);
+			//Globals.playerEntity.takedamage(-1);
 			
 			for(int i=0;i<Globals.enemies.size();i++){
 				Globals.enemies.get(i).reset();

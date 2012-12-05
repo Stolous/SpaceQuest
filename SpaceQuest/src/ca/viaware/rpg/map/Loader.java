@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class Loader {
 
-	public Map loadMap() {
+	public Map loadMap(String name) {
 		Map map = new Map();
-		File location = new File("res/maps/Test.map");
+		File location = new File("res/maps/" + name + ".map");
 		Scanner sc = null;
 		try {
 			sc = new Scanner(location);
@@ -31,9 +31,13 @@ public class Loader {
 			String[] line = sc.nextLine().split("&");
 			for (int i = 0; i < line.length; i++) {
 				if (line[i].equals("N")) {
-					mapTiles[i][ycount] = new Tile(0, 0, 64, 64, false, line[i]);
+					mapTiles[i][ycount] = new Tile(0, 0, 64, 64, false, line[i], i, ycount);
 				} else {
-					mapTiles[i][ycount] = new Tile(0, 0, 64, 64, true, line[i]);
+					Tile tile = new Tile(0, 0, 64, 64, true, line[i], i, ycount);
+					if (tile.isSpawn()){
+						map.setSpawn(i * 64, ycount * 64);
+					}
+					mapTiles[i][ycount] = tile;
 				}
 			}
 			ycount++;

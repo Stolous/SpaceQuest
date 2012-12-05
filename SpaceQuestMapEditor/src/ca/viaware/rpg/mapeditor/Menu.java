@@ -44,7 +44,7 @@ public class Menu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String n = JOptionPane.showInputDialog("Map name");
-				Map.passMap(MapEditor.tiles, 50, 50);
+				Map.passMap(MapEditor.tiles, 100, 100);
 				Map.save(n);
 			}
 		});

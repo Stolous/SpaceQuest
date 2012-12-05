@@ -49,6 +49,12 @@ public class Tile {
 		}else{
 			isCollision = false;
 		}
+		
+		if (data2[3].equals("S")){
+			isSpawnpoint = true;
+		}else{
+			isSpawnpoint = false;
+		}
 	}
 
 	public void renderTile() {
@@ -109,6 +115,20 @@ public class Tile {
 
 			glBegin(GL_LINE_STRIP);
 			glVertex2i(x + 64, y);
+			glVertex2i(x, y + 64);
+			glEnd();
+		}
+		
+		if (isSpawnpoint){
+			Globals.otherTextures.get(0).bind();
+			glBegin(GL_QUADS);
+			glTexCoord2f(0f, 0f);
+			glVertex2i(x, y);
+			glTexCoord2f(1f, 0f);
+			glVertex2i(x + 64, y);
+			glTexCoord2f(1f, 1f);
+			glVertex2i(x + 64, y + 64);
+			glTexCoord2f(0f, 1f);
 			glVertex2i(x, y + 64);
 			glEnd();
 		}
@@ -210,10 +230,18 @@ public class Tile {
 		
 		if (isCollision){
 			System.out.println("Has collision, adding collision data");
-			data = data + "/" + "C";
+			data = data + "/C";
 		}else{
 			System.out.println("Does not have collision, adding null data");
-			data = data + "/" + "N";
+			data = data + "/N";
+		}
+		
+		if (isSpawnpoint){
+			System.out.println("Is the spawn point, adding spawn point data");
+			data = data + "/S";
+		}else{
+			System.out.println("Is not the spawn point, adding null data");
+			data = data + "/N";
 		}
 
 		data = data + "&";
