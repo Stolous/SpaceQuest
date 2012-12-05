@@ -34,8 +34,8 @@ public class HealthBar {
 		percent = percent * rat;
 		barb.resize(percent, 0);
 		barb.move((percent/2), 0);
-		r=  r+hl*0.0002;
-		g= g -( hl*0.0002);
+		r=  r+hl*0.000075;
+		g= g -( hl*0.000075);
 		
 	}
 	public void set(int amount) {
