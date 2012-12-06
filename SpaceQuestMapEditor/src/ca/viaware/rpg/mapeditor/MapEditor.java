@@ -124,7 +124,7 @@ public class MapEditor {
 		Globals.enemies.add(new Enemy(th.loadTexture("thumb/SlimeFast"), 2, "Fast Slime"));
 		Globals.enemies.add(new Enemy(th.loadTexture("thumb/SlimeWeak"), 3, "Weak Slime"));
 
-		Globals.otherTextures.add(th.loadTexture("img/spawnpoint"));
+		Globals.otherTextures.add(th.loadTexture("img/waypointOUT"));
 	}
 
 	private void changeMade() {
@@ -271,17 +271,23 @@ public class MapEditor {
 			break;
 		case MARKERS:
 			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_Z)) {
+				tools.setVisible(true);
 				for (Tile tile : tiles) {
 					if (tile.isTouching(rect)) {
-						Globals.spawnPoint = tiles.indexOf(tile);
-						tile.setSpawnpoint(true);
+						tile.setOutMarker(new Waypoint(1, "N", "N", JOptionPane.showInputDialog("Enter marker name")));
 					}
 				}
+				
+			}
+			
+			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_X)) {
+				tools.setVisible(true);
 				for (Tile tile : tiles) {
-					if (tiles.indexOf(tile) != Globals.spawnPoint && tile.isSpawn()) {
-						tile.setSpawnpoint(false);
+					if (tile.isTouching(rect)) {
+						tile.setInMarker(new Waypoint(2, JOptionPane.showInputDialog("Enter map to link to"), JOptionPane.showInputDialog("Enter marker to link to"), "N"));
 					}
 				}
+				
 			}
 			break;
 		}

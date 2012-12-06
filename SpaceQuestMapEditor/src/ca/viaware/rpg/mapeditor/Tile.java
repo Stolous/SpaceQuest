@@ -15,9 +15,10 @@ public class Tile {
 	private boolean selected = false;
 	private boolean toolSelected = false;
 	private boolean isCollision = false;
-	private boolean isSpawnpoint = false;
+	private boolean isTeleMarkerIn = false, isTeleMarkerOut = false;;
 	private boolean isEnemy = false;
 	private Enemy enemy;
+	private Waypoint teleMarker;
 
 	public Tile(int x, int y, int ID) {
 		this.x = x;
@@ -52,10 +53,11 @@ public class Tile {
 			isCollision = false;
 		}
 		
-		if (data2[3].equals("S")){
-			isSpawnpoint = true;
+		if (data2[3].equals("N")){
+			isTeleMarkerIn = false;
+			isTeleMarkerOut = false;
 		}else{
-			isSpawnpoint = false;
+			
 		}
 	}
 
@@ -121,7 +123,20 @@ public class Tile {
 			glEnd();
 		}
 		
-		if (isSpawnpoint){
+		if (isTeleMarkerOut){
+			Globals.otherTextures.get(0).bind();
+			glBegin(GL_QUADS);
+			glTexCoord2f(0f, 0f);
+			glVertex2i(x, y);
+			glTexCoord2f(1f, 0f);
+			glVertex2i(x + 64, y);
+			glTexCoord2f(1f, 1f);
+			glVertex2i(x + 64, y + 64);
+			glTexCoord2f(0f, 1f);
+			glVertex2i(x, y + 64);
+			glEnd();
+		}
+		if (isTeleMarkerIn){
 			Globals.otherTextures.get(0).bind();
 			glBegin(GL_QUADS);
 			glTexCoord2f(0f, 0f);
@@ -238,11 +253,11 @@ public class Tile {
 			data = data + "/N";
 		}
 		
-		if (isSpawnpoint){
-			System.out.println("Is the spawn point, adding spawn point data");
-			data = data + "/S";
+		if (isTeleMarkerOut || isTeleMarkerIn){
+			System.out.println("Has a telemarker, adding telemarker data");
+			data = data + "/" + Integer.toString(Globals.waypoints.indexOf(teleMarker));
 		}else{
-			System.out.println("Is not the spawn point, adding null data");
+			System.out.println("Is not a telemarker, adding null data");
 			data = data + "/N";
 		}
 
@@ -285,12 +300,28 @@ public class Tile {
 		return isCollision;
 	}
 	
-	public void setSpawnpoint(boolean s){
-		isSpawnpoint = s;
+	public void setOutMarker(Waypoint w){
+		if(Globals.waypoints.contains(teleMarker)){
+			Globals.waypoints.remove(teleMarker);
+		}
+		teleMarker = w;
+		Globals.waypoints.add(w);
+		isTeleMarkerOut = true;
 	}
 	
-	public boolean isSpawn(){
-		return isSpawnpoint;
+	public void setInMarker(Waypoint w){
+		if(Globals.waypoints.contains(teleMarker)){
+			Globals.waypoints.remove(teleMarker);
+		}
+		teleMarker = w;
+	}
+	
+	public boolean isTeleMarkerOut(){
+		return isTeleMarkerOut;
+	}
+	
+	public boolean isTeleMarkerIn(){
+		return isTeleMarkerOut;
 	}
 	
 	public void addEnemy(Enemy e){

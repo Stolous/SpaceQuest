@@ -30,6 +30,13 @@ public class Saver {
 				writer.write(line);
 				writer.newLine();
 			}
+			
+			for (Waypoint way : Globals.waypoints){
+
+					writer.write("WP/" + Integer.toString(way.getType()) + "/" + way.getName() + "/" + way.getPointTo() + "/" + way.getPointToMap());
+					writer.newLine();
+
+			}
 		}
 		Globals.isSaved = true;
 	}
