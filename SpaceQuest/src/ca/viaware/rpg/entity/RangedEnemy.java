@@ -14,9 +14,9 @@ public class RangedEnemy extends Enemy {
 
 	private TexturedQuad t;
 	private boolean b =false;
-	private int delta, agressiveness, betattacks, attackspeed;
+	private int delta, agressiveness, betattacks, attackspeed,mindamage,maxdamage;
 	private static double distancebetween, xdist, ydist, playerx, playery, range, actxdist, actydist, speed, mx, my,mindist,sightrange,bulletSpeed;
-	private ArrayList <Bullet> bullets = new ArrayList<Bullet>();
+	public ArrayList <Bullet> bullets = new ArrayList<Bullet>();
 	private Texture Bullet;
 	
 	public RangedEnemy(double mx, double my, double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double mindist,double sightrange,Texture bullet,double BulletSpeed) {
@@ -29,6 +29,8 @@ public class RangedEnemy extends Enemy {
 		this.mindist=mindist;
 		this.agressiveness = agresiveness;
 		this.sightrange = sightrange;
+		this.mindamage = mindamage;
+		this.maxdamage = maxdamage;
 		mx = spawnx;
 		my = spawny;
 		x = (mx);
@@ -93,7 +95,7 @@ public class RangedEnemy extends Enemy {
 	}
 	
 private void attack(){
-	bullets.add(new Bullet(this.Bullet,getX(),(double)Mouse.getDX(),getY(),(double)Mouse.getDY(),bulletSpeed));	
+	bullets.add(new Bullet(this.Bullet,getX(),(double)Mouse.getDX(),getY(),(double)Mouse.getDY(),bulletSpeed,mindamage,maxdamage));	
 }
 	@Override
 	public void draw() {
@@ -101,8 +103,12 @@ private void attack(){
 		for(int i =0; i<bullets.size();i++){
 			
 			bullets.get(i).render();
+			
 		}
-		
+		for(int i =0; i<bullets.size();i++){			
+		if(bullets.get(i).getremoved() == true){
+			bullets.remove(i);
+		}}
 	}
 	private void run(){
 		mx++;
