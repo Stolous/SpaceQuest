@@ -16,7 +16,7 @@ public class MeleeEnemy extends Enemy {
 	private boolean b =false;
 	private TexturedQuad t;
 	private int delta, agressiveness, betattacks, attackspeed,blockx,blocky;
-	private double distancebetween, xdist, ydist, playerx, playery,range, actxdist, actydist, speed, sightrange;
+	private double distancebetween, xdist, ydist, playerx, playery,range, actxdist, actydist, speed, sightrange,xspeed,yspeed;
 	
 	public MeleeEnemy( double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double sightrange) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
@@ -38,10 +38,30 @@ public class MeleeEnemy extends Enemy {
 	public int getdelta() {
 		return delta;
 	}
+	
+//	float ySpeed = 0;
+//	float xSpeed = 0;
+//
+//	double speed = 2;
+//
+//	// Maths to make bullet go in direction thing
+//	xSpeed = (float) (bullet.gotoX - bullet.oldPlayerX);
+//	ySpeed = (float) (bullet.gotoY - bullet.oldPlayerY);
+//
+//	float factor = (float) (speed / Math.sqrt(xSpeed * xSpeed + ySpeed * ySpeed));
+//
+//	xSpeed = xSpeed * factor;
+//	ySpeed = ySpeed * factor;
+//
+//	bullet.setDX(xSpeed);
+//	bullet.setDY(ySpeed);
+//
+//	bullet.update(delta);
 
 	@Override
 	public void update(int delta) {
 	
+		
 		blockx = (int) (mx/64);
 		blocky = (int) (my/64);
 		
@@ -111,8 +131,8 @@ public class MeleeEnemy extends Enemy {
 				i++;
 			}
 		if (distancebetween > range) {
-			mx = moverx(actxdist, mx, speed);
-			my = moverx(actydist, my, speed);
+			mx = moverx(actxdist, mx, speed,xdist);
+			my = moverx(actydist, my, speed,ydist);
 
 		} else {// this means the mob is within range and will attack
 			b=true;
@@ -136,23 +156,25 @@ public class MeleeEnemy extends Enemy {
 	}
 
 	
-	private double moverx(double i, double mx, double speed) {
+	private double moverx(double i, double mx, double speed,double dist) {
+		dist =dist/100;
 
 		if (i > 0) {
-			mx = mx + speed;
+			mx = mx + speed*dist;
 
 			if (i < range) {
 
-				mx = mx - speed;
+				mx = mx - speed*dist;
 			}
 		} else {
 			if (i < 0) {
-				mx = mx - speed;
+				mx = mx - speed*dist;
 				if (i > range) {
-					mx = mx + speed;
+					mx = mx + speed*dist;
 				}
 			}
 		}
+	
 
 		return mx;
 
