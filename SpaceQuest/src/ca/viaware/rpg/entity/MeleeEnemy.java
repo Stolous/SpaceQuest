@@ -39,24 +39,7 @@ public class MeleeEnemy extends Enemy {
 		return delta;
 	}
 	
-//	float ySpeed = 0;
-//	float xSpeed = 0;
-//
-//	double speed = 2;
-//
-//	// Maths to make bullet go in direction thing
-//	xSpeed = (float) (bullet.gotoX - bullet.oldPlayerX);
-//	ySpeed = (float) (bullet.gotoY - bullet.oldPlayerY);
-//
-//	float factor = (float) (speed / Math.sqrt(xSpeed * xSpeed + ySpeed * ySpeed));
-//
-//	xSpeed = xSpeed * factor;
-//	ySpeed = ySpeed * factor;
-//
-//	bullet.setDX(xSpeed);
-//	bullet.setDY(ySpeed);
-//
-//	bullet.update(delta);
+
 
 	@Override
 	public void update(int delta) {

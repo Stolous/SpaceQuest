@@ -42,6 +42,18 @@ public class TexturedQuad {
 		t.bind();
 		update();
 	}
+	public TexturedQuad(int xsizes, int ysizes, double xs, double ys, Texture t) {
+
+		rotate = 0;
+		setXsize(xsizes);
+		ysize = ysizes;
+		x = xs;
+		y = ys;
+		setXh(getXsize() / 2);
+		yh = ysize / 2;
+		t.bind();
+		update();
+	}
 	public void setSize(double x,double y){
 		setXh(x / 2);
 		yh = y / 2;

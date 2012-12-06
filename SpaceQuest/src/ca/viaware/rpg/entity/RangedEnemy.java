@@ -1,18 +1,28 @@
 package ca.viaware.rpg.entity;
 
+import java.util.ArrayList;
+
+import org.lwjgl.input.Mouse;
+import org.newdawn.slick.opengl.Texture;
+
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.game.Globals;
+import ca.viaware.rpg.utilities.Bullet;
 import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class RangedEnemy extends Enemy {
 
-	private boolean b =false;
 	private TexturedQuad t;
+	private boolean b =false;
 	private int delta, agressiveness, betattacks, attackspeed;
-	private static double distancebetween, xdist, ydist, playerx, playery, range, actxdist, actydist, speed, mx, my,mindist,sightrange;
+	private static double distancebetween, xdist, ydist, playerx, playery, range, actxdist, actydist, speed, mx, my,mindist,sightrange,bulletSpeed;
+	private ArrayList <Bullet> bullets = new ArrayList<Bullet>();
+	private Texture Bullet;
 	
-	public RangedEnemy(double mx, double my, double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double mindist,double sightrange) {
+	public RangedEnemy(double mx, double my, double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double mindist,double sightrange,Texture bullet,double BulletSpeed) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
+		this.bulletSpeed = BulletSpeed;
+		this.Bullet = bullet;
 		this.attackspeed = attackspeed;
 		this.speed = speed / 100;
 		this.range = range;
@@ -25,25 +35,9 @@ public class RangedEnemy extends Enemy {
 		y = (my);		
 	}
 
-//	float ySpeed = 0;
-//	float xSpeed = 0;
-//
-//	double speed = 2;
-//
-//	// Maths to make bullet go in direction thing
-//	xSpeed = (float) (bullet.gotoX - bullet.oldPlayerX);
-//	ySpeed = (float) (bullet.gotoY - bullet.oldPlayerY);
-//
-//	float factor = (float) (speed / Math.sqrt(xSpeed * xSpeed + ySpeed * ySpeed));
-//
-//	xSpeed = xSpeed * factor;
-//	ySpeed = ySpeed * factor;
-//
-//	bullet.setDX(xSpeed);
-//	bullet.setDY(ySpeed);
-//
-//	bullet.update(delta);
+
 	public void update(){
+		
 		b=false;
 		setX(getT().getx());
 		setY(getT().gety());
@@ -93,16 +87,21 @@ public class RangedEnemy extends Enemy {
 
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
-
+		for(int i =0; i<bullets.size();i++){
+		bullets.get(i).update();
+		}
 	}
 	
 private void attack(){
-	
+	bullets.add(new Bullet(this.Bullet,getX(),(double)Mouse.getDX(),getY(),(double)Mouse.getDY(),bulletSpeed));	
 }
 	@Override
 	public void draw() {
 		
-		
+		for(int i =0; i<bullets.size();i++){
+			
+			bullets.get(i).render();
+		}
 		
 	}
 	private void run(){
