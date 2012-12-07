@@ -19,6 +19,7 @@ public class Tile {
 	private boolean isEnemy = false;
 	private Enemy enemy;
 	private Waypoint teleMarker;
+	private int teleMarkerID = 0;
 
 	public Tile(int x, int y, int ID) {
 		this.x = x;
@@ -57,7 +58,17 @@ public class Tile {
 			isTeleMarkerIn = false;
 			isTeleMarkerOut = false;
 		}else{
-			
+			if (data2[3].equals("1")){
+				isTeleMarkerIn = true;
+			}else{
+				isTeleMarkerOut = true;
+			}
+		}
+	}
+	
+	public void finishLoading(){
+		if (isTeleMarkerIn || isTeleMarkerOut){
+			teleMarker = Globals.waypoints.get(teleMarkerID);
 		}
 	}
 

@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 public class Loader {
 
 	public static List<Tile> loadMap(String name) {
-		List tiles = new ArrayList(16);
+		List<Tile> tiles = new ArrayList(16);
 		File location = new File("res/maps/" + name + ".map");
 		Scanner sc = null;
 		try {
@@ -47,7 +47,17 @@ public class Loader {
 				}
 				x = 0;
 				y++;
+			} else {
+				String[] data = sc.nextLine().split("/");
+
+				if (data[0].equals("WP")) {
+					Globals.waypoints.add(new Waypoint(Integer.parseInt(data[1]), data[2], data[3], data[4]));
+				}
 			}
+		}
+		
+		for (Tile tile : tiles){
+			tile.finishLoading();
 		}
 		return tiles;
 	}

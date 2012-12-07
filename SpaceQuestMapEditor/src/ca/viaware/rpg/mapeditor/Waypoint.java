@@ -10,9 +10,13 @@ int Type;
 
 	public Waypoint(int Type, String pTo, String pToMap, String name){
 		this.Type = Type;
-		pointTo = pTo;
-		pointToMap = pToMap;
-		this.name = name;
+		if (Type == 1){
+			this.name = name;
+		}else if (Type == 2){
+			pointTo = pTo;
+			pointToMap = pToMap;
+		}
+		
 	}
 	
 	public void changePoint(String p){
