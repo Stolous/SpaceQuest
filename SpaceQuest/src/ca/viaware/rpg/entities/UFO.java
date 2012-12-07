@@ -6,22 +6,22 @@ import ca.viaware.rpg.entity.RangedEnemy;
 import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TexturedQuad;
 
-public class rangedtest extends RangedEnemy{
+public class UFO extends RangedEnemy{
 	
-	private Texture[] textures = new Texture[17];
+	private Texture[] textures = new Texture[29];
 	private int index = 1;
 	private int slower = 0;
 
-	public rangedtest(int spawnx, int spawny) {
+	public UFO(int spawnx, int spawny) {
 		
 		super(50,50, 30, 5, 2, spawnx, spawny, 1, 10, 150, 40,50,500,"bullets/basic bullet",50);
 		// TODO Auto-generated constructor stub
 
-		setT(new TexturedQuad((int) width, (int) height, 0, 0, 0, "res/sprites/enemies/fastslimemoving/1.png"));
+		setT(new TexturedQuad((int) width, (int) height, 0, 0, 0, "res/sprites/enemies/UFO/1.png"));
 
-		String s = "enemies/fastslimemoving/";
+		String s = "enemies/UFO/";
 		TextureHandler t = new TextureHandler();
-		for (int count = 1; count < 18; count++) {
+		for (int count = 1; count < 30; count++) {
 			textures[count - 1] = t.loadSprite(s + count);
 		}
 	}

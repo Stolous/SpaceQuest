@@ -8,7 +8,7 @@ import org.lwjgl.opengl.*;
 import org.lwjgl.*;
 
 import ca.viaware.rpg.entities.WeakSlime;
-import ca.viaware.rpg.entities.rangedtest;
+import ca.viaware.rpg.entities.UFO;
 import ca.viaware.rpg.map.Loader;
 
 public class SpaceQuest {
@@ -18,7 +18,7 @@ public class SpaceQuest {
 		DispSetup.setupDisplay();
 		DispSetup.setupGL();
 		GameLoop gloop = new GameLoop();
-		Globals.enemies.add(new rangedtest(1,1));
+		Globals.enemies.add(new UFO(1,1));
 		Globals.enemies.add(new WeakSlime(1,1));
 		gloop.startLoop();
        
