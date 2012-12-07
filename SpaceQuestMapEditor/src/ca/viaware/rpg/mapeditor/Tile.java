@@ -314,6 +314,7 @@ public class Tile {
 			Globals.waypoints.remove(teleMarker);
 		}
 		teleMarker = w;
+		Globals.waypoints.add(w);
 	}
 	
 	public boolean isTeleMarkerOut(){

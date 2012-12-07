@@ -30,21 +30,24 @@ public class Loader {
 		int y = 0;
 
 		while (sc.hasNextLine()) {
-			String[] line = sc.nextLine().split("&");
 
-			for (String lin : line) {
-				if (lin.equals("N")) {
-					// System.out.println("Null tile at " + x + ", " + y);
-				} else {
-					System.out.println("Found tile at " + x + ", " + y);
-					Tile tile = new Tile(x * 64, y * 64, 0);
-					tile.passData(lin, x, y);
-					tiles.add(tile);
+			if (y < Globals.mapSizeY) {
+				String[] line = sc.nextLine().split("&");
+
+				for (String lin : line) {
+					if (lin.equals("N")) {
+						// System.out.println("Null tile at " + x + ", " + y);
+					} else {
+						System.out.println("Found tile at " + x + ", " + y);
+						Tile tile = new Tile(x * 64, y * 64, 0);
+						tile.passData(lin, x, y);
+						tiles.add(tile);
+					}
+					x++;
 				}
-				x++;
+				x = 0;
+				y++;
 			}
-			x = 0;
-			y++;
 		}
 		return tiles;
 	}
