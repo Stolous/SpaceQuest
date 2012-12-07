@@ -8,6 +8,7 @@ import org.newdawn.slick.opengl.Texture;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.game.Globals;
 import ca.viaware.rpg.utilities.Bullet;
+import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class RangedEnemy extends Enemy {
@@ -19,10 +20,11 @@ public class RangedEnemy extends Enemy {
 	public ArrayList <Bullet> bullets = new ArrayList<Bullet>();
 	private Texture Bullet;
 	
-	public RangedEnemy(double mx, double my, double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double mindist,double sightrange,Texture bullet,double BulletSpeed) {
+	public RangedEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double mindist,double sightrange,String path,double BulletSpeed) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
+		TextureHandler t = new TextureHandler();
+		this.Bullet=t.loadSprite(path);
 		this.bulletSpeed = BulletSpeed;
-		this.Bullet = bullet;
 		this.attackspeed = attackspeed;
 		this.speed = speed / 100;
 		this.range = range;
@@ -83,9 +85,7 @@ public class RangedEnemy extends Enemy {
 			attack();
 		}
 
-		if (this.intersects(Globals.playerEntity)&&b==false) {
-			attack();
-		}}
+		}
 
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
@@ -93,7 +93,13 @@ public class RangedEnemy extends Enemy {
 		bullets.get(i).update();
 		}
 	}
-	
+	protected double getmx() {
+		return mx;
+	}
+
+	protected double getmy() {
+		return my;
+	}
 private void attack(){
 	bullets.add(new Bullet(this.Bullet,getX(),(double)Mouse.getDX(),getY(),(double)Mouse.getDY(),bulletSpeed,mindamage,maxdamage));	
 }

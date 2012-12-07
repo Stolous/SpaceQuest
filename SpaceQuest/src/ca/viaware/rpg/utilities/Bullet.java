@@ -47,14 +47,30 @@ public class Bullet {
 		
 	}
 	public void update(){
+		
+	int blockx = (int) (sx/64);
+	int blocky = (int) (sy/64);
 		sx = sx+xSpeed;
 		sy=sy+ySpeed;	
 		if(sx == Globals.playerEntity.getX()&&sy == Globals.playerEntity.getY()){
 			contact();
+		}else{
+			int i =0;
+			for (Tile[] tile1 : Globals.gameMap.mapTiles) {
+				
+				
+					if(blockx==tile1[i].getBX()){
+						if(blocky==tile1[i].getBY()){
+							//then it means that it is in this tile
+							if(Globals.gameMap.mapTiles[blockx][blocky].hasCollision()){					
+								//block on right of mob has collision
+								System.out.println("Block has collision");
+							}
+						}
+						}
+				
 		}
-
-
-
+		}
 			
 			
 				

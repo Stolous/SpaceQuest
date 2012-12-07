@@ -1,21 +1,20 @@
 package ca.viaware.rpg.entities;
 
-
-
 import org.newdawn.slick.opengl.Texture;
 
-import ca.viaware.rpg.entity.MeleeEnemy;
+import ca.viaware.rpg.entity.RangedEnemy;
 import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TexturedQuad;
 
-public class FastSlime extends MeleeEnemy {
-
+public class rangedtest extends RangedEnemy{
+	
 	private Texture[] textures = new Texture[17];
 	private int index = 1;
 	private int slower = 0;
 
-	public FastSlime(int spawnx, int spawny) {
-		super(50, 50, 30, 5, 2, spawnx, spawny, 1, 10, 150, 40,500);
+	public rangedtest(int spawnx, int spawny) {
+		
+		super(50,50, 30, 5, 2, spawnx, spawny, 1, 10, 150, 40,50,500,"bullets/basic bullet",50);
 		// TODO Auto-generated constructor stub
 
 		setT(new TexturedQuad((int) width, (int) height, 0, 0, 0, "res/sprites/enemies/fastslimemoving/1.png"));
@@ -48,3 +47,5 @@ public class FastSlime extends MeleeEnemy {
 	}
 
 }
+
+
