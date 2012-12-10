@@ -125,6 +125,7 @@ public class MapEditor {
 		Globals.enemies.add(new Enemy(th.loadTexture("thumb/SlimeWeak"), 3, "Weak Slime"));
 
 		Globals.otherTextures.add(th.loadTexture("img/waypointOUT"));
+		Globals.otherTextures.add(th.loadTexture("img/waypointIN"));
 	}
 
 	private void changeMade() {
@@ -136,7 +137,7 @@ public class MapEditor {
 		int mY = mouseY();
 		int shiftDir = 0;
 		int cSelected = Globals.cSelected;
-
+		
 		Rectangle rect = new Rectangle(mX, mY, 1, 1);
 
 		if (!Keyboard.isKeyDown(Keyboard.KEY_S) && !Keyboard.isKeyDown(Keyboard.KEY_W) && !Keyboard.isKeyDown(Keyboard.KEY_A) && !Keyboard.isKeyDown(Keyboard.KEY_D)) {
@@ -270,25 +271,21 @@ public class MapEditor {
 			}
 			break;
 		case MARKERS:
-			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_Z)) {
+			boolean zKey = Keyboard.isKeyDown(Keyboard.KEY_Z);
+			boolean xKey = Keyboard.isKeyDown(Keyboard.KEY_X);
+			
+			if (Mouse.isButtonDown(1) && zKey) {
+				System.out.println("In");
 				tools.setVisible(true);
 				for (Tile tile : tiles) {
 					if (tile.isTouching(rect)) {
-						tile.setOutMarker(new Waypoint(1, "N", "N", JOptionPane.showInputDialog("Enter marker name")));
+						tile.addMarker(new Waypoint());
+						tile.setToolSelected(true);
 					}
 				}
 				
 			}
 			
-			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_X)) {
-				tools.setVisible(true);
-				for (Tile tile : tiles) {
-					if (tile.isTouching(rect)) {
-						tile.setInMarker(new Waypoint(2, JOptionPane.showInputDialog("Enter map to link to"), JOptionPane.showInputDialog("Enter marker to link to"), "N"));
-					}
-				}
-				
-			}
 			break;
 		}
 
@@ -339,6 +336,17 @@ public class MapEditor {
 
 			if (tile.isToolSelected()) {
 				tools.updateTile(tile.getID(), tile.getLayer2ID(), tile.is2Layers(), tile.checkColision(), tiles.indexOf(tile));
+				boolean changed = false;
+				if (!tools.getSelected().equals(tile)){
+					changed = true;
+				}
+				tools.setSelectedTile(tile);
+				
+				if (tile.isTeleMarkerIn() || tile.isTeleMarkerOut()){
+					tools.updateMarkerData(true, changed);
+				}else{
+					tools.updateMarkerData(false, changed);
+				}
 			}
 		}
 

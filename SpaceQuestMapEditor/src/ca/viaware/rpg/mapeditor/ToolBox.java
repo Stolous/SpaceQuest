@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -29,6 +30,12 @@ public class ToolBox extends JFrame {
 	private JButton collisionTool = new JButton();
 	private JButton markerTool = new JButton();
 	private JButton enemyTool = new JButton();
+	private JTextField markerName = new JTextField();
+	private JTextField markerMapPointer = new JTextField();
+	private JTextField markerNamePointer = new JTextField();
+	private JTextField markerType = new JTextField();
+	private JButton markerSubmit = new JButton();
+	private Tile selectedTile = new Tile(0,0,0);
 
 	private boolean changed = false;
 
@@ -60,6 +67,19 @@ public class ToolBox extends JFrame {
 		cont.add(collisionTool);
 		cont.add(markerTool);
 		cont.add(enemyTool);
+		
+		cont.add(markerType);
+		cont.add(markerName);
+		cont.add(markerMapPointer);
+		cont.add(markerNamePointer);
+		cont.add(markerSubmit);
+		
+		markerType.setVisible(false);
+		markerName.setVisible(false);
+		markerMapPointer.setVisible(false);
+		markerNamePointer.setVisible(false);
+		markerSubmit.setVisible(false);
+		markerSubmit.setText("Submit");
 
 		collisionTool.setText("Collision brush");
 		paintTool.setText("Paint brush");
@@ -102,6 +122,14 @@ public class ToolBox extends JFrame {
 		});
 		
 		enemyTool.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+		markerSubmit.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -161,6 +189,30 @@ public class ToolBox extends JFrame {
 
 	public void changed() {
 		changed = true;
+	}
+	
+	public Tile getSelected(){
+		return selectedTile;
+	}
+	
+	public void updateMarkerData(boolean vis, boolean changed){
+		if (vis && changed){
+		markerType.setText(Integer.toString(selectedTile.getTeleMarker().getType()));
+		markerName.setText(selectedTile.getTeleMarker().getName());
+		markerNamePointer.setText(selectedTile.getTeleMarker().getPointTo());
+		markerMapPointer.setText(selectedTile.getTeleMarker().getPointToMap());
+		}
+		
+		markerType.setVisible(vis);
+		markerName.setVisible(vis);
+		markerMapPointer.setVisible(vis);
+		markerNamePointer.setVisible(vis);
+		markerSubmit.setVisible(vis);
+		
+	}
+	
+	public void setSelectedTile(Tile tile){
+		selectedTile = tile;
 	}
 
 }

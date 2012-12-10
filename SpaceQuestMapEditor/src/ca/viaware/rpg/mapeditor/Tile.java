@@ -148,7 +148,7 @@ public class Tile {
 			glEnd();
 		}
 		if (isTeleMarkerIn){
-			Globals.otherTextures.get(0).bind();
+			Globals.otherTextures.get(1).bind();
 			glBegin(GL_QUADS);
 			glTexCoord2f(0f, 0f);
 			glVertex2i(x, y);
@@ -311,22 +311,33 @@ public class Tile {
 		return isCollision;
 	}
 	
-	public void setOutMarker(Waypoint w){
-		if(Globals.waypoints.contains(teleMarker)){
-			Globals.waypoints.remove(teleMarker);
-		}
+	public void addMarker(Waypoint w){
+		w.setName("Marker Name");
+		w.setPointTo("Marker PointTo");
+		w.setPointToMap("Marker Map PointTo");
 		teleMarker = w;
 		Globals.waypoints.add(w);
 		isTeleMarkerOut = true;
 	}
 	
-	public void setInMarker(Waypoint w){
-		if(Globals.waypoints.contains(teleMarker)){
-			Globals.waypoints.remove(teleMarker);
-		}
-		teleMarker = w;
-		Globals.waypoints.add(w);
+	public Waypoint getTeleMarker(){
+		return teleMarker;
 	}
+	
+	public void updateMarker(int Type, String name, String pTo, String pToMap){
+		if (Type == 1){
+			isTeleMarkerOut = true;
+			isTeleMarkerIn = false;
+		}else if (Type == 2){
+			isTeleMarkerOut = false;
+			isTeleMarkerIn = true;
+		}
+		teleMarker.setType(Type);
+		teleMarker.setName(name);
+		teleMarker.setPointTo(pTo);
+		teleMarker.setPointToMap(pToMap);
+	}
+	
 	
 	public boolean isTeleMarkerOut(){
 		return isTeleMarkerOut;

@@ -15,7 +15,7 @@ public class Globals {
 	public static List<Texture> otherTextures = new ArrayList(16);
 	public static List<Enemy> enemies = new ArrayList(16);
 	public static List<Waypoint> waypoints = new ArrayList(16);
-
+	
 	public static enum brush {
 		PAINT, ERASE, COLLISION, MARKERS;
 	}
