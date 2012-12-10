@@ -51,7 +51,12 @@ public class Loader {
 				String[] data = sc.nextLine().split("/");
 
 				if (data[0].equals("WP")) {
-					Globals.waypoints.add(new Waypoint(Integer.parseInt(data[1]), data[2], data[3], data[4]));
+					Waypoint WP = new Waypoint();
+					WP.setType(Integer.parseInt(data[1]));
+					WP.setName(data[2]);
+					WP.setPointTo(data[3]);
+					WP.setPointToMap(data[4]);
+					Globals.waypoints.add(WP);
 				}
 			}
 		}

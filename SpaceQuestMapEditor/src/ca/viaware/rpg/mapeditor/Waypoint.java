@@ -7,16 +7,21 @@ String name;
 String pointTo;
 String pointToMap;
 int Type;
-
-	public Waypoint(int Type, String pTo, String pToMap, String name){
-		this.Type = Type;
-		if (Type == 1){
-			this.name = name;
-		}else if (Type == 2){
-			pointTo = pTo;
-			pointToMap = pToMap;
-		}
-		
+	
+	public void setType(int type){
+		Type = type;
+	}
+	
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	public void setPointTo(String p){
+		pointTo = p;
+	}
+	
+	public void setPointToMap(String p){
+		pointToMap = p;
 	}
 	
 	public void changePoint(String p){
