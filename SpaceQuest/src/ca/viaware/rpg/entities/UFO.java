@@ -1,8 +1,10 @@
 package ca.viaware.rpg.entities;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.RangedEnemy;
+import ca.viaware.rpg.utilities.Bullet;
 import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TexturedQuad;
 
@@ -14,7 +16,7 @@ public class UFO extends RangedEnemy{
 
 	public UFO(int spawnx, int spawny) {
 		
-		super(50,50, 30, 5, 2, spawnx, spawny, 1, 10, 150, 40,50,500,"bullets/basic bullet",50);
+		super(50,50, 30, 5, 2, spawnx, spawny, 1, 10, 10, 40,50,500,"bullets/basic bullet",50);
 		// TODO Auto-generated constructor stub
 
 		setT(new TexturedQuad((int) width, (int) height, 0, 0, 0, "res/sprites/enemies/UFO/1.png"));
@@ -27,6 +29,8 @@ public class UFO extends RangedEnemy{
 	}
 
 	public void draw() {
+	
+		
 		if (slower == 5) {
 			slower = 0;
 			getT().changetexture(textures[index]);
@@ -36,9 +40,10 @@ public class UFO extends RangedEnemy{
 		}
 
 		getT().setlocation(getmx(), getmy());
+		System.out.println(getmx());
 
 		getT().update();
-		if (!(index == 17)) {// so the index doesn't go over nbr of sprites
+		if (!(index == 29)) {// so the index doesn't go over nbr of sprites
 
 		} else {
 			index = 0;

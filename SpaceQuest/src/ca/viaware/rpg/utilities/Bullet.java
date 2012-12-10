@@ -20,6 +20,8 @@ public class Bullet {
 		this.c = c;
 		sx =oldX;
 		sy=oldY;
+		
+		
 		b = new TexturedQuad(t.getTextureHeight(),t.getTextureWidth(),sx,sy,t);
 		
 		this.t=t;

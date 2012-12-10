@@ -1,62 +1,91 @@
 package ca.viaware.rpg.entity;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.game.Globals;
+import ca.viaware.rpg.map.Tile;
 import ca.viaware.rpg.utilities.Bullet;
 import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class RangedEnemy extends Enemy {
 
-	private TexturedQuad t;
 	private boolean b =false;
-	private int delta, agressiveness, betattacks, attackspeed,mindamage,maxdamage;
-	private static double distancebetween, xdist, ydist, playerx, playery, range, actxdist, actydist, speed, mx, my,mindist,sightrange,bulletSpeed;
-	public ArrayList <Bullet> bullets = new ArrayList<Bullet>();
+	private TexturedQuad t;
+	private int delta, agressiveness, betattacks, attackspeed,blockx,blocky;
+	private double distancebetween, xdist, ydist, playerx, playery,range, actxdist, actydist, speed, sightrange,xspeed,yspeed,bulletspeed,BulletSpeed;
+	private int mindamage,maxdamage;
 	private Texture Bullet;
-	
+	private ArrayList <Bullet> bullets = new  ArrayList<Bullet>();
 	public RangedEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double mindist,double sightrange,String path,double BulletSpeed) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
 		TextureHandler t = new TextureHandler();
 		this.Bullet=t.loadSprite(path);
-		this.bulletSpeed = BulletSpeed;
 		this.attackspeed = attackspeed;
 		this.speed = speed / 100;
 		this.range = range;
-		this.mindist=mindist;
 		this.agressiveness = agresiveness;
-		this.sightrange = sightrange;
-		this.mindamage = mindamage;
-		this.maxdamage = maxdamage;
 		mx = spawnx;
 		my = spawny;
 		x = (mx);
-		y = (my);		
+		y = (my);
+		this.sightrange = sightrange;
+		this.BulletSpeed =bulletspeed;
+// this way the initial attack will be faster
+
+	}
+	private void attack(){
+		bullets.add(new Bullet(this.Bullet,getX(),(double)Mouse.getDX(),getY(),(double)Mouse.getDY(),bulletspeed,mindamage,maxdamage));	
 	}
 
+		
+		public void drew() {
+			
+			for(int i =0; i<bullets.size();i++){
+				
+				bullets.get(i).render();
+				
+			}
+			for(int i =0; i<bullets.size();i++){			
+			if(bullets.get(i).getremoved() == true){
+				bullets.remove(i);
+			}}
+		}
+	// it may seem like the enemy has a weird box for the my value- but that is
+	// because the sprite isn't centered
+	public int getdelta() {
+		return delta;
+	}
+	
 
-	public void update(){
+
+	@Override
+	public void update(int delta) {
+	
+		
+		blockx = (int) (mx/64);
+		blocky = (int) (my/64);
 		
 		b=false;
 		setX(getT().getx());
 		setY(getT().gety());
-
+		
+		
 		this.delta = delta;
 		setXoffset((Globals.gameMap.getXOffset()));
 		setYoffset((Globals.gameMap.getYOffset()));
 		// MATH (YAY!!!!!!!!!!)
-		playerx = Globals.playerEntity.getX();
-		playery = Globals.playerEntity.getY();
-		playerx = Globals.playerEntity.getActX() + 384;// additin is because
-														// doesn't start at
-														// center
-		playery = Globals.playerEntity.getActY() + 256;
+		playerx = Globals.playerEntity.getActX();
+		playery = Globals.playerEntity.getActY();
 
+		
+		//System.out.println(playerx + ", " + playery);
 		xdist = playerx + (Player.getW() / 2) - mx;
 
 		actxdist = xdist;
@@ -72,27 +101,76 @@ public class RangedEnemy extends Enemy {
 
 		distancebetween = Math.sqrt(((xdist * xdist) + (ydist * ydist)));// pythagorean
 																			// theorem
-		if(distancebetween<sightrange){
-		if(distancebetween<mindist){
-			run();
-		}
-		if (distancebetween > range) {
-			mx = moverx(actxdist, mx, speed);
-			my = moverx(actydist, my, speed);
 
+		
+		
+		
+		if(distancebetween<sightrange){
+			
+		if (distancebetween > range) {
+			if((xdist-ydist)>50){
+				System.out.println("true");
+				mx = moverx(actxdist, mx, speed,xdist- (xdist*0.1));
+				my = moverx(actydist, my, speed,ydist);
+			}
+			else if((ydist-xdist)>50){
+				System.out.println("true");
+				mx = moverx(actxdist, mx, speed,xdist);
+				my = moverx(actydist, my, speed,ydist-(ydist * 0.1));
+			}else if (xdist+ydist<300){
+				System.out.println("trufdsadfsaafasdfkhdgkhajkghjdfe");
+			mx = moverx(actxdist, mx, speed,(xdist+1)*7);
+			my = moverx(actydist, my, speed,(ydist+1)*7);
+			}else{
+				mx = moverx(actxdist, mx, speed,xdist);
+				my = moverx(actydist, my, speed,ydist);
+			}
 		} else {// this means the mob is within range and will attack
 			b=true;
 			attack();
 		}
 
-		}
-
-		mx = mx + getXoffset();// this is for movement of player
-		my = my + getYoffset();
-		for(int i =0; i<bullets.size();i++){
-		bullets.get(i).update();
+		
+		
+		
+		if (this.intersects(Globals.playerEntity)&&b==false) {
+			attack();
 		}
 	}
+		
+		
+		mx = mx + getXoffset();// this is for movement of player
+		my = my + getYoffset();
+
+		
+		
+	}
+
+	
+	private double moverx(double i, double mx, double speed,double dist) {
+		dist =dist/100;
+
+		if (i > 0) {
+			mx = mx + speed*dist;
+
+			if (i < range) {
+
+				mx = mx - speed*dist;
+			}
+		} else {
+			if (i < 0) {
+				mx = mx - speed*dist;
+				if (i > range) {
+					mx = mx + speed*dist;
+				}
+			}
+		}
+	
+
+		return mx;
+
+	}
+
 	protected double getmx() {
 		return mx;
 	}
@@ -100,49 +178,14 @@ public class RangedEnemy extends Enemy {
 	protected double getmy() {
 		return my;
 	}
-private void attack(){
-	bullets.add(new Bullet(this.Bullet,getX(),(double)Mouse.getDX(),getY(),(double)Mouse.getDY(),bulletSpeed,mindamage,maxdamage));	
-}
-	@Override
-	public void draw() {
-		
-		for(int i =0; i<bullets.size();i++){
-			
-			bullets.get(i).render();
-			
-		}
-		for(int i =0; i<bullets.size();i++){			
-		if(bullets.get(i).getremoved() == true){
-			bullets.remove(i);
-		}}
-	}
-	private void run(){
-		mx++;
-		my++;
-	}
+
 	
-	private static double moverx(double i, double mx, double speed) {
 
-		if (i > 0) {
-			mx = mx + speed;
 
-			if (i < range) {
 
-				mx = mx - speed;
-			}
-		} else {
-			if (i < 0) {
-				mx = mx - speed;
-				if (i > range) {
-					mx = mx + speed;
-				}
-			}
-		}
-
-		return mx;
-
-	}
 	
+
+
 
 	public TexturedQuad getT() {
 		return t;
@@ -151,6 +194,11 @@ private void attack(){
 	public void setT(TexturedQuad t) {
 		this.t = t;
 	}
-	
-	
+
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

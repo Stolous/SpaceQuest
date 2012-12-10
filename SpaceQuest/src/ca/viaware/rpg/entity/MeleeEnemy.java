@@ -20,6 +20,7 @@ public class MeleeEnemy extends Enemy {
 	
 	public MeleeEnemy( double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double sightrange) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
+		
 		this.attackspeed = attackspeed;
 		this.speed = speed / 100;
 		this.range = range;
@@ -196,11 +197,7 @@ public class MeleeEnemy extends Enemy {
 		betattacks++;
 	}
 
-	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
 
-	}
 
 	
 
@@ -212,6 +209,12 @@ public class MeleeEnemy extends Enemy {
 
 	public void setT(TexturedQuad t) {
 		this.t = t;
+	}
+
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
