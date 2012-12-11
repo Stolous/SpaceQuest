@@ -15,6 +15,7 @@ import ca.viaware.rpg.entities.Slime;
 import ca.viaware.rpg.entities.WeakSlime;
 import ca.viaware.rpg.entities.ammobar;
 import ca.viaware.rpg.map.Map;
+import ca.viaware.rpg.map.TeleMarker;
 import ca.viaware.rpg.utilities.TextRenderer;
 
 public class Globals {
@@ -37,6 +38,7 @@ public class Globals {
 	public static Map gameMap = null;
 	public static Cursor cursor;
 	public static boolean isFullscreen = false;
+	public static List<TeleMarker> teleMarkers = new ArrayList(16);
 
 	public static enum gState {
 		INTRO, MAIN_MENU, GAME, OUTRO;

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import ca.viaware.rpg.game.Globals;
+
 public class Loader {
 
 	public Map loadMap(String name) {
@@ -34,13 +36,30 @@ public class Loader {
 					mapTiles[i][ycount] = new Tile(0, 0, 64, 64, false, line[i], i, ycount);
 				} else {
 					Tile tile = new Tile(0, 0, 64, 64, true, line[i], i, ycount);
-					if (tile.isSpawn()){
-						map.setSpawn(i * 64, ycount * 64);
-					}
+					
 					mapTiles[i][ycount] = tile;
 				}
 			}
 			ycount++;
+		}
+		
+		while(sc.hasNextLine()){
+			String[] data = sc.nextLine().split("/");
+			
+			if (data[0].equals("WP")){
+				TeleMarker WP = new TeleMarker();
+				WP.setType(Integer.parseInt(data[1]));
+				WP.setName(data[2]);
+				WP.setPointToMap(data[3]);
+				WP.setPointTo(data[4]);
+				Globals.teleMarkers.add(WP);
+			}
+		}
+		
+		for (Tile[] tile1 : mapTiles){
+			for (Tile tile : tile1){
+				tile.updateTeleMarkers();
+			}
 		}
 
 		map.setSize(x, y);

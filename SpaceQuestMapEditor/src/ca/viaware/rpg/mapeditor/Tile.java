@@ -15,7 +15,7 @@ public class Tile {
 	private boolean selected = false;
 	private boolean toolSelected = false;
 	private boolean isCollision = false;
-	private boolean isTeleMarkerIn = false, isTeleMarkerOut = false;;
+	private boolean isTeleMarkerIn = false, isTeleMarkerOut = false;
 	private boolean isEnemy = false;
 	private Enemy enemy;
 	private Waypoint teleMarker;
@@ -58,9 +58,12 @@ public class Tile {
 			isTeleMarkerIn = false;
 			isTeleMarkerOut = false;
 		}else{
+			System.out.println("TILE HAS MARKER");
 			if (data2[3].equals("1")){
+			System.out.println("MARKER IS 1");
 				isTeleMarkerIn = true;
 			}else{
+			System.out.println("MARKER IS 2");
 				isTeleMarkerOut = true;
 			}
 		}
@@ -326,11 +329,11 @@ public class Tile {
 	
 	public void updateMarker(int Type, String name, String pTo, String pToMap){
 		if (Type == 1){
-			isTeleMarkerOut = true;
-			isTeleMarkerIn = false;
-		}else if (Type == 2){
 			isTeleMarkerOut = false;
 			isTeleMarkerIn = true;
+		}else if (Type == 2){
+			isTeleMarkerOut = true;
+			isTeleMarkerIn = false;
 		}
 		teleMarker.setType(Type);
 		teleMarker.setName(name);
@@ -344,7 +347,7 @@ public class Tile {
 	}
 	
 	public boolean isTeleMarkerIn(){
-		return isTeleMarkerOut;
+		return isTeleMarkerIn;
 	}
 	
 	public void addEnemy(Enemy e){

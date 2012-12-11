@@ -42,7 +42,7 @@ public class GameLoop {
 
 		Globals.ammoBar=new ammobar();
 		
-		Globals.gameMap = MapHandler.handleMapLoad("Test");
+		Globals.gameMap = MapHandler.handleMapLoad("TestMap1");
 		MapHandler.finishLoad();
 		
 		while (Globals.isRunning) {

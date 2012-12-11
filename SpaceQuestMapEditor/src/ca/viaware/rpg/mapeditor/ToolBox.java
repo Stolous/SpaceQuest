@@ -35,7 +35,7 @@ public class ToolBox extends JFrame {
 	private JTextField markerNamePointer = new JTextField();
 	private JTextField markerType = new JTextField();
 	private JButton markerSubmit = new JButton();
-	private Tile selectedTile = new Tile(0,0,0);
+	private Tile selectedTile = new Tile(0, 0, 0);
 
 	private boolean changed = false;
 
@@ -67,13 +67,13 @@ public class ToolBox extends JFrame {
 		cont.add(collisionTool);
 		cont.add(markerTool);
 		cont.add(enemyTool);
-		
+
 		cont.add(markerType);
 		cont.add(markerName);
 		cont.add(markerMapPointer);
 		cont.add(markerNamePointer);
 		cont.add(markerSubmit);
-		
+
 		markerType.setVisible(false);
 		markerName.setVisible(false);
 		markerMapPointer.setVisible(false);
@@ -112,28 +112,36 @@ public class ToolBox extends JFrame {
 				Globals.selectedTool = Globals.brush.COLLISION;
 			}
 		});
-		
+
 		markerTool.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Globals.selectedTool = Globals.brush.MARKERS;
 			}
 		});
-		
+
 		enemyTool.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
-		
+
 		markerSubmit.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				try{
+				if (Integer.parseInt(markerType.getText()) == 1 || Integer.parseInt(markerType.getText()) == 2) {
+					selectedTile.updateMarker(Integer.parseInt(markerType.getText()), markerName.getText(), markerNamePointer.getText(), markerMapPointer.getText());
+				}else{
+					System.out.println("Invalid data");
+				}
+				}catch (NumberFormatException e1){
+					System.out.println("Invalid data");
+				}
 			}
 		});
 
@@ -190,28 +198,28 @@ public class ToolBox extends JFrame {
 	public void changed() {
 		changed = true;
 	}
-	
-	public Tile getSelected(){
+
+	public Tile getSelected() {
 		return selectedTile;
 	}
-	
-	public void updateMarkerData(boolean vis, boolean changed){
-		if (vis && changed){
-		markerType.setText(Integer.toString(selectedTile.getTeleMarker().getType()));
-		markerName.setText(selectedTile.getTeleMarker().getName());
-		markerNamePointer.setText(selectedTile.getTeleMarker().getPointTo());
-		markerMapPointer.setText(selectedTile.getTeleMarker().getPointToMap());
+
+	public void updateMarkerData(boolean vis, boolean changed) {
+		if (vis && changed) {
+			markerType.setText(Integer.toString(selectedTile.getTeleMarker().getType()));
+			markerName.setText(selectedTile.getTeleMarker().getName());
+			markerNamePointer.setText(selectedTile.getTeleMarker().getPointTo());
+			markerMapPointer.setText(selectedTile.getTeleMarker().getPointToMap());
 		}
-		
+
 		markerType.setVisible(vis);
 		markerName.setVisible(vis);
 		markerMapPointer.setVisible(vis);
 		markerNamePointer.setVisible(vis);
 		markerSubmit.setVisible(vis);
-		
+
 	}
-	
-	public void setSelectedTile(Tile tile){
+
+	public void setSelectedTile(Tile tile) {
 		selectedTile = tile;
 	}
 

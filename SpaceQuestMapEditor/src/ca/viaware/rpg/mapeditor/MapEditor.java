@@ -272,7 +272,6 @@ public class MapEditor {
 			break;
 		case MARKERS:
 			boolean zKey = Keyboard.isKeyDown(Keyboard.KEY_Z);
-			boolean xKey = Keyboard.isKeyDown(Keyboard.KEY_X);
 			
 			if (Mouse.isButtonDown(1) && zKey) {
 				System.out.println("In");

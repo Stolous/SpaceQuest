@@ -16,7 +16,9 @@ public class Tile extends AbstractMoveableEntity{
 	private int l2ID = 0;
 	private boolean hasLayer2 = false;
 	private boolean isCollision = false;
-	private boolean isSpawnpoint = false;
+	private boolean teleMarkerOut = false, teleMarkerIn = false;
+	private TeleMarker teleMarker;
+	private int teleMarkerID;
 	int actX, actY;
 
 	public Tile(double n1, double n2, double n3, double n4, boolean enabled, String data, int tileX, int tileY){
@@ -39,7 +41,7 @@ public class Tile extends AbstractMoveableEntity{
 		return actY/64;
 	}
 	public void setTexture(Texture t) {
-		tex = t;
+		tex = t;  
 	}
 
 	public boolean isEnabled() {
@@ -124,10 +126,16 @@ public class Tile extends AbstractMoveableEntity{
 			isCollision = false;
 		}
 		
-		if (data[3].equals("S")){
-			isSpawnpoint = true;
+		if (data[3].equals("N")){
+			teleMarkerOut = false;
+			teleMarkerIn = false;
 		}else{
-			isSpawnpoint = false;
+			teleMarkerID = Integer.parseInt(data[3]);
+			if (data[3].equals("1")){
+				teleMarkerOut = true;
+			}else{
+				teleMarkerIn = true;
+			}
 		}
 	}
 	
@@ -140,7 +148,25 @@ public class Tile extends AbstractMoveableEntity{
 		
 	}
 	
-	public boolean isSpawn(){
-		return isSpawnpoint;
+	public void addTeleMarker(TeleMarker tele){
+		teleMarker = tele;
+	}
+	
+	public boolean hasTeleMarkerOut(){
+		return teleMarkerOut;
+	}
+	
+	public boolean hasTeleMarkerIn(){
+		return teleMarkerIn;
+	}
+	
+	public TeleMarker getTeleMarker(){
+		return teleMarker;
+	}
+	
+	public void updateTeleMarkers(){
+		if (hasTeleMarkerIn() || hasTeleMarkerOut()){
+			teleMarker = Globals.teleMarkers.get(teleMarkerID);
+		}
 	}
 }

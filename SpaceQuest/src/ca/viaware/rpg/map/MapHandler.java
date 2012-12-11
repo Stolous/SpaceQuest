@@ -12,6 +12,6 @@ public class MapHandler {
 	}
 	
 	public static void finishLoad(){
-		Globals.playerEntity.teleport(Globals.gameMap.getSpawn());
+		
 	}
 }
