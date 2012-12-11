@@ -2,6 +2,7 @@ package ca.viaware.rpg.utilities;
 
 import java.util.Random;
 
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.game.Globals;
@@ -13,15 +14,17 @@ public class Bullet {
 	Class c;
 	TexturedQuad b;
 	private int mindamage, maxdamage;
-	private double oldX,newX,newY,oldY,xSpeed,ySpeed,sx,sy;
+	private double oldX,newX,newY,oldY,xSpeed,ySpeed,sx,sy,XOffset,YOffset;
 	public Bullet(Texture t,Double oldX,Double newX,double oldY,double newY,double bulletSpeed,int mind ,int maxd){
 		this.mindamage = mind;
 		this.maxdamage = maxd;
 		this.c = c;
 		this.t=t;
-		sx =oldX;
-		sy=oldY;
-		
+		XOffset= ((Globals.gameMap.getXOffset()));
+		YOffset=((Globals.gameMap.getYOffset()));
+		sx =oldX-XOffset;
+		sy=oldY-YOffset;
+		bulletSpeed = bulletSpeed/100;
 		
 		b = new TexturedQuad(50,50,sx,sy,this.t);
 		
@@ -30,27 +33,35 @@ public class Bullet {
 		this.newX = newX;
 		this.oldY =oldY;
 		this.newY =newY;
-		float ySpeed = 0;
-		float xSpeed = 0;
+		double ySpeed = 0;
+		double xSpeed = 0;
 
-
+		System.out.println("Bullet speed is "+ bulletSpeed);
 		// Maths to make bullet go in direction thing
 		xSpeed = (float) (newX - oldX);
 		ySpeed = (float) (newY - oldY);
-
-		float factor = (float) (bulletSpeed / Math.sqrt(xSpeed * xSpeed + ySpeed * ySpeed));
-
+		System.out.println("Oldx"+oldX);
+		System.out.println("Newx"+newX);
+		double factor = (double) (((xSpeed * xSpeed) + (ySpeed * ySpeed)));
+		System.out.println("Factor"+factor);
+		factor = Math.sqrt(factor);
+		System.out.println("Factor"+factor);
+		factor = bulletSpeed/factor;
+		System.out.println("Factor"+factor);
 		xSpeed = xSpeed * factor;
 		ySpeed = ySpeed * factor;
-
+		System.out.println("NewX"+newX);
+		System.out.println("Xspeed"+xSpeed);
 		this.ySpeed=ySpeed;
 		this.xSpeed = xSpeed;
+		
 		update();
 		
 		
 	}
 	public void update(){
-		System.out.println("Updated");
+		System.out.println("SX is"+sx);
+		
 	int blockx = (int) (sx/64);
 	int blocky = (int) (sy/64);
 		sx = sx+xSpeed;
@@ -74,9 +85,18 @@ public class Bullet {
 				
 		}
 		}
+		XOffset= ((Globals.gameMap.getXOffset()));
+		YOffset=((Globals.gameMap.getYOffset()));
+		sx = sx + XOffset;// this is for movement of player
+		sy = sy +	YOffset;
+		b.setlocation(sx, sy);
 			
 			
 				
+	}
+	public void reset() {
+		sx = sx - XOffset;// this is for movement of player
+		sy = sy - YOffset;
 	}
 	private void contact(){
 		
@@ -95,7 +115,6 @@ public class Bullet {
 	}
 	
 	public void render(){
-		b.setlocation(sx, sy);
 		b.update();
 	}
 

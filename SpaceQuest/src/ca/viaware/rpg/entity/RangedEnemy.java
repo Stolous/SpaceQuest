@@ -20,7 +20,7 @@ public class RangedEnemy extends Enemy {
 	private boolean b =false;
 	private TexturedQuad t;
 	private int delta, agressiveness, betattacks, attackspeed,blockx,blocky;
-	private double distancebetween, xdist, ydist, playerx, playery,range, actxdist, actydist, speed, sightrange,xspeed,yspeed,bulletspeed,BulletSpeed,optrange,mxc,myc;
+	private double distancebetween, xdist, ydist, playerx, playery,range, actxdist, actydist, speed, sightrange,xspeed,yspeed,BulletSpeed,optrange,mxc,myc;
 	private int mindamage,maxdamage;
 	private Texture Bullet;
 	private ArrayList <Bullet> bullets = new  ArrayList<Bullet>();
@@ -37,14 +37,18 @@ public class RangedEnemy extends Enemy {
 		x = (mx);
 		y = (my);
 		this.sightrange = sightrange;
-		this.BulletSpeed =bulletspeed;
+		System.out.println("Bulletspeed is "+ BulletSpeed);
+		
+		this.BulletSpeed =BulletSpeed;
+		System.out.println("Bulletspeed is "+this. BulletSpeed);
 // this way the initial attack will be faster
 		this.optrange =optdist;
 betattacks =0;
 	}
 	private void attack(){
+		System.out.println("Attack bs = "+ BulletSpeed+BulletSpeed);
 		if (betattacks >= attackspeed) {
-		bullets.add(new Bullet(this.Bullet,getX(),(double)Mouse.getDX(),getY(),(double)Mouse.getDY(),bulletspeed,mindamage,maxdamage));	
+			bullets.add(new Bullet(this.Bullet,getX(),Globals.playerEntity.getX(),getY(),Globals.playerEntity.getX(),BulletSpeed,mindamage,maxdamage));
 		betattacks=0;
 		}
 		}
@@ -53,9 +57,9 @@ betattacks =0;
 		public void drawbullets() {
 			
 			for(int i =0; i<bullets.size();i++){
-				
+				bullets.get(i).update();
 				bullets.get(i).render();
-				
+				bullets.get(i).reset();
 			}
 			for(int i =0; i<bullets.size();i++){			
 			if(bullets.get(i).getremoved() == true){
@@ -72,6 +76,7 @@ betattacks =0;
 
 	@Override
 	public void update(int delta) {
+		drawbullets();
 	betattacks++;
 		
 		blockx = (int) (mx/64);
@@ -111,7 +116,7 @@ betattacks =0;
 		
 		
 		if(distancebetween<sightrange){
-			
+			attack();
 		if (distancebetween > range) {
 			bb=true;
 				mx = moverx(actxdist, mx, speed,xdist,true);
@@ -134,7 +139,7 @@ betattacks =0;
 				
 			
 			b=true;
-			attack();
+			
 		}
 		bb=false;
 		
