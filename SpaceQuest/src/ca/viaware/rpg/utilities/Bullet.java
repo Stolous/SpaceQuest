@@ -18,11 +18,12 @@ public class Bullet {
 		this.mindamage = mind;
 		this.maxdamage = maxd;
 		this.c = c;
+		this.t=t;
 		sx =oldX;
 		sy=oldY;
 		
 		
-		b = new TexturedQuad(t.getTextureHeight(),t.getTextureWidth(),sx,sy,t);
+		b = new TexturedQuad(50,50,sx,sy,this.t);
 		
 		this.t=t;
 		this.oldX =oldX;
@@ -49,7 +50,7 @@ public class Bullet {
 		
 	}
 	public void update(){
-		
+		System.out.println("Updated");
 	int blockx = (int) (sx/64);
 	int blocky = (int) (sy/64);
 		sx = sx+xSpeed;

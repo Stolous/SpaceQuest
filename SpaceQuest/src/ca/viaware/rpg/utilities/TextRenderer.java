@@ -58,9 +58,9 @@ double mov = 0;
 			letter = c[i];
 			lypos = letter % 16;
 
-			System.out.println("Collumn :" + lypos);
+		
 			lxpos = letter / 16;
-			System.out.println("Row :" + lxpos);
+			
 
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			GL11.glPushMatrix();
@@ -79,20 +79,17 @@ double mov = 0;
 
 
 
-			System.out.println("lxpos: "+lxpos);
-			System.out.println("lypos: "+lypos);
+	
 
 			double startx = lypos*nbr;//16 rows/columns
 			double starty = lxpos*nbr;
-			System.out.println("Start x: "+startx);
-			System.out.println("Start y: "+starty);
+		
 			double endx = startx +nbr ;
 			double endy = starty +nbr; 
 
 
 
-			System.out.println("End x: "+endx);
-			System.out.println("End y: "+endy);
+		
 			GL11.glBegin(GL11.GL_QUADS);
 			GL11.glTexCoord2d(startx, starty);
 			GL11.glVertex2d(x - getXh(), y - yh);

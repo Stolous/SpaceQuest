@@ -16,14 +16,15 @@ import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class RangedEnemy extends Enemy {
 
+	private boolean bb= false;
 	private boolean b =false;
 	private TexturedQuad t;
 	private int delta, agressiveness, betattacks, attackspeed,blockx,blocky;
-	private double distancebetween, xdist, ydist, playerx, playery,range, actxdist, actydist, speed, sightrange,xspeed,yspeed,bulletspeed,BulletSpeed;
+	private double distancebetween, xdist, ydist, playerx, playery,range, actxdist, actydist, speed, sightrange,xspeed,yspeed,bulletspeed,BulletSpeed,optrange,mxc,myc;
 	private int mindamage,maxdamage;
 	private Texture Bullet;
 	private ArrayList <Bullet> bullets = new  ArrayList<Bullet>();
-	public RangedEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double mindist,double sightrange,String path,double BulletSpeed) {
+	public RangedEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed,double optdist,double sightrange,String path,double BulletSpeed) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
 		TextureHandler t = new TextureHandler();
 		this.Bullet=t.loadSprite(path);
@@ -38,14 +39,18 @@ public class RangedEnemy extends Enemy {
 		this.sightrange = sightrange;
 		this.BulletSpeed =bulletspeed;
 // this way the initial attack will be faster
-
+		this.optrange =optdist;
+betattacks =0;
 	}
 	private void attack(){
+		if (betattacks >= attackspeed) {
 		bullets.add(new Bullet(this.Bullet,getX(),(double)Mouse.getDX(),getY(),(double)Mouse.getDY(),bulletspeed,mindamage,maxdamage));	
-	}
+		betattacks=0;
+		}
+		}
 
 		
-		public void drew() {
+		public void drawbullets() {
 			
 			for(int i =0; i<bullets.size();i++){
 				
@@ -67,7 +72,7 @@ public class RangedEnemy extends Enemy {
 
 	@Override
 	public void update(int delta) {
-	
+	betattacks++;
 		
 		blockx = (int) (mx/64);
 		blocky = (int) (my/64);
@@ -85,7 +90,7 @@ public class RangedEnemy extends Enemy {
 		playery = Globals.playerEntity.getActY();
 
 		
-		//System.out.println(playerx + ", " + playery);
+
 		xdist = playerx + (Player.getW() / 2) - mx;
 
 		actxdist = xdist;
@@ -108,28 +113,30 @@ public class RangedEnemy extends Enemy {
 		if(distancebetween<sightrange){
 			
 		if (distancebetween > range) {
-			if((xdist-ydist)>50){
-				System.out.println("true");
-				mx = moverx(actxdist, mx, speed,xdist- (xdist*0.1));
-				my = moverx(actydist, my, speed,ydist);
-			}
-			else if((ydist-xdist)>50){
-				System.out.println("true");
-				mx = moverx(actxdist, mx, speed,xdist);
-				my = moverx(actydist, my, speed,ydist-(ydist * 0.1));
-			}else if (xdist+ydist<300){
-				System.out.println("trufdsadfsaafasdfkhdgkhajkghjdfe");
-			mx = moverx(actxdist, mx, speed,(xdist+1)*7);
-			my = moverx(actydist, my, speed,(ydist+1)*7);
-			}else{
-				mx = moverx(actxdist, mx, speed,xdist);
-				my = moverx(actydist, my, speed,ydist);
-			}
+			bb=true;
+				mx = moverx(actxdist, mx, speed,xdist,true);
+				my = moverx(actydist, my, speed,ydist,false);
+				
+			
 		} else {// this means the mob is within range and will attack
+			double optxd = playerx + (Player.getW() / 2) - optrange;
+			double optyd = playery + (Player.getH() / 2) - optrange;
+			//double optxd = xdist- optrange;
+			//double optyd = xdist- optrange;
+				if(!(distancebetween==optrange)&&bb==false){
+					
+					mx = moverx(optxd, mx, speed,xdist,true);
+					my = moverx(optyd, my, speed,ydist,false);
+					
+				}
+				
+				
+				
+			
 			b=true;
 			attack();
 		}
-
+		bb=false;
 		
 		
 		
@@ -147,26 +154,32 @@ public class RangedEnemy extends Enemy {
 	}
 
 	
-	private double moverx(double i, double mx, double speed,double dist) {
+	private double moverx(double i, double mx, double speed,double dist,boolean b) {
 		dist =dist/100;
+		double change = speed*dist;
 
 		if (i > 0) {
-			mx = mx + speed*dist;
+			
+			
 
 			if (i < range) {
-
-				mx = mx - speed*dist;
+				change*=-1;
+			
 			}
 		} else {
 			if (i < 0) {
-				mx = mx - speed*dist;
-				if (i > range) {
-					mx = mx + speed*dist;
-				}
+				change*=-1;
+			
+				
 			}
 		}
-	
-
+		if(b==true){
+			this.mxc =change;
+		}
+		else{
+			this.myc =change;
+		}
+		mx=mx+change;
 		return mx;
 
 	}

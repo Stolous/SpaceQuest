@@ -43,7 +43,7 @@ public class TexturedQuad {
 		update();
 	}
 	public TexturedQuad(int xsizes, int ysizes, double xs, double ys, Texture t) {
-
+		this.t =t;
 		rotate = 0;
 		setXsize(xsizes);
 		ysize = ysizes;
