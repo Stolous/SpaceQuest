@@ -8,7 +8,7 @@ import ca.viaware.rpg.utilities.TexturedQuad;
 
 
 public class AmmoBar{
-	TextRenderer tRender = new TextRenderer(30,0,"res/text/fonts.png");
+	TextRenderer tRender = new TextRenderer(30,0,TextRenderer.Font.BLACK);
 	
 	TexturedQuad back;
 	

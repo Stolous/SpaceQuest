@@ -21,18 +21,28 @@ import ca.viaware.rpg.game.Globals;
 
 public class TextRenderer {
 	private double xsize, ysize, x, y, rotate, xh, yh, lxpos, lypos, xloc;
-	private Texture texture;
+	private Texture texture = null;
 	String text;
 	List<String> textBuffer = new ArrayList(16);
 
-	public TextRenderer(int fontsize, int rotates, String path) {
+	public TextRenderer(int fontsize, int rotates, Font font) {
 
 		// Constructor now mainly only used to set font data, text is rendered
 		// in a separate method which makes it so that only one text renderer
 		// has to be used to render text in all kinds of different places
 
 		// text = Text;
-
+		String path = null;
+		switch (font){
+		case WHITE:
+			path = "res/text/fontsWhite.png";
+			break;
+		case BLACK:
+			path = "res/text/fonts.png";
+			break;
+		
+		}
+				
 		rotate = rotates;
 		setXsize(fontsize);
 		ysize = fontsize;
@@ -179,5 +189,9 @@ public class TextRenderer {
 
 	public void finish(){
 		Globals.textRendererBufferList.add(this);
+	}
+	
+	public static enum Font{
+		WHITE, BLACK;
 	}
 }
