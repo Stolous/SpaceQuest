@@ -5,10 +5,11 @@ import java.util.Random;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 
+import ca.viaware.rpg.entity.AbstractMoveableEntity;
 import ca.viaware.rpg.game.Globals;
 import ca.viaware.rpg.map.Tile;
 
-public class Bullet {
+public class Bullet extends AbstractMoveableEntity {
 	// Why no AbstractMoveableEntity?? How will we detect bullet collision now??
 	// And don't say you didn't know again, cause you did and could have saved
 	// yourself the effort converting this all to the Entity standard.
@@ -16,17 +17,20 @@ public class Bullet {
 	private boolean removed = false;
 	TexturedQuad b;
 	private int mindamage, maxdamage;
-	private double oldX, newX, newY, oldY, xSpeed, ySpeed, sx, sy, XOffset, YOffset;
+	private double oldX, newX, newY, oldY, xSpeed, ySpeed, XOffset, YOffset;
 	private boolean once;
 	public Bullet(Texture t, Double oldX, Double newX, double oldY, double newY, double bulletSpeed, int mind, int maxd) {
+		super(oldX, oldY, 50, 50);
 		this.mindamage = mind;
 		this.maxdamage = maxd;
 		this.t = t;
 		
-		bulletSpeed = bulletSpeed / 100;
+		bulletSpeed = bulletSpeed / 1000;
 
-		b = new TexturedQuad(50, 50, sx, sy, this.t);
-
+		b = new TexturedQuad(50, 50, x, y, this.t);
+System.out.println("Player Height "+ Globals.playerEntity.getHeight());
+		newY += 640;
+		newX += 640;
 		this.t = t;
 		this.oldX = oldX;
 		this.newX = newX;
@@ -34,38 +38,37 @@ public class Bullet {
 		this.newY = newY;
 		double ySpeed = 0;
 		double xSpeed = 0;
-		sx = oldX;
-		sy = oldY;
+		x = oldX;
+		y = oldY;
+		
 	
 		// Maths to make bullet go in direction thing
 		xSpeed = (float) (newX - oldX);
 		ySpeed = (float) (newY - oldY);
-		//System.out.println("Oldx" + oldX);
-		//System.out.println("Newx" + newX);
+	
 		double factor = (double) (((xSpeed * xSpeed) + (ySpeed * ySpeed)));
-		//System.out.println("Factor" + factor);
+		
 		factor = Math.sqrt(factor);
-		//System.out.println("Factor" + factor);
+	
 		factor = bulletSpeed / factor;
-		//System.out.println("Factor" + factor);
+		
 		xSpeed = xSpeed * factor;
 		ySpeed = ySpeed * factor;
-		//System.out.println("NewX" + newX);
-		//System.out.println("Xspeed" + xSpeed);
+
 		this.ySpeed = ySpeed;
 		this.xSpeed = xSpeed;
 		once = true;
-		update();
+	
 		}
 
-	public void update() {
+	public void update(int delta) {
 		//System.out.println("SX is" + sx);
 
-		int blockx = (int) (sx / 64);
-		int blocky = (int) (sy / 64);
-		sx = sx + xSpeed;
-		sy = sy + ySpeed;
-		if (sx == Globals.playerEntity.getX() && sy == Globals.playerEntity.getY()) {
+		int blockx = (int) (x / 64);
+		int blocky = (int) (y / 64);
+		x = x + xSpeed * delta;
+		y = y + ySpeed * delta;
+		if (x == Globals.playerEntity.getX() && y == Globals.playerEntity.getY()) {
 			contact();
 		} else {
 			int i = 0;
@@ -83,19 +86,17 @@ public class Bullet {
 
 			}
 		}
-		XOffset = ((Globals.gameMap.getXOffset()));
-		YOffset = ((Globals.gameMap.getYOffset()));
+		
 		if(once==false){	
-		sx = sx + XOffset;// this is for movement of player
-		sy = sy + YOffset;
+		y = y + YOffset;// this is for movement of player
+		x = x + XOffset;
 		}
-		b.setlocation(sx, sy);
+		b.setlocation(x, y);
 	}
 
 	public void reset() {
 		if(once==false){
-		sx = sx - XOffset;// this is for movement of player
-		sy = sy - YOffset;
+	
 		}else{
 			once=false;
 		}
@@ -118,6 +119,12 @@ public class Bullet {
 
 	public void render() {
 		b.update();
+		
+	}
+
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
 		
 	}
 

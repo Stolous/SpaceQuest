@@ -63,7 +63,7 @@ public class RangedEnemy extends Enemy {
 	public void drawbullets() {
 
 		for (int i = 0; i < bullets.size(); i++) {
-			bullets.get(i).update();
+			bullets.get(i).update(delta);
 			bullets.get(i).render();
 			bullets.get(i).reset();
 		}
