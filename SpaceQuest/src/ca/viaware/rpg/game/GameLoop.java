@@ -14,7 +14,7 @@ import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.entities.Slime;
 import ca.viaware.rpg.entities.WeakSlime;
-import ca.viaware.rpg.entities.ammobar;
+import ca.viaware.rpg.entities.AmmoBar;
 import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
 import ca.viaware.rpg.map.MapHandler;
@@ -39,7 +39,7 @@ public class GameLoop {
 				//Globals.enemies.add(new FastSlime(10,10));
 				//Globals.enemies.add(new WeakSlime(30,30));
 
-		Globals.ammoBar=new ammobar();
+		Globals.ammoBar=new AmmoBar();
 		
 		Globals.gameMap = MapHandler.handleMapLoad("TestMap1");
 		MapHandler.finishLoad();

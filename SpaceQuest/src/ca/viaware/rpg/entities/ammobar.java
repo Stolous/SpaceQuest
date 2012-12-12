@@ -7,12 +7,12 @@ import ca.viaware.rpg.utilities.TexturedQuad;
 
 
 
-public class ammobar{
+public class AmmoBar{
 	TextRenderer tRender = new TextRenderer(30,0,"res/text/fonts.png");
 	
 	TexturedQuad back;
 	
-	public ammobar(){
+	public AmmoBar(){
 		
 		back = new TexturedQuad(65,65,Display.getWidth()-60,Display.getHeight()-120,180,"res/sprites/other/Ammo Icon.png");
 		
