@@ -8,13 +8,15 @@ import org.lwjgl.input.Keyboard;
 import ca.viaware.rpg.map.MapHandler;
 import ca.viaware.rpg.map.TeleMarker;
 import ca.viaware.rpg.map.Tile;
+import ca.viaware.rpg.utilities.TextRenderer;
 
 public class PlayerMovement {
 	private boolean arrowG1 = false, arrowG2 = false;
-
+	private TextRenderer tRenderer = new TextRenderer(30, 0, "res/text/fonts.png");
+	
 	public void checkMovement(int delta) {
 		double speed = Globals.playerEntity.getSpeed();
-		if (delta < 30){
+		if (delta < 30) {
 			if (Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_A)) {
 				Globals.gameMap.moveMap(speed, 0, delta);
 				Globals.playerEntity.changePosition(-speed, 0, delta);
@@ -51,7 +53,7 @@ public class PlayerMovement {
 		int tileX = 0, tileY = 0;
 		int playerX = (int) (Globals.playerEntity.getActX() - Globals.playerEntity.getActX() % 64) / 64 + 2;
 		int playerY = (int) (Globals.playerEntity.getActY() - Globals.playerEntity.getActY() % 64) / 64 + 1;
-		
+
 		boolean teleMarkerCollision = false;
 		TeleMarker tMarker = null;
 		for (Tile[] tile1 : Globals.gameMap.mapTiles) {
@@ -78,8 +80,8 @@ public class PlayerMovement {
 							Globals.playerEntity.changePosition(0, -speed, delta);
 						}
 					}
-					
-					if (tile.hasTeleMarkerIn()){
+
+					if (tile.hasTeleMarkerIn()) {
 						teleMarkerCollision = true;
 						tMarker = tile.getTeleMarker();
 					}
@@ -87,27 +89,33 @@ public class PlayerMovement {
 			}
 			tileY = 0;
 		}
-		
-		if (teleMarkerCollision){
-			Globals.gameMap = MapHandler.handleMapLoad(tMarker.getPointToMap());
-			int x = 0;
-			int y = 0;
-			for (Tile[] tile1 : Globals.gameMap.mapTiles){
-				x++;
-				for (Tile tile : tile1){
-					y++;
-					if (tile.hasTeleMarkerOut()){
-						System.out.println("Has telemarker in");
-						if (tile.getTeleMarker().getName().equals(tMarker.getPointTo())){
-							System.out.println(x + ", " + y);
-							Globals.playerEntity.teleportXY(x * 64, y * 64);
+
+		if (teleMarkerCollision) {
+			System.out.println("Collide");
+			tRenderer.writeToScreen(Globals.dispWidth / 2 - 100, 100, "Press [E] to travel");
+
+			if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
+				Globals.gameMap = MapHandler.handleMapLoad(tMarker.getPointToMap());
+				int x = 0;
+				int y = 0;
+				for (Tile[] tile1 : Globals.gameMap.mapTiles) {
+					x++;
+					for (Tile tile : tile1) {
+						y++;
+						if (tile.hasTeleMarkerOut()) {
+							System.out.println("Has telemarker in");
+							if (tile.getTeleMarker().getName().equals(tMarker.getPointTo())) {
+								System.out.println(x + ", " + y);
+								Globals.playerEntity.teleportXY(x * 64, y * 64);
+							}
 						}
 					}
+					y = 0;
 				}
-				y = 0;
 			}
 		}
-
+		
+		tRenderer.finish();
 		Globals.playerEntity.update(delta);
 	}
 }

@@ -38,6 +38,7 @@ public class Globals {
 	public static Cursor cursor;
 	public static boolean isFullscreen = false;
 	public static List<TeleMarker> teleMarkers = new ArrayList(16);
+	public static List<TextRenderer> textRendererBufferList = new ArrayList(16);
 
 	public static enum gState {
 		INTRO, MAIN_MENU, GAME, OUTRO;

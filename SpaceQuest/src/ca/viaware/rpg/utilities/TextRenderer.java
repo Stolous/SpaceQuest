@@ -9,16 +9,21 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
+import ca.viaware.rpg.game.Globals;
+
 public class TextRenderer {
 	private double xsize, ysize, x, y, rotate, xh, yh, lxpos, lypos, xloc;
 	private Texture texture;
 	String text;
+	List<String> textBuffer = new ArrayList(16);
 
 	public TextRenderer(int fontsize, int rotates, String path) {
 
@@ -47,12 +52,10 @@ public class TextRenderer {
 	}
 
 	public void writeToScreen(int x, int y, String text) {
-		texture.bind();
+		
 		this.x = x;
 		this.y = y;
-		this.text = text;
-
-		update();
+		textBuffer.add(text);
 	}
 
 	public void update() {
@@ -64,6 +67,7 @@ public class TextRenderer {
 
 		double mov = xsize * 0.4;
 		for (int i = 0; i < c.length; i++) {
+			texture.bind();
 			x = x + mov;
 
 			letter = c[i];
@@ -71,7 +75,6 @@ public class TextRenderer {
 
 			lxpos = letter / 16;
 
-			System.out.println(x);
 
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			GL11.glPushMatrix();
@@ -163,5 +166,18 @@ public class TextRenderer {
 	public void setXsize(double xsize) {
 		this.xsize = xsize;
 	}
+	
+	public void renderBuffer(){
+		for (String t : textBuffer){
+			System.out.println(t);
+			text = t;
+			update();
+		}
+		
+		textBuffer.clear();
+	}
 
+	public void finish(){
+		Globals.textRendererBufferList.add(this);
+	}
 }

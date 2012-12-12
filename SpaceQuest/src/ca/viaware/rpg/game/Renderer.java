@@ -45,7 +45,10 @@ public class Renderer {
 
 			break;
 		}
-
+		
+		for (TextRenderer t : Globals.textRendererBufferList){
+			t.renderBuffer();
+		}
 		Globals.cursor.draw();
 	}
 }
