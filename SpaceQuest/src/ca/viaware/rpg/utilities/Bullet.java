@@ -14,20 +14,15 @@ public class Bullet {
 	// yourself the effort converting this all to the Entity standard.
 	private Texture t;
 	private boolean removed = false;
-	Class c;
 	TexturedQuad b;
 	private int mindamage, maxdamage;
 	private double oldX, newX, newY, oldY, xSpeed, ySpeed, sx, sy, XOffset, YOffset;
-
+	private boolean once;
 	public Bullet(Texture t, Double oldX, Double newX, double oldY, double newY, double bulletSpeed, int mind, int maxd) {
 		this.mindamage = mind;
 		this.maxdamage = maxd;
-		this.c = c;
 		this.t = t;
-		XOffset = ((Globals.gameMap.getXOffset()));
-		YOffset = ((Globals.gameMap.getYOffset()));
-		sx = oldX - XOffset;
-		sy = oldY - YOffset;
+		
 		bulletSpeed = bulletSpeed / 100;
 
 		b = new TexturedQuad(50, 50, sx, sy, this.t);
@@ -39,8 +34,9 @@ public class Bullet {
 		this.newY = newY;
 		double ySpeed = 0;
 		double xSpeed = 0;
-
-		System.out.println("Bullet speed is " + bulletSpeed);
+		sx = oldX;
+		sy = oldY;
+	
 		// Maths to make bullet go in direction thing
 		xSpeed = (float) (newX - oldX);
 		ySpeed = (float) (newY - oldY);
@@ -58,10 +54,9 @@ public class Bullet {
 		//System.out.println("Xspeed" + xSpeed);
 		this.ySpeed = ySpeed;
 		this.xSpeed = xSpeed;
-
+		once = true;
 		update();
-
-	}
+		}
 
 	public void update() {
 		//System.out.println("SX is" + sx);
@@ -90,15 +85,21 @@ public class Bullet {
 		}
 		XOffset = ((Globals.gameMap.getXOffset()));
 		YOffset = ((Globals.gameMap.getYOffset()));
+		if(once==false){	
 		sx = sx + XOffset;// this is for movement of player
 		sy = sy + YOffset;
+		}
 		b.setlocation(sx, sy);
-
 	}
 
 	public void reset() {
+		if(once==false){
 		sx = sx - XOffset;// this is for movement of player
 		sy = sy - YOffset;
+		}else{
+			once=false;
+		}
+		
 	}
 
 	private void contact() {
@@ -117,6 +118,7 @@ public class Bullet {
 
 	public void render() {
 		b.update();
+		
 	}
 
 }

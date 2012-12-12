@@ -20,12 +20,12 @@ public class RangedEnemy extends Enemy {
 	private boolean b = false;
 	private TexturedQuad t;
 	private int delta, agressiveness, betattacks, attackspeed, blockx, blocky;
-	private double distancebetween, xdist, ydist, playerx, playery, range, actxdist, actydist, speed, sightrange, xspeed, yspeed, BulletSpeed, optrange, mxc, myc;
+	private double distancebetween, xdist, ydist, playerx, playery, range, actxdist, actydist, speed, sightrange, xspeed, yspeed, BulletSpeed, optrange,mxc,myc,xoff,yoff;
 	private int mindamage, maxdamage;
 	private Texture Bullet;
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
-	public RangedEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed, double optdist, double sightrange, String path, double BulletSpeed) {
+	public RangedEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed, double optdist, double sightrange, String path, double BulletSpeed,double xoff,double yoff) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
 		TextureHandler t = new TextureHandler();
 		this.Bullet = t.loadSprite(path);
@@ -39,7 +39,8 @@ public class RangedEnemy extends Enemy {
 		y = (my);
 		this.sightrange = sightrange;
 		//System.out.println("Bulletspeed is " + BulletSpeed);
-
+		this.xoff =xoff;
+		this.yoff=yoff;
 		this.BulletSpeed = BulletSpeed;
 		//System.out.println("Bulletspeed is " + this.BulletSpeed);
 		// this way the initial attack will be faster
@@ -50,9 +51,13 @@ public class RangedEnemy extends Enemy {
 	private void attack() {
 		//System.out.println("Attack bs = " + BulletSpeed + BulletSpeed);
 		if (betattacks >= attackspeed) {
-			bullets.add(new Bullet(this.Bullet, getX(), Globals.playerEntity.getX(), getY(), Globals.playerEntity.getX(), BulletSpeed, mindamage, maxdamage));
+			bullets.add(new Bullet(this.Bullet, x-xoff, Globals.playerEntity.getX(), y-yoff, Globals.playerEntity.getX(), BulletSpeed, mindamage, maxdamage));
 			betattacks = 0;
+			
 		}
+		
+		
+
 	}
 
 	public void drawbullets() {
@@ -114,7 +119,7 @@ public class RangedEnemy extends Enemy {
 			attack();
 			if (distancebetween > range) {
 				bb = true;
-				mx = moverx(actxdist, mx, speed, xdist, true);
+				mx = moverx(actxdist, mx, speed, xdist, true); 
 				my = moverx(actydist, my, speed, ydist, false);
 
 			} else {// this means the mob is within range and will attack
@@ -132,7 +137,7 @@ public class RangedEnemy extends Enemy {
 				b = true;
 
 			}
-			bb = false;
+			b = false;
 
 			if (this.intersects(Globals.playerEntity) && b == false) {
 				attack();
