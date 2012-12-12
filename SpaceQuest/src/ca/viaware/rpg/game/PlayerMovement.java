@@ -12,7 +12,7 @@ import ca.viaware.rpg.utilities.TextRenderer;
 
 public class PlayerMovement {
 	private boolean arrowG1 = false, arrowG2 = false;
-	private TextRenderer tRenderer = new TextRenderer(30, 0, "res/text/fonts.png");
+	private TextRenderer tRenderer = new TextRenderer(30, 0, "res/text/fontsWhite.png");
 	
 	public void checkMovement(int delta) {
 		double speed = Globals.playerEntity.getSpeed();
