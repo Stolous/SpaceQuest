@@ -50,8 +50,8 @@ public class Loader {
 				TeleMarker WP = new TeleMarker();
 				WP.setType(Integer.parseInt(data[1]));
 				WP.setName(data[2]);
-				WP.setPointToMap(data[3]);
-				WP.setPointTo(data[4]);
+				WP.setPointToMap(data[4]);
+				WP.setPointTo(data[3]);
 				Globals.teleMarkers.add(WP);
 			}
 		}

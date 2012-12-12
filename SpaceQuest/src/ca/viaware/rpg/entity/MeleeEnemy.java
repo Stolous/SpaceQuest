@@ -92,7 +92,7 @@ public class MeleeEnemy extends Enemy {
 							//then it means that it is in this tile
 							if(Globals.gameMap.mapTiles[blockx][blocky].hasCollision()){					
 								//block on right of mob has collision
-								System.out.println("Block on up has collision");
+								//System.out.println("Block on up has collision");
 							}
 						}
 						}
@@ -103,7 +103,7 @@ public class MeleeEnemy extends Enemy {
 							//then it means that it is in this tile
 							if(Globals.gameMap.mapTiles[blockx][blocky].hasCollision()){					
 								//block on right of mob has collision
-								System.out.println("Block on right/left has collision");
+								//System.out.println("Block on right/left has collision");
 							}
 						}
 						}

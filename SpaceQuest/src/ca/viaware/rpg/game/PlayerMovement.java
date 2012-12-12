@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.lwjgl.input.Keyboard;
 
+import ca.viaware.rpg.map.MapHandler;
+import ca.viaware.rpg.map.TeleMarker;
 import ca.viaware.rpg.map.Tile;
 
 public class PlayerMovement {
@@ -49,7 +51,9 @@ public class PlayerMovement {
 		int tileX = 0, tileY = 0;
 		int playerX = (int) (Globals.playerEntity.getActX() - Globals.playerEntity.getActX() % 64) / 64 + 2;
 		int playerY = (int) (Globals.playerEntity.getActY() - Globals.playerEntity.getActY() % 64) / 64 + 1;
-
+		
+		boolean teleMarkerCollision = false;
+		TeleMarker tMarker = null;
 		for (Tile[] tile1 : Globals.gameMap.mapTiles) {
 			tileX++;
 			for (Tile tile : tile1) {
@@ -74,9 +78,34 @@ public class PlayerMovement {
 							Globals.playerEntity.changePosition(0, -speed, delta);
 						}
 					}
+					
+					if (tile.hasTeleMarkerIn()){
+						teleMarkerCollision = true;
+						tMarker = tile.getTeleMarker();
+					}
 				}
 			}
 			tileY = 0;
+		}
+		
+		if (teleMarkerCollision){
+			Globals.gameMap = MapHandler.handleMapLoad(tMarker.getPointToMap());
+			int x = 0;
+			int y = 0;
+			for (Tile[] tile1 : Globals.gameMap.mapTiles){
+				x++;
+				for (Tile tile : tile1){
+					y++;
+					if (tile.hasTeleMarkerOut()){
+						System.out.println("Has telemarker in");
+						if (tile.getTeleMarker().getName().equals(tMarker.getPointTo())){
+							System.out.println(x + ", " + y);
+							Globals.playerEntity.teleportXY(x * 64, y * 64);
+						}
+					}
+				}
+				y = 0;
+			}
 		}
 
 		Globals.playerEntity.update(delta);

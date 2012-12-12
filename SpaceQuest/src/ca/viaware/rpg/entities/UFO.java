@@ -40,7 +40,7 @@ public class UFO extends RangedEnemy{
 		}
 
 		getT().setlocation(getmx(), getmy());
-		System.out.println(getmx());
+		//System.out.println(getmx());
 
 		getT().update();
 		if (!(index == 29)) {// so the index doesn't go over nbr of sprites
