@@ -16,22 +16,26 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
 public class TextRenderer {
-	private double xsize, ysize, x, y, rotate, xh, yh, lxpos, lypos,xloc;
+	private double xsize, ysize, x, y, rotate, xh, yh, lxpos, lypos, xloc;
 	private Texture texture;
 	String text;
 
-	public TextRenderer(int fontsize, int xlocation, int ylocation, int rotates, String path, String Text) {
+	public TextRenderer(int fontsize, int rotates, String path) {
 
-		text = Text;
+		// Constructor now mainly only used to set font data, text is rendered
+		// in a separate method which makes it so that only one text renderer
+		// has to be used to render text in all kinds of different places
+
+		// text = Text;
 
 		rotate = rotates;
 		setXsize(fontsize);
 		ysize = fontsize;
-		x = xlocation;
-		y = ylocation;
+		// x = xlocation;
+		// y = ylocation;
 		setXh(getXsize() / 2);
 		yh = ysize / 2;
-		xloc = xlocation;
+		// xloc = xlocation;
 		try {
 			texture = TextureLoader.getTexture(".PNG", new FileInputStream(new File(path)));
 		} catch (FileNotFoundException e) {
@@ -39,28 +43,35 @@ public class TextRenderer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		texture.bind();
 
+	}
+
+	public void writeToScreen(int x, int y, String text) {
+		texture.bind();
+		this.x = x;
+		this.y = y;
+		this.text = text;
+
+		update();
 	}
 
 	public void update() {
 
-		x=xloc;
 		char[] c = text.toCharArray();
-		
+
 		int letter;
 		// 16 collumns 16 rows
 
-double mov = 0;
+		double mov = xsize * 0.4;
 		for (int i = 0; i < c.length; i++) {
-			x = x+ mov;
+			x = x + mov;
 
 			letter = c[i];
 			lypos = letter % 16;
 
-		
 			lxpos = letter / 16;
-			
+
+			System.out.println(x);
 
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			GL11.glPushMatrix();
@@ -73,23 +84,14 @@ double mov = 0;
 
 			// 128 px total
 
-
 			double nbr = 0.063;
 
+			double startx = lypos * nbr;// 16 rows/columns
+			double starty = lxpos * nbr;
 
+			double endx = startx + nbr;
+			double endy = starty + nbr;
 
-
-	
-
-			double startx = lypos*nbr;//16 rows/columns
-			double starty = lxpos*nbr;
-		
-			double endx = startx +nbr ;
-			double endy = starty +nbr; 
-
-
-
-		
 			GL11.glBegin(GL11.GL_QUADS);
 			GL11.glTexCoord2d(startx, starty);
 			GL11.glVertex2d(x - getXh(), y - yh);
@@ -115,13 +117,8 @@ double mov = 0;
 			 * getXh(), y - yh); GL11.glEnd(); GL11.glPopMatrix();
 			 * GL11.glDisable(GL11.GL_TEXTURE_2D);
 			 */
-			
-			mov = mov+(xsize*0.4);	
-		}
-		x=x - mov;
-		
 
-		
+		}
 
 	}
 

@@ -23,7 +23,6 @@ public class Globals {
 	ArrayList<ArrayList<String>> array = new ArrayList<ArrayList<String>>();
 
 	
-	public static ArrayList <TextRenderer> text = new ArrayList <TextRenderer>();
 	public static HealthBar healthBar;
 	//please note mobs should not be spawned at 0,0 or where they cannot reach player
 	public static ArrayList <Enemy> enemies=new ArrayList<Enemy>();

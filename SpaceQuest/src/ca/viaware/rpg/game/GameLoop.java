@@ -34,7 +34,6 @@ public class GameLoop {
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
-		Globals.text.add(new TextRenderer(100,100, 100, 0, "res/text/fonts.png", "Hello how are you?"));
 
 				//Globals.enemies.add(new Slime(0,0));
 				//Globals.enemies.add(new FastSlime(10,10));

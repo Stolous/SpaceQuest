@@ -1,12 +1,8 @@
 package ca.viaware.rpg.map;
 
-
-
-
 import ca.viaware.rpg.game.Globals;
 import ca.viaware.rpg.utilities.Location;
 import ca.viaware.rpg.utilities.TextRenderer;
-
 
 public class Map {
 	public int xSize, ySize;
@@ -19,62 +15,58 @@ public class Map {
 		ySize = y;
 		mapTiles = new Tile[x][y];
 	}
-	
-	public void renderMap(){
+
+	public void renderMap() {
 		int countx = 0;
 		int county = 0;
-		
-		while (county < ySize){
-			while (countx < xSize){
-				
-				if (mapTiles[countx][county].isEnabled()){
-				mapTiles[countx][county].render(countx, county, (int)xOffset, (int)yOffset);
+
+		while (county < ySize) {
+			while (countx < xSize) {
+
+				if (mapTiles[countx][county].isEnabled()) {
+					mapTiles[countx][county].render(countx, county, (int) xOffset, (int) yOffset);
 					Globals.temp++;
 				} else {
 				}
-				
+
 				countx++;
 			}
 			countx = 0;
 			county++;
-			
+
 		}
 
-		
-		for(int i = 0;i <Globals.text.size();i++){
-			//Globals.text.get(i).update();
-			
-			
-		}
-		//TextRenderer r = new TextRenderer(100,100, 100, 0, "res/text/fonts.png", "Hello how are you?");
-		//r.update();
-		
-		
-// enabled removal of tiles worked on text renderer
+		// TextRenderer r = new TextRenderer(100,100, 100, 0,
+		// "res/text/fonts.png", "Hello how are you?");
+		// r.update();
+
+		// enabled removal of tiles worked on text renderer
 	}
-	
-	public void moveMap(double x, double y, int delta){
+
+	public void moveMap(double x, double y, int delta) {
 		xOffset += x * delta;
 		yOffset += y * delta;
-		
+
 	}
-	public int getXOffset(){
-		return (int)xOffset;
+
+	public int getXOffset() {
+		return (int) xOffset;
 	}
-	public int getYOffset(){
-		return (int)yOffset;
+
+	public int getYOffset() {
+		return (int) yOffset;
 	}
-	
-	public void setOffsets(int x, int y){
+
+	public void setOffsets(int x, int y) {
 		xOffset = x;
 		yOffset = y;
 	}
-	
-	public void setSpawn(int x, int y){
-		spawn = new Location(x,y);
+
+	public void setSpawn(int x, int y) {
+		spawn = new Location(x, y);
 	}
-	
-	public Location getSpawn(){
+
+	public Location getSpawn() {
 		return spawn;
 	}
 }
