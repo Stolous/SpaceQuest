@@ -3,6 +3,7 @@ package ca.viaware.rpg.entity;
 import java.util.Random;
 
 import org.lwjgl.opengl.Display;
+import static org.lwjgl.opengl.GL11.*;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.game.Globals;
@@ -19,22 +20,22 @@ public class Bullet extends AbstractMoveableEntity {
 	private int mindamage, maxdamage;
 	private double oldX, newX, newY, oldY, xSpeed, ySpeed, XOffset, YOffset;
 	private boolean once;
+
 	public Bullet(Texture t, Double oldX, Double newX, double oldY, double newY, double bulletSpeed, int mind, int maxd) {
 		super(oldX, oldY, 50, 50);
+		width = 32;
+		height = 32;
 		this.mindamage = mind;
 		this.maxdamage = maxd;
 		this.t = t;
-		
+
 		XOffset = Globals.gameMap.getXOffset();
-		
+
 		YOffset = Globals.gameMap.getYOffset();
 
-		
 		bulletSpeed = bulletSpeed / 1000;
 
-		b = new TexturedQuad(32, 32, x, y, this.t);
-
-		
+		b = new TexturedQuad((int) width, (int) height, x, y, this.t);
 
 		this.t = t;
 		this.oldX = oldX;
@@ -46,95 +47,97 @@ public class Bullet extends AbstractMoveableEntity {
 		x = oldX;
 		y = oldY;
 		x = x - XOffset;// this is for movement of player
-		y=y-YOffset;
+		y = y - YOffset;
 		newX = newX + XOffset;// this is for movement of player
-		newY=newY+YOffset;
-		
+		newY = newY + YOffset;
+
 		double angle = 0;
 		double triangleBase = oldX - newX;
 		double triangleHeight = oldY - newY;
 		angle = Math.tan(triangleHeight / triangleBase) * 100;
 
-		//System.out.println(angle);
+		// System.out.println(angle);
 		b.rotate(angle);
-	
+
 		// Maths to make bullet go in direction thing
 		xSpeed = (float) (newX - oldX);
 		ySpeed = (float) (newY - oldY);
-	
+
 		double factor = (double) (((xSpeed * xSpeed) + (ySpeed * ySpeed)));
-		
+
 		factor = Math.sqrt(factor);
-	
+
 		factor = bulletSpeed / factor;
-		
+
 		xSpeed = xSpeed * factor;
 		ySpeed = ySpeed * factor;
-		
+
 		this.ySpeed = ySpeed;
 		this.xSpeed = xSpeed;
 		once = true;
-	
-		
-	
-		}
+
+	}
 
 	public void update(int delta) {
-		
+
 		XOffset = Globals.gameMap.getXOffset();
 		YOffset = Globals.gameMap.getYOffset();
-		//System.out.println("SX is" + sx);
+		// System.out.println("SX is" + sx);
 
-		int blockx = (int) (x / 64);
-		int blocky = (int) (y / 64);
 		x = x + xSpeed * delta;
 		y = y + ySpeed * delta;
-		if (x == Globals.playerEntity.getX() && y == Globals.playerEntity.getY()) {
+		
+		//removes if really far away
+		if (x > (Globals.dispWidth * 5)) {
+			removed = true;
+		}
+		if (y > (Globals.dispWidth * 5)) {
+			removed = true;
+		}
+		if (x < (Globals.dispWidth * -5)) {
+			removed = true;
+		}
+		if (y < (Globals.dispWidth * -5)) {
+			removed = true;
+		}
+		y = y + YOffset;// this is for movement of player
+		x = x + XOffset;
+
+		
+		//removes if colides with object
+		if (Globals.playerEntity.intersects(this)) {
 			contact();
 		} else {
-			int i = 0;
 			for (Tile[] tile1 : Globals.gameMap.mapTiles) {
-
-				if (blockx == tile1[i].getBX()) {
-					if (blocky == tile1[i].getBY()) {
-						// then it means that it is in this tile
-						if (Globals.gameMap.mapTiles[blockx][blocky].hasCollision()) {
-							// block on right of mob has collision
-							System.out.println(blockx+blocky);
-							System.out.println("Block has collision");
-							removed=true;
+				for (Tile tile : tile1) {
+					if (tile.intersects(this)) {
+						if (tile.hasCollision()) {
+							removed = true;
 						}
 					}
 				}
+			}
+		
 
-				}
 		}
+
 		
-		
-		y = y + YOffset;// this is for movement of player
-		x = x + XOffset;
-		
-		
-		b.setlocation(x, y);
+
+			b.setlocation(x, y);
 	}
 
 	public void reset() {
 		y = y - YOffset;// this is for movement of player
 		x = x - XOffset;
-	
-		
-		
-		
+
 	}
 
 	private void contact() {
-
 		Random r = new Random();
 		int damage = r.nextInt(maxdamage - mindamage);
 		damage += mindamage;
 		Globals.playerEntity.takedamage(damage);
 		removed = true;
-
 	}
 
 	public boolean getremoved() {
@@ -143,13 +146,13 @@ public class Bullet extends AbstractMoveableEntity {
 
 	public void render() {
 		b.update();
-		
+
 	}
 
 	@Override
 	public void draw() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

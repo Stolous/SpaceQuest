@@ -9,8 +9,9 @@ import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class RangedEnemy extends Enemy {
 
-	private boolean bb = false;
-	private boolean b = false;
+	private boolean movedOnce = false;
+
+
 	private TexturedQuad t;
 	private int delta, agressiveness, betattacks, attackspeed, blockx, blocky;
 	private double distancebetween, xdist, ydist, playerx, playery, range, actxdist, actydist, speed, sightrange, xspeed, yspeed, BulletSpeed, optrange,mxc,myc,xoff,yoff;
@@ -20,6 +21,8 @@ public class RangedEnemy extends Enemy {
 
 	public RangedEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed, double optdist, double sightrange, String path, double BulletSpeed,double xoff,double yoff) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
+		this.mindamage =mindamage;
+		this.maxdamage = maxdamage;
 		TextureHandler t = new TextureHandler();
 		this.Bullet = t.loadSprite(path);
 		this.attackspeed = attackspeed;
@@ -83,7 +86,7 @@ public class RangedEnemy extends Enemy {
 		blockx = (int) (mx / 64);
 		blocky = (int) (my / 64);
 
-		b = false;
+		
 		setX(getT().getx());
 		setY(getT().gety());
 
@@ -113,36 +116,37 @@ public class RangedEnemy extends Enemy {
 		if (distancebetween < sightrange) {
 			attack();
 			if (distancebetween > range) {
-				bb = true;
+				movedOnce = true;
 				mx = moverx(actxdist, mx, speed, xdist, true); 
 				my = moverx(actydist, my, speed, ydist, false);
 
 			} else {// this means the mob is within range and will attack
 				double optxd = playerx + (Player.getW() / 2) - optrange;
 				double optyd = playery + (Player.getH() / 2) - optrange;
+				
 
-				if (!(distancebetween == optrange) && bb == false) {
+				if (!(distancebetween == optrange) && movedOnce == false) {
 
 					mx = moverx(optxd, mx, speed, xdist, true);
 					my = moverx(optyd, my, speed, ydist, false);
 
+					
+					
 				}
 
-				b = true;
+				
 
 			}
-			b = false;
+			
 
-			if (this.intersects(Globals.playerEntity) && b == false) {
-				attack();
-			}
+			
 			
 		}
 	
 
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
-
+		
 	}
 
 private double moverx(double i, double mx, double speed, double dist, boolean b) {
