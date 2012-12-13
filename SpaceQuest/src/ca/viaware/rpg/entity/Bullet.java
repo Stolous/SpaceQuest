@@ -53,10 +53,10 @@ public class Bullet extends AbstractMoveableEntity {
 		double angle = 0;
 		double triangleBase = oldX - newX;
 		double triangleHeight = oldY - newY;
-		angle = Math.tan(triangleHeight / triangleBase) * 100;
+		angle = Math.tanh(triangleHeight / triangleBase) * 100;
 
-		//System.out.println(angle);
-		b.rotate(angle);
+		System.out.println(angle);
+		b.rotate(angle * -1 / 2);
 	
 		// Maths to make bullet go in direction thing
 		xSpeed = (float) (newX - oldX);
