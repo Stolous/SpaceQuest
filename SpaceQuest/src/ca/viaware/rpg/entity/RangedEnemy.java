@@ -45,9 +45,9 @@ public class RangedEnemy extends Enemy {
 	private void attack() {
 
 		if (betattacks >= attackspeed) {
-			bullets.add(new Bullet(this.Bullet, x-xoff, Globals.playerEntity.getX(), y-yoff, Globals.playerEntity.getX(), BulletSpeed, mindamage, maxdamage));
+			bullets.add(new Bullet(this.Bullet, x-xoff, Globals.playerEntity.getActX(), y-yoff, Globals.playerEntity.getActY(), BulletSpeed, mindamage, maxdamage));
 			betattacks = 0;
-			
+			System.out.println("Playerx "+Globals.playerEntity.getX());
 		}
 		
 		
@@ -76,6 +76,8 @@ public class RangedEnemy extends Enemy {
 
 	@Override
 	public void update(int delta) {
+		mxc=0;
+		myc=0;
 		drawbullets();
 		betattacks++;
 
@@ -113,8 +115,8 @@ public class RangedEnemy extends Enemy {
 			attack();
 			if (distancebetween > range) {
 				bb = true;
-				mx = moverx(actxdist, mx, speed, xdist, true); 
-				my = moverx(actydist, my, speed, ydist, false);
+				moverx(actxdist, mx, speed, xdist, true); 
+				moverx(actydist, my, speed, ydist, false);
 
 			} else {// this means the mob is within range and will attack
 				double optxd = playerx + (Player.getW() / 2) - optrange;
@@ -123,8 +125,9 @@ public class RangedEnemy extends Enemy {
 				// double optyd = xdist- optrange;
 				if (!(distancebetween == optrange) && bb == false) {
 
-					mx = moverx(optxd, mx, speed, xdist, true);
-					my = moverx(optyd, my, speed, ydist, false);
+					moverx(optxd, mx, speed, xdist, true);
+					moverx(optyd, my, speed, ydist, false);
+					
 
 				}
 
@@ -136,14 +139,17 @@ public class RangedEnemy extends Enemy {
 			if (this.intersects(Globals.playerEntity) && b == false) {
 				attack();
 			}
+			
 		}
+		mx= mx+mxc;
+		my=my+myc;
 
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
 
 	}
 
-	private double moverx(double i, double mx, double speed, double dist, boolean b) {
+	private void moverx(double i, double mx, double speed, double dist, boolean b) {
 		dist = dist / 100;
 		double change = speed * dist;
 
@@ -164,8 +170,8 @@ public class RangedEnemy extends Enemy {
 		} else {
 			this.myc = change;
 		}
-		mx = mx + change;
-		return mx;
+		
+		
 
 	}
 

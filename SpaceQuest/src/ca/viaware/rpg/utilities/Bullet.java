@@ -28,14 +28,13 @@ public class Bullet extends AbstractMoveableEntity {
 		XOffset = Globals.gameMap.getXOffset();
 		
 		YOffset = Globals.gameMap.getYOffset();
-		System.out.println("oldX is "+ oldX);
+
 		
 		bulletSpeed = bulletSpeed / 1000;
 
 		b = new TexturedQuad(50, 50, x, y, this.t);
 
-		newY += 640;
-		newX += 640;
+
 		this.t = t;
 		this.oldX = oldX;
 		this.newX = newX;
@@ -47,6 +46,8 @@ public class Bullet extends AbstractMoveableEntity {
 		y = oldY;
 		x = x - XOffset;// this is for movement of player
 		y=y-YOffset;
+		newX = newX + XOffset;// this is for movement of player
+		newY=newY+YOffset;
 		
 	
 		// Maths to make bullet go in direction thing
@@ -65,6 +66,11 @@ public class Bullet extends AbstractMoveableEntity {
 		this.ySpeed = ySpeed;
 		this.xSpeed = xSpeed;
 		once = true;
+		System.out.println("Newx"+newX);
+		System.out.println("Oldx"+oldX);
+		System.out.println("Changed X"+(newX-oldX));
+		System.out.println("Newy"+newY);
+		
 	
 		}
 
