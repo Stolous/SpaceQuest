@@ -91,7 +91,6 @@ public class PlayerMovement {
 		}
 
 		if (teleMarkerCollision) {
-			System.out.println("Collide");
 			tRenderer.writeToScreen(Globals.dispWidth / 2 - 100, 100, "Press [E] to travel");
 
 			if (Keyboard.isKeyDown(Keyboard.KEY_E)) {

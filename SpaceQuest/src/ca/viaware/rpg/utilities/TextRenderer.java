@@ -179,7 +179,6 @@ public class TextRenderer {
 	
 	public void renderBuffer(){
 		for (String t : textBuffer){
-			System.out.println(t);
 			text = t;
 			update();
 		}
