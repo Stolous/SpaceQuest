@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import org.newdawn.slick.opengl.Texture;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.game.Globals;
-import ca.viaware.rpg.utilities.Bullet;
 import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TexturedQuad;
 

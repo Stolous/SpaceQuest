@@ -1,13 +1,13 @@
-package ca.viaware.rpg.utilities;
+package ca.viaware.rpg.entity;
 
 import java.util.Random;
 
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 
-import ca.viaware.rpg.entity.AbstractMoveableEntity;
 import ca.viaware.rpg.game.Globals;
 import ca.viaware.rpg.map.Tile;
+import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class Bullet extends AbstractMoveableEntity {
 	// Why no AbstractMoveableEntity?? How will we detect bullet collision now??
@@ -32,8 +32,9 @@ public class Bullet extends AbstractMoveableEntity {
 		
 		bulletSpeed = bulletSpeed / 1000;
 
-		b = new TexturedQuad(50, 50, x, y, this.t);
+		b = new TexturedQuad(32, 32, x, y, this.t);
 
+		
 
 		this.t = t;
 		this.oldX = oldX;
@@ -49,6 +50,13 @@ public class Bullet extends AbstractMoveableEntity {
 		newX = newX + XOffset;// this is for movement of player
 		newY=newY+YOffset;
 		
+		double angle = 0;
+		double triangleBase = oldX - newX;
+		double triangleHeight = oldY - newY;
+		angle = Math.tan(triangleHeight / triangleBase) * 100;
+
+		//System.out.println(angle);
+		b.rotate(angle);
 	
 		// Maths to make bullet go in direction thing
 		xSpeed = (float) (newX - oldX);
@@ -62,7 +70,7 @@ public class Bullet extends AbstractMoveableEntity {
 		
 		xSpeed = xSpeed * factor;
 		ySpeed = ySpeed * factor;
-
+		
 		this.ySpeed = ySpeed;
 		this.xSpeed = xSpeed;
 		once = true;
