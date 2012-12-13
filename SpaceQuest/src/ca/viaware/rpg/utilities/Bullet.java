@@ -66,10 +66,7 @@ public class Bullet extends AbstractMoveableEntity {
 		this.ySpeed = ySpeed;
 		this.xSpeed = xSpeed;
 		once = true;
-		System.out.println("Newx"+newX);
-		System.out.println("Oldx"+oldX);
-		System.out.println("Changed X"+(newX-oldX));
-		System.out.println("Newy"+newY);
+	
 		
 	
 		}
@@ -95,12 +92,14 @@ public class Bullet extends AbstractMoveableEntity {
 						// then it means that it is in this tile
 						if (Globals.gameMap.mapTiles[blockx][blocky].hasCollision()) {
 							// block on right of mob has collision
-							//System.out.println("Block has collision");
+							System.out.println(blockx+blocky);
+							System.out.println("Block has collision");
+							removed=true;
 						}
 					}
 				}
 
-			}
+				}
 		}
 		
 		

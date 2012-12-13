@@ -47,7 +47,7 @@ public class RangedEnemy extends Enemy {
 		if (betattacks >= attackspeed) {
 			bullets.add(new Bullet(this.Bullet, x-xoff, Globals.playerEntity.getActX(), y-yoff, Globals.playerEntity.getActY(), BulletSpeed, mindamage, maxdamage));
 			betattacks = 0;
-			System.out.println("Playerx "+Globals.playerEntity.getX());
+
 		}
 		
 		
@@ -79,7 +79,7 @@ public class RangedEnemy extends Enemy {
 		mxc=0;
 		myc=0;
 		drawbullets();
-		betattacks++;
+		betattacks+=delta;
 
 		blockx = (int) (mx / 64);
 		blocky = (int) (my / 64);
@@ -115,19 +115,17 @@ public class RangedEnemy extends Enemy {
 			attack();
 			if (distancebetween > range) {
 				bb = true;
-				moverx(actxdist, mx, speed, xdist, true); 
-				moverx(actydist, my, speed, ydist, false);
+				mx = moverx(actxdist, mx, speed, xdist, true); 
+				my = moverx(actydist, my, speed, ydist, false);
 
 			} else {// this means the mob is within range and will attack
 				double optxd = playerx + (Player.getW() / 2) - optrange;
 				double optyd = playery + (Player.getH() / 2) - optrange;
-				// double optxd = xdist- optrange;
-				// double optyd = xdist- optrange;
+
 				if (!(distancebetween == optrange) && bb == false) {
 
-					moverx(optxd, mx, speed, xdist, true);
-					moverx(optyd, my, speed, ydist, false);
-					
+					mx = moverx(optxd, mx, speed, xdist, true);
+					my = moverx(optyd, my, speed, ydist, false);
 
 				}
 
@@ -141,15 +139,14 @@ public class RangedEnemy extends Enemy {
 			}
 			
 		}
-		mx= mx+mxc;
-		my=my+myc;
+	
 
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
 
 	}
 
-	private void moverx(double i, double mx, double speed, double dist, boolean b) {
+private double moverx(double i, double mx, double speed, double dist, boolean b) {
 		dist = dist / 100;
 		double change = speed * dist;
 
@@ -170,10 +167,11 @@ public class RangedEnemy extends Enemy {
 		} else {
 			this.myc = change;
 		}
-		
-		
+		mx = mx + change;
+		return mx;
 
 	}
+
 
 	protected double getmx() {
 		return mx;
