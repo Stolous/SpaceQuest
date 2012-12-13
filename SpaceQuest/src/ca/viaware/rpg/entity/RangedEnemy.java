@@ -1,15 +1,9 @@
 package ca.viaware.rpg.entity;
 
 import java.util.ArrayList;
-import java.util.Random;
-
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
-
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.game.Globals;
-import ca.viaware.rpg.map.Tile;
 import ca.viaware.rpg.utilities.Bullet;
 import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TexturedQuad;
@@ -38,18 +32,18 @@ public class RangedEnemy extends Enemy {
 		x = (mx);
 		y = (my);
 		this.sightrange = sightrange;
-		//System.out.println("Bulletspeed is " + BulletSpeed);
+
 		this.xoff =xoff;
 		this.yoff=yoff;
 		this.BulletSpeed = BulletSpeed;
-		//System.out.println("Bulletspeed is " + this.BulletSpeed);
+
 		// this way the initial attack will be faster
 		this.optrange = optdist;
 		betattacks = 0;
 	}
 
 	private void attack() {
-		//System.out.println("Attack bs = " + BulletSpeed + BulletSpeed);
+
 		if (betattacks >= attackspeed) {
 			bullets.add(new Bullet(this.Bullet, x-xoff, Globals.playerEntity.getX(), y-yoff, Globals.playerEntity.getX(), BulletSpeed, mindamage, maxdamage));
 			betattacks = 0;

@@ -25,10 +25,15 @@ public class Bullet extends AbstractMoveableEntity {
 		this.maxdamage = maxd;
 		this.t = t;
 		
+		XOffset = Globals.gameMap.getXOffset();
+		
+		YOffset = Globals.gameMap.getYOffset();
+		System.out.println("oldX is "+ oldX);
+		
 		bulletSpeed = bulletSpeed / 1000;
 
 		b = new TexturedQuad(50, 50, x, y, this.t);
-System.out.println("Player Height "+ Globals.playerEntity.getHeight());
+
 		newY += 640;
 		newX += 640;
 		this.t = t;
@@ -40,6 +45,8 @@ System.out.println("Player Height "+ Globals.playerEntity.getHeight());
 		double xSpeed = 0;
 		x = oldX;
 		y = oldY;
+		x = x - XOffset;// this is for movement of player
+		y=y-YOffset;
 		
 	
 		// Maths to make bullet go in direction thing
@@ -62,6 +69,9 @@ System.out.println("Player Height "+ Globals.playerEntity.getHeight());
 		}
 
 	public void update(int delta) {
+		
+		XOffset = Globals.gameMap.getXOffset();
+		YOffset = Globals.gameMap.getYOffset();
 		//System.out.println("SX is" + sx);
 
 		int blockx = (int) (x / 64);
@@ -87,19 +97,20 @@ System.out.println("Player Height "+ Globals.playerEntity.getHeight());
 			}
 		}
 		
-		if(once==false){	
+		
 		y = y + YOffset;// this is for movement of player
 		x = x + XOffset;
-		}
+		
+		
 		b.setlocation(x, y);
 	}
 
 	public void reset() {
-		if(once==false){
+		y = y - YOffset;// this is for movement of player
+		x = x - XOffset;
 	
-		}else{
-			once=false;
-		}
+		
+		
 		
 	}
 
