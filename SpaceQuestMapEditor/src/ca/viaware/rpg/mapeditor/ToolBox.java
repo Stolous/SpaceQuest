@@ -1,7 +1,6 @@
 package ca.viaware.rpg.mapeditor;
 
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,18 +12,16 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
+@SuppressWarnings("serial")
 public class ToolBox extends JFrame {
-	private JLabel selectedTextureName = new JLabel();
 	private JLabel tileTextureName = new JLabel();
 	private JLabel tileID = new JLabel();
 	private JLabel tileLayer2ID = new JLabel();
 	private JLabel tileLayer2Name = new JLabel();
 	private JLabel hasCollision = new JLabel();
 	private JLabel tileIndex = new JLabel();
-	private JComboBox textureSelect = new JComboBox();
+	private JComboBox<Object> textureSelect = new JComboBox<Object>();
 	private JButton paintTool = new JButton();
 	private JButton eraseTool = new JButton();
 	private JButton collisionTool = new JButton();
@@ -39,7 +36,7 @@ public class ToolBox extends JFrame {
 
 	private boolean changed = false;
 
-	private List<Object> objects = new ArrayList(16);
+	private List<Object> objects = new ArrayList<Object>(16);
 
 	public ToolBox() {
 		setTitle("Toolbox");
@@ -125,7 +122,7 @@ public class ToolBox extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				Globals.selectedTool = Globals.brush.ENEMIES;
 			}
 		});
 
