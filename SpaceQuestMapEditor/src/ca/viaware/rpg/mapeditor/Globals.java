@@ -17,7 +17,7 @@ public class Globals {
 	public static List<Waypoint> waypoints = new ArrayList(16);
 	
 	public static enum brush {
-		PAINT, ERASE, COLLISION, MARKERS;
+		PAINT, ERASE, COLLISION, MARKERS, ENEMIES;
 	}
 
 	public static brush selectedTool = brush.PAINT;

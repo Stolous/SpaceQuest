@@ -6,7 +6,7 @@ public class Enemy {
 	private int ID;
 	private String name;
 	private Texture texture;
-	
+	//seth sux
 	public Enemy(Texture tex, int id, String n){
 		ID = id;
 		name = n;
