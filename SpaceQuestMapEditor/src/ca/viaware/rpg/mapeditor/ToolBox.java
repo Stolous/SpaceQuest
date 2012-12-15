@@ -130,13 +130,13 @@ public class ToolBox extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try{
-				if (Integer.parseInt(markerType.getText()) == 1 || Integer.parseInt(markerType.getText()) == 2) {
-					selectedTile.updateMarker(Integer.parseInt(markerType.getText()), markerName.getText(), markerNamePointer.getText(), markerMapPointer.getText());
-				}else{
-					System.out.println("Invalid data");
-				}
-				}catch (NumberFormatException e1){
+				try {
+					if (Integer.parseInt(markerType.getText()) == 1 || Integer.parseInt(markerType.getText()) == 2) {
+						selectedTile.updateMarker(Integer.parseInt(markerType.getText()), markerName.getText(), markerNamePointer.getText(), markerMapPointer.getText());
+					} else {
+						System.out.println("Invalid data");
+					}
+				} catch (NumberFormatException e1) {
 					System.out.println("Invalid data");
 				}
 			}

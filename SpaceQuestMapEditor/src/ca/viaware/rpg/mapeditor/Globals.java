@@ -12,10 +12,11 @@ public class Globals {
 	public static int mapSizeX, mapSizeY;
 	public static boolean isSaved = true;
 	public static int cSelected = 0;
-	public static List<Texture> otherTextures = new ArrayList(16);
-	public static List<Enemy> enemies = new ArrayList(16);
-	public static List<Waypoint> waypoints = new ArrayList(16);
-	
+	public static List<Texture> otherTextures = new ArrayList<Texture>(16);
+	public static List<EnemyType> enemyTypes = new ArrayList<EnemyType>(16);
+	public static List<Enemy> enemies = new ArrayList<Enemy>(16);
+	public static List<Waypoint> waypoints = new ArrayList<Waypoint>(16);
+
 	public static enum brush {
 		PAINT, ERASE, COLLISION, MARKERS, ENEMIES;
 	}

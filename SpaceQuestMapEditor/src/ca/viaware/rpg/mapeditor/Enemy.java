@@ -1,27 +1,27 @@
 package ca.viaware.rpg.mapeditor;
 
-import org.newdawn.slick.opengl.Texture;
-
 public class Enemy {
-	private int ID;
-	private String name;
-	private Texture texture;
-	//seth sux
-	public Enemy(Texture tex, int id, String n){
-		ID = id;
-		name = n;
-		texture = tex;
+	private EnemyType Type;
+	private int Level;
+
+	public Enemy(EnemyType enemy, int level) {
+		Type = enemy;
+		Level = level;
 	}
-	
-	public String getName(){
-		return name;
+
+	public EnemyType getType() {
+		return Type;
 	}
-	
-	public int getID(){
-		return ID;
+
+	public int getLevel() {
+		return Level;
 	}
-	
-	public Texture getTexture(){
-		return texture;
+
+	public void setLevel(int level) {
+		Level = level;
+	}
+
+	public void setType(EnemyType type) {
+		Type = type;
 	}
 }
