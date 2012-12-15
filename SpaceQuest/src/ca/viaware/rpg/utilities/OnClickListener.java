@@ -13,9 +13,7 @@ public
 class OnClickListener extends EventObject {
   public OnClickListener(Butt source) {
     super(source);
-    if(Mouse.getX()>source.getX()){
-    	
-    }
+    
   }
 }
 

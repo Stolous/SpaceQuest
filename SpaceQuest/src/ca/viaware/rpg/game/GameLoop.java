@@ -38,18 +38,13 @@ public class GameLoop {
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
 
-		Butt b= new Butt(1,1,1,1);
 		
 		
-		b.AddOnClickListener(new ClickListener() {
-			
-			@Override
-			public void ClickListener(OnClickListener e) {
-				// TODO Auto-generated method stub
-				
+		
+		
+			if(Globals.b.intersectsMouse()){
+				System.out.println("Intersect");
 			}
-		});
-			
 			
 			
 
@@ -66,7 +61,9 @@ public class GameLoop {
 		MapHandler.finishLoad();
 		
 		while (Globals.isRunning) {
-
+			
+			
+			
 			int delta = getDelta();
 			
 			// Update debug screen
@@ -77,8 +74,20 @@ public class GameLoop {
 
 			logic.doLogic(delta);
 			render.render();
-			//Globals.playerEntity.takedamage(-1);
 			
+			Globals.b.update(delta);
+			Globals.b.updateOnClickListener(new OnClickListener(Globals.b));
+			
+			Globals.b.AddOnClickListener(new ClickListener() {
+				
+				@Override
+				public void ClickListener(OnClickListener OCL) {
+					System.out.println("Click");
+					
+				}
+			});
+			
+		
 			for(int i=0;i<Globals.enemies.size();i++){
 				Globals.enemies.get(i).reset();
 			}
