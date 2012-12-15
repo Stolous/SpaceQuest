@@ -41,10 +41,10 @@ public void updateOnClickListener(OnClickListener OCL){
 		Object[] listeners = listenerList.getListenerList();
 		for(int i = 0; i < listeners.length; i = i+2){
 			System.out.println("updated");
-			
+			if(this.intersectsMouse()){
 				((ClickListener) listeners[i+1]).ClickListener(OCL);
 				
-			
+			}
 		}}
 }
 	
