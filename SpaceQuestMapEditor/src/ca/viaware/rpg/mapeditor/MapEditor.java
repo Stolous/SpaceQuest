@@ -22,27 +22,6 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class MapEditor {
 
-	/* - - DO NOT FORMAT THE ENTIRE CLASS, WILL MESS UP THIS COMMENT - -
-	 * Brushes, key binds, etc - Just so I don't forget and have to sift through
-	 * code:
-	 * 
-	 * Left click - Move tile (unstable, try not to use this)
-	 * 
-	 * Paint brush: 
-	 * Right click - Add new tile 
-	 * LShift + Right click - Add texture to second layer
-	 * 
-	 * Erase brush: 
-	 * Right click - Erase tile 
-	 * LShift + Right click - Erase second Layer
-	 * 
-	 * Collision brush:
-	 * Right click - Add collision data
-	 * LShift + Right click - Remove collision data
-	 * 
-	 * Game marker brush: Z + Right click - Move spawn point
-	 */
-
 	public static List<Tile> tiles = new ArrayList<Tile>(16);
 	private boolean tileSelected = false;
 	private long lasttime = getTime();
@@ -52,6 +31,7 @@ public class MapEditor {
 	boolean prevPressed = false;
 	public static List<TileTexture> textures = new ArrayList(16);
 	ToolBox tools;
+	EnemyEditor enemyEditor;
 	int selectedTile = 0;
 
 	public MapEditor() {
@@ -71,12 +51,14 @@ public class MapEditor {
 		setupGL();
 		loadTextures();
 		tools.updateTextures();
+		enemyEditor = new EnemyEditor();
+		enemyEditor.createEditor();
 
 		Menu menu = new Menu();
 		menu.showMenu();
 
 		tiles.add(new Tile(0, 0, 0));
-		
+
 		while (Globals.isRunning) {
 			delta = getDelta();
 
@@ -119,10 +101,11 @@ public class MapEditor {
 		textures.add(new TileTexture(th.loadTexture("red rock"), "Red rock"));
 		textures.add(new TileTexture(th.loadTexture("sign"), "Sign"));
 		textures.add(new TileTexture(th.loadTexture("dirt"), "Dirt"));
-		
-		Globals.enemies.add(new Enemy(th.loadTexture("thumb/SlimeNormal"), 1, "Normal Slime"));
-		Globals.enemies.add(new Enemy(th.loadTexture("thumb/SlimeFast"), 2, "Fast Slime"));
-		Globals.enemies.add(new Enemy(th.loadTexture("thumb/SlimeWeak"), 3, "Weak Slime"));
+
+		Globals.enemyTypes.add(new EnemyType(th.loadTexture("thumb/SlimeNormal"), "Normal Slime"));
+		Globals.enemyTypes.add(new EnemyType(th.loadTexture("thumb/SlimeFast"), "Fast Slime"));
+		Globals.enemyTypes.add(new EnemyType(th.loadTexture("thumb/SlimeWeak"), "Weak Slime"));
+		Globals.enemyTypes.add(new EnemyType(th.loadTexture("thumb/UFO"), "UFO"));
 
 		Globals.otherTextures.add(th.loadTexture("img/waypointOUT"));
 		Globals.otherTextures.add(th.loadTexture("img/waypointIN"));
@@ -137,7 +120,7 @@ public class MapEditor {
 		int mY = mouseY();
 		int shiftDir = 0;
 		int cSelected = Globals.cSelected;
-		
+
 		Rectangle rect = new Rectangle(mX, mY, 1, 1);
 
 		if (!Keyboard.isKeyDown(Keyboard.KEY_S) && !Keyboard.isKeyDown(Keyboard.KEY_W) && !Keyboard.isKeyDown(Keyboard.KEY_A) && !Keyboard.isKeyDown(Keyboard.KEY_D)) {
@@ -272,7 +255,7 @@ public class MapEditor {
 			break;
 		case MARKERS:
 			boolean zKey = Keyboard.isKeyDown(Keyboard.KEY_Z);
-			
+
 			if (Mouse.isButtonDown(1) && zKey) {
 				System.out.println("In");
 				tools.setVisible(true);
@@ -282,9 +265,20 @@ public class MapEditor {
 						tile.setToolSelected(true);
 					}
 				}
-				
+
 			}
-			
+
+			break;
+		case ENEMIES:
+
+			if (Mouse.isButtonDown(1) && !Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+
+				for (Tile tile : tiles) {
+					if (tile.isTouching(rect)) {
+						tile.addEnemy(new Enemy(Globals.enemyTypes.get(0), 1));
+					}
+				}
+			}
 			break;
 		}
 
@@ -336,16 +330,29 @@ public class MapEditor {
 			if (tile.isToolSelected()) {
 				tools.updateTile(tile.getID(), tile.getLayer2ID(), tile.is2Layers(), tile.checkColision(), tiles.indexOf(tile));
 				boolean changed = false;
-				if (!tools.getSelected().equals(tile)){
+				if (!tools.getSelected().equals(tile)) {
 					changed = true;
 				}
 				tools.setSelectedTile(tile);
-				
-				if (tile.isTeleMarkerIn() || tile.isTeleMarkerOut()){
+
+				if (tile.isTeleMarkerIn() || tile.isTeleMarkerOut()) {
 					tools.updateMarkerData(true, changed);
-				}else{
+				} else {
 					tools.updateMarkerData(false, changed);
 				}
+
+				if (tile.isEnemy() && changed) {
+					enemyEditor.setVisible(false);
+					enemyEditor = new EnemyEditor();
+					enemyEditor.createEditor();
+					enemyEditor.setVisible(true);
+					enemyEditor.setEnemy(tile.getEnemy());
+				} else if (tile.isEnemy() && !changed && tile.equals(tile)) {
+					tile.addEnemy(enemyEditor.getSelectedEnemy());
+				} else {
+					enemyEditor.setVisible(false);
+				}
+
 			}
 		}
 

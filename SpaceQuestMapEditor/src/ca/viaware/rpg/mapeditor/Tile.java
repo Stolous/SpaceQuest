@@ -47,30 +47,30 @@ public class Tile {
 			is2Layers = true;
 			l2ID = Integer.parseInt(data2[1]);
 		}
-		
-		if (data2[2].equals("C")){
+
+		if (data2[2].equals("C")) {
 			isCollision = true;
-		}else{
+		} else {
 			isCollision = false;
 		}
-		
-		if (data2[3].equals("N")){
+
+		if (data2[3].equals("N")) {
 			isTeleMarkerIn = false;
 			isTeleMarkerOut = false;
-		}else{
+		} else {
 			System.out.println("TILE HAS MARKER");
-			if (data2[3].equals("1")){
-			System.out.println("MARKER IS 1");
+			if (data2[3].equals("1")) {
+				System.out.println("MARKER IS 1");
 				isTeleMarkerIn = true;
-			}else{
-			System.out.println("MARKER IS 2");
+			} else {
+				System.out.println("MARKER IS 2");
 				isTeleMarkerOut = true;
 			}
 		}
 	}
-	
-	public void finishLoading(){
-		if (isTeleMarkerIn || isTeleMarkerOut){
+
+	public void finishLoading() {
+		if (isTeleMarkerIn || isTeleMarkerOut) {
 			teleMarker = Globals.waypoints.get(teleMarkerID);
 		}
 	}
@@ -136,8 +136,8 @@ public class Tile {
 			glVertex2i(x, y + 64);
 			glEnd();
 		}
-		
-		if (isTeleMarkerOut){
+
+		if (isTeleMarkerOut) {
 			Globals.otherTextures.get(0).bind();
 			glBegin(GL_QUADS);
 			glTexCoord2f(0f, 0f);
@@ -150,7 +150,7 @@ public class Tile {
 			glVertex2i(x, y + 64);
 			glEnd();
 		}
-		if (isTeleMarkerIn){
+		if (isTeleMarkerIn) {
 			Globals.otherTextures.get(1).bind();
 			glBegin(GL_QUADS);
 			glTexCoord2f(0f, 0f);
@@ -162,6 +162,21 @@ public class Tile {
 			glTexCoord2f(0f, 1f);
 			glVertex2i(x, y + 64);
 			glEnd();
+		}
+
+		if (isEnemy) {
+			Globals.enemyTypes.get(Globals.enemyTypes.indexOf(enemy.getType())).getTexture().bind();
+			glBegin(GL_QUADS);
+			glTexCoord2f(0f, 0f);
+			glVertex2i(x, y);
+			glTexCoord2f(1f, 0f);
+			glVertex2i(x + 64, y);
+			glTexCoord2f(1f, 1f);
+			glVertex2i(x + 64, y + 64);
+			glTexCoord2f(0f, 1f);
+			glVertex2i(x, y + 64);
+			glEnd();
+
 		}
 
 	}
@@ -258,19 +273,19 @@ public class Tile {
 			System.out.println("Does not have 2 layers, adding null data");
 			data = data + "/N";
 		}
-		
-		if (isCollision){
+
+		if (isCollision) {
 			System.out.println("Has collision, adding collision data");
 			data = data + "/C";
-		}else{
+		} else {
 			System.out.println("Does not have collision, adding null data");
 			data = data + "/N";
 		}
-		
-		if (isTeleMarkerOut || isTeleMarkerIn){
+
+		if (isTeleMarkerOut || isTeleMarkerIn) {
 			System.out.println("Has a telemarker, adding telemarker data");
 			data = data + "/" + Integer.toString(Globals.waypoints.indexOf(teleMarker));
-		}else{
+		} else {
 			System.out.println("Is not a telemarker, adding null data");
 			data = data + "/N";
 		}
@@ -313,8 +328,8 @@ public class Tile {
 	public boolean checkColision() {
 		return isCollision;
 	}
-	
-	public void addMarker(Waypoint w){
+
+	public void addMarker(Waypoint w) {
 		w.setName("Marker Name");
 		w.setPointTo("Marker PointTo");
 		w.setPointToMap("Marker Map PointTo");
@@ -322,16 +337,16 @@ public class Tile {
 		Globals.waypoints.add(w);
 		isTeleMarkerOut = true;
 	}
-	
-	public Waypoint getTeleMarker(){
+
+	public Waypoint getTeleMarker() {
 		return teleMarker;
 	}
-	
-	public void updateMarker(int Type, String name, String pTo, String pToMap){
-		if (Type == 1){
+
+	public void updateMarker(int Type, String name, String pTo, String pToMap) {
+		if (Type == 1) {
 			isTeleMarkerOut = false;
 			isTeleMarkerIn = true;
-		}else if (Type == 2){
+		} else if (Type == 2) {
 			isTeleMarkerOut = true;
 			isTeleMarkerIn = false;
 		}
@@ -340,28 +355,35 @@ public class Tile {
 		teleMarker.setPointTo(pTo);
 		teleMarker.setPointToMap(pToMap);
 	}
-	
-	
-	public boolean isTeleMarkerOut(){
+
+	public boolean isTeleMarkerOut() {
 		return isTeleMarkerOut;
 	}
-	
-	public boolean isTeleMarkerIn(){
+
+	public boolean isTeleMarkerIn() {
 		return isTeleMarkerIn;
 	}
-	
-	public void addEnemy(Enemy e){
+
+	public void addEnemy(Enemy e) {
 		enemy = e;
 		isEnemy = true;
 	}
-	
-	public void deleteEnemy(){
+
+	public void deleteEnemy() {
 		enemy = null;
 		isEnemy = false;
 	}
-	
-	public boolean isEnemy(){
+
+	public boolean isEnemy() {
 		return isEnemy;
+	}
+
+	private void setEnemy(Enemy e) {
+		enemy = e;
+	}
+
+	public Enemy getEnemy() {
+		return enemy;
 	}
 
 }
