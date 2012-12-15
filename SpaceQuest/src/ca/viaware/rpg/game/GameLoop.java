@@ -2,6 +2,7 @@ package ca.viaware.rpg.game;
 
 import static org.lwjgl.opengl.GL11.glOrtho;
 
+import ca.viaware.rpg.utilities.ClickListener;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
@@ -18,8 +19,10 @@ import ca.viaware.rpg.entities.AmmoBar;
 import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
 import ca.viaware.rpg.map.MapHandler;
+import ca.viaware.rpg.utilities.Butt;
 import ca.viaware.rpg.utilities.DebugScreen;
 import ca.viaware.rpg.utilities.MouseData;
+import ca.viaware.rpg.utilities.OnClickListener;
 import ca.viaware.rpg.utilities.TextRenderer;
 import ca.viaware.rpg.utilities.TextureHandler;
 
@@ -34,6 +37,24 @@ public class GameLoop {
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
+
+		Butt b= new Butt(1,1,1,1);
+		
+		
+		b.AddOnClickListener(new ClickListener() {
+			
+			@Override
+			public void ClickListener(OnClickListener e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+			
+			
+			
+
+			
+		
 
 				//Globals.enemies.add(new Slime(0,0));
 				//Globals.enemies.add(new FastSlime(10,10));
