@@ -19,7 +19,7 @@ import ca.viaware.rpg.entities.AmmoBar;
 import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
 import ca.viaware.rpg.map.MapHandler;
-import ca.viaware.rpg.utilities.Butt;
+import ca.viaware.rpg.utilities.Button;
 import ca.viaware.rpg.utilities.DebugScreen;
 import ca.viaware.rpg.utilities.MouseData;
 import ca.viaware.rpg.utilities.OnClickListener;
@@ -42,7 +42,7 @@ public class GameLoop {
 		
 		
 		
-			if(Globals.b.intersectsMouse()){
+			if(Globals.button.intersectsMouse()){
 				System.out.println("Intersect");
 			}
 			
@@ -75,10 +75,10 @@ public class GameLoop {
 			logic.doLogic(delta);
 			render.render();
 			
-			Globals.b.update(delta);
-			Globals.b.updateOnClickListener(new OnClickListener(Globals.b));
+			Globals.button.update(delta);
+			Globals.button.updateOnClickListener(new OnClickListener(Globals.button));
 			
-			Globals.b.AddOnClickListener(new ClickListener() {
+			Globals.button.AddOnClickListener(new ClickListener() {
 				
 				@Override
 				public void ClickListener(OnClickListener OCL) {

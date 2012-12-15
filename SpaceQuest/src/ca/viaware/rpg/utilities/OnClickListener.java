@@ -11,7 +11,7 @@ import org.lwjgl.input.Mouse;
 @SuppressWarnings("serial")
 public
 class OnClickListener extends EventObject {
-  public OnClickListener(Butt source) {
+  public OnClickListener(Button source) {
     super(source);
     
   }
