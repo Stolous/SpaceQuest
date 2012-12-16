@@ -258,7 +258,6 @@ public class MapEditor {
 
 			if (Mouse.isButtonDown(1) && zKey) {
 				System.out.println("In");
-				tools.setVisible(true);
 				for (Tile tile : tiles) {
 					if (tile.isTouching(rect)) {
 						tile.addMarker(new Waypoint());
@@ -267,8 +266,16 @@ public class MapEditor {
 				}
 
 			}
+			
+			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
+				for (Tile tile : tiles){
+					if (tile.isTouching(rect)){
+						tile.removeMarker();
+					}
+				}
+			}
 
-			break;
+		break;
 		case ENEMIES:
 
 			if (Mouse.isButtonDown(1) && !Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
@@ -279,7 +286,21 @@ public class MapEditor {
 					}
 				}
 			}
+			
+			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
+				for (Tile tile : tiles) {
+					if (tile.isTouching(rect)) {
+						tile.deleteEnemy();
+					}
+				}
+			}
 			break;
+		}
+		Globals.waypoints.clear();
+		for (Tile tile : tiles){
+			if (tile.isTeleMarkerIn() || tile.isTeleMarkerOut()){
+				tile.refreshMarker();
+			}
 		}
 
 		int count = 0;
@@ -314,6 +335,7 @@ public class MapEditor {
 		}
 
 		count2 = 0;
+		Globals.enemies.clear();
 		for (Tile tile : tiles) {
 			if (tile.isSelected()) {
 				changeMade();
@@ -354,7 +376,10 @@ public class MapEditor {
 				}
 
 			}
+			tile.refreshEnemy();
 		}
+		
+		
 
 		// System.out.println("ShiftDir: " + shiftDir);
 

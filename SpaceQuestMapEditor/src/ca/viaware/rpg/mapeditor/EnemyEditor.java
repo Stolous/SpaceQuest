@@ -67,6 +67,7 @@ public class EnemyEditor extends JFrame {
 		selectedEnemy = e;
 
 		enemyList.setSelectedIndex(Globals.enemyTypes.indexOf(selectedEnemy.getType()));
+		enemyLevel.setText(Integer.toString(selectedEnemy.getLevel()));
 	}
 
 	private Object object(final String item) {

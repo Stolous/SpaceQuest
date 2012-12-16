@@ -15,11 +15,12 @@ public class Tile {
 	private boolean selected = false;
 	private boolean toolSelected = false;
 	private boolean isCollision = false;
-	private boolean isTeleMarkerIn = false, isTeleMarkerOut = false;
+	private boolean isTeleMarkerIn = false, isTeleMarkerOut = false, hasMarker = false;
 	private boolean isEnemy = false;
 	private Enemy enemy;
 	private Waypoint teleMarker;
 	private int teleMarkerID = 0;
+	private int enemyID = 0;
 
 	public Tile(int x, int y, int ID) {
 		this.x = x;
@@ -59,19 +60,31 @@ public class Tile {
 			isTeleMarkerOut = false;
 		} else {
 			System.out.println("TILE HAS MARKER");
-			if (data2[3].equals("1")) {
-				System.out.println("MARKER IS 1");
-				isTeleMarkerIn = true;
-			} else {
-				System.out.println("MARKER IS 2");
-				isTeleMarkerOut = true;
-			}
+			hasMarker = true;
+			teleMarkerID = Integer.parseInt(data2[3]);
+		}
+		
+		if (data2[4].equals("N")){
+			isEnemy = false;
+		}else{
+			isEnemy = true;
+			enemyID = Integer.parseInt(data2[4]);
 		}
 	}
 
 	public void finishLoading() {
-		if (isTeleMarkerIn || isTeleMarkerOut) {
+		if (hasMarker) {
 			teleMarker = Globals.waypoints.get(teleMarkerID);
+
+			if (teleMarker.getType() == 1) {
+				isTeleMarkerIn = true;
+			} else {
+				isTeleMarkerOut = true;
+			}
+		}
+
+		if (isEnemy) {
+			enemy = Globals.enemies.get(enemyID);
 		}
 	}
 
@@ -290,6 +303,14 @@ public class Tile {
 			data = data + "/N";
 		}
 
+		if (isEnemy) {
+			System.out.println("Has enemy, adding enemy data");
+			data = data + "/" + Integer.toString(Globals.enemies.indexOf(enemy));
+		} else {
+			System.out.println("Does not have enemy, adding null data");
+			data = data + "/N";
+		}
+
 		data = data + "&";
 		System.out.println("Finished producing data string, returning " + data);
 		return data;
@@ -330,12 +351,17 @@ public class Tile {
 	}
 
 	public void addMarker(Waypoint w) {
-		w.setName("Marker Name");
-		w.setPointTo("Marker PointTo");
-		w.setPointToMap("Marker Map PointTo");
-		teleMarker = w;
-		Globals.waypoints.add(w);
-		isTeleMarkerOut = true;
+
+		if (!hasMarker) {
+			w.setName("Marker Name");
+			w.setPointTo("Marker PointTo");
+			w.setPointToMap("Marker Map PointTo");
+			teleMarker = w;
+			Globals.waypoints.add(w);
+			isTeleMarkerOut = true;
+		}
+		
+		hasMarker = true;
 	}
 
 	public Waypoint getTeleMarker() {
@@ -356,6 +382,16 @@ public class Tile {
 		teleMarker.setPointToMap(pToMap);
 	}
 
+	public void removeMarker() {
+		isTeleMarkerIn = false;
+		isTeleMarkerOut = false;
+		hasMarker = false;
+	}
+
+	public void refreshMarker() {
+		Globals.waypoints.add(teleMarker);
+	}
+
 	public boolean isTeleMarkerOut() {
 		return isTeleMarkerOut;
 	}
@@ -370,8 +406,14 @@ public class Tile {
 	}
 
 	public void deleteEnemy() {
-		enemy = null;
 		isEnemy = false;
+	}
+
+	public void refreshEnemy() {
+		if (isEnemy){
+			Globals.enemies.add(enemy);
+			enemyID = Globals.enemies.indexOf(enemy);
+		}
 	}
 
 	public boolean isEnemy() {

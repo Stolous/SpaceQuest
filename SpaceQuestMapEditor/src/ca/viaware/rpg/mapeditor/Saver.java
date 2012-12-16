@@ -32,11 +32,17 @@ public class Saver {
 			}
 			
 			for (Waypoint way : Globals.waypoints){
-
+					System.out.println(way.name);
 					writer.write("WP/" + Integer.toString(way.getType()) + "/" + way.getName() + "/" + way.getPointTo() + "/" + way.getPointToMap());
 					writer.newLine();
-
 			}
+			
+			
+			for (Enemy enemy : Globals.enemies){
+				writer.write("EN/" + Integer.toString(Globals.enemyTypes.indexOf(enemy.getType())) + "/" + enemy.getLevel());
+				writer.newLine();
+			}
+			
 		}
 		Globals.isSaved = true;
 	}

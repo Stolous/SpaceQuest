@@ -25,6 +25,8 @@ public class Loader {
 		Globals.mapSizeY = Integer.parseInt(sc.nextLine());
 
 		MapEditor.tiles.clear();
+		Globals.waypoints.clear();
+		Globals.enemies.clear();
 
 		int x = 0;
 		int y = 0;
@@ -57,6 +59,9 @@ public class Loader {
 					WP.setPointTo(data[3]);
 					WP.setPointToMap(data[4]);
 					Globals.waypoints.add(WP);
+				}else if (data[0].equals("EN")){
+					Enemy enemy = new Enemy(Globals.enemyTypes.get(Integer.parseInt(data[1])), Integer.parseInt(data[2]));
+					Globals.enemies.add(enemy);
 				}
 			}
 		}
