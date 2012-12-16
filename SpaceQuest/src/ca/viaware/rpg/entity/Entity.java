@@ -13,5 +13,4 @@ public interface Entity {
 	public double getHeight();
 	public double getWidth();
 	public boolean intersects(Entity other);
-	boolean intersectsMouse();
 }

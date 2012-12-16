@@ -6,6 +6,7 @@ import org.lwjgl.input.Mouse;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.AbstractEntity;
+import ca.viaware.rpg.game.Globals;
 
 public class Button extends AbstractEntity {
 	private TexturedQuad buttTex;
@@ -41,7 +42,7 @@ public void updateOnClickListener(OnClickListener OCL){
 		Object[] listeners = listenerList.getListenerList();
 		for(int i = 0; i < listeners.length; i = i+2){
 			System.out.println("updated");
-			if(this.intersectsMouse()){
+			if(this.intersects(Globals.cursor)){
 				((ClickListener) listeners[i+1]).ClickListener(OCL);
 				
 			}

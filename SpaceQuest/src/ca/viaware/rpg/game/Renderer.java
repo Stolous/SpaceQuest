@@ -2,6 +2,7 @@ package ca.viaware.rpg.game;
 
 import org.lwjgl.opengl.*;
 
+import ca.viaware.rpg.entity.Enemy;
 import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
 import ca.viaware.rpg.utilities.TextRenderer;
@@ -37,8 +38,8 @@ public class Renderer {
 
 			Globals.gameMap.renderMap();
 			Globals.playerEntity.draw();
-			for(int i=0;i<Globals.enemies.size();i++){
-				Globals.enemies.get(i).draw();
+			for (Enemy enemy : Globals.enemies){
+				enemy.draw();
 			}
 			Globals.healthBar.update();
 			Globals.ammoBar.update();

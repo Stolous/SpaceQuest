@@ -1,15 +1,6 @@
 package ca.viaware.rpg.game;
 
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
-import static org.lwjgl.opengl.GL11.*;
-import org.lwjgl.opengl.*;
-import org.lwjgl.*;
-
-import ca.viaware.rpg.entities.WeakSlime;
 import ca.viaware.rpg.entities.UFO;
-import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.utilities.Button;
 
 public class SpaceQuest {

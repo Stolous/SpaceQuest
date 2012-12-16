@@ -74,13 +74,6 @@ public abstract class AbstractEntity implements Entity {
 		hitbox.setBounds((int) x, (int) y, (int) width, (int) height);
 		return hitbox.intersects(other.getX(), other.getY(), other.getWidth(), other.getHeight());
 	}
-	@Override
-	public boolean intersectsMouse() {
-		hitbox.setBounds((int) x, (int) y, (int) width, (int) height);
-		
-		System.out.println("MOuse x"+Mouse.getX()+"X"+x);
-		return hitbox.intersects(Mouse.getX(), Mouse.getY(),Globals.cursor.getWidth(),Globals.cursor.getHeight() );
-	}
 	/*
 	 * public boolean intersects(double x2,double y2,Entity other) {
 	 * hitbox.setBounds((int) x, (int) y, (int) width, (int) height); return

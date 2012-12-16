@@ -42,7 +42,7 @@ public class GameLoop {
 		
 		
 		
-			if(Globals.button.intersectsMouse()){
+			if(Globals.button.intersects(Globals.cursor)){
 				System.out.println("Intersect");
 			}
 			

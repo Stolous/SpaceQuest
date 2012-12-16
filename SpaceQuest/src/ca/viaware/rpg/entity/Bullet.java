@@ -2,8 +2,6 @@ package ca.viaware.rpg.entity;
 
 import java.util.Random;
 
-import org.lwjgl.opengl.Display;
-import static org.lwjgl.opengl.GL11.*;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.game.Globals;
@@ -153,5 +151,6 @@ public class Bullet extends AbstractMoveableEntity {
 	public void draw() {
 
 	}
+
 
 }
