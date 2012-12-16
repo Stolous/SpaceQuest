@@ -49,6 +49,7 @@ public class UFO extends RangedEnemy{
 			index = 0;
 		}
 
+		getB().draw();
 	}
 
 }

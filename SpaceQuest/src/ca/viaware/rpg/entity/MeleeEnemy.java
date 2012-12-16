@@ -45,7 +45,7 @@ public class MeleeEnemy extends Enemy {
 	@Override
 	public void update(int delta) {
 	
-		
+		getB().update(getdelta());
 		blockx = (int) (mx/64);
 		blocky = (int) (my/64);
 		

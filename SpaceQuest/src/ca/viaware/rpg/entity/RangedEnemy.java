@@ -78,6 +78,7 @@ public class RangedEnemy extends Enemy {
 
 	@Override
 	public void update(int delta) {
+		
 		mxc=0;
 		myc=0;
 		drawbullets();
@@ -146,7 +147,7 @@ public class RangedEnemy extends Enemy {
 
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
-		
+		getB().update(getdelta());
 	}
 
 private double moverx(double i, double mx, double speed, double dist, boolean b) {
