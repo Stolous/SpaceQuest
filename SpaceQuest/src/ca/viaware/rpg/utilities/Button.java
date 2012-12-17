@@ -76,7 +76,6 @@ public class Button extends AbstractEntity {
 
 			Object[] listeners = listenerList.getListenerList();
 			for (int i = 0; i < listeners.length; i = i + 2) {
-				System.out.println("updated");
 				if (this.intersects(Globals.cursor)) {
 					((ClickListener) listeners[i + 1]).ClickListener(OCL);
 
