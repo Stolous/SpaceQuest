@@ -48,15 +48,15 @@ public class Renderer {
 			break;
 		}
 		
-		for (TextRenderer t : Globals.textRendererBufferList){
-			t.renderBuffer();
-		}
-		Globals.textRendererBufferList.clear();
-		
 		for (Button b : Globals.buttonBuffer){
 			b.draw();
 		}
 		Globals.buttonBuffer.clear();
+		
+		for (TextRenderer t : Globals.textRendererBufferList){
+			t.renderBuffer();
+		}
+		Globals.textRendererBufferList.clear();
 		
 		Globals.cursor.draw();
 	}

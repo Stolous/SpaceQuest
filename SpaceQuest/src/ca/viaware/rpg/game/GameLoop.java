@@ -46,7 +46,7 @@ public class GameLoop {
 		
 		Globals.gameMap = MapHandler.handleMapLoad("TestMap1");
 		MapHandler.finishLoad();
-		Button button = new Button(100,100,50,50);
+		Button button = new Button(100,100,150,50);
 		
 		while (Globals.isRunning) {
 			
@@ -66,6 +66,7 @@ public class GameLoop {
 			
 			
 			button.updateOnClickListener(new OnClickListener(button));
+			button.setText("Text");
 			button.AddOnClickListener(new ClickListener() {
 				@Override
 				public void ClickListener(OnClickListener OCL) {
