@@ -38,19 +38,6 @@ public class GameLoop {
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
 
-		
-		
-		
-		
-			if(Globals.button.intersects(Globals.cursor)){
-				System.out.println("Intersect");
-			}
-			
-			
-
-			
-		
-
 				//Globals.enemies.add(new Slime(0,0));
 				//Globals.enemies.add(new FastSlime(10,10));
 				//Globals.enemies.add(new WeakSlime(30,30));
@@ -59,6 +46,7 @@ public class GameLoop {
 		
 		Globals.gameMap = MapHandler.handleMapLoad("TestMap1");
 		MapHandler.finishLoad();
+		Button button = new Button(100,100,50,50);
 		
 		while (Globals.isRunning) {
 			
@@ -75,17 +63,17 @@ public class GameLoop {
 			logic.doLogic(delta);
 			render.render();
 			
-			Globals.button.update(delta);
-			Globals.button.updateOnClickListener(new OnClickListener(Globals.button));
 			
-			Globals.button.AddOnClickListener(new ClickListener() {
-				
+			
+			button.updateOnClickListener(new OnClickListener(button));
+			button.AddOnClickListener(new ClickListener() {
 				@Override
 				public void ClickListener(OnClickListener OCL) {
 					System.out.println("Click");
-					
 				}
 			});
+			
+			Globals.buttonBuffer.add(button);
 			
 		
 			for(int i=0;i<Globals.enemies.size();i++){

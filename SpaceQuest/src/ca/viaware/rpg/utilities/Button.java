@@ -31,8 +31,8 @@ public class Button extends AbstractEntity {
 	
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
-		
+		//Rendering goes here.
+		buttTex.update();
 	}
 
 public void updateOnClickListener(OnClickListener OCL){
@@ -52,8 +52,8 @@ public void updateOnClickListener(OnClickListener OCL){
 	@Override
 	public void update(int delta ) {
 		
+		//Update is for logic, not rendering.
 		
-		buttTex.update();
 		
 				
 			

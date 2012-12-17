@@ -5,6 +5,7 @@ import org.lwjgl.opengl.*;
 import ca.viaware.rpg.entity.Enemy;
 import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
+import ca.viaware.rpg.utilities.Button;
 import ca.viaware.rpg.utilities.TextRenderer;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -50,6 +51,13 @@ public class Renderer {
 		for (TextRenderer t : Globals.textRendererBufferList){
 			t.renderBuffer();
 		}
+		Globals.textRendererBufferList.clear();
+		
+		for (Button b : Globals.buttonBuffer){
+			b.draw();
+		}
+		Globals.buttonBuffer.clear();
+		
 		Globals.cursor.draw();
 	}
 }
