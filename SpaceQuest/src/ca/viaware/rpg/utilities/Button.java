@@ -44,6 +44,19 @@ public class Button extends AbstractEntity {
 		glTexCoord2f(0f, 1f);
 		glVertex2d(x, y + height);
 		glEnd();
+		
+		if (Mouse.isButtonDown(0) && Globals.cursor.intersects(this)){
+			glBegin(GL_QUADS);
+			glTexCoord2f(1f, 1f);
+			glVertex2d(x, y);
+			glTexCoord2f(0f, 1f);
+			glVertex2d(x + width, y);
+			glTexCoord2f(0f, 0f);
+			glVertex2d(x + width, y + height);
+			glTexCoord2f(1f, 0f);
+			glVertex2d(x, y + height);
+			glEnd();
+		}
 
 		// Your text renderer seems to have a similar issue, thats why the y
 		// needs to be increased by 25 just to make it in the same place as the
