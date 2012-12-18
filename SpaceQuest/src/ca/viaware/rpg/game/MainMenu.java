@@ -16,6 +16,7 @@ import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class MainMenu {
+	private int movementstage = 0;
 	Texture [] backGround = new Texture [3];
 	SButton start,options,help,quit;
 	TexturedQuad UFO;
@@ -47,6 +48,18 @@ public MainMenu(){
 		
 	
 	public void render(){
+		//this is for UFO movement up and down
+		if(movementstage == 0){
+			UFO.move(0, 1);
+		}else{
+			UFO.move(0, -1);
+		}
+		if(UFO.gety()>350){
+			movementstage=1;
+		}
+		if(UFO.gety()<250){
+			movementstage=0;
+		}
 		
 				
 		backGround[location].bind();
@@ -64,7 +77,15 @@ public MainMenu(){
 		glTexCoord2f(0f, 1f);
 		glVertex2i(0, Globals.dispHeight);
 		glEnd();
-	
+		quit.updateOnClickListener(new OnClickListener(quit));
+		quit.AddOnClickListener(new ClickListener() {
+			
+			@Override
+			public void ClickListener(OnClickListener OCL) {
+				Globals.isRunning = false;
+				
+			}
+		});
 		
 		
 		start.updateOnClickListener(new OnClickListener(start));
