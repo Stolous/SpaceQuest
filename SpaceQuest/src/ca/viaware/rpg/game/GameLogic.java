@@ -18,12 +18,16 @@ public class GameLogic {
 	private int timer = 0, count = 0;
 
 	public void doLogic(int delta) {
+
 		if (Globals.gameState == Globals.gState.INTRO) {
-			timer += delta;
-			if (timer > 1500) {
-				System.out.println("Switching gamestate to main menu");
-				Globals.gameState = Globals.gState.MAIN_MENU;
-				Globals.cursor.setEnabled(true);
+			count++;
+			if (count > 2) {
+				timer += delta;
+				if (timer > 1500) {
+					System.out.println("Switching gamestate to main menu");
+					Globals.gameState = Globals.gState.MAIN_MENU;
+					Globals.cursor.setEnabled(true);
+				}
 			}
 		}
 
