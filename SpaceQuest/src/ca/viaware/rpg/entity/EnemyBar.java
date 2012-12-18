@@ -8,30 +8,28 @@ import ca.viaware.rpg.utilities.TexturedQuad;
 public class EnemyBar extends AbstractEntity {
 	private Enemy enemy;
 	TexturedQuad BackGround;
-	
-	public EnemyBar(double x, double y, double width, double height,Enemy e,int Level,Effect [] effects) {
+
+	public EnemyBar(double x, double y, double width, double height, Enemy e, int Level, Effect[] effects) {
 		super(x, y, width, height);
-		TextureHandler loader =new TextureHandler();
+		TextureHandler loader = new TextureHandler();
 		Texture t = loader.loadSprite("other/Enemy Bar");
-		System.out.println("T"+t.getHeight());
-		BackGround=new TexturedQuad((int)x,(int)y,width,height,t);
-		this.enemy=e;
-		
+		BackGround = new TexturedQuad((int) x, (int) y, width, height, t);
+		this.enemy = e;
+
 	}
 
 	@Override
 	public void draw() {
 		BackGround.update();
-		System.out.println("X is "+ x);
 	}
 
 	@Override
 	public void update(int delta) {
-		System.out.println("Upd X is "+ enemy.getX());
+		System.out.println("Upd X is " + enemy.getX());
 		BackGround.setlocation(enemy.getX(), enemy.getY());
-		x=enemy.getX();
-		y=enemy.getY();
-		
+		x = enemy.getX();
+		y = enemy.getY();
+
 	}
 
 }

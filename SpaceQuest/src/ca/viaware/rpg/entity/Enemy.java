@@ -5,11 +5,11 @@ import java.awt.Rectangle;
 public abstract class Enemy extends AbstractMoveableEntity {
 	protected Rectangle hitbox = new Rectangle();
 	private int currenthealth, maxhealth, maxdamage, mindamage;
-	protected double mx,my,Xoffset,Yoffset;
+	protected double mx, my, Xoffset, Yoffset;
 	private EnemyBar b;
 
 	public Enemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny) {
-		super(spawnx,spawny,width, height);
+		super(spawnx, spawny, width, height);
 		// max/min damage is so there is a range
 		this.x = spawnx;
 		this.y = spawny;
@@ -18,26 +18,29 @@ public abstract class Enemy extends AbstractMoveableEntity {
 		this.currenthealth = this.maxhealth = maxhealth;
 		this.setMaxdamage(maxdamage);
 		this.setMindamage(mindamage);
-		setB(new EnemyBar(x,y,width,height,this,1,new Effect [3]));
+		setB(new EnemyBar(x, y, width, height, this, 1, new Effect[3]));
 		// this is where spawn code goes
 
 	}
+
 	public void reset() {
 		mx = mx - getXoffset();// this is for movement of player
 		my = my - getYoffset();
 	}
-	public  double getXoffset() {
+
+	public double getXoffset() {
 		return Xoffset;
 	}
 
-	public  void setXoffset(double xoffset) {
+	public void setXoffset(double xoffset) {
 		Xoffset = xoffset;
 	}
-	public  double getYoffset() {
+
+	public double getYoffset() {
 		return Yoffset;
 	}
 
-	public  void setYoffset(double yoffset) {
+	public void setYoffset(double yoffset) {
 		Yoffset = yoffset;
 	}
 
@@ -87,12 +90,13 @@ public abstract class Enemy extends AbstractMoveableEntity {
 	public void setMindamage(int mindamage) {
 		this.mindamage = mindamage;
 	}
+
 	public EnemyBar getB() {
 		return b;
 	}
+
 	public void setB(EnemyBar b) {
 		this.b = b;
 	}
-	
 
 }

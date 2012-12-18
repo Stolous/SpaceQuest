@@ -56,7 +56,7 @@ public class Bullet extends AbstractMoveableEntity {
 
 		System.out.println(angle);
 		b.rotate(angle * -1 / 2);
-	
+
 		// Maths to make bullet go in direction thing
 		xSpeed = (float) (newX - oldX);
 		ySpeed = (float) (newY - oldY);
@@ -84,8 +84,8 @@ public class Bullet extends AbstractMoveableEntity {
 
 		x = x + xSpeed * delta;
 		y = y + ySpeed * delta;
-		
-		//removes if really far away
+
+		// removes if really far away
 		if (x > (Globals.dispWidth * 5)) {
 			removed = true;
 		}
@@ -101,8 +101,7 @@ public class Bullet extends AbstractMoveableEntity {
 		y = y + YOffset;// this is for movement of player
 		x = x + XOffset;
 
-		
-		//removes if colides with object
+		// removes if colides with object
 		if (Globals.playerEntity.intersects(this)) {
 			contact();
 		} else {
@@ -115,13 +114,10 @@ public class Bullet extends AbstractMoveableEntity {
 					}
 				}
 			}
-		
 
 		}
 
-		
-
-			b.setlocation(x, y);
+		b.setlocation(x, y);
 	}
 
 	public void reset() {
@@ -151,6 +147,5 @@ public class Bullet extends AbstractMoveableEntity {
 	public void draw() {
 
 	}
-
 
 }

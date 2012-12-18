@@ -35,11 +35,10 @@ public class Renderer {
 			new Menu();
 			break;
 		case GAME:
-			
 
 			Globals.gameMap.renderMap();
 			Globals.playerEntity.draw();
-			for (Enemy enemy : Globals.enemies){
+			for (Enemy enemy : Globals.enemies) {
 				enemy.draw();
 			}
 			Globals.healthBar.update();
@@ -47,17 +46,17 @@ public class Renderer {
 
 			break;
 		}
-		
-		for (Button b : Globals.buttonBuffer){
+
+		for (Button b : Globals.buttonBuffer) {
 			b.draw();
 		}
 		Globals.buttonBuffer.clear();
-		
-		for (TextRenderer t : Globals.textRendererBufferList){
+
+		for (TextRenderer t : Globals.textRendererBufferList) {
 			t.renderBuffer();
 		}
 		Globals.textRendererBufferList.clear();
-		
+
 		Globals.cursor.draw();
 	}
 }

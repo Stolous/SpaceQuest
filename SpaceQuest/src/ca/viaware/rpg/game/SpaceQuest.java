@@ -6,17 +6,17 @@ import ca.viaware.rpg.utilities.Button;
 public class SpaceQuest {
 
 	public SpaceQuest() {
-		
+
 		DispSetup.setupDisplay();
 		DispSetup.setupGL();
 		GameLoop gloop = new GameLoop();
-		Globals.enemies.add(new UFO(1,1));
+		Globals.enemies.add(new UFO(1, 1));
 		gloop.startLoop();
-       
+
 	}
 
 	public static void main(String[] args) {
 		new SpaceQuest();
-		
-	}                                                                        
+
 	}
+}
