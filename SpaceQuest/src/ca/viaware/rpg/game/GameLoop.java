@@ -15,7 +15,7 @@ import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.entities.Slime;
 import ca.viaware.rpg.entities.WeakSlime;
-import ca.viaware.rpg.entities.AmmoBar;
+//import ca.viaware.rpg.entities.AmmoBar;
 import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
 import ca.viaware.rpg.map.MapHandler;
@@ -40,17 +40,12 @@ public class GameLoop {
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
-		Globals.ammoBar = new AmmoBar();
+		//Globals.ammoBar = new AmmoBar();
 
 		Globals.gameMap = MapHandler.handleMapLoad("TestMap1");
 		MapHandler.finishLoad();
-<<<<<<< HEAD
-		
-		
-=======
-		Button button = new Button(100, 100, 150, 50);
+		SButton button = new SButton(100, 100, 150, 50);
 
->>>>>>> c886dbb116635560960c098fa351e27a736d39a2
 		while (Globals.isRunning) {
 
 			int delta = getDelta();
@@ -63,7 +58,6 @@ public class GameLoop {
 
 			logic.doLogic(delta);
 			render.render();
-<<<<<<< HEAD
 			
 			
 			
@@ -73,7 +67,6 @@ public class GameLoop {
 			
 		
 			for(int i=0;i<Globals.enemies.size();i++){
-=======
 
 			button.updateOnClickListener(new OnClickListener(button));
 			button.setText("Text");
@@ -86,9 +79,8 @@ public class GameLoop {
 
 			Globals.buttonBuffer.add(button);
 
-			for (int i = 0; i < Globals.enemies.size(); i++) {
->>>>>>> c886dbb116635560960c098fa351e27a736d39a2
-				Globals.enemies.get(i).reset();
+			for (int ii = 0; ii < Globals.enemies.size(); ii++) {
+				Globals.enemies.get(ii).reset();
 			}
 			Display.update();
 			Display.sync(60);
@@ -102,7 +94,7 @@ public class GameLoop {
 
 		}
 		Display.destroy();
-		System.exit(0);
+		System.exit(0);}
 	}
 
 	private void setupTextures() {

@@ -43,17 +43,14 @@ public class Renderer {
 				enemy.draw();
 			}
 			Globals.healthBar.update();
-			Globals.ammoBar.update();
+	
 
 			break;
 		}
-<<<<<<< HEAD
 		
-		for (SButton b : Globals.buttonBuffer){
-=======
+	
 
-		for (Button b : Globals.buttonBuffer) {
->>>>>>> c886dbb116635560960c098fa351e27a736d39a2
+		for (SButton b : Globals.buttonBuffer) {
 			b.draw();
 		}
 		Globals.buttonBuffer.clear();
@@ -64,5 +61,5 @@ public class Renderer {
 		Globals.textRendererBufferList.clear();
 
 		Globals.cursor.draw();
-	}
-}
+	
+}}

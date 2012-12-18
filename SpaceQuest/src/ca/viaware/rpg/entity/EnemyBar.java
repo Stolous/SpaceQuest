@@ -21,19 +21,14 @@ public class EnemyBar extends AbstractEntity {
 	@Override
 	public void draw() {
 		BackGround.update();
-<<<<<<< HEAD
 
-=======
->>>>>>> c886dbb116635560960c098fa351e27a736d39a2
 	}
 
 	@Override
 	public void update(int delta) {
-<<<<<<< HEAD
 
-=======
 		System.out.println("Upd X is " + enemy.getX());
->>>>>>> c886dbb116635560960c098fa351e27a736d39a2
+
 		BackGround.setlocation(enemy.getX(), enemy.getY());
 		x = enemy.getX();
 		y = enemy.getY();
