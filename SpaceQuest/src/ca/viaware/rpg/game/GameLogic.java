@@ -17,16 +17,14 @@ public class GameLogic {
 	PlayerMovement pMovement = new PlayerMovement();
 	FullscreenHandler fHandler = new FullscreenHandler();
 	private int timer = 0, count = 0;
+	
 
 	public void doLogic(int delta) {
 
 		if (Globals.gameState == Globals.gState.INTRO && count == 2) {
-			timer += delta;
-			if (timer > 1500) {
-				System.out.println("Switching gamestate to main menu");
-				Globals.gameState = Globals.gState.MAIN_MENU;
-				Globals.cursor.setEnabled(true);
-			}
+			Globals.m.render();
+			
+			
 		} else if (count <= 2) {
 			count++;
 		}

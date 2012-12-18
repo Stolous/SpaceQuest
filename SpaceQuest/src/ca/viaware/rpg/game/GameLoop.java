@@ -19,7 +19,7 @@ import ca.viaware.rpg.entities.AmmoBar;
 import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
 import ca.viaware.rpg.map.MapHandler;
-import ca.viaware.rpg.utilities.Button;
+import ca.viaware.rpg.utilities.SButton;
 import ca.viaware.rpg.utilities.DebugScreen;
 import ca.viaware.rpg.utilities.MouseData;
 import ca.viaware.rpg.utilities.OnClickListener;
@@ -29,10 +29,13 @@ import ca.viaware.rpg.utilities.TextureHandler;
 public class GameLoop {
 	private long lasttime = 0;
 
+	
 	public void startLoop() {
+		Globals.m=new MainMenu();
 		Globals.healthBar = new HealthBar();
 		Globals.playerEntity = new Player(Globals.dispWidth / 2 - 32, Globals.dispHeight / 2 - 32, 64, 64);
 		Globals.cursor = new Cursor(0, 0, 32, 32);
+		Globals.cursor.setEnabled(true);
 		setupTextures();
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
@@ -46,7 +49,7 @@ public class GameLoop {
 		
 		Globals.gameMap = MapHandler.handleMapLoad("TestMap1");
 		MapHandler.finishLoad();
-		Button button = new Button(100,100,150,50);
+		
 		
 		while (Globals.isRunning) {
 			
@@ -65,16 +68,9 @@ public class GameLoop {
 			
 			
 			
-			button.updateOnClickListener(new OnClickListener(button));
-			button.setText("Text");
-			button.AddOnClickListener(new ClickListener() {
-				@Override
-				public void ClickListener(OnClickListener OCL) {
-					System.out.println("Click");
-				}
-			});
 			
-			Globals.buttonBuffer.add(button);
+			
+			
 			
 		
 			for(int i=0;i<Globals.enemies.size();i++){

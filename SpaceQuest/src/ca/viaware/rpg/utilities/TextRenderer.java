@@ -69,7 +69,8 @@ public class TextRenderer {
 	}
 
 	public void update() {
-
+		x = getx();
+		y = gety();
 		char[] c = text.toCharArray();
 
 		int letter;
@@ -154,11 +155,11 @@ public class TextRenderer {
 	}
 
 	public double getx() {
-		return x;
+		return x+xh;
 	}
 
 	public double gety() {
-		return y;
+		return y+yh;
 	}
 
 	public double getXh() {

@@ -1,9 +1,9 @@
 package ca.viaware.rpg.entities;
 
-import org.lwjgl.input.Mouse;
+
 import org.newdawn.slick.opengl.Texture;
 
-import ca.viaware.rpg.entity.Bullet;
+
 import ca.viaware.rpg.entity.RangedEnemy;
 import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TexturedQuad;

@@ -5,7 +5,7 @@ import org.lwjgl.opengl.*;
 import ca.viaware.rpg.entity.Enemy;
 import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
-import ca.viaware.rpg.utilities.Button;
+import ca.viaware.rpg.utilities.SButton;
 import ca.viaware.rpg.utilities.TextRenderer;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -32,7 +32,8 @@ public class Renderer {
 		case MAIN_MENU:
 
 			Globals.gameState = Globals.gState.GAME;
-			new Menu();
+			
+			
 			break;
 		case GAME:
 			
@@ -48,7 +49,7 @@ public class Renderer {
 			break;
 		}
 		
-		for (Button b : Globals.buttonBuffer){
+		for (SButton b : Globals.buttonBuffer){
 			b.draw();
 		}
 		Globals.buttonBuffer.clear();

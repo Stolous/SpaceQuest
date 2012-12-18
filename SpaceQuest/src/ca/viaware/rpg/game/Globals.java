@@ -16,13 +16,14 @@ import ca.viaware.rpg.entities.WeakSlime;
 import ca.viaware.rpg.entities.AmmoBar;
 import ca.viaware.rpg.map.Map;
 import ca.viaware.rpg.map.TeleMarker;
-import ca.viaware.rpg.utilities.Button;
+import ca.viaware.rpg.utilities.SButton;
 import ca.viaware.rpg.utilities.TextRenderer;
 
 public class Globals {
 
 	ArrayList<ArrayList<String>> array = new ArrayList<ArrayList<String>>();
 
+	public static MainMenu m;
 	public static HealthBar healthBar;
 	//please note mobs should not be spawned at 0,0 or where they cannot reach player
 	public static ArrayList <Enemy> enemies=new ArrayList<Enemy>();
@@ -39,7 +40,7 @@ public class Globals {
 	public static boolean isFullscreen = false;
 	public static List<TeleMarker> teleMarkers = new ArrayList<TeleMarker>(16);
 	public static List<TextRenderer> textRendererBufferList = new ArrayList<TextRenderer>(16);
-	public static List<Button> buttonBuffer = new ArrayList<Button>(16);
+	public static List<SButton> buttonBuffer = new ArrayList<SButton>(16);
 
 	public static enum gState {
 		INTRO, MAIN_MENU, GAME, OUTRO;

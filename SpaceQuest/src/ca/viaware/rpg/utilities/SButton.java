@@ -9,13 +9,13 @@ import static org.lwjgl.opengl.GL11.*;
 import ca.viaware.rpg.entity.AbstractEntity;
 import ca.viaware.rpg.game.Globals;
 
-public class Button extends AbstractEntity {
+public class SButton extends AbstractEntity {
 	private Texture buttTex;
 	protected EventListenerList listenerList = new EventListenerList();
 	String text = "";
 	private TextRenderer tRender = new TextRenderer(50, 0, TextRenderer.Font.BLACK);
 
-	public Button(int X, int Y, int width, int height) {
+	public SButton(int X, int Y, int width, int height) {
 		super(X, Y, width, height);
 		TextureHandler tt = new TextureHandler();
 		buttTex = tt.loadSprite("other/button");
@@ -62,7 +62,7 @@ public class Button extends AbstractEntity {
 		// needs to be increased by 25 just to make it in the same place as the
 		// quad. this is something that you need to look into because this means
 		// that all of your textured quads are off slightly
-		tRender.writeToScreen((int) x, (int) y + 25, text);
+		tRender.writeToScreen((int) x, (int) y, text);
 		tRender.finish();
 	}
 
