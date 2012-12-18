@@ -18,7 +18,9 @@ public class GameLogic {
 	private int timer = 0, count = 0;
 
 	public void doLogic(int delta) {
-
+		for (int ii = 0; ii < Globals.enemies.size(); ii++) {
+			Globals.enemies.get(ii).reset();
+		}
 		if (Globals.gameState == Globals.gState.INTRO) {
 			count++;
 			if (count > 2) {

@@ -8,6 +8,7 @@ import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
+import ca.viaware.rpg.entity.Enemy;
 import ca.viaware.rpg.entity.MeleeEnemy;
 import ca.viaware.rpg.entities.Cursor;
 import ca.viaware.rpg.entities.FastSlime;
@@ -19,6 +20,7 @@ import ca.viaware.rpg.entities.WeakSlime;
 import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
 import ca.viaware.rpg.map.MapHandler;
+import ca.viaware.rpg.utilities.EnemyHandler;
 import ca.viaware.rpg.utilities.SButton;
 import ca.viaware.rpg.utilities.DebugScreen;
 import ca.viaware.rpg.utilities.MouseData;
@@ -39,6 +41,8 @@ public class GameLoop {
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
+		Globals.enemies.add(EnemyHandler.handleEnemy());
+		Globals.enemies.add(EnemyHandler.handleEnemy());
 		// Globals.ammoBar = new AmmoBar();
 
 		Globals.gameMap = MapHandler.handleMapLoad("TestMap1");
@@ -56,14 +60,7 @@ public class GameLoop {
 
 			logic.doLogic(delta);
 			render.render();
-
-			for (int i = 0; i < Globals.enemies.size(); i++) {
-
-				for (int ii = 0; ii < Globals.enemies.size(); ii++) {
-					Globals.enemies.get(ii).reset();
-				}
-
-			}
+			
 			Display.update();
 			Display.sync(60);
 			if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {

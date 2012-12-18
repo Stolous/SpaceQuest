@@ -9,7 +9,6 @@ public class SpaceQuest {
 		DispSetup.setupDisplay();
 		DispSetup.setupGL();
 		GameLoop gloop = new GameLoop();
-		Globals.enemies.add(new UFO(1, 1));
 		gloop.startLoop();
 
 	}
