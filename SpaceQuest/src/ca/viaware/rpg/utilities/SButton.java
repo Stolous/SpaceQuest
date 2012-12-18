@@ -10,6 +10,7 @@ import ca.viaware.rpg.entity.AbstractEntity;
 import ca.viaware.rpg.game.Globals;
 
 public class SButton extends AbstractEntity {
+	private boolean bindown = false ;
 	private Texture buttTex;
 	protected EventListenerList listenerList = new EventListenerList();
 	String text = "";
@@ -71,15 +72,23 @@ public class SButton extends AbstractEntity {
 	}
 
 	public void updateOnClickListener(OnClickListener OCL) {
+		Object[] listeners = listenerList.getListenerList();
 
 		if (Mouse.isButtonDown(0)) {
 
-			Object[] listeners = listenerList.getListenerList();
+			
 			for (int i = 0; i < listeners.length; i = i + 2) {
 				if (this.intersects(Globals.cursor)) {
-					((ClickListener) listeners[i + 1]).ClickListener(OCL);
+					bindown=true;
+					
 
 				}
+				
+			}
+		}else if(bindown==true){
+			for (int i = 0; i < listeners.length; i = i + 2) {
+				System.out.print("Click");
+			((ClickListener) listeners[i + 1]).ClickListener(OCL);
 			}
 		}
 	}
