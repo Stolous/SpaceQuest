@@ -41,11 +41,9 @@ public class GameLoop {
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
-		Globals.enemies.add(EnemyHandler.handleEnemy());
-		Globals.enemies.add(EnemyHandler.handleEnemy());
 		// Globals.ammoBar = new AmmoBar();
 
-		Globals.gameMap = MapHandler.handleMapLoad("TestMap1");
+		Globals.gameMap = MapHandler.handleMapLoad("testing");
 		MapHandler.finishLoad();
 
 		while (Globals.isRunning) {

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import ca.viaware.rpg.game.Globals;
+import ca.viaware.rpg.utilities.EnemyHandler;
 
 public class Loader {
 
@@ -53,12 +54,15 @@ public class Loader {
 				WP.setPointToMap(data[4]);
 				WP.setPointTo(data[3]);
 				Globals.teleMarkers.add(WP);
+			} else if (data[0].equals("EN")){
+				Globals.enemies.add(EnemyHandler.handleEnemy(Integer.parseInt(data[1]), Integer.parseInt(data[2])));
 			}
 		}
 		
 		for (Tile[] tile1 : mapTiles){
 			for (Tile tile : tile1){
 				tile.updateTeleMarkers();
+				tile.updateEnemies();
 			}
 		}
 

@@ -20,6 +20,8 @@ public class Tile extends AbstractMoveableEntity {
 	private TeleMarker teleMarker;
 	private int teleMarkerID;
 	int actX, actY;
+	private boolean isEnemy;
+	public int enemyID = 0;
 
 	public Tile(double n1, double n2, double n3, double n4, boolean enabled, String data, int tileX, int tileY) {
 		super(n1, n2, n3, n4);
@@ -137,6 +139,13 @@ public class Tile extends AbstractMoveableEntity {
 			teleMarkerID = Integer.parseInt(data[3]);
 			hasTeleMarker = true;
 		}
+		
+		if (data[4].equals("N")){
+		
+		}else{
+			isEnemy = true;
+			enemyID = Integer.parseInt(data[4]);
+		}
 	}
 
 	public boolean hasCollision() {
@@ -183,6 +192,17 @@ public class Tile extends AbstractMoveableEntity {
 				teleMarkerIn = false;
 				teleMarkerOut = true;
 			}
+		}
+	}
+	
+	public boolean isEnemy(){
+		return isEnemy;
+	}
+	
+	public void updateEnemies(){
+		if (isEnemy){
+			Globals.enemies.get(enemyID).setX(this.getX());
+			Globals.enemies.get(enemyID).setY(this.getY());
 		}
 	}
 }
