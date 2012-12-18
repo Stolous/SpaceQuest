@@ -29,9 +29,8 @@ import ca.viaware.rpg.utilities.TextureHandler;
 public class GameLoop {
 	private long lasttime = 0;
 
-	
 	public void startLoop() {
-		Globals.m=new MainMenu();
+		Globals.m = new MainMenu();
 		Globals.healthBar = new HealthBar();
 		Globals.playerEntity = new Player(Globals.dispWidth / 2 - 32, Globals.dispHeight / 2 - 32, 64, 64);
 		Globals.cursor = new Cursor(0, 0, 32, 32);
@@ -40,11 +39,10 @@ public class GameLoop {
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
-		//Globals.ammoBar = new AmmoBar();
+		// Globals.ammoBar = new AmmoBar();
 
 		Globals.gameMap = MapHandler.handleMapLoad("TestMap1");
 		MapHandler.finishLoad();
-		SButton button = new SButton(100, 100, 150, 50);
 
 		while (Globals.isRunning) {
 
@@ -58,43 +56,25 @@ public class GameLoop {
 
 			logic.doLogic(delta);
 			render.render();
-			
-			
-			
-			
-			
-			
-			
-		
-			for(int i=0;i<Globals.enemies.size();i++){
 
-			button.updateOnClickListener(new OnClickListener(button));
-			button.setText("Text");
-			button.AddOnClickListener(new ClickListener() {
-				@Override
-				public void ClickListener(OnClickListener OCL) {
-					System.out.println("Click");
+			for (int i = 0; i < Globals.enemies.size(); i++) {
+
+				for (int ii = 0; ii < Globals.enemies.size(); ii++) {
+					Globals.enemies.get(ii).reset();
 				}
-			});
 
-			Globals.buttonBuffer.add(button);
-
-			for (int ii = 0; ii < Globals.enemies.size(); ii++) {
-				Globals.enemies.get(ii).reset();
 			}
 			Display.update();
 			Display.sync(60);
-
 			if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
 				Globals.isRunning = false;
 			}
 			if (Display.isCloseRequested()) {
 				Globals.isRunning = false;
 			}
-
 		}
 		Display.destroy();
-		System.exit(0);}
+		System.exit(0);
 	}
 
 	private void setupTextures() {

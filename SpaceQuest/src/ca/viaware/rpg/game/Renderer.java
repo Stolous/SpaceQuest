@@ -31,8 +31,8 @@ public class Renderer {
 			break;
 		case MAIN_MENU:
 
-			Globals.gameState = Globals.gState.GAME;
 			
+			Globals.m.render();
 			
 			break;
 		case GAME:
