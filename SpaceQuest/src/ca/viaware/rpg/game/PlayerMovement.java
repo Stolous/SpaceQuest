@@ -13,7 +13,7 @@ import ca.viaware.rpg.utilities.TextRenderer;
 public class PlayerMovement {
 	private boolean arrowG1 = false, arrowG2 = false;
 	private TextRenderer tRenderer = new TextRenderer(30, 0, TextRenderer.Font.WHITE);
-	
+
 	public void checkMovement(int delta) {
 		double speed = Globals.playerEntity.getSpeed();
 		if (delta < 30) {
@@ -113,7 +113,7 @@ public class PlayerMovement {
 				}
 			}
 		}
-		
+
 		tRenderer.finish();
 		Globals.playerEntity.update(delta);
 	}

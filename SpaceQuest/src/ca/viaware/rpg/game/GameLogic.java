@@ -12,7 +12,6 @@ import org.lwjgl.opengl.GL11;
 import ca.viaware.rpg.utilities.FullscreenHandler;
 
 public class GameLogic {
-	
 
 	PlayerMovement pMovement = new PlayerMovement();
 	FullscreenHandler fHandler = new FullscreenHandler();

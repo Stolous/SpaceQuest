@@ -11,32 +11,31 @@ public class RangedEnemy extends Enemy {
 
 	private boolean movedOnce = false;
 
-
 	private TexturedQuad t;
-	private int delta, agressiveness, betattacks, attackspeed, blockx, blocky;
-	private double distancebetween, xdist, ydist, playerx, playery, range, actxdist, actydist, speed, sightrange, xspeed, yspeed, BulletSpeed, optrange,mxc,myc,xoff,yoff;
+	private int delta, aggresiveness, betattacks, attackspeed, blockx, blocky;
+	private double distancebetween, xdist, ydist, playerx, playery, range, actxdist, actydist, speed, sightrange, xspeed, yspeed, BulletSpeed, optrange, mxc, myc, xoff, yoff;
 	private int mindamage, maxdamage;
 	private Texture Bullet;
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
-	public RangedEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed, double optdist, double sightrange, String path, double BulletSpeed,double xoff,double yoff) {
+	public RangedEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int aggresiveness, double range, double speed, int attackspeed, double optdist, double sightrange, String path, double BulletSpeed, double xoff, double yoff) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
-		this.mindamage =mindamage;
+		this.mindamage = mindamage;
 		this.maxdamage = maxdamage;
 		TextureHandler t = new TextureHandler();
 		this.Bullet = t.loadSprite(path);
 		this.attackspeed = attackspeed;
 		this.speed = speed / 100;
 		this.range = range;
-		this.agressiveness = agresiveness;
+		this.aggresiveness = aggresiveness;
 		mx = spawnx;
 		my = spawny;
 		x = (mx);
 		y = (my);
 		this.sightrange = sightrange;
 
-		this.xoff =xoff;
-		this.yoff=yoff;
+		this.xoff = xoff;
+		this.yoff = yoff;
 		this.BulletSpeed = BulletSpeed;
 
 		// this way the initial attack will be faster
@@ -47,12 +46,10 @@ public class RangedEnemy extends Enemy {
 	private void attack() {
 
 		if (betattacks >= attackspeed) {
-			bullets.add(new Bullet(this.Bullet, x-xoff, Globals.playerEntity.getActX(), y-yoff, Globals.playerEntity.getActY(), BulletSpeed, mindamage, maxdamage));
+			bullets.add(new Bullet(this.Bullet, x - xoff, Globals.playerEntity.getActX(), y - yoff, Globals.playerEntity.getActY(), BulletSpeed, mindamage, maxdamage));
 			betattacks = 0;
 
 		}
-		
-		
 
 	}
 
@@ -78,16 +75,15 @@ public class RangedEnemy extends Enemy {
 
 	@Override
 	public void update(int delta) {
-		
-		mxc=0;
-		myc=0;
+
+		mxc = 0;
+		myc = 0;
 		drawbullets();
-		betattacks+=delta;
+		betattacks += delta;
 
 		blockx = (int) (mx / 64);
 		blocky = (int) (my / 64);
 
-		
 		setX(getT().getx());
 		setY(getT().gety());
 
@@ -118,39 +114,30 @@ public class RangedEnemy extends Enemy {
 			attack();
 			if (distancebetween > range) {
 				movedOnce = true;
-				mx = moverx(actxdist, mx, speed, xdist, true); 
+				mx = moverx(actxdist, mx, speed, xdist, true);
 				my = moverx(actydist, my, speed, ydist, false);
 
 			} else {// this means the mob is within range and will attack
 				double optxd = playerx + (Player.getW() / 2) - optrange;
 				double optyd = playery + (Player.getH() / 2) - optrange;
-				
 
 				if (!(distancebetween == optrange) && movedOnce == false) {
 
 					mx = moverx(optxd, mx, speed, xdist, true);
 					my = moverx(optyd, my, speed, ydist, false);
 
-					
-					
 				}
 
-				
-
 			}
-			
 
-			
-			
 		}
-	
 
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
 		getB().update(getdelta());
 	}
 
-private double moverx(double i, double mx, double speed, double dist, boolean b) {
+	private double moverx(double i, double mx, double speed, double dist, boolean b) {
 		dist = dist / 100;
 		double change = speed * dist;
 
@@ -176,7 +163,6 @@ private double moverx(double i, double mx, double speed, double dist, boolean b)
 
 	}
 
-
 	protected double getmx() {
 		return mx;
 	}
@@ -195,7 +181,6 @@ private double moverx(double i, double mx, double speed, double dist, boolean b)
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
 
 	}
 

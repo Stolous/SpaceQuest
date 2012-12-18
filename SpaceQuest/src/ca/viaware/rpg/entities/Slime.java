@@ -1,7 +1,5 @@
 package ca.viaware.rpg.entities;
 
-
-
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.MeleeEnemy;
@@ -14,9 +12,8 @@ public class Slime extends MeleeEnemy {
 	private int index = 1;
 	private int slower = 0;
 
-	public Slime(  int spawnx, int spawny) {
-		super(50, 50, 100, 10, 5, spawnx, spawny, 1, 10, 60, 50,400);
-		// TODO Auto-generated constructor stub
+	public Slime(int spawnx, int spawny) {
+		super(50, 50, 100, 10, 5, spawnx, spawny, 1, 10, 60, 50, 400);
 
 		setT(new TexturedQuad((int) width, (int) height, 0, 0, 0, "res/sprites/enemies/slimemoving/1.png"));
 

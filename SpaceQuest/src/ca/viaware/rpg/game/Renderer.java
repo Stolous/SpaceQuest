@@ -36,11 +36,10 @@ public class Renderer {
 			
 			break;
 		case GAME:
-			
 
 			Globals.gameMap.renderMap();
 			Globals.playerEntity.draw();
-			for (Enemy enemy : Globals.enemies){
+			for (Enemy enemy : Globals.enemies) {
 				enemy.draw();
 			}
 			Globals.healthBar.update();
@@ -48,17 +47,22 @@ public class Renderer {
 
 			break;
 		}
+<<<<<<< HEAD
 		
 		for (SButton b : Globals.buttonBuffer){
+=======
+
+		for (Button b : Globals.buttonBuffer) {
+>>>>>>> c886dbb116635560960c098fa351e27a736d39a2
 			b.draw();
 		}
 		Globals.buttonBuffer.clear();
-		
-		for (TextRenderer t : Globals.textRendererBufferList){
+
+		for (TextRenderer t : Globals.textRendererBufferList) {
 			t.renderBuffer();
 		}
 		Globals.textRendererBufferList.clear();
-		
+
 		Globals.cursor.draw();
 	}
 }

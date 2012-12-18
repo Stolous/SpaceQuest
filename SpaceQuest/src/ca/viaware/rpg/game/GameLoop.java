@@ -40,23 +40,21 @@ public class GameLoop {
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
+		Globals.ammoBar = new AmmoBar();
 
-				//Globals.enemies.add(new Slime(0,0));
-				//Globals.enemies.add(new FastSlime(10,10));
-				//Globals.enemies.add(new WeakSlime(30,30));
-
-		Globals.ammoBar=new AmmoBar();
-		
 		Globals.gameMap = MapHandler.handleMapLoad("TestMap1");
 		MapHandler.finishLoad();
+<<<<<<< HEAD
 		
 		
+=======
+		Button button = new Button(100, 100, 150, 50);
+
+>>>>>>> c886dbb116635560960c098fa351e27a736d39a2
 		while (Globals.isRunning) {
-			
-			
-			
+
 			int delta = getDelta();
-			
+
 			// Update debug screen
 			dbs.updateDelta(delta);
 			dbs.updateMouseCoords(MouseData.MouseX(), MouseData.MouseY());
@@ -65,6 +63,7 @@ public class GameLoop {
 
 			logic.doLogic(delta);
 			render.render();
+<<<<<<< HEAD
 			
 			
 			
@@ -74,6 +73,21 @@ public class GameLoop {
 			
 		
 			for(int i=0;i<Globals.enemies.size();i++){
+=======
+
+			button.updateOnClickListener(new OnClickListener(button));
+			button.setText("Text");
+			button.AddOnClickListener(new ClickListener() {
+				@Override
+				public void ClickListener(OnClickListener OCL) {
+					System.out.println("Click");
+				}
+			});
+
+			Globals.buttonBuffer.add(button);
+
+			for (int i = 0; i < Globals.enemies.size(); i++) {
+>>>>>>> c886dbb116635560960c098fa351e27a736d39a2
 				Globals.enemies.get(i).reset();
 			}
 			Display.update();
@@ -106,12 +120,8 @@ public class GameLoop {
 		Globals.tileTextures.add(th.loadSprite("tiles/double alien cactus plant"));
 		Globals.tileTextures.add(th.loadSprite("tiles/red rock"));
 		Globals.tileTextures.add(th.loadSprite("tiles/sign"));
-		//NUMBER ONE RULE FOR LOADING NEW TILES
-		//THEY MUST BE PUT AT THE BOTTOM
-		//OR ELSE THEY MAKE OLD MAPS NOT WORK PROPERLY:
 		Globals.tileTextures.add(th.loadSprite("tiles/dirt"));
-		//JUST A HEADS UP FOR NEXT TIME
-		
+
 		System.out.println("Loaded " + Globals.tileTextures.size() + " tile textures");
 
 		// Player animation stages - Temporary, messy and needs redoing

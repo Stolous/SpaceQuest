@@ -1,7 +1,5 @@
 package ca.viaware.rpg.entities;
 
-
-
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.MeleeEnemy;
@@ -15,8 +13,7 @@ public class FastSlime extends MeleeEnemy {
 	private int slower = 0;
 
 	public FastSlime(int spawnx, int spawny) {
-		super(50, 50, 30, 5, 2, spawnx, spawny, 1, 10, 150, 40,500);
-		// TODO Auto-generated constructor stub
+		super(50, 50, 30, 5, 2, spawnx, spawny, 1, 10, 150, 40, 500);
 
 		setT(new TexturedQuad((int) width, (int) height, 0, 0, 0, "res/sprites/enemies/fastslimemoving/1.png"));
 
