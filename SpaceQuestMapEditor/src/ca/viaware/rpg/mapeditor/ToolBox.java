@@ -21,7 +21,7 @@ public class ToolBox extends JFrame {
 	private JLabel tileLayer2Name = new JLabel();
 	private JLabel hasCollision = new JLabel();
 	private JLabel tileIndex = new JLabel();
-	private JComboBox<Object> textureSelect = new JComboBox<Object>();
+	private JComboBox textureSelect = new JComboBox();
 	private JButton paintTool = new JButton();
 	private JButton eraseTool = new JButton();
 	private JButton collisionTool = new JButton();
