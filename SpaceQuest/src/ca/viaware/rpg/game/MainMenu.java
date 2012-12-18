@@ -13,6 +13,7 @@ public class MainMenu {
 	Texture [] backGround = new Texture [3];
 	SButton start,options,help,quit;
 	TexturedQuad UFO;
+	private int location=0;
 public MainMenu(){
 	TextureHandler t = new TextureHandler();
 	String s = "other/main menu screen000";
@@ -42,6 +43,13 @@ public MainMenu(){
 	public void render(){
 		
 				
+		backGround[location].bind();
+		location++;
+		if(location== 4){
+			location=0;
+		}
+		System.out.println("loc"+ location);
+		
 		
 		start.updateOnClickListener(new OnClickListener(start));
 		start.AddOnClickListener(new ClickListener() {
