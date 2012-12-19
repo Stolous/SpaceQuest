@@ -36,7 +36,7 @@ public class Renderer {
 			
 			break;
 		case GAME:
-
+			
 			Globals.gameMap.renderMap();
 			Globals.playerEntity.draw();
 			for (Enemy enemy : Globals.enemies) {

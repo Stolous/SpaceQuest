@@ -14,7 +14,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 public class TexturedQuad {
 
-	private double xsize, ysize, x, y, rotate, xh, yh,trans;
+	private double xsize, ysize, x, y, rotate, xh, yh,trans = 100;
 
 	Texture t;
 
@@ -69,7 +69,7 @@ public class TexturedQuad {
 		glRotated(rotate, 0.0f, 0.0f, -1.0f); // rotate
 		glTranslatef(-10.0f, -10.5f, 0.0f); // to the origin
 		glTranslated(-x, -y, 0);
-
+		
 		glBegin(GL11.GL_QUADS);
 		glTexCoord2f(0, 0);
 		glVertex2d(x - getXh(), y - yh);
