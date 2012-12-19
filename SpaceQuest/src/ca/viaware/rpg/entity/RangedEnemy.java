@@ -139,26 +139,32 @@ public class RangedEnemy extends Enemy {
 
 	private double moverx(double i, double mx, double speed, double dist, boolean b) {
 		dist = dist / 100;
-		double change = speed * dist;
+		double change=0;
 
 		if (i > 0) {
+			change =  speed * dist;
 
 			if (i < range) {
-				change *= -1;
 
+				change = -speed * dist;
 			}
 		} else {
 			if (i < 0) {
-				change *= -1;
-
+				change = - speed * dist;
+				if (i > range) {
+					change = speed * dist;
+				}
 			}
 		}
-		if (b == true) {
-			this.mxc = change;
-		} else {
-			this.myc = change;
-		}
-		mx = mx + change;
+if(change >speed){
+	change = speed;
+}
+
+if(change>0){
+	change+=speed;
+}
+		
+		mx += change;
 		return mx;
 
 	}

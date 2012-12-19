@@ -100,22 +100,11 @@ public class MeleeEnemy extends Enemy {
 				i++;
 			}
 			if (distancebetween > range) {
-				if ((xdist - ydist) > 50) {
-
-					mx = moverx(actxdist, mx, speed, xdist - (xdist * 0.1));
-					my = moverx(actydist, my, speed, ydist);
-				} else if ((ydist - xdist) > 50) {
-
-					mx = moverx(actxdist, mx, speed, xdist);
-					my = moverx(actydist, my, speed, ydist - (ydist * 0.1));
-				} else if (xdist + ydist < 300) {
-
-					mx = moverx(actxdist, mx, speed, (xdist + 1) * 7);
-					my = moverx(actydist, my, speed, (ydist + 1) * 7);
-				} else {
+				
+			 
 					mx = moverx(actxdist, mx, speed, xdist);
 					my = moverx(actydist, my, speed, ydist);
-				}
+				
 			} else {// this means the mob is within range and will attack
 				b = true;
 				attack();
@@ -133,23 +122,32 @@ public class MeleeEnemy extends Enemy {
 
 	private double moverx(double i, double mx, double speed, double dist) {
 		dist = dist / 100;
+		double change=0;
 
 		if (i > 0) {
-			mx = mx + speed * dist;
+			change =  speed * dist;
 
 			if (i < range) {
 
-				mx = mx - speed * dist;
+				change = -speed * dist;
 			}
 		} else {
 			if (i < 0) {
-				mx = mx - speed * dist;
+				change = - speed * dist;
 				if (i > range) {
-					mx = mx + speed * dist;
+					change = speed * dist;
 				}
 			}
 		}
+if(change >speed){
+	change = speed;
+}
 
+if(change>0){
+	change+=speed;
+}
+		
+		mx += change;
 		return mx;
 
 	}
