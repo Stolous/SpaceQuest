@@ -14,7 +14,7 @@ public class Saver {
 
 	//final static Charset ENCODING = StandardCharsets.UTF_8;
 
-	void saveMap(List<String> aLines, String name) throws IOException {
+	void saveMap(List<String> mapData, String name) throws IOException {
 		File mapPath = new File("res/maps/" + name + ".map");
 		
 		if (mapPath.exists()){
@@ -25,21 +25,33 @@ public class Saver {
 			mapPath.createNewFile();
 		}
 		
-		Writer writer = new OutputStreamWriter(new FileOutputStream(mapPath));
+		Writer outputStream = new OutputStreamWriter(new FileOutputStream(mapPath));
+		BufferedWriter writer = new BufferedWriter(outputStream);
 		
-		for (String data : aLines){
+		for (String data : mapData){
 			writer.write(data);
+			writer.newLine();
+			writer.flush();
 		}
 		
 		for (Waypoint way : Globals.waypoints){
 			writer.write("WP/" + Integer.toString(way.getType()) + "/" + way.getName() + "/" + way.getPointTo() + "/" + way.getPointToMap());
+			writer.newLine();
+			writer.flush();
 		}
 		
 		for (Enemy enemy : Globals.enemies){
+			System.out.println("Writing enemy " + enemy.getType().getName());
 			writer.write("EN/" + Integer.toString(Globals.enemyTypes.indexOf(enemy.getType())) + "/" + enemy.getLevel());
+			writer.newLine();
+			writer.flush();
 		}
 		
-		/*try {
+		writer.close();
+		outputStream.close();
+
+		/* 1.7+ code
+		try {
 			Files.createFile(Paths.get("res/maps/" + name + ".map"));
 		} catch (FileAlreadyExistsException e) {
 			System.out.println("File: " + "res/maps/" + name + ".map exists, erasing and recreating");
@@ -49,7 +61,7 @@ public class Saver {
 
 		Path path = Paths.get("res/maps/" + name + ".map");
 		try (BufferedWriter writer = Files.newBufferedWriter(path, ENCODING)) {
-			for (String line : aLines) {
+			for (String line : mapData) {
 				writer.write(line);
 				writer.newLine();
 			}
