@@ -103,7 +103,7 @@ public class RangedEnemy extends Enemy {
 		}
 		ydist = playery + (Player.getH() / 2) - my;
 		actydist = ydist;
-		if (ydist < 1) {
+		if (ydist < 0) {
 			ydist *= -1;
 		}
 
@@ -111,25 +111,24 @@ public class RangedEnemy extends Enemy {
 																			// theorem
 
 		if (distancebetween < sightrange) {
-			attack();
-			if (distancebetween > range) {
-				movedOnce = true;
-				mx = moverx(actxdist, mx, speed, xdist, true);
-				my = moverx(actydist, my, speed, ydist, false);
+			
+			mx = moverx(actxdist, mx, speed, xdist, true);
+			my = moverx(actydist, my, speed, ydist, false);
+			if (distancebetween < range) {
+				
 
-			} else {// this means the mob is within range and will attack
-				double optxd = playerx + (Player.getW() / 2) - optrange;
-				double optyd = playery + (Player.getH() / 2) - optrange;
+			 // this means the mob is within range and will attack
+				
 
-				if (!(distancebetween == optrange) && movedOnce == false) {
+				
+					
+					
+					
 
-					mx = moverx(optxd, mx, speed, xdist, true);
-					my = moverx(optyd, my, speed, ydist, false);
+				
 
-				}
-
+			
 			}
-
 		}
 
 		mx = mx + getXoffset();// this is for movement of player
@@ -139,31 +138,33 @@ public class RangedEnemy extends Enemy {
 
 	private double moverx(double i, double mx, double speed, double dist, boolean b) {
 		dist = dist / 100;
-		double change=0;
+		double change = 0;
 
 		if (i > 0) {
-			change =  speed * dist;
+			change = speed * dist;
 
 			if (i < range) {
+				attack();
 
 				change = -speed * dist;
 			}
 		} else {
 			if (i < 0) {
-				change = - speed * dist;
+				change = -speed * dist;
 				if (i > range) {
 					change = speed * dist;
+					attack();
 				}
 			}
 		}
-if(change >speed){
-	change = speed;
-}
+		if (change > speed) {
+			change = speed;
+		}
 
-if(change>0){
-	change+=speed;
-}
-		
+		if (change > 0) {
+			change += speed;
+		}
+
 		mx += change;
 		return mx;
 

@@ -64,7 +64,7 @@ public class MeleeEnemy extends Enemy {
 		}
 		ydist = playery + (Player.getH() / 2) - my;
 		actydist = ydist;
-		if (ydist < 1) {
+		if (ydist < 0) {
 			ydist *= -1;
 		}
 
@@ -100,11 +100,9 @@ public class MeleeEnemy extends Enemy {
 				i++;
 			}
 			if (distancebetween > range) {
-				
-			 
-					mx = moverx(actxdist, mx, speed, xdist);
-					my = moverx(actydist, my, speed, ydist);
-				
+				mx = moverx(actxdist, mx, speed, xdist);
+				my = moverx(actydist, my, speed, ydist);
+
 			} else {// this means the mob is within range and will attack
 				b = true;
 				attack();
@@ -122,10 +120,10 @@ public class MeleeEnemy extends Enemy {
 
 	private double moverx(double i, double mx, double speed, double dist) {
 		dist = dist / 100;
-		double change=0;
+		double change = 0;
 
 		if (i > 0) {
-			change =  speed * dist;
+			change = speed * dist;
 
 			if (i < range) {
 
@@ -133,20 +131,20 @@ public class MeleeEnemy extends Enemy {
 			}
 		} else {
 			if (i < 0) {
-				change = - speed * dist;
+				change = -speed * dist;
 				if (i > range) {
 					change = speed * dist;
 				}
 			}
 		}
-if(change >speed){
-	change = speed;
-}
+		if (change > speed) {
+			change = speed;
+		}
 
-if(change>0){
-	change+=speed;
-}
-		
+		if (change > 0) {
+			change += speed;
+		}
+
 		mx += change;
 		return mx;
 
