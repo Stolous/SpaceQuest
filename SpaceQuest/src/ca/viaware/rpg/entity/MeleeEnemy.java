@@ -39,8 +39,8 @@ public class MeleeEnemy extends Enemy {
 
 	@Override
 	public void update(int delta) {
-
-		getB().update(getdelta());
+		
+		
 		blockx = (int) (mx / 64);
 		blocky = (int) (my / 64);
 
@@ -112,6 +112,7 @@ public class MeleeEnemy extends Enemy {
 				attack();
 			}
 		}
+		getB().update(getdelta());
 
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
