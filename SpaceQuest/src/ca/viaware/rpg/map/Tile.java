@@ -2,11 +2,15 @@ package ca.viaware.rpg.map;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.AbstractMoveableEntity;
+import ca.viaware.rpg.entity.Enemy;
 import ca.viaware.rpg.game.Globals;
+import ca.viaware.rpg.utilities.EnemyHandler;
 
 public class Tile extends AbstractMoveableEntity {
 
@@ -199,10 +203,13 @@ public class Tile extends AbstractMoveableEntity {
 		return isEnemy;
 	}
 	
-	public void updateEnemies(){
+	public void updateEnemies(int x, int y, List<String> enemyList){
 		if (isEnemy){
-			Globals.enemies.get(enemyID).setX(this.getX());
-			Globals.enemies.get(enemyID).setY(this.getY());
+			String[] data = enemyList.get(enemyID).split("/");
+			
+			Enemy e = EnemyHandler.handleEnemy(x * 64, y * 64, Integer.parseInt(data[0]), Integer.parseInt(data[1]));
+			
+			Globals.enemies.add(e);
 		}
 	}
 }

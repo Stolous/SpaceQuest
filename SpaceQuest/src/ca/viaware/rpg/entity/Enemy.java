@@ -24,6 +24,7 @@ public abstract class Enemy extends AbstractMoveableEntity {
 	}
 
 	public void reset() {
+		
 		mx = mx - getXoffset();// this is for movement of player
 		my = my - getYoffset();
 	}

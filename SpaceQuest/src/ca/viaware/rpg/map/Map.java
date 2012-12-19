@@ -19,7 +19,6 @@ public class Map {
 	public void renderMap() {
 		int countx = 0;
 		int county = 0;
-
 		while (county < ySize) {
 			while (countx < xSize) {
 

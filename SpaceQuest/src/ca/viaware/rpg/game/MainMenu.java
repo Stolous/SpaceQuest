@@ -99,7 +99,7 @@ public MainMenu(){
 						try {
 							Thread.sleep(50L);// this is so that the color shows
 												// for a little while
-							System.out.println("Switching Gamestate to game");
+							//System.out.println("Switching Gamestate to game");
 							Globals.gameState = Globals.gState.GAME;
 						} catch (InterruptedException e) {
 							e.printStackTrace();

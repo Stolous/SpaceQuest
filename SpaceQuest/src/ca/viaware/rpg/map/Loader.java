@@ -2,6 +2,8 @@ package ca.viaware.rpg.map;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import ca.viaware.rpg.game.Globals;
@@ -13,6 +15,7 @@ public class Loader {
 		Map map = new Map();
 		File location = new File("res/maps/" + name + ".map");
 		Scanner sc = null;
+		List<String> enemyData = new ArrayList<String>(16);
 		try {
 			sc = new Scanner(location);
 		} catch (FileNotFoundException e) {
@@ -37,33 +40,37 @@ public class Loader {
 					mapTiles[i][ycount] = new Tile(0, 0, 64, 64, false, line[i], i, ycount);
 				} else {
 					Tile tile = new Tile(0, 0, 64, 64, true, line[i], i, ycount);
-					
+
 					mapTiles[i][ycount] = tile;
 				}
 			}
 			ycount++;
 		}
-		
-		while(sc.hasNextLine()){
+
+		while (sc.hasNextLine()) {
 			String[] data = sc.nextLine().split("/");
-			
-			if (data[0].equals("WP")){
+
+			if (data[0].equals("WP")) {
 				TeleMarker WP = new TeleMarker();
 				WP.setType(Integer.parseInt(data[1]));
 				WP.setName(data[2]);
 				WP.setPointToMap(data[4]);
 				WP.setPointTo(data[3]);
 				Globals.teleMarkers.add(WP);
-			} else if (data[0].equals("EN")){
-				Globals.enemies.add(EnemyHandler.handleEnemy(Integer.parseInt(data[1]), Integer.parseInt(data[2])));
+			} else if (data[0].equals("EN")) {
+				enemyData.add(data[1] + "/" + data[2]);
 			}
 		}
-		
-		for (Tile[] tile1 : mapTiles){
-			for (Tile tile : tile1){
+		int x1 = 0, y1 = 0;
+		for (Tile[] tile1 : mapTiles) {
+			y1 = 0;
+			for (Tile tile : tile1) {
 				tile.updateTeleMarkers();
-				tile.updateEnemies();
+				tile.updateEnemies(x1, y1, enemyData);
+				y1++;
 			}
+
+			x1++;
 		}
 
 		map.setSize(x, y);

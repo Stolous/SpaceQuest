@@ -9,21 +9,21 @@ import ca.viaware.rpg.map.Tile;
 
 public class EnemyHandler {
 
-	public static Enemy handleEnemy(int ID, int level){
+	public static Enemy handleEnemy(int x, int y, int ID, int level){
 		Enemy e = null;
 		
 		switch (ID){
 		case 0:
-			e = new Slime(0, 0);
+			e = new Slime(x, y);
 			break;
 		case 1:
-			e = new WeakSlime(0, 0);
+			e = new WeakSlime(x, y);
 			break;
 		case 2:
-			e = new FastSlime(0, 0);
+			e = new FastSlime(x, y);
 			break;
 		case 3:
-			e = new UFO(0, 0);
+			e = new UFO(x, y);
 			break;
 		}
 		

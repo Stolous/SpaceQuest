@@ -87,7 +87,6 @@ public class SButton extends AbstractEntity {
 			}
 		}else if(bindown==true){
 			for (int i = 0; i < listeners.length; i = i + 2) {
-				System.out.print("Click");
 			((ClickListener) listeners[i + 1]).ClickListener(OCL);
 			}
 		}

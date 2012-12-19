@@ -52,13 +52,13 @@ public class RangedEnemy extends Enemy {
 		
 		//so that it is inaccurate both positive and negative
 		
-		System.out.println("change"+accchange);
+		//System.out.println("change"+accchange);
 		
 		Double newx =Globals.playerEntity.getActX()+accchange;
 		accchange= (r.nextInt(accuracy));
 		Double newy =Globals.playerEntity.getActY()+accchange;
-		System.out.println("newx"+(newx));
-		System.out.println("newy"+(newy));
+		//System.out.println("newx"+(newx));
+		//System.out.println("newy"+(newy));
 		if (betattacks >= attackspeed) {
 			
 			bullets.add(new Bullet(this.Bullet, x - xoff, newx, y - yoff, newy, BulletSpeed, mindamage, maxdamage));
