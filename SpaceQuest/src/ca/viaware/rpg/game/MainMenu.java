@@ -24,6 +24,9 @@ public class MainMenu {
 	TexturedQuad UFO;
 	private int location=0;
 	private boolean onethread = false;
+	
+	private double sinX = 0;
+	private double sinY = 0;
 public MainMenu(){
 	TextureHandler t = new TextureHandler();
 	String s = "other/main menu screen000";
@@ -31,7 +34,7 @@ public MainMenu(){
 		backGround[i]= t.loadSprite(s+(i+1));
 	}
 	
-	UFO=new TexturedQuad(450, 450, 450, 300, 0, "res/sprites/enemies/UFO/1.png");
+	UFO=new TexturedQuad(450, 450, 450, 250, 0, "res/sprites/enemies/UFO/1.png");
 	start = new SButton(100,100,200,70);
 	options = new SButton(80,200,200,70);
 	help = new SButton(80,300,200,70);
@@ -52,10 +55,14 @@ public MainMenu(){
 	
 	public void render(){
 		//this is for UFO movement up and down
+		
+		sinX = sinX + 0.025;
+		sinY = Math.sin(sinX);
+		
 		if(movementstage == 0){
-			UFO.move(0, 1);
+			UFO.move(0, sinY);
 		}else{
-			UFO.move(0, -1);
+			UFO.move(0, sinY);
 		}
 		if(UFO.gety()>350){
 			movementstage=1;
