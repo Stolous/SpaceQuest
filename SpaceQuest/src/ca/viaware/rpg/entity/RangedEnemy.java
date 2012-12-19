@@ -1,6 +1,8 @@
 package ca.viaware.rpg.entity;
 
 import java.util.ArrayList;
+import java.util.Random;
+
 import org.newdawn.slick.opengl.Texture;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.game.Globals;
@@ -14,11 +16,11 @@ public class RangedEnemy extends Enemy {
 	private TexturedQuad t;
 	private int delta, aggresiveness, betattacks, attackspeed, blockx, blocky;
 	private double distancebetween, xdist, ydist, playerx, playery, range, actxdist, actydist, speed, sightrange, xspeed, yspeed, BulletSpeed, optrange, mxc, myc, xoff, yoff;
-	private int mindamage, maxdamage;
+	private int mindamage, maxdamage,accuracy;
 	private Texture Bullet;
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
-	public RangedEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int aggresiveness, double range, double speed, int attackspeed, double optdist, double sightrange, String path, double BulletSpeed, double xoff, double yoff) {
+	public RangedEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int aggresiveness, double range, double speed, int attackspeed, double optdist, double sightrange, String path, double BulletSpeed, double xoff, double yoff,int accuracy) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
 		this.mindamage = mindamage;
 		this.maxdamage = maxdamage;
@@ -33,7 +35,7 @@ public class RangedEnemy extends Enemy {
 		x = (mx);
 		y = (my);
 		this.sightrange = sightrange;
-
+		this.accuracy=accuracy;
 		this.xoff = xoff;
 		this.yoff = yoff;
 		this.BulletSpeed = BulletSpeed;
@@ -44,9 +46,22 @@ public class RangedEnemy extends Enemy {
 	}
 
 	private void attack() {
-
+		
+		Random r=new Random();
+		int accchange= (r.nextInt(accuracy));
+		
+		//so that it is inaccurate both positive and negative
+		
+		System.out.println("change"+accchange);
+		
+		Double newx =Globals.playerEntity.getActX()+accchange;
+		accchange= (r.nextInt(accuracy));
+		Double newy =Globals.playerEntity.getActY()+accchange;
+		System.out.println("newx"+(newx));
+		System.out.println("newy"+(newy));
 		if (betattacks >= attackspeed) {
-			bullets.add(new Bullet(this.Bullet, x - xoff, Globals.playerEntity.getActX(), y - yoff, Globals.playerEntity.getActY(), BulletSpeed, mindamage, maxdamage));
+			
+			bullets.add(new Bullet(this.Bullet, x - xoff, newx, y - yoff, newy, BulletSpeed, mindamage, maxdamage));
 			betattacks = 0;
 
 		}

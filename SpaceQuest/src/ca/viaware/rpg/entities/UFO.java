@@ -16,7 +16,7 @@ public class UFO extends RangedEnemy {
 
 	public UFO(int spawnx, int spawny) {
 
-		super(50, 50, 30, 5, 2, spawnx, spawny, 1, 200, 50, 500, 100, 500, "bullets/LazerGreen", 250, 0, 0);
+		super(50, 50, 30, 5, 2, spawnx, spawny, 1, 200, 50, 500, 100, 500, "bullets/LazerGreen", 250, 0, 0,250);
 
 		setT(new TexturedQuad((int) width, (int) height, 0, 0, 0, "res/sprites/enemies/UFO/1.png"));
 
