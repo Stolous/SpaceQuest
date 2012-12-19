@@ -26,7 +26,11 @@ public class SButton extends AbstractEntity {
 	public void AddOnClickListener(ClickListener listener) {
 		listenerList.add(ClickListener.class, listener);
 	}
-
+public void move(double x,double y){
+	tRender.move(x, y);
+	this.x+=x;
+	this.y+=y;
+}
 	@Override
 	public void draw() {
 		// Rendering goes here.
