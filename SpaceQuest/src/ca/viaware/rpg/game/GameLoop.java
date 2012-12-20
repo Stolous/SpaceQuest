@@ -43,12 +43,16 @@ public class GameLoop {
 		DebugScreen dbs = new DebugScreen(170, 200);
 		// Globals.ammoBar = new AmmoBar();
 
-		Globals.gameMap = MapHandler.handleMapLoad("testing");
+		Globals.gameMap = MapHandler.handleMapLoad("testmap1");
 		MapHandler.finishLoad();
 
 		while (Globals.isRunning) {
 
 			int delta = getDelta();
+			
+			if (Keyboard.isKeyDown(Keyboard.KEY_Q)){
+				delta = 29;
+			}
 
 			// Update debug screen
 			dbs.updateDelta(delta);

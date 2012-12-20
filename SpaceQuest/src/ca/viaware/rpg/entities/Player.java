@@ -235,21 +235,21 @@ public class Player extends AbstractEntity {
 	}
 
 	public void teleportXY(int teleX, int teleY) {
-		actX = teleX;
-		actY = teleY;
+		actX = teleX - 64;
+		actY = teleY - 64;
 
-		int mapX = (int) (getX() - teleX);
-		int mapY = (int) (getY() - teleY);
+		int mapX = (int) (getX() - actX);
+		int mapY = (int) (getY() - actY);
 
 		Globals.gameMap.setOffsets(mapX, mapY);
 	}
 
 	public void teleport(Location loc) {
-		actX = loc.getX();
-		actY = loc.getY();
+		actX = loc.getX() - 64;
+		actY = loc.getY() - 64;
 
-		int mapX = (int) (getX() - loc.getX());
-		int mapY = (int) (getY() - loc.getY());
+		int mapX = (int) (getX() - actX);
+		int mapY = (int) (getY() - actY);
 
 		Globals.gameMap.setOffsets(mapX, mapY);
 	}
