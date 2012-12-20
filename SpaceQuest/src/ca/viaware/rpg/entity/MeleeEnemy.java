@@ -112,7 +112,7 @@ public class MeleeEnemy extends Enemy {
 				attack();
 			}
 		}
-		getB().update(getdelta());
+		
 
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();

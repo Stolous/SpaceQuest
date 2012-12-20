@@ -134,7 +134,7 @@ public class RangedEnemy extends Enemy {
 
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
-		getB().update(getdelta());
+		
 	}
 
 	private double moverx(double i, double mx, double speed, double dist, boolean b) {

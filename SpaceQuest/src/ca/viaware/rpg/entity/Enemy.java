@@ -18,7 +18,7 @@ public abstract class Enemy extends AbstractMoveableEntity {
 		this.currenthealth = this.maxhealth = maxhealth;
 		this.setMaxdamage(maxdamage);
 		this.setMindamage(mindamage);
-		setB(new EnemyBar(x, y, width, height, this, 1, new Effect[3]));
+	
 		// this is where spawn code goes
 
 	}
