@@ -228,8 +228,8 @@ public class Player extends AbstractEntity {
 		actX = teleX - 64;
 		actY = teleY - 64;
 
-		int mapX = (int) (getX() - teleX);
-		int mapY = (int) (getY() - teleY);
+		double mapX = getX() - teleX + 64;
+		double mapY = getY() - teleY + 64;
 
 		Globals.gameMap.setOffsets(mapX, mapY);
 	}
@@ -238,8 +238,8 @@ public class Player extends AbstractEntity {
 		actX = loc.getX() - 64;
 		actY = loc.getY() - 64;
 
-		int mapX = (int) (getX() - actX);
-		int mapY = (int) (getY() - actY);
+		double mapX = getX() - loc.getX() + 64;
+		double mapY = getY() - loc.getY() + 64;
 
 		Globals.gameMap.setOffsets(mapX, mapY);
 	}
