@@ -41,7 +41,7 @@ public class HealthBar {
 
 	}
 
-	public void fullscreen() {
+	public void windowResized() {
 		System.out.println("Size changed");
 		//barf.setSize(Display.getWidth(), (Display.getHeight() / 9));
 		//barf.setlocation(Display.getWidth() / 2, Display.getHeight() - Display.getHeight() / 25);

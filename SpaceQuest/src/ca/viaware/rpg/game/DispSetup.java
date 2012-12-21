@@ -22,6 +22,7 @@ public class DispSetup {
 		try {
 			Display.setTitle("SpaceQuest");
 			Display.setDisplayMode(new DisplayMode(Globals.dispWidth, Globals.dispHeight));
+			Display.setResizable(true);
 			Display.create();
 		} catch (LWJGLException e) {
 

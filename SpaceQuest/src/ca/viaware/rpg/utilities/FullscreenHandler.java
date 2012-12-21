@@ -33,7 +33,8 @@ public class FullscreenHandler {
 				} catch (LWJGLException e) {
 					e.printStackTrace();
 				}
-				Globals.healthBar.fullscreen();
+				Globals.healthBar.windowResized();
+				Globals.playerEntity.screenChanged();
 				System.out.println("Done");
 				Globals.isFullscreen = true;
 				fsSwitch = true;
@@ -50,6 +51,8 @@ public class FullscreenHandler {
 				} catch (LWJGLException e) {
 					e.printStackTrace();
 				}
+				Globals.healthBar.windowResized();
+				Globals.playerEntity.screenChanged();
 				System.out.println("Done");
 				Globals.isFullscreen = false;
 				fsSwitch = false;

@@ -1,6 +1,11 @@
 package ca.viaware.rpg.game;
 
+import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
+import static org.lwjgl.opengl.GL11.GL_PROJECTION;
+import static org.lwjgl.opengl.GL11.glLoadIdentity;
+import static org.lwjgl.opengl.GL11.glMatrixMode;
 import static org.lwjgl.opengl.GL11.glOrtho;
+import static org.lwjgl.opengl.GL11.glViewport;
 
 import ca.viaware.rpg.utilities.ClickListener;
 import org.lwjgl.LWJGLException;
@@ -21,6 +26,7 @@ import ca.viaware.rpg.map.Loader;
 import ca.viaware.rpg.map.Map;
 import ca.viaware.rpg.map.MapHandler;
 import ca.viaware.rpg.utilities.EnemyHandler;
+import ca.viaware.rpg.utilities.ResizeHandler;
 import ca.viaware.rpg.utilities.SButton;
 import ca.viaware.rpg.utilities.DebugScreen;
 import ca.viaware.rpg.utilities.MouseData;
@@ -62,6 +68,10 @@ public class GameLoop {
 
 			logic.doLogic(delta);
 			render.render();
+			
+			if (Display.wasResized()){
+				ResizeHandler.handleResize();
+			}
 			
 			Display.update();
 			Display.sync(60);

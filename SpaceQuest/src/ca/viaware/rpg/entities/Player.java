@@ -3,6 +3,7 @@ package ca.viaware.rpg.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
@@ -93,25 +94,6 @@ public class Player extends AbstractEntity {
 	@Override
 	public void update(int delta) {
 
-		// Temp system of compensating player coords for fullscreen change
-		if (Globals.isFullscreen) {
-			setX(Globals.dispWidth / 2 - width / 2);
-			setY(Globals.dispHeight / 2 - height / 2);
-
-			if (!screenChanged) {
-				screenChanged = true;
-				teleportXY((int) actX, (int) actY);
-			}
-		}
-
-		if (!Globals.isFullscreen) {
-			if (screenChanged) {
-				screenChanged = false;
-				actX = actX + (Globals.dispWidth - Globals.dispWidthBK) / 2;
-				actY = actY + (Globals.dispHeight - Globals.dispHeightBK) / 2;
-			}
-		}
-
 		// Animation
 		animCount += delta;
 		if (animCount > 150) {
@@ -159,6 +141,14 @@ public class Player extends AbstractEntity {
 		}
 	}
 
+	public void screenChanged(){
+		setX(Globals.dispWidth / 2 - width / 2);
+		setY(Globals.dispHeight / 2 - height / 2);
+		int screenXchange = Globals.dispWidth - Globals.dispWidthBK;
+		int screenYchange = Globals.dispHeight - Globals.dispHeightBK;
+
+		Globals.gameMap.setOffsets((Globals.gameMap.getXOffset() + screenXchange / 2), (Globals.gameMap.getYOffset() + screenYchange / 2));
+	}
 	public void addTexture(Texture tex) {
 		animPositions.add(tex);
 	}
@@ -238,8 +228,8 @@ public class Player extends AbstractEntity {
 		actX = teleX - 64;
 		actY = teleY - 64;
 
-		int mapX = (int) (getX() - actX);
-		int mapY = (int) (getY() - actY);
+		int mapX = (int) (getX() - teleX);
+		int mapY = (int) (getY() - teleY);
 
 		Globals.gameMap.setOffsets(mapX, mapY);
 	}
