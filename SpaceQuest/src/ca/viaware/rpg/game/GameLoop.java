@@ -88,7 +88,7 @@ public class GameLoop {
 
 	private void setupTextures() {
 		TextureHandler th = new TextureHandler();
-		Globals.startImg = th.loadDiffTexture("res/img/intro.png", "PNG");
+		Globals.startImg = th.loadDiffTexture("res/img/intro2.png", "PNG");
 		Globals.tileTextures.add(th.loadSprite("tiles/grass"));
 		Globals.tileTextures.add(th.loadSprite("tiles/cobble"));
 		Globals.tileTextures.add(th.loadSprite("tiles/flower red"));
