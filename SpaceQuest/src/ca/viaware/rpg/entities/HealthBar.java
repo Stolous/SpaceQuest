@@ -2,6 +2,7 @@ package ca.viaware.rpg.entities;
 
 import org.lwjgl.opengl.Display;
 
+import ca.viaware.rpg.game.Globals;
 import ca.viaware.rpg.utilities.TexturedQuad;
 import ca.viaware.rpg.utilities.NoTexQuad;
 
@@ -42,11 +43,14 @@ public class HealthBar {
 
 	public void fullscreen() {
 		System.out.println("Size changed");
-		barf.setSize(Display.getWidth(), (Display.getHeight() / 9));
-		barf.setlocation(Display.getWidth() / 2, Display.getHeight() - Display.getHeight() / 25);
+		//barf.setSize(Display.getWidth(), (Display.getHeight() / 9));
+		//barf.setlocation(Display.getWidth() / 2, Display.getHeight() - Display.getHeight() / 25);
 
-		barb.setlocation(Display.getWidth() / 2, Display.getHeight() - (int) (Display.getHeight() / 150));
-		barb.setSize(hl * rat, (Display.getHeight() / 54.3));
+		//barb.setlocation(Display.getWidth() / 2, Display.getHeight() - (int) (Display.getHeight() / 150));
+		//barb.setSize(hl * rat, (Display.getHeight() / 54.3));
+		
+		barf.move((Globals.dispWidth - Globals.dispWidthBK) / 2, (Globals.dispHeight - Globals.dispHeightBK));
+		barb.move((Globals.dispWidth - Globals.dispWidthBK) / 2, (Globals.dispHeight - Globals.dispHeightBK));
 	}
 
 	public void set(int amount) {
