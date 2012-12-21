@@ -17,7 +17,6 @@ public class FullscreenHandler {
 			Globals.dispWidthBK = Globals.dispWidth;
 			Globals.dispHeightBK = Globals.dispHeight;
 			if (!fsSwitch) {
-				Globals.healthBar.fullscreen();
 				System.out.println("Setting fullscreen");
 				DisplayMode dispMode = Display.getDesktopDisplayMode();
 				Globals.dispWidth = dispMode.getWidth();
@@ -34,6 +33,7 @@ public class FullscreenHandler {
 				} catch (LWJGLException e) {
 					e.printStackTrace();
 				}
+				Globals.healthBar.fullscreen();
 				System.out.println("Done");
 				Globals.isFullscreen = true;
 				fsSwitch = true;
