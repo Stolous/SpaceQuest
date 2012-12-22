@@ -31,7 +31,7 @@ public class Globals {
 	public static int dispWidthBK = 0, dispHeightBK = 0;
 	public static int temp = 0;
 	public static List<Texture> tileTextures = new ArrayList<Texture>(16);
-	public static Texture startImg = null;
+	public static List<Texture> otherTextures = new ArrayList<Texture>(16);
 	public static Player playerEntity = null;
 	public static Map gameMap = null;
 	public static Cursor cursor;

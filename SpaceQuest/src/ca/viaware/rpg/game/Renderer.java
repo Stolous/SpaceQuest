@@ -16,7 +16,7 @@ public class Renderer {
 		switch (Globals.gameState) {
 		case INTRO:
 			// Intro screen - now working!
-			Globals.startImg.bind();
+			Globals.otherTextures.get(0).bind();
 			glBegin(GL_QUADS);
 			glTexCoord2f(0f, 0f);
 			glVertex2i(0, 0);

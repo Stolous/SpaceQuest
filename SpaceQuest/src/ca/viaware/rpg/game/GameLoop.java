@@ -50,7 +50,6 @@ public class GameLoop {
 		// Globals.ammoBar = new AmmoBar();
 
 		Globals.gameMap = MapHandler.handleMapLoad("testmap1");
-		MapHandler.finishLoad();
 
 		while (Globals.isRunning) {
 
@@ -88,7 +87,9 @@ public class GameLoop {
 
 	private void setupTextures() {
 		TextureHandler th = new TextureHandler();
-		Globals.startImg = th.loadDiffTexture("res/img/intro2.png", "PNG");
+		Globals.otherTextures.add(th.loadDiffTexture("res/img/intro2.png", "PNG"));
+		Globals.otherTextures.add(th.loadDiffTexture("res/img/maploading.png", "PNG"));
+		
 		Globals.tileTextures.add(th.loadSprite("tiles/grass"));
 		Globals.tileTextures.add(th.loadSprite("tiles/cobble"));
 		Globals.tileTextures.add(th.loadSprite("tiles/flower red"));

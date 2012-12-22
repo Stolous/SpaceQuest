@@ -117,7 +117,6 @@ public class Tile extends AbstractMoveableEntity {
 
 	public void parseInputData(String d) {
 		String[] data = d.split("/");
-		System.out.println("Input: " + d);
 
 		setID(Integer.parseInt(data[0]));
 
@@ -188,7 +187,6 @@ public class Tile extends AbstractMoveableEntity {
 	public void updateTeleMarkers() {
 		if (hasTeleMarker) {
 			teleMarker = Globals.teleMarkers.get(teleMarkerID);
-			System.out.println("Has tele marker");
 			if (teleMarker.getType() == 1) {
 				teleMarkerIn = true;
 				teleMarkerOut = false;

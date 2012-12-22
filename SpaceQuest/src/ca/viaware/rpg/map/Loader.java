@@ -32,7 +32,7 @@ public class Loader {
 
 		int ycount = 0;
 		Tile mapTiles[][] = new Tile[x][y];
-
+		int tileCount = 0;
 		while (ycount < y) {
 			String[] line = sc.nextLine().split("&");
 			for (int i = 0; i < line.length; i++) {
@@ -40,12 +40,15 @@ public class Loader {
 					mapTiles[i][ycount] = new Tile(0, 0, 64, 64, false, line[i], i, ycount);
 				} else {
 					Tile tile = new Tile(0, 0, 64, 64, true, line[i], i, ycount);
-
+					
 					mapTiles[i][ycount] = tile;
+					tileCount++;
 				}
 			}
 			ycount++;
 		}
+		
+		System.out.println(tileCount + " tiles handled");
 
 		while (sc.hasNextLine()) {
 			String[] data = sc.nextLine().split("/");
