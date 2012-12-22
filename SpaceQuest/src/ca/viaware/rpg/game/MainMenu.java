@@ -23,7 +23,7 @@ public class MainMenu {
 	SButton start, options, help, quit;
 	TexturedQuad UFO;
 	private int location = 0;
-	private boolean onethread = false, startclicked = false;
+	private boolean startclicked = false;
 
 	private double sinX = 0;
 	private double sinY = 0;

@@ -21,12 +21,13 @@ public class HealthBar {
 		g = 0.51;
 		b = 0;
 		hl = 100;
+		
+		
 
 	}
 
 	public void update() {
-
-		barb.setcol(r, g, b);
+		
 		barf.update();
 		barb.update();
 	}

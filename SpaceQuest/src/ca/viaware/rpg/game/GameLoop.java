@@ -1,37 +1,16 @@
 package ca.viaware.rpg.game;
 
-import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
-import static org.lwjgl.opengl.GL11.GL_PROJECTION;
-import static org.lwjgl.opengl.GL11.glLoadIdentity;
-import static org.lwjgl.opengl.GL11.glMatrixMode;
-import static org.lwjgl.opengl.GL11.glOrtho;
-import static org.lwjgl.opengl.GL11.glViewport;
-
-import ca.viaware.rpg.utilities.ClickListener;
-import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
-
-import ca.viaware.rpg.entity.Enemy;
-import ca.viaware.rpg.entity.MeleeEnemy;
 import ca.viaware.rpg.entities.Cursor;
-import ca.viaware.rpg.entities.FastSlime;
 import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
-import ca.viaware.rpg.entities.Slime;
-import ca.viaware.rpg.entities.WeakSlime;
 //import ca.viaware.rpg.entities.AmmoBar;
-import ca.viaware.rpg.map.Loader;
-import ca.viaware.rpg.map.Map;
 import ca.viaware.rpg.map.MapHandler;
-import ca.viaware.rpg.utilities.EnemyHandler;
 import ca.viaware.rpg.utilities.ResizeHandler;
-import ca.viaware.rpg.utilities.SButton;
 import ca.viaware.rpg.utilities.DebugScreen;
 import ca.viaware.rpg.utilities.MouseData;
-import ca.viaware.rpg.utilities.OnClickListener;
-import ca.viaware.rpg.utilities.TextRenderer;
 import ca.viaware.rpg.utilities.TextureHandler;
 
 public class GameLoop {
@@ -55,8 +34,8 @@ public class GameLoop {
 		while (Globals.isRunning) {
 
 			int delta = getDelta();
-			
-			if (Keyboard.isKeyDown(Keyboard.KEY_Q)){
+
+			if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
 				delta = 29;
 			}
 
@@ -68,11 +47,11 @@ public class GameLoop {
 
 			logic.doLogic(delta);
 			render.render();
-			
-			if (Display.wasResized()){
+
+			if (Display.wasResized()) {
 				ResizeHandler.handleResize();
 			}
-			
+
 			Display.update();
 			Display.sync(60);
 			if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
