@@ -37,6 +37,10 @@ public class Map {
 
 	}
 
+	public Tile[][] getMap(){
+			
+			return mapTiles;
+	}
 	public void moveMap(double x, double y, int delta) {
 		xOffset += x * delta;
 		yOffset += y * delta;
@@ -60,6 +64,12 @@ public class Map {
 		spawn = new Location(x, y);
 	}
 
+	public int getXSize(){
+		return xSize;
+	}
+	public int getYSize(){
+		return ySize;
+	}
 	public Location getSpawn() {
 		return spawn;
 	}
