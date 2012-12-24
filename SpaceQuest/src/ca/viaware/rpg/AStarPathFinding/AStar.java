@@ -24,6 +24,8 @@ public class AStar {
                 closedList = new ArrayList<Node>();
                 openList = new SortedNodeList();
         }
+        
+        
 
         public Path calcShortestPath(int startX, int startY, int goalX, int goalY) {
                
@@ -101,6 +103,41 @@ public class AStar {
                 return path;
         }
 
+        
+        public void printPath() {
+            Node node;
+            for(int x=0; x<map.mapWidth; x++) {
+
+                    if (x==0) {
+                            for (int i=0; i<=map.mapWidth; i++)
+                                    System.out.print("-");
+                            System.out.println();   
+                    }
+                    System.out.print("|");
+
+                    for(int y=0; y<map.mapHeight; y++) {
+                            node = map.getNode(x, y);
+                            if (node.isObstacle) {
+                                    System.out.print("+");
+                            } else if (node.isStart) {
+                                    System.out.print("s");
+                            } else if (node.isGoal) {
+                                    System.out.print("X");
+                            } else if (shortestPath.haswaypoint(node.getX(), node.getY())) {
+                                    System.out.print("O");
+                            } else {
+                                    System.out.print(" ");
+                            }
+                            if (y==map.mapWidth)
+                                    System.out.print("_");
+                    }
+
+                    System.out.print("|");
+                    System.out.println();
+            }
+            for (int i=0; i<=map.mapWidth; i++)
+                    System.out.print("-");
+    }
         private class SortedNodeList {
 
                 private ArrayList<Node> list = new ArrayList<Node>();
