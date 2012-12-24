@@ -48,11 +48,11 @@ public class mobMap {
 			for (int y = 0; y < mapHeight; y++) {
 				node = new Node(x, y);
 				for (int i = 0; i < ObstacleMap.size(); i++) {
-					if (((Tile) ObstacleMap.get(i)).getBX() == 1) {
-						if (((Tile) ObstacleMap.get(i)).getBY() == 1) {
+					if (((Tile) ObstacleMap.get(i)).hasCollision()) {
+						
 							node.setObstical(true);
 							map.get(x).add(node);
-						}
+						
 					}
 
 				}
