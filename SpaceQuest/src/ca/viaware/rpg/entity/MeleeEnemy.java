@@ -3,9 +3,14 @@ package ca.viaware.rpg.entity;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
+import ca.viaware.rpg.AStarPathFinding.AStar;
+import ca.viaware.rpg.AStarPathFinding.AStarHeuristic;
+import ca.viaware.rpg.AStarPathFinding.ClosestHeuristic;
+import ca.viaware.rpg.AStarPathFinding.mobMap;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.game.Globals;
 import ca.viaware.rpg.map.Tile;
@@ -113,7 +118,19 @@ public class MeleeEnemy extends Enemy {
 			}
 		}
 		
+		if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+			
+			
+			mobMap map = new mobMap();
+	        AStarHeuristic heuristic = new ClosestHeuristic();
+	        AStar pathFinder = new AStar(map, heuristic);
+	        pathFinder.calcShortestPath((int)this.x, (int)this.y, (int)Globals.playerEntity.getX(),(int) Globals.playerEntity.getY());
+	        System.out.println("MAP:");
+	        pathFinder.printPath();
+			mx = mx + getXoffset();// this is for movement of player
+			my = my + getYoffset();
 
+		}
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
 

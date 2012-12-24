@@ -17,7 +17,7 @@ public class mobMap {
 
 	ArrayList ObstacleMap = new ArrayList<Tile>();
 
-	mobMap() {
+	public mobMap() {
 		this.mapWidth = Globals.gameMap.getXSize();
 		this.mapHeight = Globals.gameMap.getYSize();
 		

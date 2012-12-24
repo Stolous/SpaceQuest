@@ -17,7 +17,7 @@ public class AStar {
         private Path shortestPath;
      
 
-        AStar(mobMap map, AStarHeuristic heuristic) {
+        public AStar(mobMap map, AStarHeuristic heuristic) {
                 this.map = map;
                 this.heuristic = heuristic;
 
@@ -27,13 +27,13 @@ public class AStar {
         
         
 
-        public Path calcShortestPath(int startX, int startY, int goalX, int goalY) {
+        public Path calcShortestPath(int x, int y, int d, int e) {
                
-                map.setStartLocation(startX, startY);
-                map.setGoalLocation(goalX, goalY);
+                map.setStartLocation(x, y);
+                map.setGoalLocation(d, e);
 
                 //check if possible goal
-                if (map.getNode(goalX, goalY).isObstacle) {
+                if (map.getNode(d, e).isObstacle) {
                         return null;
                 }
 
