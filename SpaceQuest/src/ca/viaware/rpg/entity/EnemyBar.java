@@ -2,6 +2,7 @@ package ca.viaware.rpg.entity;
 
 import org.newdawn.slick.opengl.Texture;
 
+import ca.viaware.rpg.effect.Effect;
 import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TexturedQuad;
 
