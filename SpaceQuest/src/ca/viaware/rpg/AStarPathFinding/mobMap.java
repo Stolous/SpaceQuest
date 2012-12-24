@@ -7,8 +7,8 @@ import ca.viaware.rpg.map.Tile;
 
 public class mobMap {
 
-	private int mapWidth;
-	private int mapHeight;
+	 int mapWidth;
+	 int mapHeight;
 	private ArrayList<ArrayList<Node>> map;
 	private int startLocationX = 0;
 	private int startLocationY = 0;
@@ -20,7 +20,7 @@ public class mobMap {
 	mobMap() {
 		this.mapWidth = Globals.gameMap.getXSize();
 		this.mapHeight = Globals.gameMap.getYSize();
-		;
+		
 
 		// inner arrray;
 		ArrayList<Tile> innerObstacleMap = new ArrayList<Tile>();
@@ -89,7 +89,7 @@ public class mobMap {
 		return map;
 	}
 
-	public void setObstical(int x, int y, boolean isObstical) {
+	public void setObstacle(int x, int y, boolean isObstical) {
 		map.get(x).get(y).setObstical(isObstical);
 	}
 
