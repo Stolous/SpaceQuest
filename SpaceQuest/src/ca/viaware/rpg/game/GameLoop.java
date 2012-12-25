@@ -2,7 +2,10 @@ package ca.viaware.rpg.game;
 
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
+
+import ca.viaware.rpg.audio.AudioLoadList;
 import ca.viaware.rpg.entities.Cursor;
 import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
@@ -23,6 +26,7 @@ public class GameLoop {
 		Globals.cursor = new Cursor(0, 0, 32, 32);
 		Globals.cursor.setEnabled(true);
 		TextureLoadList.loadTextures();
+		AudioLoadList.loadAudio();
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
@@ -60,6 +64,7 @@ public class GameLoop {
 				Globals.isRunning = false;
 			}
 		}
+		AL.destroy();
 		Display.destroy();
 		System.exit(0);
 	}

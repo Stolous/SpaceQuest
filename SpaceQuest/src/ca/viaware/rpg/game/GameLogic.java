@@ -8,14 +8,20 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.openal.Audio;
+import org.newdawn.slick.openal.SoundStore;
 
+import ca.viaware.rpg.audio.MusicPlaylist;
 import ca.viaware.rpg.utilities.FullscreenHandler;
 
 public class GameLogic {
 
 	PlayerMovement pMovement = new PlayerMovement();
 	FullscreenHandler fHandler = new FullscreenHandler();
+	MusicPlaylist mPlaylist = new MusicPlaylist();
+	Audio currentSong = Globals.musicLibrary.get(0);
 	private int timer = 0, count = 0;
+	private int songTimer = 0;
 
 	public void doLogic(int delta) {
 		for (int ii = 0; ii < Globals.enemies.size(); ii++) {
@@ -33,6 +39,18 @@ public class GameLogic {
 			}
 		}
 
+		//Timer is here so that song position gets decent time to advance between checks
+		songTimer += delta;
+		if (songTimer > 500) {
+			currentSong = mPlaylist.nextSong(currentSong);
+			if (!currentSong.isPlaying()) {
+				System.out.println("Starting...");
+				currentSong.playAsMusic(1.0f, 1.0f, false);
+			}
+			songTimer = 0;
+		}
+
+		SoundStore.get().poll(0);
 		fHandler.handleFullscreen();
 
 		// Allows user to leave the game screen if desired

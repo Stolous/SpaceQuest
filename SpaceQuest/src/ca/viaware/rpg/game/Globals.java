@@ -3,6 +3,7 @@ package ca.viaware.rpg.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.Enemy;
@@ -39,6 +40,7 @@ public class Globals {
 	public static List<TeleMarker> teleMarkers = new ArrayList<TeleMarker>(16);
 	public static List<TextRenderer> textRendererBufferList = new ArrayList<TextRenderer>(16);
 	public static List<SButton> buttonBuffer = new ArrayList<SButton>(16);
+	public static List<Audio> musicLibrary = new ArrayList<Audio>(16);
 
 	public static enum gState {
 		INTRO, MAIN_MENU, GAME, OUTRO;
