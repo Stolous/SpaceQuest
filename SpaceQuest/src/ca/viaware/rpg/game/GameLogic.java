@@ -18,6 +18,7 @@ public class GameLogic {
 
 	PlayerMovement pMovement = new PlayerMovement();
 	FullscreenHandler fHandler = new FullscreenHandler();
+	FPSCounter fpsCounter = new FPSCounter();
 	MusicPlaylist mPlaylist = new MusicPlaylist();
 	Audio currentSong = Globals.musicLibrary.get(0);
 	private int timer = 0, count = 0;
@@ -38,7 +39,7 @@ public class GameLogic {
 				}
 			}
 		}
-
+		fpsCounter.calculateFPS(delta);
 		//Timer is here so that song position gets decent time to advance between checks
 		songTimer += delta;
 		if (songTimer > 500) {
