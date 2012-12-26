@@ -42,7 +42,7 @@ public class GameLoop {
 			int delta = getDelta();
 
 			if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
-				delta = 29;
+				delta = 40;
 			}
 
 			// Update debug screen
