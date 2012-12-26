@@ -1,9 +1,11 @@
 package ca.viaware.rpg.game;
 
+import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.AL10;
+import org.lwjgl.openal.OpenALException;
 import org.lwjgl.opengl.Display;
 
 import ca.viaware.rpg.audio.AudioLoadList;

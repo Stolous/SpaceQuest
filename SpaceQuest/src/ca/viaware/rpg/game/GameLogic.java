@@ -39,10 +39,13 @@ public class GameLogic {
 				}
 			}
 		}
-		fpsCounter.calculateFPS(delta);
-		//Timer is here so that song position gets decent time to advance between checks
-		songTimer += delta;
-		if (songTimer > 500) {
+		if (delta >= 0) {
+			fpsCounter.calculateFPS(delta);
+			// Timer is here so that song position gets decent time to advance
+			// between checks
+			songTimer += delta;
+		}
+		if (songTimer > 1000) {
 			currentSong = mPlaylist.nextSong(currentSong);
 			if (!currentSong.isPlaying()) {
 				System.out.println("Starting...");

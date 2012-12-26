@@ -14,7 +14,7 @@ public class AudioHandler {
 		try {
 			a = AudioLoader.getAudio("OGG", new FileInputStream("res/audio/" + input + ".ogg"));
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("ERROR - Could not load audio file");
 		}
 		
 		return a;
@@ -25,7 +25,7 @@ public class AudioHandler {
 		try {
 			a = AudioLoader.getStreamingAudio("OGG", new File("res/audio/" + input + ".ogg").toURL());
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("ERROR - Could not load audio file");
 		}
 		
 		return a;
