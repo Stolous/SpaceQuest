@@ -15,12 +15,18 @@ public class RangedEnemy extends Enemy {
 
 	private TexturedQuad t;
 	private int delta, aggresiveness, betattacks, attackspeed, blockx, blocky;
-	private double distancebetween, xdist, ydist, playerx, playery, range, actxdist, actydist, speed, sightrange, xspeed, yspeed, BulletSpeed, optrange, mxc, myc, xoff, yoff;
+	private double distancebetween, xdist, ydist, playerx, playery, range,
+			actxdist, actydist, speed, sightrange, xspeed, yspeed, BulletSpeed,
+			optrange, mxc, myc, xoff, yoff;
 	private int mindamage, maxdamage, accuracy;
 	private Texture Bullet;
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
-	public RangedEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int aggresiveness, double range, double speed, int attackspeed, double optdist, double sightrange, String path, double BulletSpeed, double xoff, double yoff, int accuracy) {
+	public RangedEnemy(double width, double height, int maxhealth,
+			int maxdamage, int mindamage, int spawnx, int spawny,
+			int aggresiveness, double range, double speed, int attackspeed,
+			double optdist, double sightrange, String path, double BulletSpeed,
+			double xoff, double yoff, int accuracy) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
 		this.mindamage = mindamage;
 		this.maxdamage = maxdamage;
@@ -59,9 +65,11 @@ public class RangedEnemy extends Enemy {
 		Double newy = Globals.playerEntity.getActY() + accchange;
 		// System.out.println("newx"+(newx));
 		// System.out.println("newy"+(newy));
+
 		if (betattacks >= attackspeed) {
 
-			bullets.add(new Bullet(this.Bullet, x - xoff, newx, y - yoff, newy, BulletSpeed, mindamage, maxdamage));
+			bullets.add(new Bullet(this.Bullet, x - xoff, newx, y - yoff, newy,
+					BulletSpeed, mindamage, maxdamage));
 			betattacks = 0;
 
 		}
@@ -94,7 +102,9 @@ public class RangedEnemy extends Enemy {
 		mxc = 0;
 		myc = 0;
 		drawbullets();
-		betattacks += delta;
+		if (delta >= 0) {
+			betattacks += delta;
+		}
 
 		blockx = (int) (mx / 64);
 		blocky = (int) (my / 64);
@@ -134,10 +144,11 @@ public class RangedEnemy extends Enemy {
 
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
-		
+
 	}
 
-	private double moverx(double i, double mx, double speed, double dist, boolean b) {
+	private double moverx(double i, double mx, double speed, double dist,
+			boolean b) {
 		dist = dist / 100;
 		double change = 0;
 
