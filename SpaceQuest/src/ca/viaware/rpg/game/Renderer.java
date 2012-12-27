@@ -32,7 +32,7 @@ public class Renderer {
 		case MAIN_MENU:
 
 			
-			Globals.m.render();
+			Globals.mainMenu.render();
 			
 			break;
 		case GAME:

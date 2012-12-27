@@ -7,15 +7,12 @@ import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.Enemy;
-import ca.viaware.rpg.entity.MeleeEnemy;
 import ca.viaware.rpg.entities.Cursor;
-import ca.viaware.rpg.entities.FastSlime;
 import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
-import ca.viaware.rpg.entities.Slime;
-import ca.viaware.rpg.entities.WeakSlime;
 import ca.viaware.rpg.map.Map;
 import ca.viaware.rpg.map.TeleMarker;
+import ca.viaware.rpg.utilities.Animation;
 import ca.viaware.rpg.utilities.SButton;
 import ca.viaware.rpg.utilities.TextRenderer;
 
@@ -25,7 +22,6 @@ public class Globals {
 
 	public static MainMenu m;
 	public static HealthBar healthBar;
-	//please note mobs should not be spawned at 0,0 or where they cannot reach player
 	public static ArrayList <Enemy> enemies=new ArrayList<Enemy>();
 	public static boolean isRunning = true;
 	public static int dispWidth = 800, dispHeight = 600;
@@ -41,6 +37,7 @@ public class Globals {
 	public static List<TextRenderer> textRendererBufferList = new ArrayList<TextRenderer>(16);
 	public static List<SButton> buttonBuffer = new ArrayList<SButton>(16);
 	public static List<Audio> musicLibrary = new ArrayList<Audio>(16);
+	public static List<Animation> tileAnimations = new ArrayList<Animation>(16);
 
 	public static enum gState {
 		INTRO, MAIN_MENU, GAME, OUTRO;

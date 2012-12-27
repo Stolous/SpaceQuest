@@ -23,7 +23,7 @@ public class GameLoop {
 	private long lasttime = 0;
 
 	public void startLoop() {
-		Globals.m = new MainMenu();
+		Globals.mainMenu = new MainMenu();
 		Globals.healthBar = new HealthBar();
 		Globals.playerEntity = new Player(Globals.dispWidth / 2 - 32, Globals.dispHeight / 2 - 32, 64, 64);
 		Globals.cursor = new Cursor(0, 0, 32, 32);
