@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,7 +33,8 @@ public class ToolBox extends JFrame {
 	private JTextField markerNamePointer = new JTextField();
 	private JTextField markerType = new JTextField();
 	private JButton markerSubmit = new JButton();
-	private Tile selectedTile = new Tile(0, 0, 0);
+	private Tile selectedTile = new Tile(0, 0, 0, false);
+	private boolean isAnim = false;
 
 	private boolean changed = false;
 
@@ -218,6 +220,10 @@ public class ToolBox extends JFrame {
 
 	public void setSelectedTile(Tile tile) {
 		selectedTile = tile;
+	}
+	
+	public void setPlacingAnim(boolean a){
+		isAnim = a;
 	}
 
 }

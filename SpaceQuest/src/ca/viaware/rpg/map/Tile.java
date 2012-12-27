@@ -68,8 +68,10 @@ public class Tile extends AbstractMoveableEntity {
 		x = cx * 64 + xOff;
 		y = cy * 64 + yOff;
 
-		if (enabled) {
+		if (enabled && !isAnimated) {
 			Globals.tileTextures.get(ID).bind();
+		}else if (enabled && isAnimated){
+			tileAnim.bindCurrentStage();
 		}
 
 		glBegin(GL_QUADS);
@@ -211,6 +213,13 @@ public class Tile extends AbstractMoveableEntity {
 			Enemy e = EnemyHandler.handleEnemy(x * 64, y * 64, Integer.parseInt(data[0]), Integer.parseInt(data[1]));
 			
 			Globals.enemies.add(e);
+		}
+	}
+	
+	@Override
+	public void update(int delta){
+		if (isAnimated){
+			tileAnim.stepAnimation(delta);
 		}
 	}
 }

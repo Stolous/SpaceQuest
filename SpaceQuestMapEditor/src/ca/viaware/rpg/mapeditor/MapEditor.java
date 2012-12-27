@@ -30,6 +30,7 @@ public class MapEditor {
 	int dCount = 0;
 	boolean prevPressed = false;
 	public static List<TileTexture> textures = new ArrayList(16);
+	public static List<TileTexture> animTextures = new ArrayList(16);
 	ToolBox tools;
 	EnemyEditor enemyEditor;
 	int selectedTile = 0;
@@ -45,7 +46,7 @@ public class MapEditor {
 			e.printStackTrace();
 		} catch (UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
-		} //seth is an asshole
+		} // seth is an asshole
 		tools = new ToolBox();
 		setupDisplay();
 		setupGL();
@@ -57,7 +58,7 @@ public class MapEditor {
 		Menu menu = new Menu();
 		menu.showMenu();
 
-		tiles.add(new Tile(0, 0, 0));
+		tiles.add(new Tile(0, 0, 0, false));
 
 		while (Globals.isRunning) {
 			delta = getDelta();
@@ -174,8 +175,14 @@ public class MapEditor {
 			tools.changed();
 		}
 
-		if (cSelected > (textures.size() - 1)) {
-			cSelected = 0;
+		if (!Keyboard.isKeyDown(Keyboard.KEY_A)) {
+			if (cSelected > (textures.size() - 1)) {
+				cSelected = 0;
+			}
+		} else if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
+			if (cSelected > (animTextures.size() - 1)) {
+				cSelected = 0;
+			}
 		}
 		if (cSelected < 0) {
 			cSelected = 0;
@@ -195,9 +202,12 @@ public class MapEditor {
 					}
 				}
 
-				if (!d) {
+				if (!d && !Keyboard.isKeyDown(Keyboard.KEY_A)) {
 					changeMade();
-					tiles.add(new Tile(mX - mX % 64, mY - mY % 64, cSelected));
+					tiles.add(new Tile(mX - mX % 64, mY - mY % 64, cSelected, false));
+				} else if (!d && Keyboard.isKeyDown(Keyboard.KEY_A)) {
+					changeMade();
+					tiles.add(new Tile(mX - mX % 64, mY - mY % 64, cSelected, true));
 				}
 			}
 
@@ -266,16 +276,16 @@ public class MapEditor {
 				}
 
 			}
-			
-			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
-				for (Tile tile : tiles){
-					if (tile.isTouching(rect)){
+
+			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+				for (Tile tile : tiles) {
+					if (tile.isTouching(rect)) {
 						tile.removeMarker();
 					}
 				}
 			}
 
-		break;
+			break;
 		case ENEMIES:
 
 			if (Mouse.isButtonDown(1) && !Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
@@ -286,8 +296,8 @@ public class MapEditor {
 					}
 				}
 			}
-			
-			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
+
+			if (Mouse.isButtonDown(1) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 				for (Tile tile : tiles) {
 					if (tile.isTouching(rect)) {
 						tile.deleteEnemy();
@@ -297,8 +307,8 @@ public class MapEditor {
 			break;
 		}
 		Globals.waypoints.clear();
-		for (Tile tile : tiles){
-			if (tile.isTeleMarkerIn() || tile.isTeleMarkerOut()){
+		for (Tile tile : tiles) {
+			if (tile.isTeleMarkerIn() || tile.isTeleMarkerOut()) {
 				tile.refreshMarker();
 			}
 		}
@@ -378,8 +388,6 @@ public class MapEditor {
 			}
 			tile.refreshEnemy();
 		}
-		
-		
 
 		// System.out.println("ShiftDir: " + shiftDir);
 
