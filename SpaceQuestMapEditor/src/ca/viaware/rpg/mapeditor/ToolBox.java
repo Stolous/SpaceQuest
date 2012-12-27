@@ -221,8 +221,20 @@ public class ToolBox extends JFrame {
 	public void setSelectedTile(Tile tile) {
 		selectedTile = tile;
 	}
-	
-	public void setPlacingAnim(boolean a){
+
+	public void setPlacingAnim(boolean a) {
+		if (a != isAnim) {
+			textureSelect.removeAll();
+			if (a) {
+				for (TileTexture tile : MapEditor.animTextures) {
+					textureSelect.addItem(object(tile.getName()));
+				}
+			} else {
+				for (TileTexture tile : MapEditor.textures) {
+					textureSelect.addItem(object(tile.getName()));
+				}
+			}
+		}
 		isAnim = a;
 	}
 

@@ -190,6 +190,7 @@ public class MapEditor {
 
 		Globals.cSelected = cSelected;
 		tools.updateSelected();
+		tools.setPlacingAnim(Keyboard.isKeyDown(Keyboard.KEY_A));
 
 		switch (Globals.selectedTool) {
 

@@ -41,7 +41,7 @@ public class Map {
 				count++;
 				boolean isTile = false;
 				for (Tile tile : tileArray) {
-					tiles[xC][yC] = new Tile(0, 0, 0);
+					tiles[xC][yC] = new Tile(0, 0, 0, false);
 					if (tile.getActX() == xC && tile.getActY() == yC) {
 						System.out.println("Found tile at " + xC + ", " + yC);
 						tiles[xC][yC] = tile;
