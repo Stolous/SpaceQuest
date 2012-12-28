@@ -29,7 +29,7 @@ public class GameLoop {
 		Globals.cursor = new Cursor(0, 0, 32, 32);
 		Globals.cursor.setEnabled(true);
 		TextureLoadList.loadTextures();
-		AudioLoadList.loadAudio();
+		//AudioLoadList.loadAudio();
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
@@ -67,7 +67,7 @@ public class GameLoop {
 				Globals.isRunning = false;
 			}
 		}
-		AL.destroy();
+		//AL.destroy();
 		Display.destroy();
 		System.exit(0);
 	}

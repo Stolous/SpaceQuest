@@ -19,10 +19,10 @@ public class GameLogic {
 	PlayerMovement pMovement = new PlayerMovement();
 	FullscreenHandler fHandler = new FullscreenHandler();
 	FPSCounter fpsCounter = new FPSCounter();
-	MusicPlaylist mPlaylist = new MusicPlaylist();
-	Audio currentSong = Globals.musicLibrary.get(0);
+	//MusicPlaylist mPlaylist = new MusicPlaylist();
+	//Audio currentSong = Globals.musicLibrary.get(0);
 	private int timer = 0, count = 0;
-	private int songTimer = 0;
+	//private int songTimer = 0;
 
 	public void doLogic(int delta) {
 		for (int ii = 0; ii < Globals.enemies.size(); ii++) {
@@ -43,8 +43,9 @@ public class GameLogic {
 			fpsCounter.calculateFPS(delta);
 			// Timer is here so that song position gets decent time to advance
 			// between checks
-			songTimer += delta;
+			//songTimer += delta;
 		}
+		/*
 		if (songTimer > 1000) {
 			currentSong = mPlaylist.nextSong(currentSong);
 			if (!currentSong.isPlaying()) {
@@ -53,8 +54,8 @@ public class GameLogic {
 			}
 			songTimer = 0;
 		}
-
-		SoundStore.get().poll(0);
+		 */
+		//SoundStore.get().poll(0);
 		fHandler.handleFullscreen();
 
 		// Allows user to leave the game screen if desired
