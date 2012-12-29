@@ -35,13 +35,13 @@ public class Node implements Comparable<Node> {
 		this.isGoal = false;
 	}
 
-	Node(int x, int y, boolean visited, int distanceFromStart, boolean isObstical, boolean isStart, boolean isGoal) {
+	Node(int x, int y, boolean visited, int distanceFromStart, boolean isObstacle, boolean isStart, boolean isGoal) {
 		neighborList = new ArrayList<Node>();
 		this.x = x;
 		this.y = y;
 		this.visited = visited;
 		this.distanceFromStart = distanceFromStart;
-		this.isObstacle = isObstical;
+		this.isObstacle = isObstacle;
 		this.isStart = isStart;
 		this.isGoal = isGoal;
 	}
@@ -193,12 +193,12 @@ public class Node implements Comparable<Node> {
 		this.y = y;
 	}
 
-	public boolean isObstical() {
+	public boolean isObstacle() {
 		return isObstacle;
 	}
 
-	public void setObstical(boolean isObstical) {
-		this.isObstacle = isObstical;
+	public void setObstacle(boolean isObstacle) {
+		this.isObstacle = isObstacle;
 	}
 
 	public boolean isStart() {

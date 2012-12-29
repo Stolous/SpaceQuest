@@ -15,7 +15,7 @@ public class mobMap {
 	private int goalLocationX = 0;
 	private int goalLocationY = 0;
 
-	ArrayList ObstacleMap = new ArrayList<Tile>();
+	ArrayList<Tile> ObstacleMap = new ArrayList<Tile>();
 
 	public mobMap() {
 		this.mapWidth = Globals.gameMap.getXSize();
@@ -25,11 +25,17 @@ public class mobMap {
 		// inner arrray;
 		ArrayList<Tile> innerObstacleMap = new ArrayList<Tile>();
 		// x
-		for (int X = 0; Globals.gameMap.getMap().length < X; X++) {
+		System.out.println("l "+Globals.gameMap.getMap()[0].length);
+		for (int X = 0; Globals.gameMap.getMap().length > X; X++) {
+			
 			// y
-			for (int Y = 0; Globals.gameMap.getMap()[0].length < Y; Y++) {
+			//this goes through every block
+			for (int Y = 0; Globals.gameMap.getMap()[0].length > Y; Y++) {
+				System.out.println("X"+X+"Y"+Y);
+				
 				if (Globals.gameMap.getMap()[X][Y].hasCollision()) {
 					ObstacleMap.add(Globals.gameMap.getMap()[X][Y]);
+					System.out.println("djkfjdk");
 				}
 			}
 		}
@@ -41,24 +47,27 @@ public class mobMap {
 	}
 
 	private void createMap() {
+		System.out.println("Width "+ mapWidth);
 		Node node;
 		map = new ArrayList<ArrayList<Node>>();
 		for (int x = 0; x < mapWidth; x++) {
+			System.out.println(map.size());
 			map.add(new ArrayList<Node>());
 			for (int y = 0; y < mapHeight; y++) {
 				node = new Node(x, y);
 				for (int i = 0; i < ObstacleMap.size(); i++) {
-					if (((Tile) ObstacleMap.get(i)).hasCollision()) {
-						
-							node.setObstical(true);
+					//this is not being run 	
+					if (((Tile) ObstacleMap.get(i)).hasCollision()) {				
+							node.setObstacle(true);
 							map.get(x).add(node);
-						
 					}
 
 				}
 			}
 
 		}
+		System.out.println(map.get(1).size());
+		System.out.println("Test"+ map.get(1).get(1).getX());
 	}
 
 	private void registerEdges() {
@@ -89,8 +98,8 @@ public class mobMap {
 		return map;
 	}
 
-	public void setObstacle(int x, int y, boolean isObstical) {
-		map.get(x).get(y).setObstical(isObstical);
+	public void setObstacle(int x, int y, boolean isObstacle) {
+		map.get(x).get(y).setObstacle(isObstacle);
 	}
 
 	public Node getNode(int x, int y) {
