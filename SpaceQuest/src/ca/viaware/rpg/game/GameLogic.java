@@ -48,7 +48,7 @@ public class GameLogic {
 			// between checks
 			songTimer += delta;
 		}
-		
+		if(Globals.musiclevel>0){
 		if (songTimer > 1000) {
 			currentSong = mPlaylist.nextSong(currentSong);
 			if (!currentSong.isPlaying()) {
@@ -57,7 +57,9 @@ public class GameLogic {
 			}
 			songTimer = 0;
 		}
-		 
+		}else{
+			currentSong.stop();
+		}
 		SoundStore.get().poll(0);
 		fHandler.handleFullscreen();
 

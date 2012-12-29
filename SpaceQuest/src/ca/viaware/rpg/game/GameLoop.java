@@ -45,7 +45,12 @@ public class GameLoop {
 			if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
 				delta = 40;
 			}
-
+			if(Keyboard.isKeyDown(Keyboard.KEY_ADD)){
+				Globals.musiclevel++;
+			}else if(Keyboard.isKeyDown(Keyboard.KEY_SUBTRACT)){
+					Globals.musiclevel--;
+				
+			}
 			// Update debug screen
 			dbs.updateDelta(delta);
 			dbs.updateMouseCoords(MouseData.MouseX(), MouseData.MouseY());

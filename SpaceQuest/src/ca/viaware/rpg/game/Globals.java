@@ -20,6 +20,7 @@ public class Globals {
 
 	ArrayList<ArrayList<String>> array = new ArrayList<ArrayList<String>>();
 
+	public static int musiclevel =1;
 	public static MainMenu mainMenu;
 	public static HealthBar healthBar;
 	public static ArrayList <Enemy> enemies=new ArrayList<Enemy>();
