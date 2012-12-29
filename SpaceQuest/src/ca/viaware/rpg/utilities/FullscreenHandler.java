@@ -14,10 +14,10 @@ public class FullscreenHandler {
 
 	public void handleFullscreen() {
 		if (Keyboard.isKeyDown(Keyboard.KEY_F)) {
-			Globals.dispWidthBK = Globals.dispWidth;
-			Globals.dispHeightBK = Globals.dispHeight;
 			if (!fsSwitch) {
 				System.out.println("Setting fullscreen");
+				Globals.dispWidthBK = Globals.dispWidth;
+				Globals.dispHeightBK = Globals.dispHeight;
 				DisplayMode dispMode = Display.getDesktopDisplayMode();
 				Globals.dispWidth = dispMode.getWidth();
 				Globals.dispHeight = dispMode.getHeight();
@@ -40,11 +40,19 @@ public class FullscreenHandler {
 				fsSwitch = true;
 			} else {
 				System.out.println("Setting windowed");
+				int bkw = Globals.dispWidth;
+				int bkh = Globals.dispHeight;
 				Globals.dispWidth = Globals.dispWidthBK;
 				Globals.dispHeight = Globals.dispHeightBK;
+				Globals.dispHeightBK = bkh;
+				Globals.dispWidthBK = bkw;
 				DisplayMode dispMode = new DisplayMode(Globals.dispWidth, Globals.dispHeight);
 				try {
 					glViewport(0, 0, Globals.dispWidth, Globals.dispHeight);
+					glMatrixMode(GL_PROJECTION);
+					glLoadIdentity();
+					glOrtho(0, Globals.dispWidth, Globals.dispHeight, 0, 1, -1);
+					glMatrixMode(GL_MODELVIEW);
 					Display.setDisplayMode(dispMode);
 					Display.setFullscreen(false);
 					Display.setVSyncEnabled(true);
