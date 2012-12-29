@@ -47,7 +47,7 @@ public class FullscreenHandler {
 					glViewport(0, 0, Globals.dispWidth, Globals.dispHeight);
 					Display.setDisplayMode(dispMode);
 					Display.setFullscreen(false);
-					Display.setVSyncEnabled(false);
+					Display.setVSyncEnabled(true);
 				} catch (LWJGLException e) {
 					e.printStackTrace();
 				}
