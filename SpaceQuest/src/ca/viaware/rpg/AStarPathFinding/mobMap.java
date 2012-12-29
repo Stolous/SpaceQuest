@@ -107,7 +107,6 @@ public class mobMap {
 	}
 
 	public void setStartLocation(int x, int y) {
-		
 		map.get(startLocationX).get(startLocationY).setStart(false);
 		map.get(x).get(y).setStart(true);
 		startLocationX = x;

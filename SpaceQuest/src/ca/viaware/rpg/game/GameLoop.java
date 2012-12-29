@@ -46,9 +46,9 @@ public class GameLoop {
 				delta = 40;
 			}
 			if(Keyboard.isKeyDown(Keyboard.KEY_ADD)){
-				Globals.musiclevel++;
+				Globals.musiclevel+=0.008;
 			}else if(Keyboard.isKeyDown(Keyboard.KEY_SUBTRACT)){
-					Globals.musiclevel--;
+					Globals.musiclevel-=0.008;
 				
 			}
 			// Update debug screen

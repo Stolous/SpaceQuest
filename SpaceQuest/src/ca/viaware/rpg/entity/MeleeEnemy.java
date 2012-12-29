@@ -124,6 +124,10 @@ public class MeleeEnemy extends Enemy {
 			mobMap map = new mobMap();
 	        AStarHeuristic heuristic = new ClosestHeuristic();
 	        AStar pathFinder = new AStar(map, heuristic);
+	        System.out.println("X");
+	        System.out.println(x);
+	        System.out.println(x/64);
+	        System.out.println(mx);
 	        pathFinder.calcShortestPath((int)this.x, (int)this.y, (int)Globals.playerEntity.getX(),(int) Globals.playerEntity.getY());
 	        System.out.println("MAP:");
 	        pathFinder.printPath();

@@ -48,19 +48,20 @@ public class GameLogic {
 			// between checks
 			songTimer += delta;
 		}
-		if(Globals.musiclevel>0){
+		
 		if (songTimer > 1000) {
 			currentSong = mPlaylist.nextSong(currentSong);
 			if (!currentSong.isPlaying()) {
 				System.out.println("Starting...");
+				
 				currentSong.playAsMusic(1.0f, 1.0f, false);
 			}
 			songTimer = 0;
 		}
-		}else{
-			currentSong.stop();
-		}
+		
+			
 		SoundStore.get().poll(0);
+		SoundStore.get().setMusicVolume(Globals.musiclevel);
 		fHandler.handleFullscreen();
 
 		// Allows user to leave the game screen if desired
