@@ -18,6 +18,7 @@ import ca.viaware.rpg.utilities.ResizeHandler;
 import ca.viaware.rpg.utilities.DebugScreen;
 import ca.viaware.rpg.utilities.MouseData;
 import ca.viaware.rpg.utilities.TextureHandler;
+import ca.viaware.rpg.utilities.TimeHandler;
 
 public class GameLoop {
 	private long lasttime = 0;
@@ -38,7 +39,7 @@ public class GameLoop {
 		Globals.gameMap = MapHandler.handleMapLoad("testmap1");
 
 		while (Globals.isRunning) {
-
+			
 			int delta = getDelta();
 
 			if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
@@ -50,7 +51,10 @@ public class GameLoop {
 			dbs.updateMouseCoords(MouseData.MouseX(), MouseData.MouseY());
 			dbs.updatePlayerCoords(Globals.playerEntity.getActX(), Globals.playerEntity.getActY());
 			dbs.updateMapOffset(Globals.gameMap.getXOffset(), Globals.gameMap.getYOffset());
-
+			dbs.updateRunningTime(TimeHandler.getMins(), TimeHandler.getSecs());
+			dbs.updatePlayerHealth(Globals.playerEntity.getCurrentHealth());
+			dbs.updateTotalEnemies(Globals.enemies.size());
+			
 			logic.doLogic(delta);
 			render.render();
 

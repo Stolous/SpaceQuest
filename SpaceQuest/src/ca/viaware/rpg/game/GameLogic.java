@@ -13,6 +13,7 @@ import org.newdawn.slick.openal.SoundStore;
 
 import ca.viaware.rpg.audio.MusicPlaylist;
 import ca.viaware.rpg.utilities.FullscreenHandler;
+import ca.viaware.rpg.utilities.TimeHandler;
 
 public class GameLogic {
 
@@ -39,7 +40,9 @@ public class GameLogic {
 				}
 			}
 		}
+		
 		if (delta >= 0) {
+			TimeHandler.updateTime(delta);
 			fpsCounter.calculateFPS(delta);
 			// Timer is here so that song position gets decent time to advance
 			// between checks
