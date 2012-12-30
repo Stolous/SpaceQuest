@@ -1,5 +1,7 @@
 package ca.viaware.rpg.map;
 
+import java.util.ArrayList;
+
 import ca.viaware.rpg.game.Globals;
 import ca.viaware.rpg.utilities.Location;
 
@@ -8,7 +10,9 @@ public class Map {
 	private double xOffset, yOffset;
 	public Tile mapTiles[][];
 	Location spawn;
+	private ArrayList<Tile> ObstacleMap = new ArrayList<Tile>();
 
+	
 	public void setSize(int x, int y) {
 		xSize = x;
 		ySize = y;
@@ -71,5 +75,25 @@ public class Map {
 	}
 	public Location getSpawn() {
 		return spawn;
+	}
+	public ArrayList<Tile> getObstacleMap() {
+		return ObstacleMap;
+	}
+	public void setObstacleMap() {
+		// inner arrray;
+		// x
+		
+		for (int X = 0; Globals.gameMap.getMap().length > X; X++) {
+
+			// y
+			// this goes through every block
+			for (int Y = 0; Globals.gameMap.getMap()[0].length > Y; Y++) {
+
+				if (Globals.gameMap.getMap()[X][Y].hasCollision()) {
+					getObstacleMap().add(Globals.gameMap.getMap()[X][Y]);
+
+				}
+			}
+		}
 	}
 }

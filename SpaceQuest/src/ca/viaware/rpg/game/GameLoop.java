@@ -32,6 +32,7 @@ public class GameLoop {
 		// Globals.ammoBar = new AmmoBar();
 
 		Globals.gameMap = MapHandler.handleMapLoad("testmap1");
+		Globals.gameMap.setObstacleMap();
 
 		while (Globals.isRunning) {
 			

@@ -21,21 +21,7 @@ public class mobMap {
 		this.mapWidth = Globals.gameMap.getXSize();
 		this.mapHeight = Globals.gameMap.getYSize();
 
-		// inner arrray;
-		// x
-		System.out.println("l " + Globals.gameMap.getMap()[0].length);
-		for (int X = 0; Globals.gameMap.getMap().length > X; X++) {
-
-			// y
-			// this goes through every block
-			for (int Y = 0; Globals.gameMap.getMap()[0].length > Y; Y++) {
-
-				if (Globals.gameMap.getMap()[X][Y].hasCollision()) {
-					ObstacleMap.add(Globals.gameMap.getMap()[X][Y]);
-
-				}
-			}
-		}
+		ObstacleMap = Globals.gameMap.getObstacleMap();
 
 		createMap();
 
