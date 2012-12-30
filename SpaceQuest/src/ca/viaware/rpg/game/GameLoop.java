@@ -31,9 +31,9 @@ public class GameLoop {
 		DebugScreen dbs = new DebugScreen(170, 200);
 		// Globals.ammoBar = new AmmoBar();
 
-		Globals.gameMap = MapHandler.handleMapLoad("testmap1");
+		Globals.gameMap = MapHandler.handleMapLoad("pathfindtest");
 		Globals.gameMap.setObstacleMap();
-
+		
 		while (Globals.isRunning) {
 			
 			int delta = getDelta();

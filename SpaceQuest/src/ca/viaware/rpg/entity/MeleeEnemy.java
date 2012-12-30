@@ -17,6 +17,7 @@ import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class MeleeEnemy extends Enemy {
 
+	
 	private boolean b = false;
 	private TexturedQuad t;
 	@SuppressWarnings("unused")
@@ -47,8 +48,7 @@ public class MeleeEnemy extends Enemy {
 	public void update(int delta) {
 		
 		
-		blockx = (int) (mx / 64);
-		blocky = (int) (my / 64);
+		
 
 		b = false;
 		setX(getT().getx());
@@ -79,35 +79,10 @@ public class MeleeEnemy extends Enemy {
 
 		if (distancebetween < sightrange) {
 			// mob colision
-			int i = 0;
-			for (Tile[] tile1 : Globals.gameMap.mapTiles) {
-
-				if (ydist > 0) {
-					if (blockx == tile1[i].getBX()) {
-						if (blocky - 1 == tile1[i].getBY()) {
-							// then it means that it is in this tile
-							if (Globals.gameMap.mapTiles[blockx][blocky].hasCollision()) {
-								// block on right of mob has collision
-							}
-						}
-					}
-				}
-				if (xdist > 0) {
-					if (blockx - 1 == tile1[i].getBX()) {
-						if (blocky == tile1[i].getBY()) {
-							// then it means that it is in this tile
-							if (Globals.gameMap.mapTiles[blockx][blocky].hasCollision()) {
-								// block on right of mob has collision
-							}
-						}
-					}
-				}
-
-				i++;
-			}
+			
 			if (distancebetween > range) {
-				mx = moverx(actxdist, mx, speed, xdist);
-				my = moverx(actydist, my, speed, ydist);
+			//	mx = moverx(actxdist, mx, speed, xdist);
+		//		my = moverx(actydist, my, speed, ydist);
 
 			} else {// this means the mob is within range and will attack
 				b = true;
@@ -121,6 +96,8 @@ public class MeleeEnemy extends Enemy {
 		
 		if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
 			
+				
+			
 			
 			mobMap map = new mobMap();
 	        AStarHeuristic heuristic = new ClosestHeuristic();
@@ -131,12 +108,15 @@ public class MeleeEnemy extends Enemy {
 	        pathFinder.printPath();
 			mx = mx + getXoffset();// this is for movement of player
 			my = my + getYoffset();
-
+			
 		}
+		blockx = (int) (mx / 64);
+		blocky = (int) (my / 64);
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
 
 	}
+	
 
 	private double moverx(double i, double mx, double speed, double dist) {
 		dist = dist / 100;
