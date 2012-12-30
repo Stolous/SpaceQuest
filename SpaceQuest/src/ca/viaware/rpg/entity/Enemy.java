@@ -1,12 +1,16 @@
 package ca.viaware.rpg.entity;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
+
+import ca.viaware.rpg.AStarPathFinding.Node;
 
 public abstract class Enemy extends AbstractMoveableEntity {
 	protected Rectangle hitbox = new Rectangle();
 	private int currenthealth, maxhealth, maxdamage, mindamage;
 	protected double mx, my, Xoffset, Yoffset;
 	private EnemyBar b;
+	
 
 	public Enemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny) {
 		super(spawnx, spawny, width, height);
@@ -18,7 +22,7 @@ public abstract class Enemy extends AbstractMoveableEntity {
 		this.currenthealth = this.maxhealth = maxhealth;
 		this.setMaxdamage(maxdamage);
 		this.setMindamage(mindamage);
-	
+		
 		// this is where spawn code goes
 
 	}

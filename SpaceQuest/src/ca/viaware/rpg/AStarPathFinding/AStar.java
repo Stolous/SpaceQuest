@@ -14,7 +14,7 @@ public class AStar {
          //closed list= nodes not searched sorted via heuristic               
         private ArrayList<Node> closedList;
         private SortedNodeList openList;
-        private Path shortestPath;
+        public Path shortestPath;
      
 
         public AStar(mobMap map, AStarHeuristic heuristic) {
