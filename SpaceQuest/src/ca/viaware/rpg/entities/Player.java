@@ -95,7 +95,10 @@ public class Player extends AbstractEntity {
 	public void update(int delta) {
 
 		// Animation
-		animCount += delta;
+		if (delta >= 0) {
+			animCount += delta;
+		}
+
 		if (animCount > 150) {
 			animStage++;
 			switch (walkingDir) {
@@ -141,7 +144,7 @@ public class Player extends AbstractEntity {
 		}
 	}
 
-	public void screenChanged(){
+	public void screenChanged() {
 		setX(Globals.dispWidth / 2 - width / 2);
 		setY(Globals.dispHeight / 2 - height / 2);
 		int screenXchange = Globals.dispWidth - Globals.dispWidthBK;
@@ -149,6 +152,7 @@ public class Player extends AbstractEntity {
 
 		Globals.gameMap.setOffsets((Globals.gameMap.getXOffset() + screenXchange / 2), (Globals.gameMap.getYOffset() + screenYchange / 2));
 	}
+
 	public void addTexture(Texture tex) {
 		animPositions.add(tex);
 	}
