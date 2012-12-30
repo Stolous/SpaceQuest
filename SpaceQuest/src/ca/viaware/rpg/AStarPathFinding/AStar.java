@@ -111,11 +111,13 @@ public class AStar {
 
         
         public int getNextWaypointX(){ 	
-        	int X = shortestPath.getWayPoint(0).getX();
+        	int X = shortestPath.getWayPoint(1).getX();
+        	X+=-0;
         	return X;
         }
         public int getNextWaypointY(){ 	
-        	int Y = shortestPath.getWayPoint(0).getY();
+        	int Y = shortestPath.getWayPoint(1).getY();
+        	Y+=-1;
         	return Y;
         }
         
