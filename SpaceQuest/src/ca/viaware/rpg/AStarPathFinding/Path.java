@@ -7,6 +7,9 @@ public class Path {
         
         public Path() {
         }
+        public void removeall(){
+        	waypoints.removeAll(waypoints);
+        }
         
         public int getLength() {
                 return waypoints.size();

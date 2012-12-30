@@ -30,7 +30,11 @@ public class AStar {
         }
 
         public Path calcShortestPath(int x, int y, int d, int e) {
-               
+        	try{
+               	shortestPath.removeall();
+        	}catch(Exception E){
+        		
+        	}
                 map.setStartLocation(x, y);
                 map.setGoalLocation(d, e);
 
@@ -106,6 +110,15 @@ public class AStar {
         }
 
         
+        public int getNextWaypointX(){ 	
+        	int X = shortestPath.getWayPoint(0).getX();
+        	return X;
+        }
+        public int getNextWaypointY(){ 	
+        	int Y = shortestPath.getWayPoint(0).getY();
+        	return Y;
+        }
+        
         public void printPath() {
             Node node;
             for(int x=0; x<map.mapWidth; x++) {
@@ -130,7 +143,7 @@ public class AStar {
                             } else if (node.isGoal) {
                                     System.out.print("*");
                             } else if (shortestPath.haswaypoint(node.getX(), node.getY())) {
-                                    System.out.print("O");
+                                    System.out.print("W");
                             } else {
                                     System.out.print(" ");
                             }

@@ -18,7 +18,7 @@ import ca.viaware.rpg.utilities.TexturedQuad;
 public class MeleeEnemy extends Enemy {
 
 	
-	private boolean b = false;
+	private boolean b = false,first=true;
 	private TexturedQuad t;
 	@SuppressWarnings("unused")
 	private int delta, agressiveness, betattacks, attackspeed, blockx, blocky;
@@ -51,11 +51,16 @@ public class MeleeEnemy extends Enemy {
 	public void update(int delta) {
 		
 		
-if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+
 			
-				
+		int newblockx = (int) (mx / 64);
+		int newblocky = (int) (my / 64);
 			
-			
+			if(!(newblockx==blockx)||!(newblocky==blocky)||first){
+				System.out.println(first);
+				blockx = newblockx;
+				blocky = newblocky; 
+				first = false;
 			mobMap map = new mobMap();
 	        pathFinder.updatemap(map);
 	        pathFinder.calcShortestPath((int)(x/64), (int)(y/64),(int)Globals.playerEntity.getX()/64,(int) Globals.playerEntity.getY()/64);
@@ -63,8 +68,11 @@ if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
 	        pathFinder.printPath();
 			mx = mx + getXoffset();// this is for movement of player
 			my = my + getYoffset();
+			goalX = pathFinder.getNextWaypointX()*64;
+			goalY = pathFinder.getNextWaypointY()*64;
+			System.out.println("Goal X "+ goalX+"Goal Y "+ goalY);
 			
-		}
+			}
 
 		b = false;
 		setX(getT().getx());
@@ -74,8 +82,7 @@ if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
 		setXoffset((Globals.gameMap.getXOffset()));
 		setYoffset((Globals.gameMap.getYOffset()));
 		// MATH (YAY!!!!!!!!!!)
-		goalX = Globals.playerEntity.getActX();
-		goalY = Globals.playerEntity.getActY();
+		
 
 		xdist = goalX + (Player.getW() / 2) - mx;
 
@@ -92,13 +99,13 @@ if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
 
 		distancebetween = Math.sqrt(((xdist * xdist) + (ydist * ydist)));// pythagorean
 																			// theorem
-
+		mx = moverx(actxdist, mx, speed, xdist);
+		my = moverx(actydist, my, speed, ydist);
 		if (distancebetween < sightrange) {
-			// mob colision
 			
+
 			if (distancebetween > range) {
-				mx = moverx(actxdist, mx, speed, xdist);
-				my = moverx(actydist, my, speed, ydist);
+				
 
 			} else {// this means the mob is within range and will attack
 				b = true;
@@ -111,8 +118,7 @@ if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
 		}
 		
 		
-		blockx = (int) (mx / 64);
-		blocky = (int) (my / 64);
+		
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
 
