@@ -31,11 +31,11 @@ public class mobMap {
 			// y
 			//this goes through every block
 			for (int Y = 0; Globals.gameMap.getMap()[0].length > Y; Y++) {
-				System.out.println("X"+X+"Y"+Y);
+			
 				
 				if (Globals.gameMap.getMap()[X][Y].hasCollision()) {
 					ObstacleMap.add(Globals.gameMap.getMap()[X][Y]);
-					System.out.println("djkfjdk");
+					System.out.println("Collision");
 				}
 			}
 		}
@@ -51,18 +51,20 @@ public class mobMap {
 		Node node;
 		map = new ArrayList<ArrayList<Node>>();
 		for (int x = 0; x < mapWidth; x++) {
-			System.out.println(map.size());
 			map.add(new ArrayList<Node>());
 			for (int y = 0; y < mapHeight; y++) {
 				node = new Node(x, y);
 				for (int i = 0; i < ObstacleMap.size(); i++) {
 					//this is not being run 	
-					if (((Tile) ObstacleMap.get(i)).hasCollision()) {				
+					if (((Tile) ObstacleMap.get(i)).getBX()==x) {		
+						if (((Tile) ObstacleMap.get(i)).getBY()==y) {		
 							node.setObstacle(true);
-							map.get(x).add(node);
+							
+						}
 					}
 
 				}
+				map.get(x).add(node);
 			}
 
 		}

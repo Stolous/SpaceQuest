@@ -116,7 +116,8 @@ public class AStar {
                     System.out.print("|");
 
                     for(int y=0; y<map.mapHeight; y++) {
-                            node = map.getNode(x, y);
+                            node = map.getNode(y, x);
+                            
                             if (node.isObstacle) {
                                     System.out.print("X");
                             } else if (node.isStart) {
@@ -126,7 +127,7 @@ public class AStar {
                             } else if (shortestPath.haswaypoint(node.getX(), node.getY())) {
                                     System.out.print("O");
                             } else {
-                                    System.out.print(" ");
+                                    System.out.print("-");
                             }
                             if (y==map.mapWidth)
                                     System.out.print("_");
