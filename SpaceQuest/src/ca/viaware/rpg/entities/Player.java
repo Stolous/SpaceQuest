@@ -221,7 +221,6 @@ public class Player extends AbstractEntity {
 
 	public static void death() {
 
-		System.out.println("You are dead!");
 		Globals.healthBar.set(0);
 	}
 
