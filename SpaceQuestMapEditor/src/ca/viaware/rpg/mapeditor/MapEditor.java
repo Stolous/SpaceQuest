@@ -45,7 +45,7 @@ public class MapEditor {
 			e.printStackTrace();
 		} catch (UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
-		} // seth is an asshole
+		}
 		tools = new ToolBox();
 		setupDisplay();
 		setupGL();
