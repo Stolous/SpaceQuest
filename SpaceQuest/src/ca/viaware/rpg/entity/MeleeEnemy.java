@@ -125,7 +125,8 @@ public class MeleeEnemy extends Enemy {
 	        AStar pathFinder = new AStar(map, heuristic);
 	        
 	        pathFinder.calcShortestPath((int)(x/64), (int)(y/64),(int)Globals.playerEntity.getX()/64,(int) Globals.playerEntity.getY()/64);
-	        
+	        System.out.println("MAP:");
+	        pathFinder.printPath();
 			mx = mx + getXoffset();// this is for movement of player
 			my = my + getYoffset();
 
