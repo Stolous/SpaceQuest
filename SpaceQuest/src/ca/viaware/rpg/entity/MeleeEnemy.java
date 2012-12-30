@@ -1,11 +1,10 @@
 package ca.viaware.rpg.entity;
 
-import java.util.ArrayList;
+
 import java.util.Random;
 
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.opengl.Texture;
+
 
 import ca.viaware.rpg.AStarPathFinding.AStar;
 import ca.viaware.rpg.AStarPathFinding.AStarHeuristic;

@@ -7,8 +7,8 @@ import ca.viaware.rpg.map.Tile;
 
 public class mobMap {
 
-	 int mapWidth;
-	 int mapHeight;
+	int mapWidth;
+	int mapHeight;
 	private ArrayList<ArrayList<Node>> map;
 	private int startLocationX = 0;
 	private int startLocationY = 0;
@@ -20,22 +20,19 @@ public class mobMap {
 	public mobMap() {
 		this.mapWidth = Globals.gameMap.getXSize();
 		this.mapHeight = Globals.gameMap.getYSize();
-		
 
 		// inner arrray;
-		ArrayList<Tile> innerObstacleMap = new ArrayList<Tile>();
 		// x
-		System.out.println("l "+Globals.gameMap.getMap()[0].length);
+		System.out.println("l " + Globals.gameMap.getMap()[0].length);
 		for (int X = 0; Globals.gameMap.getMap().length > X; X++) {
-			
+
 			// y
-			//this goes through every block
+			// this goes through every block
 			for (int Y = 0; Globals.gameMap.getMap()[0].length > Y; Y++) {
-			
-				
+
 				if (Globals.gameMap.getMap()[X][Y].hasCollision()) {
 					ObstacleMap.add(Globals.gameMap.getMap()[X][Y]);
-					System.out.println("Collision");
+
 				}
 			}
 		}
@@ -47,7 +44,7 @@ public class mobMap {
 	}
 
 	private void createMap() {
-		System.out.println("Width "+ mapWidth);
+		System.out.println("Width " + mapWidth);
 		Node node;
 		map = new ArrayList<ArrayList<Node>>();
 		for (int x = 0; x < mapWidth; x++) {
@@ -55,11 +52,11 @@ public class mobMap {
 			for (int y = 0; y < mapHeight; y++) {
 				node = new Node(x, y);
 				for (int i = 0; i < ObstacleMap.size(); i++) {
-					//this is not being run 	
-					if (((Tile) ObstacleMap.get(i)).getBX()==x) {		
-						if (((Tile) ObstacleMap.get(i)).getBY()==y) {		
+					// this is not being run
+					if (((Tile) ObstacleMap.get(i)).getBX() == x) {
+						if (((Tile) ObstacleMap.get(i)).getBY() == y) {
 							node.setObstacle(true);
-							
+
 						}
 					}
 
@@ -68,8 +65,7 @@ public class mobMap {
 			}
 
 		}
-		System.out.println(map.get(1).size());
-		System.out.println("Test"+ map.get(1).get(1).getX());
+
 	}
 
 	private void registerEdges() {

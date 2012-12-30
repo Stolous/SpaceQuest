@@ -45,10 +45,10 @@ public class AStar {
                 //while goal not reached
                 while(openList.size() != 0) {
 
-                        //get the first Node from non-searched Node list, sorted by lowest distance from our goal as guessed by our heuristic
+                        //get the first Node from non-searched Node list, sorted by lowest distance from our goal as guessed by heuristic
                         Node current = openList.getFirst();
 
-                        // check if goal reched
+                        // check if goal reached
                         if( current.getY() == map.getGoalLocationY()&&current.getX() == map.getGoalLocationX()) {
                                 return reconstructPath(current);
                         }
@@ -57,7 +57,7 @@ public class AStar {
                         openList.remove(current);
                         closedList.add(current);
 
-                        //go through all the current Nodes neighbors and calculate if one should be our next step
+                        //go through all the current Nodes neighbors and calculate if one should be next step
                         for(Node neighbor : current.getNeighborList()) {
                                 boolean neighborIsBetter;
                                 if (closedList.contains(neighbor))
@@ -116,6 +116,9 @@ public class AStar {
                     System.out.print("|");
 
                     for(int y=0; y<map.mapHeight; y++) {
+                    	
+                    		
+                    	
                             node = map.getNode(y, x);
                             
                             if (node.isObstacle) {
@@ -127,14 +130,14 @@ public class AStar {
                             } else if (shortestPath.haswaypoint(node.getX(), node.getY())) {
                                     System.out.print("O");
                             } else {
-                                    System.out.print("-");
+                                    System.out.print(" ");
                             }
                             if (y==map.mapWidth)
                                     System.out.print("_");
                     }
                    
                     System.out.print("|");
-                    System.out.println("X "+x);
+                    System.out.println("X "+(x+1));
             }
             for (int i=0; i<=map.mapWidth; i++)
                     System.out.print("-");
