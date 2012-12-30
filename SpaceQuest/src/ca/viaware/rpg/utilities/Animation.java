@@ -12,9 +12,9 @@ public class Animation {
 	int currentStage = 0;
 	int timer = 0;
 	
-	public Animation(List<Texture> anim, int speed){
+	public Animation(List<Texture> anim, int fps){
 	animList = anim;	
-	animSpeed = speed;
+	animSpeed = 1000 / fps;
 	}
 	
 	public void stepAnimation(int delta){
