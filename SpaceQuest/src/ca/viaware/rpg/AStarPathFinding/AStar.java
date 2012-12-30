@@ -17,15 +17,17 @@ public class AStar {
         public Path shortestPath;
      
 
-        public AStar(mobMap map, AStarHeuristic heuristic) {
-                this.map = map;
+        public AStar(AStarHeuristic heuristic) {
+                
                 this.heuristic = heuristic;
 
                 closedList = new ArrayList<Node>();
                 openList = new SortedNodeList();
         }
         
-        
+        public void updatemap(mobMap map){
+        	this.map =map;
+        }
 
         public Path calcShortestPath(int x, int y, int d, int e) {
                

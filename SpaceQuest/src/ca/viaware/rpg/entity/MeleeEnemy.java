@@ -23,8 +23,9 @@ public class MeleeEnemy extends Enemy {
 	@SuppressWarnings("unused")
 	private int delta, agressiveness, betattacks, attackspeed, blockx, blocky;
 	@SuppressWarnings("unused")
-	private double distancebetween, xdist, ydist, playerx, playery, range, actxdist, actydist, speed, sightrange, xspeed, yspeed;
+	private double distancebetween, xdist, ydist, goalX, goalY, range, actxdist, actydist, speed, sightrange, xspeed, yspeed;
 
+	private AStar pathFinder;
 	public MeleeEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed, double sightrange) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
 
@@ -38,6 +39,8 @@ public class MeleeEnemy extends Enemy {
 		y = (my);
 		this.sightrange = sightrange;
 
+		AStarHeuristic heuristic = new ClosestHeuristic();
+        pathFinder = new AStar(heuristic);	
 	}
 
 	public int getdelta() {
@@ -48,7 +51,20 @@ public class MeleeEnemy extends Enemy {
 	public void update(int delta) {
 		
 		
-		
+if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+			
+				
+			
+			
+			mobMap map = new mobMap();
+	        pathFinder.updatemap(map);
+	        pathFinder.calcShortestPath((int)(x/64), (int)(y/64),(int)Globals.playerEntity.getX()/64,(int) Globals.playerEntity.getY()/64);
+	        System.out.println("MAP:");
+	        pathFinder.printPath();
+			mx = mx + getXoffset();// this is for movement of player
+			my = my + getYoffset();
+			
+		}
 
 		b = false;
 		setX(getT().getx());
@@ -58,17 +74,17 @@ public class MeleeEnemy extends Enemy {
 		setXoffset((Globals.gameMap.getXOffset()));
 		setYoffset((Globals.gameMap.getYOffset()));
 		// MATH (YAY!!!!!!!!!!)
-		playerx = Globals.playerEntity.getActX();
-		playery = Globals.playerEntity.getActY();
+		goalX = Globals.playerEntity.getActX();
+		goalY = Globals.playerEntity.getActY();
 
-		xdist = playerx + (Player.getW() / 2) - mx;
+		xdist = goalX + (Player.getW() / 2) - mx;
 
 		actxdist = xdist;
 		// if negative
 		if (xdist < 0) {
 			xdist *= -1;
 		}
-		ydist = playery + (Player.getH() / 2) - my;
+		ydist = goalY + (Player.getH() / 2) - my;
 		actydist = ydist;
 		if (ydist < 0) {
 			ydist *= -1;
@@ -81,8 +97,8 @@ public class MeleeEnemy extends Enemy {
 			// mob colision
 			
 			if (distancebetween > range) {
-			//	mx = moverx(actxdist, mx, speed, xdist);
-		//		my = moverx(actydist, my, speed, ydist);
+				mx = moverx(actxdist, mx, speed, xdist);
+				my = moverx(actydist, my, speed, ydist);
 
 			} else {// this means the mob is within range and will attack
 				b = true;
@@ -94,22 +110,7 @@ public class MeleeEnemy extends Enemy {
 			}
 		}
 		
-		if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
-			
-				
-			
-			
-			mobMap map = new mobMap();
-	        AStarHeuristic heuristic = new ClosestHeuristic();
-	        AStar pathFinder = new AStar(map, heuristic);
-	        
-	        pathFinder.calcShortestPath((int)(x/64), (int)(y/64),(int)Globals.playerEntity.getX()/64,(int) Globals.playerEntity.getY()/64);
-	        System.out.println("MAP:");
-	        pathFinder.printPath();
-			mx = mx + getXoffset();// this is for movement of player
-			my = my + getYoffset();
-			
-		}
+		
 		blockx = (int) (mx / 64);
 		blocky = (int) (my / 64);
 		mx = mx + getXoffset();// this is for movement of player
