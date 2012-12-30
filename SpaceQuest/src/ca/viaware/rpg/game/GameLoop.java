@@ -45,9 +45,9 @@ public class GameLoop {
 			if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
 				delta = 40;
 			}
-			if(Keyboard.isKeyDown(Keyboard.KEY_ADD)){
+			if(Keyboard.isKeyDown(Keyboard.KEY_PERIOD)){
 				Globals.musiclevel+=0.008;
-			}else if(Keyboard.isKeyDown(Keyboard.KEY_SUBTRACT)){
+			}else if(Keyboard.isKeyDown(Keyboard.KEY_COMMA)){
 					Globals.musiclevel-=0.008;
 				
 			}
