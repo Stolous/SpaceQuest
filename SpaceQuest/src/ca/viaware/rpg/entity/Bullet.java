@@ -16,7 +16,9 @@ public class Bullet extends AbstractMoveableEntity {
 	private boolean removed = false;
 	TexturedQuad b;
 	private int mindamage, maxdamage;
+	@SuppressWarnings("unused")
 	private double oldX, newX, newY, oldY, xSpeed, ySpeed, XOffset, YOffset;
+	@SuppressWarnings("unused")
 	private boolean once;
 
 	public Bullet(Texture t, Double oldX, Double newX, double oldY, double newY, double bulletSpeed, int mind, int maxd) {

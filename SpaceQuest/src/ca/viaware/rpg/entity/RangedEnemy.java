@@ -11,22 +11,19 @@ import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class RangedEnemy extends Enemy {
 
+	@SuppressWarnings("unused")
 	private boolean movedOnce = false;
 
 	private TexturedQuad t;
+	@SuppressWarnings("unused")
 	private int delta, aggresiveness, betattacks, attackspeed, blockx, blocky;
-	private double distancebetween, xdist, ydist, playerx, playery, range,
-			actxdist, actydist, speed, sightrange, xspeed, yspeed, BulletSpeed,
-			optrange, mxc, myc, xoff, yoff;
+	@SuppressWarnings("unused")
+	private double distancebetween, xdist, ydist, playerx, playery, range, actxdist, actydist, speed, sightrange, xspeed, yspeed, BulletSpeed, optrange, mxc, myc, xoff, yoff;
 	private int mindamage, maxdamage, accuracy;
 	private Texture Bullet;
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
-	public RangedEnemy(double width, double height, int maxhealth,
-			int maxdamage, int mindamage, int spawnx, int spawny,
-			int aggresiveness, double range, double speed, int attackspeed,
-			double optdist, double sightrange, String path, double BulletSpeed,
-			double xoff, double yoff, int accuracy) {
+	public RangedEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int aggresiveness, double range, double speed, int attackspeed, double optdist, double sightrange, String path, double BulletSpeed, double xoff, double yoff, int accuracy) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
 		this.mindamage = mindamage;
 		this.maxdamage = maxdamage;
@@ -68,8 +65,7 @@ public class RangedEnemy extends Enemy {
 
 		if (betattacks >= attackspeed) {
 
-			bullets.add(new Bullet(this.Bullet, x - xoff, newx, y - yoff, newy,
-					BulletSpeed, mindamage, maxdamage));
+			bullets.add(new Bullet(this.Bullet, x - xoff, newx, y - yoff, newy, BulletSpeed, mindamage, maxdamage));
 			betattacks = 0;
 
 		}
@@ -147,8 +143,7 @@ public class RangedEnemy extends Enemy {
 
 	}
 
-	private double moverx(double i, double mx, double speed, double dist,
-			boolean b) {
+	private double moverx(double i, double mx, double speed, double dist, boolean b) {
 		dist = dist / 100;
 		double change = 0;
 

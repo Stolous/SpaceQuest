@@ -1,10 +1,5 @@
 package ca.viaware.rpg.utilities;
 
-import static org.lwjgl.opengl.GL11.GL_QUADS;
-import static org.lwjgl.opengl.GL11.glBegin;
-import static org.lwjgl.opengl.GL11.glEnd;
-import static org.lwjgl.opengl.GL11.glVertex2i;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
+import static org.lwjgl.opengl.GL11.*;
 
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
@@ -20,10 +15,11 @@ import org.newdawn.slick.opengl.TextureLoader;
 import ca.viaware.rpg.game.Globals;
 
 public class TextRenderer {
+	@SuppressWarnings("unused")
 	private double xsize, ysize, x, y, rotate, xh, yh, lxpos, lypos, xloc;
 	private Texture texture = null;
 	String text;
-	List<String> textBuffer = new ArrayList(16);
+	List<String> textBuffer = new ArrayList<String>(16);
 
 	public TextRenderer(int fontsize, int rotates, Font font) {
 
@@ -87,13 +83,13 @@ public class TextRenderer {
 			lxpos = letter / 16;
 
 
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
-			GL11.glPushMatrix();
-			GL11.glTranslated(x, y, 0);
-			GL11.glTranslatef(10.0f, 10.5f, -0.0f); // back to previous position
-			GL11.glRotated(rotate, 0.0f, 0.0f, -1.0f); // rotate
-			GL11.glTranslatef(-10.0f, -10.5f, 0.0f); // to the origin
-			GL11.glTranslated(-x, -y, 0);
+			glEnable(GL_TEXTURE_2D);
+			glPushMatrix();
+			glTranslated(x, y, 0);
+			glTranslatef(10.0f, 10.5f, -0.0f); // back to previous position
+			glRotated(rotate, 0.0f, 0.0f, -1.0f); // rotate
+			glTranslatef(-10.0f, -10.5f, 0.0f); // to the origin
+			glTranslated(-x, -y, 0);
 			// above is for movement/rotation of text
 
 			// 128 px total
@@ -106,19 +102,19 @@ public class TextRenderer {
 			double endx = startx + nbr;
 			double endy = starty + nbr;
 
-			GL11.glBegin(GL11.GL_QUADS);
-			GL11.glTexCoord2d(startx, starty);
-			GL11.glVertex2d(x - getXh(), y - yh);
-			GL11.glTexCoord2d(startx, endy);
-			GL11.glVertex2d(x - getXh(), y + yh);
-			GL11.glTexCoord2d(endx, endy);
-			GL11.glVertex2d(x + getXh(), y + yh);
-
-			GL11.glTexCoord2d(endx, starty);
-			GL11.glVertex2d(x + getXh(), y - yh);
-			GL11.glEnd();
-			GL11.glPopMatrix();
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			glBegin(GL_QUADS);
+			glTexCoord2d(startx, starty);
+			glVertex2d(x - getXh(), y - yh);
+			glTexCoord2d(startx, endy);
+			glVertex2d(x - getXh(), y + yh);
+			glTexCoord2d(endx, endy);
+			glVertex2d(x + getXh(), y + yh);
+			
+			glTexCoord2d(endx, starty);
+			glVertex2d(x + getXh(), y - yh);
+			glEnd();
+			glPopMatrix();
+			glDisable(GL_TEXTURE_2D);
 
 			/*
 			 * Just in case i screw something up GL11.glBegin(GL11.GL_QUADS);

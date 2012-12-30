@@ -1,10 +1,7 @@
 package ca.viaware.rpg.game;
 
-import org.lwjgl.opengl.*;
 
 import ca.viaware.rpg.entity.Enemy;
-import ca.viaware.rpg.map.Loader;
-import ca.viaware.rpg.map.Map;
 import ca.viaware.rpg.utilities.SButton;
 import ca.viaware.rpg.utilities.TextRenderer;
 import static org.lwjgl.opengl.GL11.*;
@@ -45,6 +42,10 @@ public class Renderer {
 			Globals.healthBar.update();
 	
 
+			break;
+			
+		case OUTRO:
+			
 			break;
 		}
 		

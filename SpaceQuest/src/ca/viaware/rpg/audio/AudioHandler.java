@@ -20,6 +20,7 @@ public class AudioHandler {
 		return a;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public Audio loadAudioStream(String input){
 		Audio a = null;
 		try {

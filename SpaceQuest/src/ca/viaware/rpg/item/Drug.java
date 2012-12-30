@@ -9,6 +9,7 @@ import ca.viaware.rpg.effect.Effect;
 
 public class Drug extends Item{
 
+	@SuppressWarnings("unused")
 	private List<Effect> drugEffects = new ArrayList<Effect>(16);
 	
 	public Drug(Texture t, List<Effect> effects) {

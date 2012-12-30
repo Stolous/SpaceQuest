@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +12,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 public class TextureHandler {
 
+	@SuppressWarnings("static-access")
 	public Texture loadSprite(String key) {
 		File location = new File("res/sprites/" + key + ".png");
 
@@ -31,6 +31,7 @@ public class TextureHandler {
 		return texture;
 	}
 
+	@SuppressWarnings("static-access")
 	public Texture loadDiffTexture(String addr, String type) {
 		File location = new File(addr);
 
@@ -56,13 +57,14 @@ public class TextureHandler {
 
 		while (hasNext) {
 			File file = new File("res/sprites/" + animFolder + Integer.toString(count) + ".png");
-			
 			if (file.exists()) {
 				Texture texture = loadSprite(animFolder + "/" + Integer.toString(count));
+				aList.add(texture);
 			} else {
 				hasNext = false;
 			}
 			count++;
+			
 		}
 
 		return new Animation(aList, speed);

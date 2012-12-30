@@ -2,8 +2,6 @@ package ca.viaware.rpg.utilities;
 
 import static org.lwjgl.opengl.GL11.*;
 
-import org.lwjgl.opengl.GL11;
-
 public class Colour {
 
 	private double red, green, blue;

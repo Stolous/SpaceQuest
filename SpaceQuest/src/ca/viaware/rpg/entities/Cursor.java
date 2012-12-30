@@ -2,7 +2,6 @@ package ca.viaware.rpg.entities;
 
 import static org.lwjgl.opengl.GL11.*;
 
-import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.AbstractMoveableEntity;

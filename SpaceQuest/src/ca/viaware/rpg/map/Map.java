@@ -2,7 +2,6 @@ package ca.viaware.rpg.map;
 
 import ca.viaware.rpg.game.Globals;
 import ca.viaware.rpg.utilities.Location;
-import ca.viaware.rpg.utilities.TextRenderer;
 
 public class Map {
 	public int xSize, ySize;

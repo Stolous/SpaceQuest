@@ -1,12 +1,10 @@
 package ca.viaware.rpg.entity;
 
 import java.awt.Rectangle;
-import java.util.ArrayList;
-
-import ca.viaware.rpg.AStarPathFinding.Node;
 
 public abstract class Enemy extends AbstractMoveableEntity {
 	protected Rectangle hitbox = new Rectangle();
+	@SuppressWarnings("unused")
 	private int currenthealth, maxhealth, maxdamage, mindamage;
 	protected double mx, my, Xoffset, Yoffset;
 	private EnemyBar b;

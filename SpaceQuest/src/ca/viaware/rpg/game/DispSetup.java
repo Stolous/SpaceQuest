@@ -1,21 +1,10 @@
 package ca.viaware.rpg.game;
 
-import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
-import static org.lwjgl.opengl.GL11.GL_PROJECTION;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL11.glEnable;
-import static org.lwjgl.opengl.GL11.glLoadIdentity;
-import static org.lwjgl.opengl.GL11.glMatrixMode;
-import static org.lwjgl.opengl.GL11.glOrtho;
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.DisplayMode;
 import static org.lwjgl.opengl.GL11.*;
-import org.lwjgl.opengl.*;
-import org.lwjgl.*;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.*;
 
 public class DispSetup {
 	public static void setupDisplay() {

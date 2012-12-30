@@ -1,23 +1,18 @@
 package ca.viaware.rpg.game;
 
-import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.openal.AL;
-import org.lwjgl.openal.AL10;
-import org.lwjgl.openal.OpenALException;
 import org.lwjgl.opengl.Display;
 
 import ca.viaware.rpg.audio.AudioLoadList;
 import ca.viaware.rpg.entities.Cursor;
 import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
-//import ca.viaware.rpg.entities.AmmoBar;
 import ca.viaware.rpg.map.MapHandler;
 import ca.viaware.rpg.utilities.ResizeHandler;
 import ca.viaware.rpg.utilities.DebugScreen;
 import ca.viaware.rpg.utilities.MouseData;
-import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TimeHandler;
 
 public class GameLoop {

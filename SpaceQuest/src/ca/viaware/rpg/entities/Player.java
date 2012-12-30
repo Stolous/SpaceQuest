@@ -3,8 +3,6 @@ package ca.viaware.rpg.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.AbstractEntity;
@@ -22,7 +20,6 @@ public class Player extends AbstractEntity {
 	int animCount = 0;
 	double speed = 0.15;
 	private static double width, height;
-	private boolean screenChanged = false;
 
 	private double changeY, changeX;
 

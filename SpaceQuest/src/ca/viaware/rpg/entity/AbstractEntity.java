@@ -2,10 +2,6 @@ package ca.viaware.rpg.entity;
 
 import java.awt.Rectangle;
 
-import org.lwjgl.input.Mouse;
-
-import ca.viaware.rpg.game.Globals;
-
 public abstract class AbstractEntity implements Entity {
 
 	protected double x, y, width, height;
@@ -74,10 +70,5 @@ public abstract class AbstractEntity implements Entity {
 		hitbox.setBounds((int) x, (int) y, (int) width, (int) height);
 		return hitbox.intersects(other.getX(), other.getY(), other.getWidth(), other.getHeight());
 	}
-	/*
-	 * public boolean intersects(double x2,double y2,Entity other) {
-	 * hitbox.setBounds((int) x, (int) y, (int) width, (int) height); return
-	 * hitbox.intersects(x2,y2, other.getWidth(), other.getHeight()); }
-	 */
 
 }

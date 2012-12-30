@@ -7,7 +7,6 @@ import ca.viaware.rpg.game.Globals;
 public class MusicPlaylist {
 	private int count = 0;
 	private float oldPos = 0;
-	private int count2 = 0;
 	public Audio nextSong(Audio current){
 		if (oldPos == current.getPosition()){
 			count++;

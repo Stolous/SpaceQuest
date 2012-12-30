@@ -4,13 +4,9 @@ import static org.lwjgl.opengl.GL11.*;
 
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.opengl.Texture;
-
 import ca.viaware.rpg.entity.AbstractMoveableEntity;
 import ca.viaware.rpg.entity.Enemy;
 import ca.viaware.rpg.game.Globals;
-import ca.viaware.rpg.utilities.Animation;
 import ca.viaware.rpg.utilities.EnemyHandler;
 
 public class Tile extends AbstractMoveableEntity {

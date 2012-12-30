@@ -19,7 +19,9 @@ public class MeleeEnemy extends Enemy {
 
 	private boolean b = false;
 	private TexturedQuad t;
+	@SuppressWarnings("unused")
 	private int delta, agressiveness, betattacks, attackspeed, blockx, blocky;
+	@SuppressWarnings("unused")
 	private double distancebetween, xdist, ydist, playerx, playery, range, actxdist, actydist, speed, sightrange, xspeed, yspeed;
 
 	public MeleeEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed, double sightrange) {

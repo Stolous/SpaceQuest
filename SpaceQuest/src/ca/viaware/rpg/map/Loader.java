@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import ca.viaware.rpg.game.Globals;
-import ca.viaware.rpg.utilities.EnemyHandler;
 
 public class Loader {
 

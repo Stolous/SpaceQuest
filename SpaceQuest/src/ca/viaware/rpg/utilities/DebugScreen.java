@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+@SuppressWarnings("serial")
 public class DebugScreen extends JFrame{
 
 	JLabel delta = new JLabel();

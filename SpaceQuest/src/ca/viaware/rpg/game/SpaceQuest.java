@@ -1,7 +1,5 @@
 package ca.viaware.rpg.game;
 
-import ca.viaware.rpg.entities.UFO;
-
 public class SpaceQuest {
 
 	public SpaceQuest() {
