@@ -30,7 +30,6 @@ public class MapEditor {
 	int dCount = 0;
 	boolean prevPressed = false;
 	public static List<TileTexture> textures = new ArrayList(16);
-	public static List<TileTexture> animTextures = new ArrayList(16);
 	ToolBox tools;
 	EnemyEditor enemyEditor;
 	int selectedTile = 0;
@@ -58,7 +57,7 @@ public class MapEditor {
 		Menu menu = new Menu();
 		menu.showMenu();
 
-		tiles.add(new Tile(0, 0, 0, false));
+		tiles.add(new Tile(0, 0, 0));
 
 		while (Globals.isRunning) {
 			delta = getDelta();
@@ -175,22 +174,15 @@ public class MapEditor {
 			tools.changed();
 		}
 
-		if (!Keyboard.isKeyDown(Keyboard.KEY_A)) {
 			if (cSelected > (textures.size() - 1)) {
 				cSelected = 0;
 			}
-		} else if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-			if (cSelected > (animTextures.size() - 1)) {
-				cSelected = 0;
-			}
-		}
 		if (cSelected < 0) {
 			cSelected = 0;
 		}
 
 		Globals.cSelected = cSelected;
 		tools.updateSelected();
-		tools.setPlacingAnim(Keyboard.isKeyDown(Keyboard.KEY_A));
 
 		switch (Globals.selectedTool) {
 
@@ -203,12 +195,9 @@ public class MapEditor {
 					}
 				}
 
-				if (!d && !Keyboard.isKeyDown(Keyboard.KEY_A)) {
+				if (!d) {
 					changeMade();
-					tiles.add(new Tile(mX - mX % 64, mY - mY % 64, cSelected, false));
-				} else if (!d && Keyboard.isKeyDown(Keyboard.KEY_A)) {
-					changeMade();
-					tiles.add(new Tile(mX - mX % 64, mY - mY % 64, cSelected, true));
+					tiles.add(new Tile(mX - mX % 64, mY - mY % 64, cSelected));
 				}
 			}
 

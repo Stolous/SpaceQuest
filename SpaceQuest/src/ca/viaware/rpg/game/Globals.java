@@ -12,6 +12,7 @@ import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.map.Map;
 import ca.viaware.rpg.map.TeleMarker;
+import ca.viaware.rpg.map.TileTexture;
 import ca.viaware.rpg.utilities.Animation;
 import ca.viaware.rpg.utilities.SButton;
 import ca.viaware.rpg.utilities.TextRenderer;
@@ -28,7 +29,7 @@ public class Globals {
 	public static int dispWidth = 800, dispHeight = 600;
 	public static int dispWidthBK = 0, dispHeightBK = 0;
 	public static int temp = 0;
-	public static List<Texture> tileTextures = new ArrayList<Texture>(16);
+	public static List<TileTexture> tileTextures = new ArrayList<TileTexture>(16);
 	public static List<Texture> otherTextures = new ArrayList<Texture>(16);
 	public static Player playerEntity = null;
 	public static Map gameMap = null;

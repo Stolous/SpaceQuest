@@ -41,7 +41,7 @@ public class Loader {
 						// System.out.println("Null tile at " + x + ", " + y);
 					} else {
 						System.out.println("Found tile at " + x + ", " + y);
-						Tile tile = new Tile(x * 64, y * 64, 0, false);
+						Tile tile = new Tile(x * 64, y * 64, 0);
 						tile.passData(lin, x, y);
 						tiles.add(tile);
 					}

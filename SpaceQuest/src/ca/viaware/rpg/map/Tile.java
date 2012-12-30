@@ -15,7 +15,7 @@ import ca.viaware.rpg.utilities.EnemyHandler;
 
 public class Tile extends AbstractMoveableEntity {
 
-	private Texture tex = null;
+	private TileTexture tex = null;
 	private boolean enabled = false;
 	private int ID = 0;
 	private int l2ID = 0;
@@ -27,8 +27,6 @@ public class Tile extends AbstractMoveableEntity {
 	int actX, actY;
 	private boolean isEnemy;
 	public int enemyID = 0;
-	private Animation tileAnim = null;
-	private boolean isAnimated = false;
 
 	public Tile(double n1, double n2, double n3, double n4, boolean enabled, String data, int tileX, int tileY) {
 		super(n1, n2, n3, n4);
@@ -52,7 +50,7 @@ public class Tile extends AbstractMoveableEntity {
 		return actY / 64;
 	}
 
-	public void setTexture(Texture t) {
+	public void setTexture(TileTexture t) {
 		tex = t;
 	}
 
@@ -60,7 +58,7 @@ public class Tile extends AbstractMoveableEntity {
 		return enabled;
 	}
 
-	public Texture getTexture() {
+	public TileTexture getTexture() {
 		return tex;
 	}
 
@@ -68,12 +66,9 @@ public class Tile extends AbstractMoveableEntity {
 		x = cx * 64 + xOff;
 		y = cy * 64 + yOff;
 
-		if (enabled && !isAnimated) {
-			Globals.tileTextures.get(ID).bind();
-		}else if (enabled && isAnimated){
-			tileAnim.bindCurrentStage();
+		if (enabled) {
+			Globals.tileTextures.get(ID).bindTexture();
 		}
-
 		glBegin(GL_QUADS);
 		glTexCoord2f(0f, 0f);
 		glVertex2i(cx * 64 + xOff, cy * 64 + yOff);
@@ -86,7 +81,7 @@ public class Tile extends AbstractMoveableEntity {
 		glEnd();
 
 		if (hasLayer2) {
-			Globals.tileTextures.get(l2ID).bind();
+			Globals.tileTextures.get(l2ID).bindTexture();
 			glBegin(GL_QUADS);
 			glTexCoord2f(0f, 0f);
 			glVertex2i(cx * 64 + xOff, cy * 64 + yOff);
@@ -218,8 +213,6 @@ public class Tile extends AbstractMoveableEntity {
 	
 	@Override
 	public void update(int delta){
-		if (isAnimated){
-			tileAnim.stepAnimation(delta);
-		}
+		tex.updateTexture(delta);
 	}
 }

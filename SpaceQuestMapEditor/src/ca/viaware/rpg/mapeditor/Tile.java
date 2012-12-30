@@ -21,13 +21,11 @@ public class Tile {
 	private Waypoint teleMarker;
 	private int teleMarkerID = 0;
 	private int enemyID = 0;
-	private boolean isAnimated = false;
 
-	public Tile(int x, int y, int ID, boolean anim) {
+	public Tile(int x, int y, int ID) {
 		this.x = x;
 		this.y = y;
 		this.ID = ID;
-		isAnimated = anim;
 
 		actX = x / 64 + Globals.xOffset;
 		actY = y / 64 + Globals.yOffset;
@@ -72,12 +70,6 @@ public class Tile {
 			isEnemy = true;
 			enemyID = Integer.parseInt(data2[4]);
 		}
-		
-		if (data2[5].equals("N")){
-			isAnimated = false;
-		}else{
-			isAnimated = true;
-		}
 	}
 
 	public void finishLoading() {
@@ -99,11 +91,7 @@ public class Tile {
 	public void renderTile() {
 		glEnable(GL_TEXTURE_2D);
 
-		if (isAnimated){
-		MapEditor.animTextures.get(ID).getTexture().bind();
-		}else{
 		MapEditor.textures.get(ID).getTexture().bind();
-		}
 		
 		glBegin(GL_QUADS);
 		glTexCoord2f(0f, 0f);
@@ -323,12 +311,6 @@ public class Tile {
 			data = data + "/N";
 		}
 		
-		if (isAnimated) {
-			data = data + "/A";
-		}else{
-			data = data + "/N";
-		}
-
 		data = data + "&";
 		System.out.println("Finished producing data string, returning " + data);
 		return data;
@@ -446,8 +428,4 @@ public class Tile {
 		return enemy;
 	}
 	
-	public void setAnimated(boolean anim){
-		isAnimated = anim;
-	}
-
 }
