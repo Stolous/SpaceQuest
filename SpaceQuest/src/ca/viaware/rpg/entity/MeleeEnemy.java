@@ -23,7 +23,7 @@ public class MeleeEnemy extends Enemy {
 	@SuppressWarnings("unused")
 	private int delta, agressiveness, betattacks, attackspeed, blockx, blocky;
 	@SuppressWarnings("unused")
-	private double distancebetween, xdist, ydist, goalX, goalY, range, actxdist, actydist, speed, sightrange, xspeed, yspeed;
+	private double distancebetween, pblockx,pblocky,xdist, ydist, goalX, goalY, range, actxdist, actydist, speed, sightrange, xspeed, yspeed;
 
 	private AStar pathFinder;
 	public MeleeEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed, double sightrange) {
@@ -52,11 +52,11 @@ public class MeleeEnemy extends Enemy {
 		
 		
 
-			
+		int newpblockx =(int) Globals.playerEntity.getX()/64;
+		int newpblocky =(int) Globals.playerEntity.getY()/64;
 		int newblockx = (int) (mx / 64);
 		int newblocky = (int) (my / 64);
-			
-			if(!(newblockx==blockx)||!(newblocky==blocky)||first){
+			if(!(newblockx==blockx)||!(newblocky==blocky)||first||newpblockx != pblockx||newpblocky!=pblocky){
 				System.out.println(first);
 				blockx = newblockx;
 				blocky = newblocky; 
@@ -73,6 +73,8 @@ public class MeleeEnemy extends Enemy {
 			System.out.println("Goal X "+ goalX+"Goal Y "+ goalY);
 			
 			}
+			pblockx = newpblockx;
+			pblocky = newpblocky;
 
 		b = false;
 		setX(getT().getx());
