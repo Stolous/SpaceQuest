@@ -5,8 +5,11 @@ import java.util.List;
 
 import org.newdawn.slick.opengl.Texture;
 
+import ca.viaware.rpg.effect.Effect;
+import ca.viaware.rpg.effect.effects.SpeedyGonzalez;
 import ca.viaware.rpg.entity.AbstractEntity;
 import ca.viaware.rpg.game.Globals;
+import ca.viaware.rpg.utilities.Colour;
 import ca.viaware.rpg.utilities.Location;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -15,12 +18,12 @@ public class Player extends AbstractEntity {
 	boolean color = false;
 	private static int currentHealth;
 	private int regenRate;
-	List<Texture> animPositions = new ArrayList<Texture>(16);
+	private List<Texture> animPositions = new ArrayList<Texture>(16);
+	private List<Effect> activeEffects = new ArrayList<Effect>(16);
 	int animStage = 0;
 	int animCount = 0;
 	double speed = 0.15;
 	private static double width, height;
-
 	private double changeY, changeX;
 
 	boolean walkChange = false;
@@ -35,6 +38,8 @@ public class Player extends AbstractEntity {
 		currentHealth = maxHealth;
 		actX = Globals.dispWidth / 2 - width / 2;
 		actY = Globals.dispHeight / 2 - height / 2;
+		
+		activeEffects.add(new SpeedyGonzalez());
 
 	}
 
@@ -52,7 +57,7 @@ public class Player extends AbstractEntity {
 		changeX = 0;
 		changeY = 0;
 		animPositions.get(animStage).bind();
-
+		
 		if (color) {
 			glColor3f(1, 0.5f, 0.5f);
 
@@ -71,6 +76,10 @@ public class Player extends AbstractEntity {
 			Thread t = new Thread(r);
 			t.start();
 
+		}else{
+			for (Effect effect : activeEffects){
+				effect.bindColour();
+			}
 		}
 
 		glBegin(GL_QUADS);
@@ -138,6 +147,14 @@ public class Player extends AbstractEntity {
 
 			}
 			animCount = 0;
+		}
+		
+		for (Effect effect : activeEffects){
+			if (!effect.isActive()){
+				maxHealth = (int) (effect.getHealthMultiply() * maxHealth);
+				speed = effect.getSpeedMultiply() * speed;
+			}
+			effect.setActive(true);
 		}
 	}
 
