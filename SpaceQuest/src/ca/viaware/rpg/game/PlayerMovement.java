@@ -31,15 +31,15 @@ public class PlayerMovement {
 					if (tile.hasCollision()) {
 						double tileX = tile.getX();
 						double tileY = tile.getY();
-						if (playerX > tileX - 10) {
+						if (playerX > tileX && playerY >= tileY - 55 && playerY < tileY + 55) {
 							cLeft = true;
-						} else if (playerX <= tileX + 10) {
+						} else if (playerX <= tileX && playerY >= tileY - 55 && playerY < tileY + 55) {
 							cRight = true;
 						}
 
-						if (playerY >= tileY + 50) {
+						if (playerY >= tileY && playerX >= tileX - 55 && playerX < tileX + 55) {
 							cUp = true;
-						} else if (playerY + 50 < tileY) {
+						} else if (playerY < tileY && playerX >= tileX - 55 && playerX < tileX + 55) {
 							cDown = true;
 						}
 					}
