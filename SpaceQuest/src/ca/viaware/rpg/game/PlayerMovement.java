@@ -15,30 +15,32 @@ public class PlayerMovement {
 		double speed = Globals.playerEntity.getSpeed();
 		boolean cUp = false, cDown = false, cRight = false, cLeft = false;
 		// Collision:
-		int tileX = 0, tileY = 0;
-		int playerX = (int) (Globals.playerEntity.getActX() - Globals.playerEntity.getActX() % 64) / 64 + 2;
-		int playerY = (int) (Globals.playerEntity.getActY() - Globals.playerEntity.getActY() % 64) / 64 + 1;
+		//int playerX = (int) (Globals.playerEntity.getActX() - Globals.playerEntity.getActX() % 64) / 64 + 2;
+		//int playerY = (int) (Globals.playerEntity.getActY() - Globals.playerEntity.getActY() % 64) / 64 + 1;
+
+		double playerX = Globals.playerEntity.getX();
+		double playerY = Globals.playerEntity.getY();
 
 		boolean teleMarkerCollision = false;
 		TeleMarker tMarker = null;
 		for (Tile[] tile1 : Globals.gameMap.mapTiles) {
-			tileX++;
 			for (Tile tile : tile1) {
-				tileY++;
 				// i reorganized this - not necessary to check if tile has
 				// collision if it does not intersect player!
 				if (Globals.playerEntity.intersects(tile)) {
 					if (tile.hasCollision()) {
-						if (playerX > tileX) {
+						double tileX = tile.getX();
+						double tileY = tile.getY();
+						if (playerX > tileX - 10) {
 							cLeft = true;
-						} else if (playerX <= tileX) {
+						} else if (playerX <= tileX + 10) {
 							cRight = true;
 						}
 
-						if (playerY >= tileY) {
-							cDown = true;
-						} else if (playerY < tileY) {
+						if (playerY >= tileY + 50) {
 							cUp = true;
+						} else if (playerY + 50 < tileY) {
+							cDown = true;
 						}
 					}
 
@@ -48,7 +50,6 @@ public class PlayerMovement {
 					}
 				}
 			}
-			tileY = 0;
 		}
 
 		if (teleMarkerCollision) {

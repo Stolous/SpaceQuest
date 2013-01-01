@@ -31,7 +31,7 @@ public class GameLoop {
 		DebugScreen dbs = new DebugScreen(170, 200);
 		// Globals.ammoBar = new AmmoBar();
 
-		Globals.gameMap = MapHandler.handleMapLoad("pathfindtest");
+		Globals.gameMap = MapHandler.handleMapLoad("CollisionTesting");
 		Globals.gameMap.setObstacleMap();
 		
 		while (Globals.isRunning) {
