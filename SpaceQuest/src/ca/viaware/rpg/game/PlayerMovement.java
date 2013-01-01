@@ -1,6 +1,5 @@
 package ca.viaware.rpg.game;
 
-
 import org.lwjgl.input.Keyboard;
 
 import ca.viaware.rpg.map.MapHandler;
@@ -14,39 +13,7 @@ public class PlayerMovement {
 
 	public void checkMovement(int delta) {
 		double speed = Globals.playerEntity.getSpeed();
-		if (delta < 60) {
-			if (Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_A)) {
-				Globals.gameMap.moveMap(speed, 0, delta);
-				Globals.playerEntity.changePosition(-speed, 0, delta);
-				arrowG1 = true;
-			} else if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT) || Keyboard.isKeyDown(Keyboard.KEY_D)) {
-				Globals.gameMap.moveMap(-speed, 0, delta);
-				Globals.playerEntity.changePosition(speed, 0, delta);
-				Globals.playerEntity.setWalkingDir(3);
-				arrowG1 = true;
-			} else {
-				arrowG1 = false;
-			}
-
-			if (Keyboard.isKeyDown(Keyboard.KEY_DOWN) || Keyboard.isKeyDown(Keyboard.KEY_S)) {
-				Globals.gameMap.moveMap(0, -speed, delta);
-				Globals.playerEntity.changePosition(0, speed, delta);
-				Globals.playerEntity.setWalkingDir(1);
-				arrowG2 = true;
-			} else if (Keyboard.isKeyDown(Keyboard.KEY_UP) || Keyboard.isKeyDown(Keyboard.KEY_W)) {
-				Globals.gameMap.moveMap(0, speed, delta);
-				Globals.playerEntity.changePosition(0, -speed, delta);
-				Globals.playerEntity.setWalkingDir(2);
-				arrowG2 = true;
-			} else {
-				arrowG2 = false;
-			}
-
-			if (!arrowG1 && !arrowG2) {
-				Globals.playerEntity.setWalkingDir(0);
-			}
-
-		}
+		boolean cUp = false, cDown = false, cRight = false, cLeft = false;
 		// Collision:
 		int tileX = 0, tileY = 0;
 		int playerX = (int) (Globals.playerEntity.getActX() - Globals.playerEntity.getActX() % 64) / 64 + 2;
@@ -63,19 +30,15 @@ public class PlayerMovement {
 				if (Globals.playerEntity.intersects(tile)) {
 					if (tile.hasCollision()) {
 						if (playerX > tileX) {
-							Globals.gameMap.moveMap(-speed, 0, delta);
-							Globals.playerEntity.changePosition(speed, 0, delta);
+							cLeft = true;
 						} else if (playerX <= tileX) {
-							Globals.gameMap.moveMap(speed, 0, delta);
-							Globals.playerEntity.changePosition(-speed, 0, delta);
+							cRight = true;
 						}
 
 						if (playerY >= tileY) {
-							Globals.gameMap.moveMap(0, -speed, delta);
-							Globals.playerEntity.changePosition(0, speed, delta);
+							cDown = true;
 						} else if (playerY < tileY) {
-							Globals.gameMap.moveMap(0, speed, delta);
-							Globals.playerEntity.changePosition(0, -speed, delta);
+							cUp = true;
 						}
 					}
 
@@ -110,6 +73,40 @@ public class PlayerMovement {
 					y = 0;
 				}
 			}
+		}
+
+		if (delta < 60) {
+			if (Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_A) && !cLeft) {
+				Globals.gameMap.moveMap(speed, 0, delta);
+				Globals.playerEntity.changePosition(-speed, 0, delta);
+				arrowG1 = true;
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT) || Keyboard.isKeyDown(Keyboard.KEY_D) && !cRight) {
+				Globals.gameMap.moveMap(-speed, 0, delta);
+				Globals.playerEntity.changePosition(speed, 0, delta);
+				Globals.playerEntity.setWalkingDir(3);
+				arrowG1 = true;
+			} else {
+				arrowG1 = false;
+			}
+
+			if (Keyboard.isKeyDown(Keyboard.KEY_DOWN) || Keyboard.isKeyDown(Keyboard.KEY_S) && !cDown) {
+				Globals.gameMap.moveMap(0, -speed, delta);
+				Globals.playerEntity.changePosition(0, speed, delta);
+				Globals.playerEntity.setWalkingDir(1);
+				arrowG2 = true;
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_UP) || Keyboard.isKeyDown(Keyboard.KEY_W) && !cUp) {
+				Globals.gameMap.moveMap(0, speed, delta);
+				Globals.playerEntity.changePosition(0, -speed, delta);
+				Globals.playerEntity.setWalkingDir(2);
+				arrowG2 = true;
+			} else {
+				arrowG2 = false;
+			}
+
+			if (!arrowG1 && !arrowG2) {
+				Globals.playerEntity.setWalkingDir(0);
+			}
+
 		}
 
 		tRenderer.finish();
