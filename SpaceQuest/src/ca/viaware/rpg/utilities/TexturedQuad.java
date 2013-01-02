@@ -134,4 +134,8 @@ public void settrans(double transp){
 		t.bind();
 
 	}
+	
+	public double getYh(){
+		return yh;
+	}
 }

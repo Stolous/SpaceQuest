@@ -6,6 +6,8 @@ import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glTexCoord2f;
 import static org.lwjgl.opengl.GL11.glVertex2i;
 
+import java.util.Random;
+
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
@@ -51,18 +53,7 @@ public class MainMenu {
 
 		sinX = sinX + 0.025;
 		sinY = Math.sin(sinX);
-
-		if (movementstage == 0) {
-			UFO.move(0, sinY);
-		} else {
-			UFO.move(0, sinY);
-		}
-		if (UFO.gety() > 350) {
-			movementstage = 1;
-		}
-		if (UFO.gety() < 250) {
-			movementstage = 0;
-		}
+		UFO.move(0, sinY);
 
 		backGround[location].bind();
 		location++;
@@ -97,7 +88,6 @@ public class MainMenu {
 
 			@Override
 			public void ClickListener(OnClickListener OCL) {
-
 				startclicked = true;
 				
 
@@ -124,6 +114,11 @@ public class MainMenu {
 		options.move(-2, 0);
 		help.move(-2, 0);
 		UFOtrans -= 0.01;
+		
+		UFO.move(1.5, -1);
+		
+		UFO.setSize(UFO.getXh() * 2 - 5, UFO.getYh() * 2 - 6);
+		UFO.rotate(0.2);
 
 		if (start.getX() < -350) {
 
