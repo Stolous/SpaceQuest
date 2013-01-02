@@ -36,11 +36,9 @@ public class GameLogic {
 			}
 		}
 		
-		if (delta >= 0) {
+		if (count > 2) {
 			TimeHandler.updateTime(delta);
 			fpsCounter.calculateFPS(delta);
-			// Timer is here so that song position gets decent time to advance
-			// between checks
 			songTimer += delta;
 		}
 		

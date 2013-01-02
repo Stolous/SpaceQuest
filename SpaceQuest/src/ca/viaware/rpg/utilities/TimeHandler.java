@@ -16,6 +16,7 @@ public class TimeHandler {
 			minutes++;
 			seconds -= 60;
 		}
+		
 	}
 	
 	public static int getMins(){
