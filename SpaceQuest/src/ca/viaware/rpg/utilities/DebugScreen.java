@@ -1,7 +1,7 @@
 package ca.viaware.rpg.utilities;
 
 import java.awt.Container;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,7 +20,7 @@ public class DebugScreen extends JFrame{
 	public DebugScreen(int width, int height){
 		setSize(width,height);
 		setResizable(false);
-		setLayout(new FlowLayout());
+		setLayout(new GridLayout(7,1));
 		setVisible(true);
 		
 		showComponents();
