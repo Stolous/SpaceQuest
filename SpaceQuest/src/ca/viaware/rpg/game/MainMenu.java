@@ -6,8 +6,6 @@ import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glTexCoord2f;
 import static org.lwjgl.opengl.GL11.glVertex2i;
 
-import java.util.Random;
-
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
@@ -20,7 +18,6 @@ import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class MainMenu {
 	private double UFOtrans = 1;
-	private int movementstage = 0;
 	Texture[] backGround = new Texture[3];
 	SButton start, options, help, quit;
 	TexturedQuad UFO;
