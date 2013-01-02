@@ -10,6 +10,7 @@ import ca.viaware.rpg.utilities.TextRenderer;
 public class PlayerMovement {
 	private boolean arrowG1 = false, arrowG2 = false;
 	private TextRenderer tRenderer = new TextRenderer(30, 0, TextRenderer.Font.WHITE);
+	private int collisionSensitivity = 55;
 
 	public void checkMovement(int delta) {
 		double speed = Globals.playerEntity.getSpeed();
@@ -31,15 +32,15 @@ public class PlayerMovement {
 					if (tile.hasCollision()) {
 						double tileX = tile.getX();
 						double tileY = tile.getY();
-						if (playerX > tileX && playerY >= tileY - 55 && playerY < tileY + 55) {
+						if (playerX > tileX && playerY >= tileY - collisionSensitivity && playerY < tileY + collisionSensitivity) {
 							cLeft = true;
-						} else if (playerX <= tileX && playerY >= tileY - 55 && playerY < tileY + 55) {
+						} else if (playerX <= tileX && playerY >= tileY - collisionSensitivity && playerY < tileY + collisionSensitivity) {
 							cRight = true;
 						}
 
-						if (playerY >= tileY && playerX >= tileX - 55 && playerX < tileX + 55) {
+						if (playerY >= tileY && playerX >= tileX - collisionSensitivity && playerX < tileX + collisionSensitivity) {
 							cUp = true;
-						} else if (playerY < tileY && playerX >= tileX - 55 && playerX < tileX + 55) {
+						} else if (playerY < tileY && playerX >= tileX - collisionSensitivity && playerX < tileX + collisionSensitivity) {
 							cDown = true;
 						}
 					}
