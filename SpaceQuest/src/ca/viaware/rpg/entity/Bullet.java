@@ -9,9 +9,6 @@ import ca.viaware.rpg.map.Tile;
 import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class Bullet extends AbstractMoveableEntity {
-	// Why no AbstractMoveableEntity?? How will we detect bullet collision now??
-	// And don't say you didn't know again, cause you did and could have saved
-	// yourself the effort converting this all to the Entity standard.
 	private Texture t;
 	private boolean removed = false;
 	TexturedQuad b;
@@ -20,8 +17,9 @@ public class Bullet extends AbstractMoveableEntity {
 	private double oldX, newX, newY, oldY, xSpeed, ySpeed, XOffset, YOffset;
 	@SuppressWarnings("unused")
 	private boolean once;
+	private targetType target;
 
-	public Bullet(Texture t, Double oldX, Double newX, double oldY, double newY, double bulletSpeed, int mind, int maxd) {
+	public Bullet(Texture t, double oldX, double newX, double oldY, double newY, double bulletSpeed, int mind, int maxd, targetType target) {
 		super(oldX, oldY, 50, 50);
 		width = 32;
 		height = 32;
@@ -74,6 +72,8 @@ public class Bullet extends AbstractMoveableEntity {
 		this.ySpeed = ySpeed;
 		this.xSpeed = xSpeed;
 		once = true;
+		
+		this.target = target;
 
 	}
 
@@ -103,9 +103,15 @@ public class Bullet extends AbstractMoveableEntity {
 		x = x + XOffset;
 
 		// removes if colides with object
-		if (Globals.playerEntity.intersects(this)) {
-			contact();
-		} else {
+		if (Globals.playerEntity.intersects(this) && target == targetType.PLAYER) {
+			contact(null);
+		} else if (target == targetType.ENEMIES){
+			for (Enemy enemy : Globals.enemies){
+				if (enemy.intersects(this)){
+					contact(enemy);
+				}
+			}
+		}else{
 			for (Tile[] tile1 : Globals.gameMap.mapTiles) {
 				for (Tile tile : tile1) {
 					if (tile.intersects(this)) {
@@ -127,11 +133,17 @@ public class Bullet extends AbstractMoveableEntity {
 
 	}
 
-	private void contact() {
+	private void contact(Enemy e) {
 		Random r = new Random();
 		int damage = r.nextInt(maxdamage - mindamage);
 		damage += mindamage;
+		
+		if (target == targetType.PLAYER){
 		Globals.playerEntity.takedamage(damage);
+		}else if (target == targetType.ENEMIES){
+		e.takedamage(damage);
+		}
+		
 		removed = true;
 	}
 
@@ -147,6 +159,10 @@ public class Bullet extends AbstractMoveableEntity {
 	@Override
 	public void draw() {
 
+	}
+	
+	public static enum targetType{
+		ENEMIES, FRIENDLIES, PLAYER, ALLNPCS, ALL;
 	}
 
 }

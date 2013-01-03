@@ -183,12 +183,14 @@ public class Player extends AbstractEntity {
 	}
 
 	public void changePosition(double x, double y, int delta) {
+		double oldActX = actX;
+		double oldActY = actY;
+		
 		actX += x * delta;
 		actY += y * delta;
 
-		changeX = x * delta;
-		changeY = y * delta;
-
+		changeX = actX - oldActX;
+		changeY = actY - oldActY;
 	}
 
 	public double getActX() {
@@ -260,5 +262,6 @@ public class Player extends AbstractEntity {
 
 		Globals.gameMap.setOffsets(mapX, mapY);
 	}
+	
 
 }

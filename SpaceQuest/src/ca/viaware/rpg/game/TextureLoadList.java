@@ -10,6 +10,8 @@ public class TextureLoadList {
 		Globals.otherTextures.add(th.loadDiffTexture("res/img/intro2.png", "PNG"));
 		Globals.otherTextures.add(th.loadDiffTexture("res/img/maploading.png", "PNG"));
 		
+		Globals.bulletTextures.add(th.loadSprite("bullets/LazerGreen"));
+		
 		Globals.tileTextures.add(new TileTexture(null, th.loadSprite("tiles/grass"), false));
 		Globals.tileTextures.add(new TileTexture(null, th.loadSprite("tiles/cobble"), false));
 		Globals.tileTextures.add(new TileTexture(null, th.loadSprite("tiles/flower red"), false));

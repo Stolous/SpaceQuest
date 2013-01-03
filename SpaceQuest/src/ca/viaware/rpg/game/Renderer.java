@@ -1,6 +1,6 @@
 package ca.viaware.rpg.game;
 
-
+import ca.viaware.rpg.entity.Bullet;
 import ca.viaware.rpg.entity.Enemy;
 import ca.viaware.rpg.utilities.SButton;
 import ca.viaware.rpg.utilities.TextRenderer;
@@ -39,6 +39,11 @@ public class Renderer {
 			for (Enemy enemy : Globals.enemies) {
 				enemy.draw();
 			}
+			
+			for (Bullet bullet : Globals.bullets){
+				bullet.draw();
+				bullet.reset();
+			}
 			Globals.healthBar.update();
 	
 
@@ -59,6 +64,7 @@ public class Renderer {
 		for (TextRenderer t : Globals.textRendererBufferList) {
 			t.renderBuffer();
 		}
+		
 		Globals.textRendererBufferList.clear();
 
 		Globals.cursor.draw();

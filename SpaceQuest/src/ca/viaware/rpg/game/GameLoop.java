@@ -2,6 +2,7 @@ package ca.viaware.rpg.game;
 
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 
@@ -9,6 +10,8 @@ import ca.viaware.rpg.audio.AudioLoadList;
 import ca.viaware.rpg.entities.Cursor;
 import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
+import ca.viaware.rpg.entity.Bullet;
+import ca.viaware.rpg.entity.Bullet.targetType;
 import ca.viaware.rpg.map.MapHandler;
 import ca.viaware.rpg.utilities.ResizeHandler;
 import ca.viaware.rpg.utilities.DebugScreen;
@@ -47,6 +50,11 @@ public class GameLoop {
 					Globals.musiclevel-=0.008;
 				
 			}
+			
+			if (Mouse.isButtonDown(0)){
+				Globals.bullets.add(new Bullet(Globals.bulletTextures.get(0), Globals.playerEntity.getX(), Globals.cursor.getX(), Globals.playerEntity.getY(), Globals.cursor.getY(), 1, 1, 1, targetType.ENEMIES));
+			}
+			
 			// Update debug screen
 			dbs.updateDelta(delta);
 			dbs.updateMouseCoords(MouseData.MouseX(), MouseData.MouseY());

@@ -28,7 +28,6 @@ public class UFO extends RangedEnemy {
 	}
 
 	public void draw() {
-		drawbullets();
 
 		if (slower == 5) {
 			slower = 0;

@@ -7,6 +7,7 @@ import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.SoundStore;
 
 import ca.viaware.rpg.audio.MusicPlaylist;
+import ca.viaware.rpg.entity.Bullet;
 import ca.viaware.rpg.utilities.FullscreenHandler;
 import ca.viaware.rpg.utilities.TimeHandler;
 
@@ -68,6 +69,16 @@ public class GameLogic {
 
 		for (int i = 0; i < Globals.enemies.size(); i++) {
 			Globals.enemies.get(i).update(delta);
+		}
+		
+		for (Bullet bullet : Globals.bullets){
+			bullet.update(delta);
+		}
+		
+		for (int i = 0; i < Globals.bullets.size(); i++) {
+			if (Globals.bullets.get(i).getremoved() == true) {
+				Globals.bullets.remove(i);
+			}
 		}
 
 		Globals.cursor.update(delta);

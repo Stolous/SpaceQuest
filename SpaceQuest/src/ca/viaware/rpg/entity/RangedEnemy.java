@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.newdawn.slick.opengl.Texture;
 import ca.viaware.rpg.entities.Player;
+import ca.viaware.rpg.entity.Bullet.targetType;
 import ca.viaware.rpg.game.Globals;
 import ca.viaware.rpg.utilities.TextureHandler;
 import ca.viaware.rpg.utilities.TexturedQuad;
@@ -21,7 +22,6 @@ public class RangedEnemy extends Enemy {
 	private double distancebetween, xdist, ydist, playerx, playery, range, actxdist, actydist, speed, sightrange, xspeed, yspeed, BulletSpeed, optrange, mxc, myc, xoff, yoff;
 	private int mindamage, maxdamage, accuracy;
 	private Texture Bullet;
-	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
 	public RangedEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int aggresiveness, double range, double speed, int attackspeed, double optdist, double sightrange, String path, double BulletSpeed, double xoff, double yoff, int accuracy) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
@@ -65,25 +65,11 @@ public class RangedEnemy extends Enemy {
 
 		if (betattacks >= attackspeed) {
 
-			bullets.add(new Bullet(this.Bullet, x - xoff, newx, y - yoff, newy, BulletSpeed, mindamage, maxdamage));
+			Globals.bullets.add(new Bullet(this.Bullet, x - xoff, newx, y - yoff, newy, BulletSpeed, mindamage, maxdamage, targetType.PLAYER));
 			betattacks = 0;
 
 		}
 
-	}
-
-	public void drawbullets() {
-
-		for (int i = 0; i < bullets.size(); i++) {
-			bullets.get(i).update(delta);
-			bullets.get(i).render();
-			bullets.get(i).reset();
-		}
-		for (int i = 0; i < bullets.size(); i++) {
-			if (bullets.get(i).getremoved() == true) {
-				bullets.remove(i);
-			}
-		}
 	}
 
 	// it may seem like the enemy has a weird box for the my value- but that is
@@ -97,7 +83,6 @@ public class RangedEnemy extends Enemy {
 
 		mxc = 0;
 		myc = 0;
-		drawbullets();
 		if (delta >= 0) {
 			betattacks += delta;
 		}

@@ -6,6 +6,7 @@ import java.util.List;
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.opengl.Texture;
 
+import ca.viaware.rpg.entity.Bullet;
 import ca.viaware.rpg.entity.Enemy;
 import ca.viaware.rpg.entities.Cursor;
 import ca.viaware.rpg.entities.HealthBar;
@@ -31,6 +32,7 @@ public class Globals {
 	public static int temp = 0;
 	public static List<TileTexture> tileTextures = new ArrayList<TileTexture>(16);
 	public static List<Texture> otherTextures = new ArrayList<Texture>(16);
+	public static List<Texture> bulletTextures = new ArrayList<Texture>(16);
 	public static Player playerEntity = null;
 	public static Map gameMap = null;
 	public static Cursor cursor;
@@ -40,6 +42,7 @@ public class Globals {
 	public static List<SButton> buttonBuffer = new ArrayList<SButton>(16);
 	public static List<Audio> musicLibrary = new ArrayList<Audio>(16);
 	public static List<Animation> tileAnimations = new ArrayList<Animation>(16);
+	public static List<Bullet> bullets = new ArrayList<Bullet>(16);
 
 	public static enum gState {
 		INTRO, MAIN_MENU, GAME, OUTRO;
