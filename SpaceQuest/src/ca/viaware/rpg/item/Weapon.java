@@ -5,10 +5,11 @@ import org.newdawn.slick.opengl.Texture;
 public class Weapon extends Item{
 
 	@SuppressWarnings("unused")
-	private double baseDamage, fireRate;
-	public Weapon(Texture t, double baseDmg, double fireRate) {
+	private double minimumDamage, maximumDamage, fireRate;
+	public Weapon(Texture t, double minDmg, double maxDmg, double fireRate) {
 		super(t);
-		baseDamage = baseDmg;
+		minimumDamage = minDmg;
+		maximumDamage = maxDmg;
 		this.fireRate = fireRate;
 	}
 
