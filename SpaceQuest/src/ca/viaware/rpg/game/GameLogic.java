@@ -37,6 +37,10 @@ public class GameLogic {
 			}
 		}
 		
+		if (Globals.gameState == Globals.gState.MAIN_MENU){
+			Globals.mainMenu.update(delta);
+		}
+		
 		if (count > 2) {
 			TimeHandler.updateTime(delta);
 			fpsCounter.calculateFPS(delta);

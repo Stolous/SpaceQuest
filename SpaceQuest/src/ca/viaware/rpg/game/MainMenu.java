@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.game.Globals.gState;
+import ca.viaware.rpg.utilities.Animation;
 import ca.viaware.rpg.utilities.ClickListener;
 import ca.viaware.rpg.utilities.OnClickListener;
 import ca.viaware.rpg.utilities.SButton;
@@ -18,7 +19,6 @@ import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class MainMenu {
 	private double UFOtrans = 1;
-	Texture[] backGround = new Texture[3];
 	SButton start, options, help, quit;
 	TexturedQuad UFO;
 	private int location = 0;
@@ -26,13 +26,13 @@ public class MainMenu {
 
 	private double sinX = 0;
 	private double sinY = 0;
+	
+	Animation background;
 
 	public MainMenu() {
 		TextureHandler t = new TextureHandler();
-		String s = "other/main menu screen000";
-		for (int i = 0; i < 3; i++) {
-			backGround[i] = t.loadSprite(s + (i + 1));
-		}
+		
+		background = t.loadAnimation("other/menubackground", 10);
 
 		UFO = new TexturedQuad(450, 450, 450, 250, 0, "res/sprites/other/main ufo.png");
 		start = new SButton(100, 100, 200, 70);
@@ -51,12 +51,8 @@ public class MainMenu {
 		sinX = sinX + 0.025;
 		sinY = Math.sin(sinX);
 		UFO.move(0, sinY);
-
-		backGround[location].bind();
-		location++;
-		if (location == 3) {
-			location = 0;
-		}
+		
+		background.bindCurrentStage();
 
 		glBegin(GL_QUADS);
 
@@ -102,6 +98,10 @@ public class MainMenu {
 		UFO.settrans(UFOtrans);
 		UFO.update();
 
+	}
+	
+	public void update(int delta){
+		background.stepAnimation(delta);
 	}
 
 	private void transition(final gState g) {

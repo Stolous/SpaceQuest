@@ -51,12 +51,12 @@ public class TextureHandler {
 	}
 
 	public Animation loadAnimation(String animFolder, int speed) {
-		int count = 0;
+		int count = 1;
 		boolean hasNext = true;
 		List<Texture> aList = new ArrayList<Texture>(16);
 
 		while (hasNext) {
-			File file = new File("res/sprites/" + animFolder + Integer.toString(count) + ".png");
+			File file = new File("res/sprites/" + animFolder + "/" + Integer.toString(count) + ".png");
 			if (file.exists()) {
 				Texture texture = loadSprite(animFolder + "/" + Integer.toString(count));
 				aList.add(texture);
@@ -66,6 +66,8 @@ public class TextureHandler {
 			count++;
 			
 		}
+		
+		System.out.println("Loaded animation: " + animFolder + " with " + aList.size() + " stages");
 
 		return new Animation(aList, speed);
 	}
