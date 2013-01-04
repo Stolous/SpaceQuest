@@ -41,7 +41,7 @@ public class Renderer {
 			}
 			
 			for (Bullet bullet : Globals.bullets){
-				bullet.draw();
+				bullet.render();
 				bullet.reset();
 			}
 			Globals.healthBar.update();

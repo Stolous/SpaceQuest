@@ -78,7 +78,7 @@ public class Bullet extends AbstractMoveableEntity {
 	}
 
 	public void update(int delta) {
-
+		
 		XOffset = Globals.gameMap.getXOffset();
 		YOffset = Globals.gameMap.getYOffset();
 		// System.out.println("SX is" + sx);

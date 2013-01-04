@@ -52,7 +52,7 @@ public class GameLoop {
 			}
 			
 			if (Mouse.isButtonDown(0)){
-				Globals.bullets.add(new Bullet(Globals.bulletTextures.get(0), Globals.playerEntity.getX(), Globals.cursor.getX(), Globals.playerEntity.getY(), Globals.cursor.getY(), 1, 1, 1, targetType.ENEMIES));
+				Globals.bullets.add(new Bullet(Globals.bulletTextures.get(0), Globals.playerEntity.getX(), Globals.cursor.getX(), Globals.playerEntity.getY(), Globals.cursor.getY(), 200, 1, 1, targetType.ENEMIES));
 			}
 			
 			// Update debug screen
