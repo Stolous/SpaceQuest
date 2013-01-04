@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL11.*;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.entity.AbstractMoveableEntity;
+import ca.viaware.rpg.game.Globals;
 import ca.viaware.rpg.utilities.MouseData;
 
 public class Cursor extends AbstractMoveableEntity {
@@ -49,6 +50,14 @@ public class Cursor extends AbstractMoveableEntity {
 
 	public void setEnabled(boolean e) {
 		enabled = e;
+	}
+	
+	public double getActX(){
+		return getX() - Globals.gameMap.getXOffset();
+	}
+	
+	public double getActY(){
+		return getY() - Globals.gameMap.getYOffset();
 	}
 
 }
