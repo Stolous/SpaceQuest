@@ -33,9 +33,6 @@ public class GameLoop {
 		GameLogic logic = new GameLogic();
 		DebugScreen dbs = new DebugScreen(170, 200);
 		// Globals.ammoBar = new AmmoBar();
-
-		Globals.gameMap = MapHandler.handleMapLoad("CollisionTesting");
-		Globals.gameMap.setObstacleMap();
 		
 		while (Globals.isRunning) {
 			
@@ -51,12 +48,14 @@ public class GameLoop {
 				
 			}
 			
-			if (Mouse.isButtonDown(0)){
+			if (Mouse.isButtonDown(0) && Globals.gameState == Globals.gState.GAME){
 				//eventually max/min damage would be from the weapon class
 				Globals.bullets.add(new Bullet(Globals.bulletTextures.get(0), Globals.playerEntity.getX(), Globals.cursor.getActX(), Globals.playerEntity.getY(), Globals.cursor.getActY(), 200, 1, 2, targetType.ENEMIES));
 			}
 			
 			// Update debug screen
+			
+			if (Globals.gameState == Globals.gState.GAME){
 			dbs.updateDelta(delta);
 			dbs.updateMouseCoords(MouseData.MouseX(), MouseData.MouseY());
 			dbs.updatePlayerCoords(Globals.playerEntity.getActX(), Globals.playerEntity.getActY());
@@ -64,7 +63,7 @@ public class GameLoop {
 			dbs.updateRunningTime(TimeHandler.getMins(), TimeHandler.getSecs());
 			dbs.updatePlayerHealth(Globals.playerEntity.getCurrentHealth());
 			dbs.updateTotalEnemies(Globals.enemies.size());
-			
+			}
 			logic.doLogic(delta);
 			render.render();
 

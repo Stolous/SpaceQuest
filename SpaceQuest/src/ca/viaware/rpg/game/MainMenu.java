@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.game.Globals.gState;
+import ca.viaware.rpg.map.MapHandler;
 import ca.viaware.rpg.utilities.Animation;
 import ca.viaware.rpg.utilities.ClickListener;
 import ca.viaware.rpg.utilities.OnClickListener;
@@ -83,6 +84,7 @@ public class MainMenu {
 			public void ClickListener(OnClickListener OCL) {
 				startclicked = true;
 				
+				
 
 			}
 
@@ -118,8 +120,9 @@ public class MainMenu {
 		UFO.rotate(0.2);
 
 		if (start.getX() < -350) {
-
 			Globals.gameState = g;
+			Globals.gameMap = MapHandler.handleMapLoad("CollisionTesting");
+			Globals.gameMap.setObstacleMap();
 
 		}
 
