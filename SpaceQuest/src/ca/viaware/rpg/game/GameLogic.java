@@ -1,6 +1,5 @@
 package ca.viaware.rpg.game;
 
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.openal.Audio;
@@ -36,28 +35,26 @@ public class GameLogic {
 				}
 			}
 		}
-		
-		if (Globals.gameState == Globals.gState.MAIN_MENU){
+
+		else if (Globals.gameState == Globals.gState.MAIN_MENU) {
 			Globals.mainMenu.update(delta);
-		}
-		
-		if (count > 2) {
+		} else{ 
+			if (count > 2) {
 			TimeHandler.updateTime(delta);
 			fpsCounter.calculateFPS(delta);
 			songTimer += delta;
 		}
-		
+
 		if (songTimer > 1000) {
 			currentSong = mPlaylist.nextSong(currentSong);
 			if (!currentSong.isPlaying()) {
 				System.out.println("Starting...");
-				
+
 				currentSong.playAsMusic(1.0f, 1.0f, false);
 			}
 			songTimer = 0;
 		}
-		
-			
+
 		SoundStore.get().poll(0);
 		SoundStore.get().setMusicVolume(Globals.musiclevel);
 		fHandler.handleFullscreen();
@@ -74,17 +71,17 @@ public class GameLogic {
 		for (int i = 0; i < Globals.enemies.size(); i++) {
 			Globals.enemies.get(i).update(delta);
 		}
-		
-		for (Bullet bullet : Globals.bullets){
+
+		for (Bullet bullet : Globals.bullets) {
 			bullet.update(delta);
 		}
-		
+
 		for (int i = 0; i < Globals.bullets.size(); i++) {
 			if (Globals.bullets.get(i).getremoved() == true) {
 				Globals.bullets.remove(i);
 			}
 		}
-
+		}
 		Globals.cursor.update(delta);
 
 	}
