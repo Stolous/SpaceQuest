@@ -50,7 +50,8 @@ public class MeleeEnemy extends Enemy {
 	@Override
 	public void update(int delta) {
 		
-		
+		mx = moverx(actxdist, mx, speed, xdist);
+		my = moverx(actydist, my, speed, ydist);
 
 		int newpblockx =(int) Globals.playerEntity.getX()/64;
 		int newpblocky =(int) Globals.playerEntity.getY()/64;
@@ -58,8 +59,10 @@ public class MeleeEnemy extends Enemy {
 		int newblocky = (int) (my / 64);
 			if(!(newblockx==blockx)||!(newblocky==blocky)||first||newpblockx != pblockx||newpblocky!=pblocky){
 				System.out.println(first);
+				System.out.println("blocky" + blocky);
 				blockx = newblockx;
 				blocky = newblocky; 
+				System.out.println("blocky" + blocky);
 				first = false;
 			mobMap map = new mobMap();
 	        pathFinder.updatemap(map);
@@ -101,8 +104,7 @@ public class MeleeEnemy extends Enemy {
 
 		distancebetween = Math.sqrt(((xdist * xdist) + (ydist * ydist)));// pythagorean
 																			// theorem
-		mx = moverx(actxdist, mx, speed, xdist);
-		my = moverx(actydist, my, speed, ydist);
+		
 		if (distancebetween < sightrange) {
 			
 

@@ -120,7 +120,7 @@ public class AStar {
         	
         		
         	
-        //	X+=1;
+        	//X+=1;
         	return X;
         }
         public int getNextWaypointY(){ 	
@@ -130,7 +130,7 @@ public class AStar {
         	}catch(Exception e){
         		Y = shortestPath.getWayPoint(0).getY();
         	}
-        	//Y+=-1;
+        //	Y+=1;
         	return Y;
         }
         
