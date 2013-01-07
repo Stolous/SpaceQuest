@@ -25,6 +25,9 @@ public class TextureLoadList {
 		Globals.tileTextures.add(new TileTexture(null, th.loadSprite("tiles/red rock"), false));
 		Globals.tileTextures.add(new TileTexture(null, th.loadSprite("tiles/sign"), false));
 		Globals.tileTextures.add(new TileTexture(null, th.loadSprite("tiles/dirt"), false));
+		
+		//Example of animated tile:
+		//Globals.tileTextures.add(new TileTexture(th.loadAnimation("animfolder", fps), null, true));
 
 		System.out.println("Loaded " + Globals.tileTextures.size() + " tile textures");
 
