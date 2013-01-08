@@ -50,12 +50,12 @@ public class MeleeEnemy extends Enemy {
 
 		mx = moverx(actxdist, mx, speed, xdist);
 		my = moverx(actydist, my, speed, ydist);
-
-		int newpblockx = (int) Globals.playerEntity.getX() / 64;
-		int newpblocky = (int) Globals.playerEntity.getY() / 64;
+		mx = mx + getXoffset();// this is for movement of player
+		my = my + getYoffset();
+		
 		int newblockx = (int) (mx / 64);
 		int newblocky = (int) (my / 64);
-		if (newblockx != blockx || newblocky != blocky || first || newpblockx != pblockx || newpblocky != pblocky) {
+		if (newblockx != blockx || newblocky != blocky || first || Globals.playerEntity.hasMoved()) {
 			System.out.println(first);
 			System.out.println("blocky" + blocky);
 			blockx = newblockx;
@@ -64,18 +64,14 @@ public class MeleeEnemy extends Enemy {
 			first = false;
 			mobMap map = new mobMap();
 			pathFinder.updatemap(map);
-			pathFinder.calcShortestPath((int) (x / 64), (int) (y / 64), (int) Globals.playerEntity.getX() / 64, (int) Globals.playerEntity.getY() / 64);
+			pathFinder.calcShortestPath(blockx + 1, blocky, (int) Globals.playerEntity.getActX() / 64, (int) Globals.playerEntity.getActY() / 64);
 			System.out.println("MAP:");
 			pathFinder.printPath();
-			mx = mx + getXoffset();// this is for movement of player
-			my = my + getYoffset();
 			goalX = pathFinder.getNextWaypointX() * 64;
 			goalY = pathFinder.getNextWaypointY() * 64;
 			System.out.println("Goal X " + goalX + "Goal Y " + goalY);
 
 		}
-		pblockx = newpblockx;
-		pblocky = newpblocky;
 
 		b = false;
 		setX(getT().getx());
@@ -116,8 +112,8 @@ public class MeleeEnemy extends Enemy {
 			}
 		}
 
-		mx = mx + getXoffset();// this is for movement of player
-		my = my + getYoffset();
+		//mx = mx + getXoffset();// this is for movement of player
+		//my = my + getYoffset();
 
 	}
 

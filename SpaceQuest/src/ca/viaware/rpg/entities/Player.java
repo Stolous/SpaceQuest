@@ -25,6 +25,7 @@ public class Player extends AbstractEntity {
 	double speed = 0.15;
 	private static double width, height;
 	private double changeY, changeX;
+	private boolean hasMoved = false;
 
 	boolean walkChange = false;
 	private int walkingDir = 0;
@@ -94,6 +95,8 @@ public class Player extends AbstractEntity {
 		glEnd();
 
 		glColor3f(1, 1, 1);
+		
+		hasMoved = false;
 
 	}
 
@@ -186,11 +189,21 @@ public class Player extends AbstractEntity {
 		double oldActX = actX;
 		double oldActY = actY;
 		
+		int oldActXTile = (int) actX / 64;
+		int oldActYTile = (int) actY / 64;
+		
 		actX += x * delta;
 		actY += y * delta;
 
+		int newActXTile = (int) actX / 64;
+		int newActYTile = (int) actY / 64;
+		
 		changeX = actX - oldActX;
 		changeY = actY - oldActY;
+		
+		if (newActXTile != oldActXTile || newActYTile != oldActYTile){
+		hasMoved = true;
+		}
 	}
 
 	public double getActX() {
@@ -261,6 +274,10 @@ public class Player extends AbstractEntity {
 		double mapY = getY() - loc.getY() + 64;
 
 		Globals.gameMap.setOffsets(mapX, mapY);
+	}
+	
+	public boolean hasMoved(){
+		return hasMoved;
 	}
 	
 

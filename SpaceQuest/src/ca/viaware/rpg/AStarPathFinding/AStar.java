@@ -115,7 +115,11 @@ public class AStar {
         	try{
         	X = shortestPath.getWayPoint(1).getX();
         	}catch(Exception e){
+        		try{
         		X = shortestPath.getWayPoint(0).getX();
+        		}catch(Exception e1){
+        			X = 0;
+        		}
         	}
         	
         		
@@ -128,7 +132,11 @@ public class AStar {
         	try{
         	Y = shortestPath.getWayPoint(1).getY();
         	}catch(Exception e){
-        		Y = shortestPath.getWayPoint(0).getY();
+        		try{
+            		Y = shortestPath.getWayPoint(0).getY();
+            		}catch(Exception e1){
+            			Y = 0;
+            		}
         	}
         //	Y+=1;
         	return Y;
