@@ -54,11 +54,9 @@ public class MeleeEnemy extends Enemy {
 		
 		mx = moverx(actxdist, mx, speed, xdist);
 		my = moverx(actydist, my, speed, ydist);
-		mx = mx + getXoffset();// this is for movement of player
-		my = my + getYoffset();
 		
-		int newblockx = (int) (mx / 64);
-		int newblocky = (int) (my / 64);
+		int newblockx = (int) (x / 64);
+		int newblocky = (int) (y / 64);
 		if (newblockx != blockx || newblocky != blocky || first || Globals.playerEntity.hasMoved()) {
 			System.out.println(first);
 			System.out.println("blocky" + blocky);
@@ -76,6 +74,9 @@ public class MeleeEnemy extends Enemy {
 			System.out.println("Goal X " + goalX + "Goal Y " + goalY);
 
 		}
+		
+		mx = mx + getXoffset();// this is for movement of player
+		my = my + getYoffset();
 
 		b = false;
 		setX(getT().getx());
