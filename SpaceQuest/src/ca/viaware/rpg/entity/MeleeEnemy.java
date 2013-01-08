@@ -48,6 +48,10 @@ public class MeleeEnemy extends Enemy {
 	@Override
 	public void update(int delta) {
 
+		this.delta = delta;
+		setXoffset((Globals.gameMap.getXOffset()));
+		setYoffset((Globals.gameMap.getYOffset()));
+		
 		mx = moverx(actxdist, mx, speed, xdist);
 		my = moverx(actydist, my, speed, ydist);
 		mx = mx + getXoffset();// this is for movement of player
@@ -64,7 +68,7 @@ public class MeleeEnemy extends Enemy {
 			first = false;
 			mobMap map = new mobMap();
 			pathFinder.updatemap(map);
-			pathFinder.calcShortestPath(blockx + 1, blocky, (int) Globals.playerEntity.getActX() / 64, (int) Globals.playerEntity.getActY() / 64);
+			pathFinder.calcShortestPath(blockx, blocky, (int) Globals.playerEntity.getActX() / 64, (int) Globals.playerEntity.getActY() / 64);
 			System.out.println("MAP:");
 			pathFinder.printPath();
 			goalX = pathFinder.getNextWaypointX() * 64;
@@ -77,9 +81,6 @@ public class MeleeEnemy extends Enemy {
 		setX(getT().getx());
 		setY(getT().gety());
 
-		this.delta = delta;
-		setXoffset((Globals.gameMap.getXOffset()));
-		setYoffset((Globals.gameMap.getYOffset()));
 		// MATH (YAY!!!!!!!!!!)
 
 		xdist = goalX + (Player.getW() / 2) - mx;
