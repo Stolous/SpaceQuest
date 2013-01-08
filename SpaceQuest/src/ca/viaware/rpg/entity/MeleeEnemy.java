@@ -1,10 +1,8 @@
 package ca.viaware.rpg.entity;
 
-
 import java.util.Random;
 
 import org.lwjgl.input.Keyboard;
-
 
 import ca.viaware.rpg.AStarPathFinding.AStar;
 import ca.viaware.rpg.AStarPathFinding.AStarHeuristic;
@@ -17,15 +15,15 @@ import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class MeleeEnemy extends Enemy {
 
-	
-	private boolean b = false,first=true;
+	private boolean b = false, first = true;
 	private TexturedQuad t;
 	@SuppressWarnings("unused")
 	private int delta, agressiveness, betattacks, attackspeed, blockx, blocky;
 	@SuppressWarnings("unused")
-	private double distancebetween, pblockx,pblocky,xdist, ydist, goalX, goalY, range, actxdist, actydist, speed, sightrange, xspeed, yspeed;
+	private double distancebetween, pblockx, pblocky, xdist, ydist, goalX, goalY, range, actxdist, actydist, speed, sightrange, xspeed, yspeed;
 
 	private AStar pathFinder;
+
 	public MeleeEnemy(double width, double height, int maxhealth, int maxdamage, int mindamage, int spawnx, int spawny, int agresiveness, double range, double speed, int attackspeed, double sightrange) {
 		super(width, height, maxhealth, maxdamage, mindamage, spawnx, spawny);
 
@@ -40,7 +38,7 @@ public class MeleeEnemy extends Enemy {
 		this.sightrange = sightrange;
 
 		AStarHeuristic heuristic = new ClosestHeuristic();
-        pathFinder = new AStar(heuristic);	
+		pathFinder = new AStar(heuristic);
 	}
 
 	public int getdelta() {
@@ -49,35 +47,35 @@ public class MeleeEnemy extends Enemy {
 
 	@Override
 	public void update(int delta) {
-		
+
 		mx = moverx(actxdist, mx, speed, xdist);
 		my = moverx(actydist, my, speed, ydist);
 
-		int newpblockx =(int) Globals.playerEntity.getX()/64;
-		int newpblocky =(int) Globals.playerEntity.getY()/64;
+		int newpblockx = (int) Globals.playerEntity.getX() / 64;
+		int newpblocky = (int) Globals.playerEntity.getY() / 64;
 		int newblockx = (int) (mx / 64);
 		int newblocky = (int) (my / 64);
-			if(!(newblockx==blockx)||!(newblocky==blocky)||first||newpblockx != pblockx||newpblocky!=pblocky){
-				System.out.println(first);
-				System.out.println("blocky" + blocky);
-				blockx = newblockx;
-				blocky = newblocky; 
-				System.out.println("blocky" + blocky);
-				first = false;
+		if (newblockx != blockx || newblocky != blocky || first || newpblockx != pblockx || newpblocky != pblocky) {
+			System.out.println(first);
+			System.out.println("blocky" + blocky);
+			blockx = newblockx;
+			blocky = newblocky;
+			System.out.println("blocky" + blocky);
+			first = false;
 			mobMap map = new mobMap();
-	        pathFinder.updatemap(map);
-	        pathFinder.calcShortestPath((int)(x/64), (int)(y/64),(int)Globals.playerEntity.getX()/64,(int) Globals.playerEntity.getY()/64);
-	        System.out.println("MAP:");
-	        pathFinder.printPath();
+			pathFinder.updatemap(map);
+			pathFinder.calcShortestPath((int) (x / 64), (int) (y / 64), (int) Globals.playerEntity.getX() / 64, (int) Globals.playerEntity.getY() / 64);
+			System.out.println("MAP:");
+			pathFinder.printPath();
 			mx = mx + getXoffset();// this is for movement of player
 			my = my + getYoffset();
-			goalX = pathFinder.getNextWaypointX()*64;
-			goalY = pathFinder.getNextWaypointY()*64;
-			System.out.println("Goal X "+ goalX+"Goal Y "+ goalY);
-			
-			}
-			pblockx = newpblockx;
-			pblocky = newpblocky;
+			goalX = pathFinder.getNextWaypointX() * 64;
+			goalY = pathFinder.getNextWaypointY() * 64;
+			System.out.println("Goal X " + goalX + "Goal Y " + goalY);
+
+		}
+		pblockx = newpblockx;
+		pblocky = newpblocky;
 
 		b = false;
 		setX(getT().getx());
@@ -87,7 +85,6 @@ public class MeleeEnemy extends Enemy {
 		setXoffset((Globals.gameMap.getXOffset()));
 		setYoffset((Globals.gameMap.getYOffset()));
 		// MATH (YAY!!!!!!!!!!)
-		
 
 		xdist = goalX + (Player.getW() / 2) - mx;
 
@@ -104,12 +101,10 @@ public class MeleeEnemy extends Enemy {
 
 		distancebetween = Math.sqrt(((xdist * xdist) + (ydist * ydist)));// pythagorean
 																			// theorem
-		
+
 		if (distancebetween < sightrange) {
-			
 
 			if (distancebetween > range) {
-				
 
 			} else {// this means the mob is within range and will attack
 				b = true;
@@ -120,14 +115,11 @@ public class MeleeEnemy extends Enemy {
 				attack();
 			}
 		}
-		
-		
-		
+
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
 
 	}
-	
 
 	private double moverx(double i, double mx, double speed, double dist) {
 		dist = dist / 100;
