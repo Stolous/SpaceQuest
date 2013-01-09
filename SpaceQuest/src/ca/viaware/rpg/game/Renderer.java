@@ -44,8 +44,11 @@ public class Renderer {
 				bullet.render();
 				bullet.reset();
 			}
+			Globals.night.update(0);
+			Globals.night.draw();
+		//	Globals.night.nightProgress();
 			Globals.healthBar.update();
-	
+			
 
 			break;
 			

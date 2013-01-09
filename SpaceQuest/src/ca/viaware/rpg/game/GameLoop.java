@@ -27,6 +27,7 @@ public class GameLoop {
 		Globals.playerEntity = new Player(Globals.dispWidth / 2 - 32, Globals.dispHeight / 2 - 32, 64, 64);
 		Globals.cursor = new Cursor(0, 0, 32, 32);
 		Globals.cursor.setEnabled(true);
+		Globals.night=new Night();
 		TextureLoadList.loadTextures();
 		AudioLoadList.loadAudio();
 		Renderer render = new Renderer();

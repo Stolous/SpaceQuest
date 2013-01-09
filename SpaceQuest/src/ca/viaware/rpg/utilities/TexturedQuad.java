@@ -61,7 +61,7 @@ public class TexturedQuad {
 	public void update() {
 
 		glEnable(GL11.GL_TEXTURE_2D);
-		GL11.glColor4d(1, 1, 1, trans);
+		GL11.glColor4d(1, 1, 1, getTrans());
 		t.bind();
 		glPushMatrix();
 		glTranslated(x, y, 0);
@@ -85,7 +85,7 @@ public class TexturedQuad {
 		GL11.glColor4d(1, 1, 1, 1);
 	}
 public void settrans(double transp){
-	trans = transp;
+	setTrans(transp);
 }
 	public void rotate(double rotates) {
 		rotate = rotate + rotates;
@@ -137,5 +137,13 @@ public void settrans(double transp){
 	
 	public double getYh(){
 		return yh;
+	}
+
+	public double getTrans() {
+		return trans;
+	}
+
+	public void setTrans(double trans) {
+		this.trans = trans;
 	}
 }
