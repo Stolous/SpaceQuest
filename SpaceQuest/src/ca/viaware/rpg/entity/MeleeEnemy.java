@@ -66,11 +66,11 @@ public class MeleeEnemy extends Enemy {
 			first = false;
 			mobMap map = new mobMap();
 			pathFinder.updatemap(map);
-			pathFinder.calcShortestPath(blockx, blocky, (int) Globals.playerEntity.getActX() / 64, (int) Globals.playerEntity.getActY() / 64);
+			pathFinder.calcShortestPath(blockx, blocky, (int) Globals.playerEntity.getX() / 64, (int) Globals.playerEntity.getY() / 64);
 			System.out.println("MAP:");
 			pathFinder.printPath();
-			goalX = pathFinder.getNextWaypointX() * 64;
-			goalY = pathFinder.getNextWaypointY() * 64;
+			goalX = pathFinder.getNextWaypointX() * 64-getXoffset();
+			goalY = pathFinder.getNextWaypointY() * 64-getYoffset();
 			System.out.println("Goal X " + goalX + "Goal Y " + goalY);
 
 		}
