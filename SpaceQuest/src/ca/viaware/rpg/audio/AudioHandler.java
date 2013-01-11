@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import org.lwjgl.LWJGLException;
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioLoader;
 
@@ -25,7 +26,7 @@ public class AudioHandler {
 		Audio a = null;
 		try {
 			a = AudioLoader.getStreamingAudio("OGG", new File("res/audio/" + input + ".ogg").toURL());
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.out.println("ERROR - Could not load audio file");
 		}
 		
