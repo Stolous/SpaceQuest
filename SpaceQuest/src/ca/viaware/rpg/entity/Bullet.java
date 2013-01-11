@@ -9,52 +9,50 @@ import ca.viaware.rpg.map.Tile;
 import ca.viaware.rpg.utilities.TexturedQuad;
 
 public class Bullet extends AbstractMoveableEntity {
-	private Texture t;
+	private Texture texture;
 	private boolean removed = false;
-	TexturedQuad b;
-	private int mindamage, maxdamage;
-	@SuppressWarnings("unused")
-	private double oldX, newX, newY, oldY, xSpeed, ySpeed, XOffset, YOffset;
-	@SuppressWarnings("unused")
-	private boolean once;
+	TexturedQuad bulletQuad;
+	private int minDamage, maxDamage;
+	private double oldX, newX, newY, oldY, xSpeed, ySpeed, xOffset, yOffset;
 	private targetType target;
 
 	public Bullet(Texture t, double oldX, double newX, double oldY, double newY, double bulletSpeed, int mind, int maxd, targetType target) {
 		super(oldX, oldY, 50, 50);
 		width = 32;
 		height = 32;
-		this.mindamage = mind;
-		this.maxdamage = maxd;
-		this.t = t;
+		minDamage = mind;
+		maxDamage = maxd;
+		texture = t;
 
-		XOffset = Globals.gameMap.getXOffset();
+		xOffset = Globals.gameMap.getXOffset();
 
-		YOffset = Globals.gameMap.getYOffset();
+		yOffset = Globals.gameMap.getYOffset();
 
-		bulletSpeed = bulletSpeed / 1000;
+		setDestination(oldX, oldY, newX, newY, bulletSpeed / 1000, target);
 
-		b = new TexturedQuad((int) width, (int) height, x, y, this.t);
-
-		this.t = t;
-		this.oldX = oldX;
-		this.newX = newX;
-		this.oldY = oldY;
-		this.newY = newY;
+		bulletQuad = new TexturedQuad((int) width, (int) height, x, y, texture);
+	}
+	
+	public void setDestination(double startX, double startY, double destX, double destY, double speed, targetType target){
+		this.oldX = startX;
+		this.newX = destX;
+		this.oldY = startY;
+		this.newY = destY;
 		double ySpeed = 0;
 		double xSpeed = 0;
 		x = oldX;
 		y = oldY;
-		x = x - XOffset;// this is for movement of player
-		y = y - YOffset;
-		newX = newX + XOffset;// this is for movement of player
-		newY = newY + YOffset;
+		x = x - xOffset;// this is for movement of player
+		y = y - yOffset;
+		newX = newX + xOffset;// this is for movement of player
+		newY = newY + yOffset;
 
 		double angle = 0;
 		double triangleBase = oldX - newX;
 		double triangleHeight = oldY - newY;
 		angle = Math.tanh(triangleHeight / triangleBase) * 100;
 
-		b.rotate(angle * -1 / 2);
+		bulletQuad.rotate(angle * -1 / 2);
 
 		// Maths to make bullet go in direction thing
 		xSpeed = (float) (newX - oldX);
@@ -64,29 +62,32 @@ public class Bullet extends AbstractMoveableEntity {
 
 		factor = Math.sqrt(factor);
 
-		factor = bulletSpeed / factor;
+		factor = speed / factor;
 
 		xSpeed = xSpeed * factor;
 		ySpeed = ySpeed * factor;
 
 		this.ySpeed = ySpeed;
 		this.xSpeed = xSpeed;
-		once = true;
 		
 		this.target = target;
 
 	}
+	
+	public void setDamage(int minDmg, int maxDmg){
+		minDamage = minDmg;
+		maxDamage = maxDmg;
+	}
 
 	public void update(int delta) {
 		
-		XOffset = Globals.gameMap.getXOffset();
-		YOffset = Globals.gameMap.getYOffset();
-		// System.out.println("SX is" + sx);
+		xOffset = Globals.gameMap.getXOffset();
+		yOffset = Globals.gameMap.getYOffset();
 
 		x = x + xSpeed * delta;
 		y = y + ySpeed * delta;
 
-		// removes if really far away
+		// Removes if really far away
 		if (x > (Globals.dispWidth * 5)) {
 			removed = true;
 		}
@@ -99,10 +100,10 @@ public class Bullet extends AbstractMoveableEntity {
 		if (y < (Globals.dispWidth * -5)) {
 			removed = true;
 		}
-		y = y + YOffset;// this is for movement of player
-		x = x + XOffset;
+		y = y + yOffset;// this is for movement of player
+		x = x + xOffset;
 
-		// removes if colides with object
+		// Removes if collides with object
 		if (Globals.playerEntity.intersects(this) && target == targetType.PLAYER) {
 			contact(null);
 		} else if (target == targetType.ENEMIES){
@@ -124,19 +125,19 @@ public class Bullet extends AbstractMoveableEntity {
 
 		}
 
-		b.setlocation(x, y);
+		bulletQuad.setlocation(x, y);
 	}
 
 	public void reset() {
-		y = y - YOffset;// this is for movement of player
-		x = x - XOffset;
+		y = y - yOffset;// this is for movement of player
+		x = x - xOffset;
 
 	}
 
 	private void contact(Enemy e) {
 		Random r = new Random();
-		int damage = r.nextInt(maxdamage - mindamage);
-		damage += mindamage;
+		int damage = r.nextInt(maxDamage - minDamage);
+		damage += minDamage;
 		
 		if (target == targetType.PLAYER){
 		Globals.playerEntity.takedamage(damage);
@@ -152,7 +153,7 @@ public class Bullet extends AbstractMoveableEntity {
 	}
 
 	public void render() {
-		b.update();
+		bulletQuad.update();
 
 	}
 
