@@ -15,6 +15,8 @@ public class AStar {
         private ArrayList<Node> closedList;
         private SortedNodeList openList;
         public Path shortestPath;
+        private TempDebugScreen debugScreen;
+        private boolean mapExists = false;
      
 
         public AStar(AStarHeuristic heuristic) {
@@ -23,10 +25,17 @@ public class AStar {
 
                 closedList = new ArrayList<Node>();
                 openList = new SortedNodeList();
+                
         }
         
         public void updatemap(mobMap map){
         	this.map =map;
+        	
+        	if (!mapExists){
+        		mapExists = true;
+        		debugScreen = new TempDebugScreen(map.mapWidth, map.mapHeight);
+        		System.out.println("Debug screen initialized");
+        	}
         }
 
         public int numberOfWaypointsLeft(){
@@ -150,14 +159,16 @@ public class AStar {
         
         public void printPath() {
             Node node;
+            if (mapExists){
+            debugScreen.reset();
             for(int x=0; x<map.mapWidth; x++) {
 
                     if (x==0) {
                             for (int i=0; i<=map.mapWidth; i++)
-                                    System.out.print("-");
-                            System.out.println();   
+                            	debugScreen.addText("-");
+                            debugScreen.nextLine(); 
                     }
-                    System.out.print("|");
+                    debugScreen.addText("|");
 
                     for(int y=0; y<map.mapHeight; y++) {
                     	
@@ -166,26 +177,33 @@ public class AStar {
                             node = map.getNode(y, x);
                             
                             if (node.isObstacle) {
-                                    System.out.print("X");
+                            	debugScreen.addText("X");
                             } else if (node.isStart) {
-                                    System.out.print("s");
+                                debugScreen.addText("S");
                             } else if (node.isGoal) {
-                                    System.out.print("*");
+                            	debugScreen.addText("*");
                             } else if (shortestPath.haswaypoint(node.getX(), node.getY())) {
-                                    System.out.print("W");
+                            	debugScreen.addText("W");
                             } else {
-                                    System.out.print(" ");
+                            	debugScreen.addText(" ");
                             }
                             if (y==map.mapWidth)
-                                    System.out.print("_");
+                            	debugScreen.addText("_");
                     }
                    
-                    System.out.print("|");
-                    System.out.println("X "+(x+1));
+                    debugScreen.addText("|");
+                    if (x+1 < 10){
+                    	debugScreen.addText("X 0"+(x+1));
+                    }else{
+                    	debugScreen.addText("X "+(x+1));
+                    }
+                    
+                    debugScreen.nextLine();
             }
             for (int i=0; i<=map.mapWidth; i++)
-                    System.out.print("-");
+                    debugScreen.addText("-");
     }
+        }
         private class SortedNodeList {
 
                 private ArrayList<Node> list = new ArrayList<Node>();
