@@ -13,7 +13,7 @@ public class Bullet extends AbstractMoveableEntity {
 	private boolean removed = false;
 	TexturedQuad bulletQuad;
 	private int minDamage, maxDamage;
-	private double oldX, newX, newY, oldY, xSpeed, ySpeed, xOffset, yOffset;
+	private double oldX, newX, newY, oldY, xSpeed, ySpeed, xOffset, yOffset, currentSpeed;
 	private targetType target;
 
 	public Bullet(Texture t, double oldX, double newX, double oldY, double newY, double bulletSpeed, int mind, int maxd, targetType target) {
@@ -34,6 +34,7 @@ public class Bullet extends AbstractMoveableEntity {
 	}
 	
 	public void setDestination(double startX, double startY, double destX, double destY, double speed, targetType target){
+		currentSpeed = speed;
 		this.oldX = startX;
 		this.newX = destX;
 		this.oldY = startY;
@@ -72,6 +73,10 @@ public class Bullet extends AbstractMoveableEntity {
 		
 		this.target = target;
 
+	}
+	
+	public double getCurrentSpeed(){
+		return currentSpeed;
 	}
 	
 	public void setDamage(int minDmg, int maxDmg){
