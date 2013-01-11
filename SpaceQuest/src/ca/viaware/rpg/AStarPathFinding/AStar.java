@@ -29,6 +29,12 @@ public class AStar {
         	this.map =map;
         }
 
+        public int numberOfWaypointsLeft(){
+        	
+        	
+        	return shortestPath.getLength();
+        	
+        }
         public Path calcShortestPath(int x, int y, int d, int e) {
         	try{
                	shortestPath.removeall();
@@ -124,7 +130,7 @@ public class AStar {
         	
         		
         	
-        	//X+=1;
+        	X+=1;
         	return X;
         }
         public int getNextWaypointY(){ 	

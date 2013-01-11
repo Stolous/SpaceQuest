@@ -12,7 +12,8 @@ public class ClosestHeuristic implements AStarHeuristic {
                 
                 
                 
-                //manhatten style float result = (float) (dx*dx)+(dy*dy);
+               // manhatten style
+               // float result = (float) (dx*dx)+(dy*dy);
                 
                 
                 return result;

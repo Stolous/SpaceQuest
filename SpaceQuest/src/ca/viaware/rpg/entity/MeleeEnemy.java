@@ -51,13 +51,29 @@ public class MeleeEnemy extends Enemy {
 		this.delta = delta;
 		setXoffset((Globals.gameMap.getXOffset()));
 		setYoffset((Globals.gameMap.getYOffset()));
-		
-		mx = moverx(actxdist, mx, speed, xdist);
-		my = moverx(actydist, my, speed, ydist);
-		
+				mx = mover(actxdist, mx, speed, xdist);
+				my = mover(actydist, my, speed, ydist);
+
+//		try {
+//			if (pathFinder.numberOfWaypointsLeft() == 1) {
+//				mx = mover(actxdist, mx, speed, xdist);
+//				my = mover(actydist, my, speed, ydist);
+//			} else {
+//				if(xdist>=ydist){
+//					mx = basicmover(actxdist, mx, speed);
+//				}
+//				else{
+//					my = basicmover(actydist, my, speed);
+//				}
+//				
+//			}
+//		} catch (Exception e) {
+//
+//		}
+
 		int newblockx = (int) (x / 64);
 		int newblocky = (int) (y / 64);
-		if (newblockx != blockx || newblocky != blocky || first || Globals.playerEntity.hasMoved()) {
+		if (newblockx != blockx || newblocky != blocky || first || Globals.playerEntity.hasMoved() || (blockx == pblockx && blocky == pblocky && !this.intersects(Globals.playerEntity))) {
 			System.out.println(first);
 			System.out.println("blocky" + blocky);
 			blockx = newblockx;
@@ -69,12 +85,12 @@ public class MeleeEnemy extends Enemy {
 			pathFinder.calcShortestPath(blockx, blocky, (int) Globals.playerEntity.getX() / 64, (int) Globals.playerEntity.getY() / 64);
 			System.out.println("MAP:");
 			pathFinder.printPath();
-			goalX = pathFinder.getNextWaypointX() * 64-getXoffset();
-			goalY = pathFinder.getNextWaypointY() * 64-getYoffset();
+			goalX = pathFinder.getNextWaypointX() * 64 - getXoffset();
+			goalY = pathFinder.getNextWaypointY() * 64 - getYoffset();
 			System.out.println("Goal X " + goalX + "Goal Y " + goalY);
 
 		}
-		
+
 		mx = mx + getXoffset();// this is for movement of player
 		my = my + getYoffset();
 
@@ -114,26 +130,48 @@ public class MeleeEnemy extends Enemy {
 			}
 		}
 
-		//mx = mx + getXoffset();// this is for movement of player
-		//my = my + getYoffset();
+		// mx = mx + getXoffset();// this is for movement of player
+		// my = my + getYoffset();
 
 	}
 
-	private double moverx(double i, double mx, double speed, double dist) {
+	private double basicmover(double actdist, double mx, double speed) {
+
+		if (actdist > 0) {
+			mx = mx + speed;
+
+			if (actdist < range) {
+
+				mx = mx - speed;
+			}
+		} else {
+			if (actdist < 0) {
+				mx = mx - speed;
+				if (actdist > range) {
+					mx = mx + speed;
+				}
+			}
+		}
+
+		return mx;
+
+	}
+
+	private double mover(double actualdistance, double mx, double speed, double dist) {
 		dist = dist / 100;
 		double change = 0;
 
-		if (i > 0) {
+		if (actualdistance > 0) {
 			change = speed * dist;
 
-			if (i < range) {
+			if (actualdistance < range) {
 
 				change = -speed * dist;
 			}
 		} else {
-			if (i < 0) {
+			if (actualdistance < 0) {
 				change = -speed * dist;
-				if (i > range) {
+				if (actualdistance > range) {
 					change = speed * dist;
 				}
 			}
