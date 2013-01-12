@@ -28,9 +28,9 @@ public class Bullet extends AbstractMoveableEntity {
 
 		yOffset = Globals.gameMap.getYOffset();
 
-		setDestination(oldX, oldY, newX, newY, bulletSpeed / 1000, target);
-
 		bulletQuad = new TexturedQuad((int) width, (int) height, x, y, texture);
+		
+		setDestination(oldX, oldY, newX, newY, bulletSpeed / 1000, target);
 	}
 	
 	public void setDestination(double startX, double startY, double destX, double destY, double speed, targetType target){
