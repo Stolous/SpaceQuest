@@ -2,7 +2,7 @@ package ca.viaware.rpg.entity;
 
 import java.util.Random;
 
-import org.lwjgl.input.Keyboard;
+
 
 import ca.viaware.rpg.AStarPathFinding.AStar;
 import ca.viaware.rpg.AStarPathFinding.AStarHeuristic;
@@ -10,12 +10,13 @@ import ca.viaware.rpg.AStarPathFinding.ClosestHeuristic;
 import ca.viaware.rpg.AStarPathFinding.mobMap;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.game.Globals;
-import ca.viaware.rpg.map.Tile;
+
 import ca.viaware.rpg.utilities.TexturedQuad;
+
 
 public class MeleeEnemy extends Enemy {
 
-	private boolean b = false, first = true;
+	private boolean b = false, first = true,XY = true, moved =true;
 	private TexturedQuad t;
 	@SuppressWarnings("unused")
 	private int delta, agressiveness, betattacks, attackspeed, blockx, blocky;
@@ -47,47 +48,31 @@ public class MeleeEnemy extends Enemy {
 
 	@Override
 	public void update(int delta) {
-
+		
 		this.delta = delta;
 		setXoffset((Globals.gameMap.getXOffset()));
 		setYoffset((Globals.gameMap.getYOffset()));
-				mx = mover(actxdist, mx, speed, xdist);
-				my = mover(actydist, my, speed, ydist);
-
-//		try {
-//			if (pathFinder.numberOfWaypointsLeft() == 1) {
-//				mx = mover(actxdist, mx, speed, xdist);
-//				my = mover(actydist, my, speed, ydist);
-//			} else {
-//				if(xdist>=ydist){
-//					mx = basicmover(actxdist, mx, speed);
-//				}
-//				else{
-//					my = basicmover(actydist, my, speed);
-//				}
-//				
-//			}
-//		} catch (Exception e) {
-//
-//		}
+				
 
 		int newblockx = (int) (x / 64);
 		int newblocky = (int) (y / 64);
-		if (newblockx != blockx || newblocky != blocky || first || Globals.playerEntity.hasMoved() || (blockx == pblockx && blocky == pblocky && !this.intersects(Globals.playerEntity))) {
-			System.out.println(first);
-			System.out.println("blocky" + blocky);
+		if(blockx!=newblockx||blocky!=newblocky){
+			moved=true;
+		}
+		if (moved|| first || Globals.playerEntity.hasMoved() || (blockx == pblockx && blocky == pblocky && !this.intersects(Globals.playerEntity))) {
+			
 			blockx = newblockx;
 			blocky = newblocky;
-			System.out.println("blocky" + blocky);
+			
 			first = false;
 			mobMap map = new mobMap();
 			pathFinder.updatemap(map);
 			pathFinder.calcShortestPath(blockx, blocky, (int) Globals.playerEntity.getActX() / 64, (int) Globals.playerEntity.getActY() / 64);
-			System.out.println("MAP:");
-			pathFinder.printPath();
-			goalX = pathFinder.getNextWaypointX() * 64 - getXoffset();
+			
+			//pathFinder.printPath();
+			goalX = pathFinder.getNextWaypointX() * 64+1 - getXoffset();
 			goalY = pathFinder.getNextWaypointY() * 64 - getYoffset();
-			System.out.println("Goal X " + goalX + "Goal Y " + goalY);
+			
 
 		}
 
@@ -107,12 +92,24 @@ public class MeleeEnemy extends Enemy {
 		if (xdist < 0) {
 			xdist *= -1;
 		}
+	//	xdist+=65;
+		
 		ydist = goalY + (Player.getH() / 2) - my;
 		actydist = ydist;
 		if (ydist < 0) {
 			ydist *= -1;
 		}
-
+		//ydist+=65;
+		if(actxdist>0){
+			xdist+=65;
+		}else{
+			xdist-=65;
+		}
+		if(actydist>0){
+			ydist-=65;
+		}else{
+			ydist+=65;
+		}
 		distancebetween = Math.sqrt(((xdist * xdist) + (ydist * ydist)));// pythagorean
 																			// theorem
 
@@ -129,7 +126,38 @@ public class MeleeEnemy extends Enemy {
 				attack();
 			}
 		}
+	//	mx = mover(actxdist, mx, speed, xdist);
+	//	my = mover(actydist, my, speed, ydist);
 
+try {
+	if (pathFinder.numberOfWaypointsLeft() == 1) {
+		mx = mover(actxdist, mx, speed, xdist);
+		my = mover(actydist, my, speed, ydist);
+	} else {
+		if(moved){
+			System.out.println("XDIST" + xdist);
+			if(xdist>75){
+				XY = true;
+				
+			}else{
+				XY = false;
+				
+			}
+			if(XY){
+				mx = basicmover(actxdist, mx, speed);
+			}else{
+				my = basicmover(actydist, my, speed);
+			
+			}
+		}
+		
+		
+	}
+} catch (Exception e) {
+
+}
+		
+		
 		// mx = mx + getXoffset();// this is for movement of player
 		// my = my + getYoffset();
 

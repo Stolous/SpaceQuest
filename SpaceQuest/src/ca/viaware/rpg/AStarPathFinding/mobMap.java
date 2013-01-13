@@ -26,11 +26,15 @@ public class mobMap {
 		createMap();
 
 		registerEdges();
-		System.out.println("Mob map successfully initialized");
+
 	}
 
+	public void update(){
+		createMap();
+		registerEdges();
+	}
 	private void createMap() {
-		System.out.println("Width " + mapWidth);
+
 		Node node;
 		map = new ArrayList<ArrayList<Node>>();
 		for (int x = 0; x < mapWidth; x++) {

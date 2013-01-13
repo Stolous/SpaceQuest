@@ -136,10 +136,10 @@ public class AStar {
         			X = 0;
         		}
         	}
+        	//X++;
+        		System.out.println(X);
         	
-        		
         	
-        	X+=1;
         	return X;
         }
         public int getNextWaypointY(){ 	
@@ -153,7 +153,7 @@ public class AStar {
             			Y = 0;
             		}
         	}
-        //	Y+=1;
+        	
         	return Y;
         }
         
