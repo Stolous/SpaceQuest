@@ -136,15 +136,15 @@ public class AStar {
         			X = 0;
         		}
         	}
-        	//X++;
-        		System.out.println(X);
-        	
+        	X++;
+        
+        	System.out.println("X"+X);
         	
         	return X;
         }
         public int getNextWaypointY(){ 	
         	int Y;
-        	try{
+        	try{ 
         	Y = shortestPath.getWayPoint(1).getY();
         	}catch(Exception e){
         		try{
@@ -155,6 +155,7 @@ public class AStar {
         	}
         	
         	return Y;
+        	
         }
         
         public void printPath() {

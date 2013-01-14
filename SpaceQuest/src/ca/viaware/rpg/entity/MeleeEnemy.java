@@ -17,6 +17,7 @@ import ca.viaware.rpg.utilities.TexturedQuad;
 public class MeleeEnemy extends Enemy {
 
 	private boolean b = false, first = true,XY = true, moved =true;
+	int dir = 0;
 	private TexturedQuad t;
 	@SuppressWarnings("unused")
 	private int delta, agressiveness, betattacks, attackspeed, blockx, blocky;
@@ -85,6 +86,7 @@ public class MeleeEnemy extends Enemy {
 
 		// MATH (YAY!!!!!!!!!!)
 
+		
 		xdist = goalX + (Player.getW() / 2) - mx;
 
 		actxdist = xdist;
@@ -99,16 +101,12 @@ public class MeleeEnemy extends Enemy {
 		if (ydist < 0) {
 			ydist *= -1;
 		}
-		//ydist+=65;
-		if(actxdist>0){
-			xdist+=65;
+		
+		
+		if(xdist>ydist){
+			dir = 0;
 		}else{
-			xdist-=65;
-		}
-		if(actydist>0){
-			ydist-=65;
-		}else{
-			ydist+=65;
+			dir=1;
 		}
 		distancebetween = Math.sqrt(((xdist * xdist) + (ydist * ydist)));// pythagorean
 																			// theorem
@@ -136,7 +134,8 @@ try {
 	} else {
 		if(moved){
 			System.out.println("XDIST" + xdist);
-			if(xdist>75){
+			System.out.println("YDIST" + ydist);
+			if(dir==0){
 				XY = true;
 				
 			}else{
