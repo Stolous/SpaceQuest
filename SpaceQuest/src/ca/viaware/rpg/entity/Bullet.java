@@ -117,10 +117,12 @@ public class Bullet extends AbstractMoveableEntity {
 					contact(enemy);
 				}
 			}
-		}else{
+		}
+			System.out.println("INTERSECT");
 			for (Tile[] tile1 : Globals.gameMap.mapTiles) {
 				for (Tile tile : tile1) {
 					if (tile.intersects(this)) {
+						
 						if (tile.hasCollision()) {
 							removed = true;
 						}
@@ -128,7 +130,7 @@ public class Bullet extends AbstractMoveableEntity {
 				}
 			}
 
-		}
+		
 
 		bulletQuad.setlocation(x, y);
 	}
