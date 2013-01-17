@@ -12,6 +12,7 @@ import ca.viaware.rpg.entities.HealthBar;
 import ca.viaware.rpg.entities.Player;
 import ca.viaware.rpg.entity.Bullet;
 import ca.viaware.rpg.entity.Bullet.targetType;
+import ca.viaware.rpg.item.PlasmaRifle;
 import ca.viaware.rpg.map.MapHandler;
 import ca.viaware.rpg.utilities.ResizeHandler;
 import ca.viaware.rpg.utilities.DebugScreen;
@@ -22,13 +23,14 @@ public class GameLoop {
 	private long lasttime = 0;
 
 	public void startLoop() {
+		TextureLoadList.loadTextures();
 		Globals.mainMenu = new MainMenu();
 		Globals.healthBar = new HealthBar();
-		Globals.playerEntity = new Player(Globals.dispWidth / 2 - 32, Globals.dispHeight / 2 - 32, 64, 64);
+		Globals.playerEntity = new Player(Globals.dispWidth / 2 - 32, Globals.dispHeight / 2 - 32, 64, 64, new PlasmaRifle(5,8));
 		Globals.cursor = new Cursor(0, 0, 32, 32);
+		PlayerWalkTextures.loadTextures();
 		Globals.cursor.setEnabled(true);
 		Globals.night=new Night();
-		TextureLoadList.loadTextures();
 		AudioLoadList.loadAudio();
 		Renderer render = new Renderer();
 		GameLogic logic = new GameLogic();

@@ -13,15 +13,14 @@ public class Weapon extends Item {
 
 	private int minimumDamage, maximumDamage, fireRateTimer;
 	private double fireRate;
-	private Bullet bullet;
-	private Texture texture;
+	private Texture texture, bulletTexture;
 
-	public Weapon(Texture t, Bullet bullet, int minDmg, int maxDmg, double fireRate) {
+	public Weapon(Texture t, Texture bulletTexture, int minDmg, int maxDmg, double fireRate) {
 		super(t);
 		minimumDamage = minDmg;
 		maximumDamage = maxDmg;
 		this.fireRate = fireRate;
-		this.bullet = bullet;
+		this.bulletTexture = bulletTexture;
 		texture = t;
 	}
 
@@ -29,12 +28,9 @@ public class Weapon extends Item {
 		fireRateTimer += delta;
 
 		if (fireRateTimer > fireRate) {
-			Bullet bullet = this.bullet;
 
-			bullet.setDestination(startX, startY, destX, destY, bullet.getCurrentSpeed(), Bullet.targetType.ENEMIES);
-			bullet.setDamage(minimumDamage, maximumDamage);
-
-			Globals.bullets.add(bullet);
+			Globals.bullets.add(new Bullet(bulletTexture, startX, destX, startY, destY, 50, Bullet.targetType.ENEMIES));
+			
 		}
 
 	}

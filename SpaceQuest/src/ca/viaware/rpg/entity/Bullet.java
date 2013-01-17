@@ -116,12 +116,9 @@ public class Bullet extends AbstractMoveableEntity {
 					contact(enemy);
 				}
 			}
-<<<<<<< HEAD
 		} else {
-=======
 		}
 			System.out.println("INTERSECT");
->>>>>>> ebac9cacf0743964b200eec7702bb1167e9baa33
 			for (Tile[] tile1 : Globals.gameMap.mapTiles) {
 				for (Tile tile : tile1) {
 					if (tile.intersects(this)) {
