@@ -44,6 +44,7 @@ public class Globals {
 	public static List<Audio> musicLibrary = new ArrayList<Audio>(16);
 	public static List<Animation> tileAnimations = new ArrayList<Animation>(16);
 	public static List<Bullet> bullets = new ArrayList<Bullet>(16);
+	public static List<Texture> gunTextures = new ArrayList<Texture>(16);
 
 	public static enum gState {
 		INTRO, MAIN_MENU, GAME, OUTRO;

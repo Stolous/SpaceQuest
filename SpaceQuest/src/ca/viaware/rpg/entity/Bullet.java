@@ -29,11 +29,11 @@ public class Bullet extends AbstractMoveableEntity {
 		yOffset = Globals.gameMap.getYOffset();
 
 		bulletQuad = new TexturedQuad((int) width, (int) height, x, y, texture);
-		
+
 		setDestination(oldX, oldY, newX, newY, bulletSpeed / 1000, target);
 	}
-	
-	public void setDestination(double startX, double startY, double destX, double destY, double speed, targetType target){
+
+	public void setDestination(double startX, double startY, double destX, double destY, double speed, targetType target) {
 		currentSpeed = speed;
 		this.oldX = startX;
 		this.newX = destX;
@@ -62,7 +62,6 @@ public class Bullet extends AbstractMoveableEntity {
 		double factor = (double) (((xSpeed * xSpeed) + (ySpeed * ySpeed)));
 
 		factor = Math.sqrt(factor);
-
 		factor = speed / factor;
 
 		xSpeed = xSpeed * factor;
@@ -70,22 +69,22 @@ public class Bullet extends AbstractMoveableEntity {
 
 		this.ySpeed = ySpeed;
 		this.xSpeed = xSpeed;
-		
+
 		this.target = target;
 
 	}
-	
-	public double getCurrentSpeed(){
+
+	public double getCurrentSpeed() {
 		return currentSpeed;
 	}
-	
-	public void setDamage(int minDmg, int maxDmg){
+
+	public void setDamage(int minDmg, int maxDmg) {
 		minDamage = minDmg;
 		maxDamage = maxDmg;
 	}
 
 	public void update(int delta) {
-		
+
 		xOffset = Globals.gameMap.getXOffset();
 		yOffset = Globals.gameMap.getYOffset();
 
@@ -111,13 +110,13 @@ public class Bullet extends AbstractMoveableEntity {
 		// Removes if collides with object
 		if (Globals.playerEntity.intersects(this) && target == targetType.PLAYER) {
 			contact(null);
-		} else if (target == targetType.ENEMIES){
-			for (Enemy enemy : Globals.enemies){
-				if (enemy.intersects(this)){
+		} else if (target == targetType.ENEMIES) {
+			for (Enemy enemy : Globals.enemies) {
+				if (enemy.intersects(this)) {
 					contact(enemy);
 				}
 			}
-		}else{
+		} else {
 			for (Tile[] tile1 : Globals.gameMap.mapTiles) {
 				for (Tile tile : tile1) {
 					if (tile.intersects(this)) {
@@ -143,13 +142,13 @@ public class Bullet extends AbstractMoveableEntity {
 		Random r = new Random();
 		int damage = r.nextInt(maxDamage - minDamage);
 		damage += minDamage;
-		
-		if (target == targetType.PLAYER){
-		Globals.playerEntity.takedamage(damage);
-		}else if (target == targetType.ENEMIES){
-		e.takedamage(damage);
+
+		if (target == targetType.PLAYER) {
+			Globals.playerEntity.takedamage(damage);
+		} else if (target == targetType.ENEMIES) {
+			e.takedamage(damage);
 		}
-		
+
 		removed = true;
 	}
 
@@ -166,8 +165,8 @@ public class Bullet extends AbstractMoveableEntity {
 	public void draw() {
 
 	}
-	
-	public static enum targetType{
+
+	public static enum targetType {
 		ENEMIES, FRIENDLIES, PLAYER, ALLNPCS, ALL;
 	}
 

@@ -26,6 +26,8 @@ public class TextureLoadList {
 		Globals.tileTextures.add(new TileTexture(null, th.loadSprite("tiles/sign"), false));
 		Globals.tileTextures.add(new TileTexture(null, th.loadSprite("tiles/dirt"), false));
 		
+		Globals.gunTextures.add(th.loadSprite("weapon/plasmarifle"));
+		
 		//Example of animated tile:
 		//Globals.tileTextures.add(new TileTexture(th.loadAnimation("animfolder", fps), null, true));
 
