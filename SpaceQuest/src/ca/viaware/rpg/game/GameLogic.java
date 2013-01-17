@@ -73,13 +73,16 @@ public class GameLogic {
 		}
 
 		for (Bullet bullet : Globals.bullets) {
+			
 			bullet.update(delta);
 			
 		}
 
 		for (int i = 0; i < Globals.bullets.size(); i++) {
+		
 			if (Globals.bullets.get(i).getremoved()) {
 				Globals.bullets.remove(i);
+				System.out.println("removed");
 			}
 		}
 		}
