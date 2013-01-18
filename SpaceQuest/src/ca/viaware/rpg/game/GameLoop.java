@@ -51,11 +51,6 @@ public class GameLoop {
 				
 			}
 			
-			if (Mouse.isButtonDown(0) && Globals.gameState == Globals.gState.GAME){
-				//eventually max/min damage would be from the weapon class
-				Globals.bullets.add(new Bullet(Globals.bulletTextures.get(0), Globals.playerEntity.getX(), Globals.cursor.getActX(), Globals.playerEntity.getY(), Globals.cursor.getActY(), 200, 1, 2, targetType.ENEMIES));
-			}
-			
 			// Update debug screen
 			
 			if (Globals.gameState == Globals.gState.GAME){

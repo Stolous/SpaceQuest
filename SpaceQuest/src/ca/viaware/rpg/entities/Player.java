@@ -3,6 +3,7 @@ package ca.viaware.rpg.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.opengl.Texture;
 
 import ca.viaware.rpg.effect.Effect;
@@ -108,6 +109,10 @@ public class Player extends AbstractEntity {
 	@Override
 	public void update(int delta) {
 
+		if (Mouse.isButtonDown(0)){
+			wieldedWeapon.fireWeapon(this.getX(), this.getY(), Globals.cursor.getActX(), Globals.cursor.getActY(), delta);
+		}
+		
 		// Animation
 		if (delta >= 0) {
 			animCount += delta;

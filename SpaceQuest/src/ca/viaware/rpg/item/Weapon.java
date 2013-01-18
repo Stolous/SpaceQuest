@@ -24,13 +24,14 @@ public class Weapon extends Item {
 		texture = t;
 	}
 
-	public void fireWeapon(int startX, int startY, int destX, int destY, int delta) {
+	public void fireWeapon(double startX, double startY, double destX, double destY, int delta) {
 		fireRateTimer += delta;
 
 		if (fireRateTimer > fireRate) {
 
-			Globals.bullets.add(new Bullet(bulletTexture, startX, destX, startY, destY, 50, Bullet.targetType.ENEMIES));
+			Globals.bullets.add(new Bullet(bulletTexture, startX, destX, startY, destY, 50, minimumDamage, maximumDamage, Bullet.targetType.ENEMIES));
 			
+			fireRateTimer = 0;
 		}
 
 	}
@@ -38,7 +39,7 @@ public class Weapon extends Item {
 	public void drawOnEntity(Entity e) {
 		double x = e.getX();
 		double y = e.getY();
-		double width = 32, height = 32;
+		double width = 64, height = 64;
 
 		double angle = 0;
 		double triangleBase = MouseData.MouseX() - x;
@@ -47,8 +48,18 @@ public class Weapon extends Item {
 
 		glEnable(GL_TEXTURE_2D);
 		texture.bind();
+		
+		if (MouseData.MouseX() < x){
+			angle += 180;
+			height *= -1;
+		}
+		
 		glPushMatrix();
-		glRotated(angle, 0.0f, 0.0f, -1.0f);
+		glTranslated(x, y, 0);
+		glTranslatef(10.0f, 10.5f, -0.0f); // back to previous position
+		glRotated(-angle, 0.0f, 0.0f, -1.0f); // rotate
+		glTranslatef(-10.0f, -10.5f, 0.0f); // to the origin
+		glTranslated(-x, -y, 0);
 
 		glBegin(GL_QUADS);
 		glTexCoord2f(0f, 0f);

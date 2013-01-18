@@ -8,7 +8,7 @@ import ca.viaware.rpg.game.Globals;
 public class PlasmaRifle extends Weapon{
 
 	public PlasmaRifle(int minDmg, int maxDmg) {
-		super(Globals.gunTextures.get(0), new Bullet(Globals.bulletTextures.get(0), 0, 0, 0, 0, 0, 0, 0, Bullet.targetType.ENEMIES), minDmg, maxDmg, 500);
-	}
+		super(Globals.gunTextures.get(0), Globals.bulletTextures.get(0), minDmg, maxDmg, 500.0);
+	} 
 
 }
