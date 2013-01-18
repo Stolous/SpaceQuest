@@ -70,7 +70,7 @@ public class MeleeEnemy extends Enemy {
 			pathFinder.updatemap(map);
 			pathFinder.calcShortestPath(blockx, blocky, (int) Globals.playerEntity.getActX() / 64, (int) Globals.playerEntity.getActY() / 64);
 			
-			//pathFinder.printPath();
+			pathFinder.printPath();
 			goalX = pathFinder.getNextWaypointX() * 64+1 - getXoffset();
 			goalY = pathFinder.getNextWaypointY() * 64 - getYoffset();
 			
@@ -92,7 +92,10 @@ public class MeleeEnemy extends Enemy {
 		actxdist = xdist;
 		// if negative
 		if (xdist < 0) {
+			
 			xdist *= -1;
+		}else{
+			xdist+=64;
 		}
 	//	xdist+=65;
 		
@@ -100,6 +103,8 @@ public class MeleeEnemy extends Enemy {
 		actydist = ydist;
 		if (ydist < 0) {
 			ydist *= -1;
+		}else{
+			ydist-=64;
 		}
 		
 		

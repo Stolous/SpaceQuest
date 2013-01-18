@@ -39,6 +39,9 @@ public class Path {
         public void addWayPoint(Node n) {
                 waypoints.add(0, n);
         }
+        public void addWayPoint(Node n,int location) {
+            waypoints.add(location, n);
+    }
 
         
         public boolean haswaypoint(int x, int y) {

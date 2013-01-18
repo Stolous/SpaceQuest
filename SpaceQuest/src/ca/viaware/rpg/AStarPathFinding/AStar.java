@@ -115,12 +115,43 @@ public class AStar {
        
 
         private Path reconstructPath(Node node) {
+        	
                 Path path = new Path();
+                int oldx = -5 , oldy = -5;
                 while(!(node.getPreviousNode() == null)) {
                         path.addWayPoint(node);
                         node = node.getPreviousNode();
+                       
+                        	if(oldx != node.getX()&&oldy != node.getY()&&oldx!= -5&&oldy!=-5){
+                        		
+                        		if(oldx>node.getX()){
+                        			if(oldy>node.getY()){
+                        				
+                        			path.addWayPoint(new Node(node.getX()-64,node.getY()-64),path.getLength()-1);
+                        			}else{
+                        				path.addWayPoint(new Node(node.getX()-64,node.getY()+64),path.getLength());
+                        			}
+                        			
+                        		}else{
+                        			if(oldy>node.getY()){
+                        				path.addWayPoint(new Node(node.getX()+64,node.getY()-64),path.getLength());
+                        			}else{
+                        				path.addWayPoint(new Node(node.getX()+64,node.getY()+64),path.getLength());
+                        			}
+                        		}
+                        		System.out.println(path.getLength());
+                        		
+                        		
+                        		
+                        		
+                        	}
+                        	oldx = node.getX();
+                        	oldy = node.getY();
+                      
+                        
                 }
                 this.shortestPath = path;
+                
                 return path;
         }
 
@@ -136,7 +167,7 @@ public class AStar {
         			X = 0;
         		}
         	}
-        	X++;
+        	
         
         	System.out.println("X"+X);
         	
